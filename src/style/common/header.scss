@@ -1,0 +1,10 @@
+.header {
+    grid-column: s/e;
+    grid-row: s/m;
+
+    background-color: $b-secondary-color;
+
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
