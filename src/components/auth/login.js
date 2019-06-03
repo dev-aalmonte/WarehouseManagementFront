@@ -14,7 +14,6 @@ class LoginForm extends Component {
                 <Field className='login-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput}/>
                 <Field className='login-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput}/>
                 <Field className='login-form__login' type='submit' name='login' title='Login' onClick={() => console.log('submiting')} component={FormButton}/>
-
             </form>
         )
     }

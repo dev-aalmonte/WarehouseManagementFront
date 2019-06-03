@@ -23,8 +23,9 @@
         grid-column: m/e;
 
         display: grid;
-        grid-template-rows: [s] .2fr [m] 1fr [e];
+        grid-template-rows: [s] .6fr [m] 1fr [e];
         grid-template-columns: [s] 1fr [e];
+        grid-row-gap: 10rem;
 
         margin: 0 22rem;
 
@@ -39,8 +40,8 @@
         &__form {
             grid-row: m/e;
             grid-column: s/e;
-            align-self: center;
-            
+            align-self: start;
+
             width: 100%;
             display: grid;
             grid-row-gap: 2.5rem;
