@@ -1,0 +1,53 @@
+.form-input {
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 1rem;
+
+    &__label {
+        font-size: 1.6rem;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        height: 3rem;
+
+        padding-left: 1rem;
+
+        background-color: $b-background-light-color;
+
+        border: none;
+        border-bottom: 1px solid #000;
+        border-radius: .5rem;
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+}
+
+.form-button {
+    width: 100%;
+
+    button {
+        min-width: 15rem;
+        height: 3.5rem;
+
+        background-color: $b-secondary-color;
+        border: none;
+        border-radius: .5rem;
+
+        transition: all .05s ease;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            background: $b-sub-color;
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}

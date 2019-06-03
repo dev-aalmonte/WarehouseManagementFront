@@ -25,6 +25,7 @@ body {
 }
 
 .app {
+    height: 100vh;
     display: grid;
     grid-template-columns: [s] 1fr [m] 1fr [e];
     grid-template-rows: [s] 6rem [m] 1fr [e];
@@ -33,5 +34,6 @@ body {
 // Components imports
 
 @import 'common/header';
+@import 'common/form-fields';
 
 @import 'auth/login';
