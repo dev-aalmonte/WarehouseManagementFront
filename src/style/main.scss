@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    overflow-x: hidden;
+    overflow: hidden;
     font-weight: normal;
 
     -webkit-font-smoothing: antialiased;
@@ -34,6 +34,7 @@ body {
 // Components imports
 
 @import 'common/header';
+@import 'common/image';
 @import 'common/form-fields';
 
 @import 'auth/login';

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export function Heading ({className, text}) {
-    return (
-        <div className={`${className} heading`}>
-            {text}
-        </div>
-    )
+export class Heading extends Component {
+    render(){
+        const { className, children } = this.props;
+        return (
+            <div className={`${className} heading`}>
+                {children}
+            </div>
+        )
+    }
 }
