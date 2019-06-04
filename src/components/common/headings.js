@@ -10,3 +10,14 @@ export class Heading extends Component {
         )
     }
 }
+
+export class SmallHeading extends Component {
+    render(){
+        const { className, children } = this.props;
+        return (
+            <div className={`${className} small-heading`}>
+                {children}
+            </div>
+        )
+    }
+}

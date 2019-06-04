@@ -33,6 +33,9 @@ body {
 
 // Components imports
 
+@import 'home';
+
+@import 'common/card';
 @import 'common/header';
 @import 'common/heading';
 @import 'common/image';

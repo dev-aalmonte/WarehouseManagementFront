@@ -1,0 +1,33 @@
+.card {
+    width: 22.5rem;
+    height: 22.5rem;
+    background-color: $b-primary-color;
+    border-radius: .5rem;
+    cursor: pointer;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+    align-items: center;
+    justify-items: center;
+
+    transition: all .1s ease;
+
+    &__icon {
+        align-self: end;
+        font-size: 6.2rem;
+        color: $t-secondary-color;
+    }
+    
+    &__title {
+        color: $t-secondary-color;
+    }
+
+    &:hover {
+        background-color: $b-secondary-color;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}

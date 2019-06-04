@@ -1,0 +1,31 @@
+.home {
+    grid-column: s/e;
+
+    width: 100%;
+
+    position: relative;
+    display: grid;
+
+    &__background {
+        width: 100%;
+        background: #000;
+        position: absolute;
+        z-index: -10;
+
+        &__image {
+            width: 100%;
+            opacity: .45;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        
+        display: grid;
+        grid-template-columns: 22.5rem 22.5rem;
+        grid-gap: 13rem;
+
+        justify-content: center;
+        align-content: center;
+    }
+}
