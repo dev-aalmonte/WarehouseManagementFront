@@ -15,6 +15,7 @@ import './style/main.scss';
 import history from './history';
 
 import Login from './components/auth/login';
+import Home from './components/home';
 
 function main() {
   ReactDOM.render(
@@ -23,6 +24,7 @@ function main() {
             <App>
                 <Switch>
                     <Route exact path='/' component={Login} />
+                    <Route path='/home' component={Home} />
                 </Switch>
             </App>
         </Router>
