@@ -25,6 +25,7 @@ body {
 }
 
 .app {
+    position: relative;
     height: 100vh;
     display: grid;
     grid-template-columns: [s] 1fr [m] 1fr [e];
@@ -38,11 +39,14 @@ body {
 @import 'common/card';
 @import 'common/header';
 @import 'common/heading';
-@import 'common/image';
 @import 'common/form-fields';
+@import 'common/image';
+@import 'common/modal';
 @import 'common/searchbar';
+@import 'common/slideshow';
 @import 'common/table';
 
 @import 'auth/login';
 
 @import 'products/products';
+@import 'products/product-detail';

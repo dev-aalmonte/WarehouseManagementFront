@@ -1,0 +1,24 @@
+.product-detail {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: [slide-s] .3fr [slide-e content-s] .7fr [content-e];
+
+    &__slideshow {
+        grid-column: slide-s/slide-e;
+        background: $b-secondary-color;
+    }
+
+    &__content {
+        grid-column: content-s/content-e;
+        padding: 2.6rem;
+
+        display: grid;
+        grid-template-rows: .2fr .8fr;
+
+        &__description {
+            font-size: 1.6rem;
+            line-height: 2.6rem;
+        }
+    }
+}
