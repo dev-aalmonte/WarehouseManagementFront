@@ -8,16 +8,22 @@
     top: 0;
     left: 0;
 
-    z-index: 10;
-
+    z-index: -10;
+    
     display: grid;
     grid-template-rows: .2fr [content-s] .6fr [content-e] .2fr;
     grid-template-columns: .2fr [content-s] .6fr [content-e] .2fr;
-
+    
     &__content {
         grid-row: content-s/content-e;
         grid-column: content-s/content-e;
         background: $b-background-color;
         border-radius: .5rem;
     }
+    opacity: 0;
+}
+
+.modal.active {
+    z-index: 10;
+    opacity: 1;
 }

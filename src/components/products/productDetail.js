@@ -5,7 +5,7 @@ import Slideshow from '../common/slideshow';
 
 class ProductDetail extends Component {
     render() {
-        return(
+        return (
             <div className='product-detail'>
                 <div className='product-detail__slideshow'>
                     <Slideshow className='product-detail__slideshow__slideshow' imgs={[

@@ -5,12 +5,17 @@ import { FormSmallButton } from '../formFields';
 import Table from '../common/table';
 
 class Products extends Component {
+    openModal = (name) => {
+        console.log("Opening Modal");
+        document.querySelector(`.modal-${name}`).classList.add('active');
+    }
+
     render() {
-        return(
+        return (
             <div className='products'>
                 <Searchbar className='products-searchbar' />
                 <div className='products__buttoms'>
-                    <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
+                    <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
                 </div>
