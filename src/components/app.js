@@ -7,6 +7,7 @@ import { faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, f
 
 import Modal from './common/modal';
 import ProductDetail from './products/productDetail';
+import ProductAdd from './products/productAdd';
 
 library.add(faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight);
 
@@ -17,6 +18,7 @@ export default class App extends Component {
                 <Header/>
                 {this.props.children}
                 <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
+                <Modal className='modal-product_add'> <ProductAdd/> </Modal>
             </div>
         );
     }

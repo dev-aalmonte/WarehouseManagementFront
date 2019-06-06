@@ -17,7 +17,7 @@ class Products extends Component {
                 <div className='products__buttoms'>
                     <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
-                    <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
+                    <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='search'/>
                 </div>
                 <Table className='products__table' />
             </div>
