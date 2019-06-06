@@ -26,26 +26,54 @@
 }
 
 .form-button {
+    cursor: pointer;
     width: 100%;
-
+    
     button {
         min-width: 15rem;
         height: 3.5rem;
-
+        
         background-color: $b-secondary-color;
         border: none;
         border-radius: .5rem;
-
+        
         transition: all .05s ease;
-
+        
         &:focus {
             outline: none;
         }
-
+        
         &:hover {
             background: $b-sub-color;
         }
+        
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+}
 
+.form-small-button {
+    button {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    
+        background: $b-sub-color;
+        border: none;
+        border-radius: .5rem;
+        font-size: 1.8rem;
+    
+        transition: all .05s ease;
+    
+        &:focus {
+            outline: none;
+        }
+    
+        &:hover {
+            background: $b-hightlight-color;
+        }
+    
         &:active {
             transform: scale(0.97);
         }

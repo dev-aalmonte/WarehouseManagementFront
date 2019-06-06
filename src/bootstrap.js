@@ -16,6 +16,7 @@ import history from './history';
 
 import Login from './components/auth/login';
 import Home from './components/home';
+import Products from './components/products/products';
 
 function main() {
   ReactDOM.render(
@@ -25,6 +26,7 @@ function main() {
                 <Switch>
                     <Route exact path='/' component={Login} />
                     <Route path='/home' component={Home} />
+                    <Route path='/products' component={Products} />
                 </Switch>
             </App>
         </Router>

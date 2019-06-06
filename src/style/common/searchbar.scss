@@ -1,0 +1,21 @@
+.searchbar {
+    display: grid;
+    grid-template-columns: [s] 4rem [m] 1fr [e];
+    align-items: center;
+
+    &__icon {
+        justify-self: end;
+        grid-column: s/m;
+        font-size: 2.2rem;
+        margin-top: 1rem;
+    }
+    
+    &__input {
+        grid-column: m/e;
+        width: 95%;
+        padding: 0 2rem;
+
+        // Overwriting forminput
+        grid-template-rows: 1fr;
+    }
+}
