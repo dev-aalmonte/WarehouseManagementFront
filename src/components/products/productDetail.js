@@ -9,8 +9,8 @@ class ProductDetail extends Component {
             <div className='product-detail'>
                 <div className='product-detail__slideshow'>
                     <Slideshow className='product-detail__slideshow__slideshow' imgs={[
-                        '../../../static/assets/temp/2.jpg',
                         '../../../static/assets/temp/1.jpg',
+                        '../../../static/assets/temp/2.jpg',
                         '../../../static/assets/temp/3.jpg',
                     ]}/>
                 </div>

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+const image = require.context('../../../static/assets/temp');
+
 import Icon from './icon';
 
 class Slideshow extends Component {
