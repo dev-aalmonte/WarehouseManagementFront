@@ -25,8 +25,8 @@ export class FormSelect extends Component {
             <div className={`${className} form-select`}>
                 <label className='form-select__label'>{title}</label>
                 <div className='form-select__input-container'>
-                    <select className='form-select__input-container__input'  {...input}>
-                        <option value='' disabled selected>{placeholder}</option>
+                    <select className='form-select__input-container__input' value='' {...input}>
+                        <option value='' disabled>{placeholder}</option>
                         {
                             options.map((option, index) => {
                                 return <option key={index} value={option.key}>{option.value}</option>

@@ -6,7 +6,7 @@ class Icon extends Component {
     render() {
         const { className, icon, onClick } = this.props;
         return (
-            <FontAwesomeIcon onClick={onClick ? onClick : ''} className={`${className} icon`} icon={icon} />
+            <FontAwesomeIcon onClick={onClick ? onClick : f => f} className={`${className} icon`} icon={icon} />
         )
     }
 }
