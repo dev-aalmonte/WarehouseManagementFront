@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Icon extends Component {
     render() {
-        const { className, icon } = this.props;
+        const { className, icon, onClick } = this.props;
         return (
-            <FontAwesomeIcon className={`${className} icon`} icon={icon} />
+            <FontAwesomeIcon onClick={onClick ? onClick : ''} className={`${className} icon`} icon={icon} />
         )
     }
 }

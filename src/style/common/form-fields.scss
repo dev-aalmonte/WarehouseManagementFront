@@ -25,6 +25,51 @@
     }
 }
 
+.form-select {
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: [s] 1fr [m] 1fr [e];
+    grid-row-gap: 1rem;
+
+    &__label {
+        font-size: 1.6rem;
+    }
+
+    &__input-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        
+        &__input {
+            width: 100%;
+            box-sizing: border-box;
+            height: 3rem;
+    
+            padding-left: 1rem;
+            background-color: $b-background-light-color;
+    
+            border: none;
+            border-bottom: 1px solid #000;
+            border-radius: .5rem;
+            font-size: 1.4rem;
+    
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+    
+            position: relative;
+        }
+    
+        &__icon {
+            height: 100%;
+            font-size: 1.4rem;
+            position: absolute;
+            right: 1rem;
+        }
+    }
+}
+
 .form-button {
     cursor: pointer;
     width: 100%;

@@ -14,6 +14,32 @@ export class FormInput extends Component {
     }
 }
 
+export class FormSelect extends Component {
+    openSelect = () => {
+        console.log("Goes here!");
+    }
+
+    render() {
+        const { className, title, options, placeholder, input } = this.props;
+        return (
+            <div className={`${className} form-select`}>
+                <label className='form-select__label'>{title}</label>
+                <div className='form-select__input-container'>
+                    <select className='form-select__input-container__input'  {...input}>
+                        <option value='' disabled selected>{placeholder}</option>
+                        {
+                            options.map((option, index) => {
+                                return <option key={index} value={option.key}>{option.value}</option>
+                            })
+                        }
+                    </select>
+                    <Icon onClick={this.openSelect} className='form-select__input-container__icon' icon='angle-down'/>
+                </div>
+            </div>
+        )
+    }
+}
+
 export class FormButton extends Component {
     render() {
         const { className, title, type, onClick, input } = this.props;
