@@ -13,7 +13,7 @@ class Products extends Component {
     render() {
         return (
             <div className='products'>
-                <Searchbar className='products-searchbar' />
+                <Searchbar className='products-searchbar' placeholder='Search a Product' />
                 <div className='products__buttoms'>
                     <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>

@@ -17,6 +17,8 @@ import history from './history';
 import Login from './components/auth/login';
 import Home from './components/home';
 import Products from './components/products/products';
+import Clients from './components/clients/clients';
+import Client from './components/clients/client';
 
 function main() {
   ReactDOM.render(
@@ -27,6 +29,8 @@ function main() {
                     <Route exact path='/' component={Login} />
                     <Route path='/home' component={Home} />
                     <Route path='/products' component={Products} />
+                    <Route path='/clients' component={Clients} />
+                    <Route path='/client/:id' component={Client} />
                 </Switch>
             </App>
         </Router>
