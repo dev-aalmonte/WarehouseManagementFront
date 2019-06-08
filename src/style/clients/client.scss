@@ -2,7 +2,7 @@
     grid-column: s/e;
 
     display: grid;
-    grid-template-rows: [s client-heading-s] 7rem [client-heading-e client-description-s] 20rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
+    grid-template-rows: [s client-heading-s] 7rem [client-heading-e client-description-s] 12rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
     // grid-template-columns: [s] .9fr [m] .1fr [e];
 
     padding: 5rem 20rem;
@@ -12,6 +12,7 @@
     }
     
     &__description {
+        align-self: center;
         grid-row: client-description-s/client-description-e;
     }
 
@@ -19,9 +20,20 @@
         grid-row: order-heading-s/order-heading-e;
     }
     
-    &__order-searchbar {
+    &__order-searchbar-container {
         grid-row: order-search-s/order-search-e;
         
+        display: grid;
+        grid-template-columns: .95fr .05fr;
+
+        align-items: center;
+
+        &__button {
+            align-self: end;
+            width: 3.6rem;
+            height: 3.6rem;
+        }
+        padding-bottom: .5rem;
     }
     
     &__order-table {
