@@ -19,6 +19,7 @@ import Home from './components/home';
 import Products from './components/products/products';
 import Clients from './components/clients/clients';
 import Client from './components/clients/client';
+import OrderNew from './components/orders/orderNew';
 
 function main() {
   ReactDOM.render(
@@ -31,6 +32,7 @@ function main() {
                     <Route path='/products' component={Products} />
                     <Route path='/clients' component={Clients} />
                     <Route path='/client/:id' component={Client} />
+                    <Route path='/order/new' component={OrderNew} />
                 </Switch>
             </App>
         </Router>

@@ -1,0 +1,25 @@
+.order-new {
+    grid-column: s/e;
+    
+    padding: 5rem 20rem;
+
+    display: grid;
+    grid-template-rows: 6rem 1fr;
+    grid-row-gap: 5rem;
+
+    &__form {
+        display: grid;
+        grid-template-rows: .1fr .7fr .2fr;
+        align-items: start;
+    }
+
+    
+}
+
+.order-add-form {
+    &__submit {
+        margin-top: 6rem;
+        display: grid;
+        justify-items: end;
+    }
+}
