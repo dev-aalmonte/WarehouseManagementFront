@@ -1,5 +1,6 @@
 import {
-    AUTHENTICATE_USER
+    AUTHENTICATE_USER,
+    LOGOUT_USER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,6 +16,13 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 authenticated: true,
                 user
+            }
+
+        case LOGOUT_USER:
+            return {
+                ...state,
+                authenticated: false,
+                user: {}
             }
         default: 
             return state;

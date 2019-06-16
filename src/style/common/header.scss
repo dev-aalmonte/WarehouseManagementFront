@@ -5,6 +5,35 @@
     background-color: $b-secondary-color;
 
     display: grid;
+    grid-template-columns: 1fr [logo-s] 1fr [logo-e welcome-s] 1fr [welcome-e];
+    grid-template-rows: 1fr;
     align-items: center;
     justify-items: center;
+
+    &__logo {
+        grid-column: logo-s/logo-e;
+    }
+    
+    &__user {
+        width: 100%;
+        margin-right: 5rem;
+        grid-column: welcome-s/welcome-e;
+        justify-self: end;
+
+        font-size: 1.4rem;
+
+        display: grid;
+        grid-template-columns: .9fr .1fr;
+        grid-template-rows: 1fr;
+        justify-items: end;
+        align-items: center;
+
+        &__logout {
+            font-size: 2.6rem;
+
+            &__icon {
+                cursor: pointer;
+            }
+        }
+    }
 }
