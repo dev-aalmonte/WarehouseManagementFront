@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 import { reduxForm, Field } from 'redux-form';
 
 import { FormInput, FormButton } from '../formFields';
@@ -23,7 +25,9 @@ class LoginForm extends Component {
 
 class Login extends Component {
     onSubmit = (fields) => {
-        console.log(fields);
+        this.props.login(fields, () => {
+            this.props.history.push('/home');
+        });
     }
 
     render() {
@@ -46,4 +50,4 @@ LoginForm = reduxForm({
     form: 'Login'
 })(LoginForm);
 
-export default Login;
+export default connect(null, actions)(Login);

@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Router, Switch, Route } from 'react-router-dom';
+import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
 import App from './components/app';
 
-const createStoreWithMiddleware = applyMiddleware()(compose((window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)));
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(compose((window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)));
 
 // import 'bootstrap/dist/css/bootstrap.css';
 import './style/main.scss';
