@@ -28,7 +28,7 @@ class Login extends Component {
     componentWillMount() {
         const localToken = localStorage.getItem('token');
         const isUserEmpty = Object.entries(this.props.user).length === 0 && this.props.user.constructor === Object;
-        if(localToken !== null && isUserEmpty){
+        if((localToken !== null || localToken !== '') && isUserEmpty){
             this.props.getUserByToken(localToken, () => {
                 this.props.history.push('/home');
             })

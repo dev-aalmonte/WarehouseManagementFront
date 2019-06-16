@@ -14,6 +14,7 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(compose((window.de
 import './style/main.scss';
 
 import history from './history';
+import requireAuth from './components/middleware/requireAuth';
 
 import Login from './components/auth/login';
 import Home from './components/home';
@@ -31,7 +32,7 @@ function main() {
             <App>
                 <Switch>
                     <Route exact path='/' component={Login} />
-                    <Route path='/home' component={Home} />
+                    <Route path='/home' component={requireAuth(Home)} />
                     <Route path='/products' component={Products} />
                     <Route path='/clients' component={Clients} />
                     <Route path='/client/:id' component={Client} />

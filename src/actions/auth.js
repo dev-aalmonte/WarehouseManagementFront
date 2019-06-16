@@ -36,7 +36,7 @@ export function getUserByToken(token, success) {
                     type: AUTHENTICATE_USER,
                     payload: response.data
                 });
-                success();
+                success(response.data);
             })
             .catch(err => {
                 if(err)
