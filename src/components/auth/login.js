@@ -24,6 +24,21 @@ class LoginForm extends Component {
 }
 
 class Login extends Component {
+
+    componentWillMount() {
+        const localToken = localStorage.getItem('token');
+        const isUserEmpty = Object.entries(this.props.user).length === 0 && this.props.user.constructor === Object;
+        if(localToken !== null && isUserEmpty){
+            this.props.getUserByToken(localToken, () => {
+                this.props.history.push('/home');
+            })
+        }
+
+        if(localToken !== null && !isUserEmpty){
+            this.props.history.push('/home');
+        }
+    }
+
     onSubmit = (fields) => {
         this.props.login(fields, () => {
             this.props.history.push('/home');
@@ -50,4 +65,9 @@ LoginForm = reduxForm({
     form: 'Login'
 })(LoginForm);
 
-export default connect(null, actions)(Login);
+function mapStateToProps(state){
+    const { user } = state.auth;
+    return { user };
+}
+
+export default connect(mapStateToProps, actions)(Login);

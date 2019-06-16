@@ -5,7 +5,7 @@ import {
     AUTHENTICATE_USER
 } from './types';
 
-export function login(fields, sucess) {
+export function login(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/login`, qs.stringify(fields), {
             headers: {
@@ -13,14 +13,30 @@ export function login(fields, sucess) {
             }
         })
             .then(response => {
-                console.log("Response Data:", response.data);
                 const { api_token } = response.data;
                 localStorage.setItem('token', api_token);
                 dispatch({
                     type: AUTHENTICATE_USER,
                     payload: response.data
                 })
-                sucess();
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
+export function getUserByToken(token, success) {
+    return function (dispatch) {
+        axios.get(`${API_URL}/user/token/${token}`)
+            .then(response => {
+                dispatch({
+                    type: AUTHENTICATE_USER,
+                    payload: response.data
+                });
+                success();
             })
             .catch(err => {
                 if(err)

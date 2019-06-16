@@ -1,7 +1,10 @@
 import {
-    login
+    login,
+    getUserByToken
 } from './auth';
 
 export {
-    login
+    // Auth
+    login,
+    getUserByToken
 }
