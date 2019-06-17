@@ -33,6 +33,14 @@
 
             &__icon {
                 cursor: pointer;
+
+                &:hover {
+                    color: rgba(#000, .7);
+                }
+
+                &:active {
+                    transform: scale(0.95);
+                }
             }
         }
     }
