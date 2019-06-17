@@ -4,9 +4,9 @@ import Icon from './icon';
 
 class Card extends Component {
     render() {
-        const { className, title, icon } = this.props;
+        const { className, title, icon, onClick } = this.props;
         return (
-            <div className={`${className} card`}>
+            <div onClick={onClick} className={`${className} card`}>
                 <Icon className='card__icon' icon={icon ? icon : 'question-circle' } />
                 <SmallHeading className='card__title'>{title}</SmallHeading>
             </div>

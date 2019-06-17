@@ -33,12 +33,12 @@ function main() {
                 <Switch>
                     <Route exact path='/' component={Login} />
                     <Route path='/home' component={requireAuth(Home)} />
-                    <Route path='/products' component={Products} />
-                    <Route path='/clients' component={Clients} />
-                    <Route path='/client/:id' component={Client} />
-                    <Route path='/order/new' component={OrderNew} />
-                    <Route path='/order/search/:id' component={OrderSearch} />
-                    <Route path='/order/:id' component={OrderDetail} />
+                    <Route path='/products' component={requireAuth(Products)} />
+                    <Route path='/clients' component={requireAuth(Clients)} />
+                    <Route path='/client/:id' component={requireAuth(Client)} />
+                    <Route path='/order/new' component={requireAuth(OrderNew)} />
+                    <Route path='/order/search/:id' component={requireAuth(OrderSearch)} />
+                    <Route path='/order/:id' component={requireAuth(OrderDetail)} />
                 </Switch>
             </App>
         </Router>
