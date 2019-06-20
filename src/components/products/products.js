@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 import Searchbar from '../common/searchbar';
 import { FormSmallButton } from '../formFields';
 import Table from '../common/table';
 
 class Products extends Component {
+    componentWillMount() {
+        console.log("Getting products");
+        this.props.getProducts();
+    }
+
     openModal = (name) => {
-        console.log("Opening Modal");
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
     render() {
+        const tableHeader = ["Product", "Price", "Weight", "Longitude"];
+        const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
+        const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"]
+        const tableData = this.props.products;
         return (
             <div className='products'>
                 <Searchbar className='products-searchbar' placeholder='Search a Product' />
@@ -19,10 +29,15 @@ class Products extends Component {
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='search'/>
                 </div>
-                <Table className='products__table' />
+                <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} />
             </div>
         )
     }
 }
 
-export default Products;
+function mapStateToProps(state) {
+    const { products } = state.product;
+    return { products };
+}
+
+export default connect(mapStateToProps, actions)(Products);

@@ -4,9 +4,16 @@ import {
     getUserByToken
 } from './auth';
 
+import {
+    getProducts, 
+} from './product';
+
 export {
     // Auth
     login,
     logout,
-    getUserByToken
+    getUserByToken,
+
+    // Products
+    getProducts,
 }
