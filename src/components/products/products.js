@@ -15,6 +15,11 @@ class Products extends Component {
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getProducts(null, search);
+    }
+
     render() {
         const tableHeader = ["Product", "Price", "Weight", "Longitude"];
         const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
@@ -23,7 +28,7 @@ class Products extends Component {
         const pagination = this.props.pagination;
         return (
             <div className='products'>
-                <Searchbar className='products-searchbar' placeholder='Search a Product' />
+                <Searchbar className='products-searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput} />
                 <div className='products__buttoms'>
                     <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>

@@ -5,11 +5,11 @@ import { FormInput } from '../formFields';
 
 class Searchbar extends Component {
     render() {
-        const { className, placeholder } = this.props;
+        const { className, placeholder, onKeyUp } = this.props;
         return (
             <div className={`${className} searchbar`}>
                 <Icon className='searchbar__icon' icon='search' />
-                <FormInput className='searchbar__input' type='text' name='search' placeholder={placeholder} />
+                <FormInput className='searchbar__input' type='text' name='search' placeholder={placeholder} onKeyUp={onKeyUp} />
             </div>
         )
     }

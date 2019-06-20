@@ -11,10 +11,11 @@ const requestConfig = {
     }
 }
 
-export function getProducts(paginationURL = null) {
+export function getProducts(paginationURL = null, search = '') {
     const requestURL = paginationURL ? paginationURL : `${API_URL}/products`;
+    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
     return function (dispatch) {
-        axios.get(requestURL)
+        axios.get(requestURL + searchURL)
             .then(response => {
                 if(response.data){
                     dispatch({
