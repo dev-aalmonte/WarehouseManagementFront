@@ -8,7 +8,6 @@ import Table from '../common/table';
 
 class Products extends Component {
     componentWillMount() {
-        console.log("Getting products");
         this.props.getProducts();
     }
 
@@ -21,6 +20,7 @@ class Products extends Component {
         const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
         const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"]
         const tableData = this.props.products;
+        const pagination = this.props.pagination;
         return (
             <div className='products'>
                 <Searchbar className='products-searchbar' placeholder='Search a Product' />
@@ -29,15 +29,15 @@ class Products extends Component {
                     <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
                     <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='search'/>
                 </div>
-                <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} />
+                <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} />
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    const { products } = state.product;
-    return { products };
+    const { products, pagination } = state.product;
+    return { products, pagination };
 }
 
 export default connect(mapStateToProps, actions)(Products);

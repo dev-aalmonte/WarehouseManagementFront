@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+
+import { FormSmallButton } from '../formFields';
 
 class Table extends Component {
 
@@ -22,8 +26,15 @@ class Table extends Component {
         return templateItem;
     }
 
+    paginationOnClick(url) {
+        if (url != null){
+            console.log("Going to: ", url);
+            this.props.getProducts(url);
+        }
+    }
+
     render() {
-        const { className, heading, body, columnName, template } = this.props;
+        const { className, heading, body, columnName, template, pagination } = this.props;
         return (
             <div className={`${className} table`}>
                 <div className='table__heading'>
@@ -55,9 +66,18 @@ class Table extends Component {
                         })
                     }
                 </div>
+                <div className='table__footer'>
+                    <div className='table__footer__paginationInfo'>
+                        Page: {pagination.current_page} of {pagination.last_page}
+                    </div>
+                    <div className='table__footer__paginationButtons'>
+                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`table__footer__paginationButtons__button ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
+                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`table__footer__paginationButtons__button ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
-export default Table;
+export default connect(null, actions)(Table);

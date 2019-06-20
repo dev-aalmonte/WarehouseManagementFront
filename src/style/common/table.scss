@@ -1,10 +1,10 @@
 .table {
     display: grid;
-    grid-template-rows: [s] 4rem [m] 1fr [e];
+    grid-template-rows: [heading-s] 4rem [heading-e body-s] 1fr [body-e footer-s] 4rem [footer-e];
 
     
     &__heading {
-        grid-row: s/m;
+        grid-row: heading-s/heading-e;
         border-bottom: .1rem solid #000;
         border-radius: .5rem;
 
@@ -32,7 +32,7 @@
     }
     
     &__body {
-        grid-row: m/e;
+        grid-row: body-s/body-e;
         
         display: grid;
         grid-template-rows: repeat(auto-fill, 4.1rem);
@@ -61,6 +61,36 @@
             
             &__item:not(:last-child) {
                 border-right: .1rem solid $b-hightlight-color;
+            }
+        }
+    }
+
+    &__footer {
+        grid-row: footer-s/footer-e;
+
+        display: grid;
+        grid-template-columns: [s] 1fr [m] 1fr [e];
+        grid-template-rows: 1fr;
+        
+        &__paginationInfo {
+            font-size: 1.2rem;
+        }
+
+        &__paginationButtons {
+            grid-column: m/e;
+
+            display: grid;
+            grid-template-columns: 5rem 5rem;
+            justify-content: end;
+
+            &__button {
+                justify-self: end;
+                width: 3.6rem;
+                height: 3.6rem;
+            }
+
+            &__button.hidden {
+                display: none;
             }
         }
     }
