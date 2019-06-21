@@ -30,9 +30,9 @@ class Products extends Component {
             <div className='products'>
                 <Searchbar className='products-searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput} />
                 <div className='products__buttoms'>
-                    <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='search'/>
-                    <FormSmallButton className='products__buttoms__button' type='button' icon='search'/>
-                    <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='search'/>
+                    <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='minus'/>
+                    <FormSmallButton className='products__buttoms__button' type='button' icon='edit'/>
+                    <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} />
             </div>

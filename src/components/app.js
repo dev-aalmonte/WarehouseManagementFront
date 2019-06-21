@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import Header from './common/header';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt, faEdit, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from './common/modal';
 import ProductDetail from './products/productDetail';
 import ProductAdd from './products/productAdd';
 
-library.add(faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt);
+library.add(faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt, faEdit, faMinus);
 
 export default class App extends Component {
     render() {
