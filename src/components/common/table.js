@@ -34,7 +34,7 @@ class Table extends Component {
     }
 
     render() {
-        const { className, heading, body, columnName, template, pagination } = this.props;
+        const { className, heading, body, columnName, template, pagination, events } = this.props;
         return (
             <div className={`${className} table`}>
                 <div className='table__heading'>
@@ -48,7 +48,7 @@ class Table extends Component {
                     {
                         body.map((item, index) => {
                             return (
-                                <div key={index} className='table__body__row'>
+                                <div key={index} className='table__body__row' onClick={(event) => events.onClick(event, index)} onDoubleClick={() => events.onDoubleClick()}>
                                     {
                                         columnName.map((column, index) => {
                                             var templateItem = '';
