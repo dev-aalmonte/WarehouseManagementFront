@@ -49,6 +49,13 @@
             align-items: end;
 
             &__item {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; 
+                
                 height: 3.5rem;
                 width: 90%;
                 text-align: center;

@@ -24,6 +24,24 @@ class Products extends Component {
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
+    openAddProduct = () => {
+        this.openModal('product_add');
+    }
+
+    openEditProduct = () => {
+        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        if(allElementsSelected.length === 1)
+            console.log("Opening Edit");
+    }
+
+    deleteProduct = () => {
+        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        if(allElementsSelected.length > 0)
+            allElementsSelected.forEach(element => {
+                console.log("Deleting...");
+            })
+    }
+
     displaySearchBarInput = (event) => {
         const search = event.target.value;
         this.props.getProducts(null, search);
@@ -99,9 +117,9 @@ class Products extends Component {
             <div className='products' onKeyDownCapture={event => this.onKeyDown(event)}  onKeyUpCapture={event => this.onKeyUp(event)} tabIndex="0">
                 <Searchbar className='products-searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                 <div className='products__buttoms'>
-                    <FormSmallButton onClick={() => this.openModal('product_detail')} className='products__buttoms__button' type='button' icon='minus'/>
-                    <FormSmallButton className='products__buttoms__button' type='button' icon='edit'/>
-                    <FormSmallButton onClick={() => this.openModal('product_add')} className='products__buttoms__button' type='button' icon='plus'/>
+                    <FormSmallButton onClick={() => this.deleteProduct()} className='products__buttoms__button' type='button' icon='minus'/>
+                    <FormSmallButton onClick={() => this.openEditProduct()} className='products__buttoms__button' type='button' icon='edit'/>
+                    <FormSmallButton onClick={() => this.openAddProduct()} className='products__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} />
             </div>

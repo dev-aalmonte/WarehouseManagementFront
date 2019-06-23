@@ -5,7 +5,8 @@ import {
 } from './auth';
 
 import {
-    getProducts, 
+    getProducts,
+    addProduct
 } from './product';
 
 export {
@@ -16,4 +17,5 @@ export {
 
     // Products
     getProducts,
+    addProduct
 }

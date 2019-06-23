@@ -1,5 +1,6 @@
 import {
-    GET_PRODUCTS
+    GET_PRODUCTS,
+    ADD_PRODUCTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -27,7 +28,8 @@ export default function(state = INITIAL_STATE, action){
                     last_page
                 }
             }
-
+        
+        case ADD_PRODUCTS:
         default: 
             return state;
     }

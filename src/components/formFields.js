@@ -8,7 +8,7 @@ export class FormInput extends Component {
         return (
             <div className={`${className} form-input`}>
                 <label className='form-input__label'>{title}</label>
-                <input className='form-input__input' type={type} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp(event)} />
+                <input className='form-input__input' type={type} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
             </div>
         )
     }
