@@ -75,6 +75,7 @@ class Products extends Component {
             },
             onClick: (event, index) => {
                 const parent = event.target.parentElement;
+                const parentIsActive = parent.classList.contains('active');
                 const allElements = document.querySelectorAll(`.table__body__row`);
                 
                 if(this.state.activeKey == 'Shift') {
@@ -104,9 +105,7 @@ class Products extends Component {
                         element.classList.remove('active');
                     });
 
-                    if(parent.classList.contains('active'))
-                        parent.classList.remove('active');
-                    else
+                    if(!parentIsActive)
                         parent.classList.add('active');
                 }
                 
