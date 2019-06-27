@@ -48,7 +48,7 @@ class Table extends Component {
                     {
                         body.map((item, index) => {
                             return (
-                                <div key={index} className='table__body__row' onClick={(event) => events.onClick(event, index)} onDoubleClick={() => events.onDoubleClick()}>
+                                <div key={index} id={index} className='table__body__row' onClick={(event) => events.onClick(event, index)} onDoubleClick={() => events.onDoubleClick()}>
                                     {
                                         columnName.map((column, index) => {
                                             var templateItem = '';

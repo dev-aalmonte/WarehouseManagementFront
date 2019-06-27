@@ -1,6 +1,8 @@
 import {
     GET_PRODUCTS,
-    ADD_PRODUCTS
+    SELECT_SINGLE_PRODUCT,
+    ADD_PRODUCTS,
+    EDIT_PRODUCTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -28,8 +30,16 @@ export default function(state = INITIAL_STATE, action){
                     last_page
                 }
             }
-        
+
+        case SELECT_SINGLE_PRODUCT:
+            const id = action.payload;
+            return {
+                ...state,
+                selected_product: id == -1 ? {} : state.products[id]
+            }
+
         case ADD_PRODUCTS:
+        case EDIT_PRODUCTS:
         default: 
             return state;
     }

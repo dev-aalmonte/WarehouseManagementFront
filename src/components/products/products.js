@@ -25,13 +25,18 @@ class Products extends Component {
     }
 
     openAddProduct = () => {
+        this.props.selectSingleProduct(-1);
         this.openModal('product_add');
+
     }
 
     openEditProduct = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        if(allElementsSelected.length === 1)
-            console.log("Opening Edit");
+        if(allElementsSelected.length === 1){
+            const selectedItem = allElementsSelected[0];
+            this.props.selectSingleProduct(selectedItem.id);
+            this.openModal('product_add');
+        }
     }
 
     deleteProduct = () => {
@@ -67,10 +72,6 @@ class Products extends Component {
         const pagination = this.props.pagination;
         const tableEvents = {
             onDoubleClick: () => {
-                console.log("Entering");
-                // Select Product
-
-                // Open Modal
                 this.openModal('product_detail');
             },
             onClick: (event, index) => {

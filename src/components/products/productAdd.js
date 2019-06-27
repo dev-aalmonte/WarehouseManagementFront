@@ -7,6 +7,7 @@ import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
 
 class ProductAddForm extends Component {
+
     render() {
         const { className, handleSubmit } = this.props;
         const weightOption = [
@@ -37,7 +38,7 @@ class ProductAddForm extends Component {
                 <Field className='product-add-form__metric-weight' name='metric_weight' title='Metric Weight' placeholder='Select a metric weight' options={weightOption} component={FormSelect} />
                 <Field className='product-add-form__weight' type='text' name='weight' title='Weight' placeholder='Weight' component={FormInput} />
                 <Field className='product-add-form__metric-longitude' name='metric_longitude' title='Metric Longitude' placeholder='Select a metric longitude' options={longitudeOption} component={FormSelect} />
-                <Field className='product-add-form__width' type='text' name='width' title='Width' placeholder='Width' component={FormInput} />
+                <Field className='product-add-form__width' type='text' name='width' title='Width' placeholder='Width' component={FormInput}/>
                 <Field className='product-add-form__height' type='text' name='height' title='Height' placeholder='Height' component={FormInput} />
                 <Field className='product-add-form__length' type='text' name='length' title='Length' placeholder='Length' component={FormInput} />
                 {/* <Field className='product-add-form__status' name='status' title='Status' placeholder='Select a status' options={statusOptions} component={FormSelect} />
@@ -50,6 +51,7 @@ class ProductAddForm extends Component {
 
 class ProductAdd extends Component {
     onSubmit = (fields) => {
+        console.log("Fields:", fields);
         this.props.addProduct(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
                 element.classList.remove('active');
@@ -58,21 +60,32 @@ class ProductAdd extends Component {
     }
 
     render() {
-        // const { className } = this.props;
         return (
             <div className={`product-add`}>
                 <div className='product-add__background'></div>
                 <div className='product-add__content'>
                     <Heading className='product-add__title'>Add Product</Heading>
-                    <ProductAddForm onSubmit={this.onSubmit} className='product-add__content__form' />
+                    <ProductAddForm onSubmit={(e) => this.onSubmit(e)} className='product-add__content__form' />
                 </div>
             </div>
         )
     }
 }
 
+
 ProductAddForm = reduxForm({
-    form: 'product-add'
+    form: 'product-add',
+    enableReinitialize: true
 })(ProductAddForm);
 
-export default connect(null, actions)(ProductAdd);
+ProductAddForm = connect((state) => {
+    const { selected_product } = state.product;
+    return { initialValues: selected_product };
+})(ProductAddForm);
+
+function mapStateToProps(state) {
+    const { selected_product } = state.product;
+    return { selected_product };
+}
+
+export default connect(mapStateToProps, actions)(ProductAdd);

@@ -6,7 +6,8 @@ import {
 
 import {
     getProducts,
-    addProduct
+    addProduct,
+    selectSingleProduct
 } from './product';
 
 export {
@@ -17,5 +18,6 @@ export {
 
     // Products
     getProducts,
-    addProduct
+    addProduct,
+    selectSingleProduct
 }
