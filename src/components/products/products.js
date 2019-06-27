@@ -42,8 +42,12 @@ class Products extends Component {
     deleteProduct = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length > 0)
-            allElementsSelected.forEach(element => {
-                console.log("Deleting...");
+            allElementsSelected.forEach((element) => {
+                const rowID = this.props.products[element.id].id;
+                console.log("Row to delete: ", rowID);
+                this.props.deleteProduct(rowID, () => {
+                    console.log("Row deleted!");
+                });
             })
     }
 

@@ -2,7 +2,8 @@ import {
     GET_PRODUCTS,
     SELECT_SINGLE_PRODUCT,
     ADD_PRODUCTS,
-    EDIT_PRODUCTS
+    EDIT_PRODUCTS,
+    DELETE_PRODUCTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -40,6 +41,7 @@ export default function(state = INITIAL_STATE, action){
 
         case ADD_PRODUCTS:
         case EDIT_PRODUCTS:
+        case DELETE_PRODUCTS:
         default: 
             return state;
     }

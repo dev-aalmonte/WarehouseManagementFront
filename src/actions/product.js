@@ -5,6 +5,7 @@ import {
     GET_PRODUCTS,
     ADD_PRODUCTS,
     EDIT_PRODUCTS,
+    DELETE_PRODUCTS,
     SELECT_SINGLE_PRODUCT
 } from './types';
 
@@ -79,5 +80,24 @@ export function addProduct(fields, success) {
                         console.log(err);
                 });
         }
+    }
+}
+
+export function deleteProduct(id, success) {
+    return function (dispatch) {
+        axios.delete(`${API_URL}/products/${id}`, requestConfig)
+            .then(response => {
+                if(response.data == 1) {
+                    dispatch({
+                        type: DELETE_PRODUCTS,
+                        payload: id
+                    });
+                }
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }

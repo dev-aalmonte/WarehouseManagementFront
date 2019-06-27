@@ -7,7 +7,8 @@ import {
 import {
     getProducts,
     addProduct,
-    selectSingleProduct
+    selectSingleProduct,
+    deleteProduct
 } from './product';
 
 export {
@@ -19,5 +20,6 @@ export {
     // Products
     getProducts,
     addProduct,
-    selectSingleProduct
+    selectSingleProduct,
+    deleteProduct
 }
