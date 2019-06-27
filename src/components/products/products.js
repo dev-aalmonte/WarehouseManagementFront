@@ -19,6 +19,21 @@ class Products extends Component {
     componentWillMount() {
         this.props.getProducts();
     }
+    
+    resetTable() {
+        const { current_page } = this.props.pagination;
+        if(current_page != null)
+            this.props.getProducts(`http://127.0.0.1:8000/api/products?page=${current_page}`)
+        else
+            this.props.getProducts();
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
+    }
 
     openModal = (name) => {
         document.querySelector(`.modal-${name}`).classList.add('active');
@@ -43,10 +58,11 @@ class Products extends Component {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length > 0)
             allElementsSelected.forEach((element) => {
+                element.classList.add('to_delete');
                 const rowID = this.props.products[element.id].id;
-                console.log("Row to delete: ", rowID);
                 this.props.deleteProduct(rowID, () => {
-                    console.log("Row deleted!");
+                    this.resetTable();
+                    this.resetActive();
                 });
             })
     }

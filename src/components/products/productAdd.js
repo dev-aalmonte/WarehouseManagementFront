@@ -7,6 +7,20 @@ import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
 
 class ProductAddForm extends Component {
+    resetTable() {
+        const { current_page } = this.props.pagination;
+        if(current_page != null)
+            this.props.getProducts(`http://127.0.0.1:8000/api/products?page=${current_page}`)
+        else
+            this.props.getProducts();
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
+    }
 
     render() {
         const { className, handleSubmit } = this.props;
@@ -51,10 +65,11 @@ class ProductAddForm extends Component {
 
 class ProductAdd extends Component {
     onSubmit = (fields) => {
-        console.log("Fields:", fields);
         this.props.addProduct(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
                 element.classList.remove('active');
+                this.resetTable();
+                this.resetActive();
             })
         });
     }

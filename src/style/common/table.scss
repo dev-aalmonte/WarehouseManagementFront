@@ -74,6 +74,10 @@
         &__row.active {
             background: rgba($b-hightlight-color, .5);
         }
+
+        &__row.to_delete {
+            background: rgba(#BF6666, .5);
+        }
     }
 
     &__footer {
