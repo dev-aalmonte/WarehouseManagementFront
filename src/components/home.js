@@ -4,6 +4,7 @@ import { BackgroundImage } from './common/image';
 import Card from './common/card';
 
 import background from '../../static/assets/img/login-img.jpg';
+import Icon from './common/icon';
 
 class Home extends Component {
     toClients = () => {
@@ -33,6 +34,16 @@ class Home extends Component {
                     <Card className='home__content__card' title='Order' icon='archive' onClick={this.toOrders} />
                     <Card className='home__content__card' title='Product' icon='boxes' onClick={this.toProducts}/>
                     <Card className='home__content__card' title='Search'icon='search' onClick={this.toOrderSearch}/>
+                </div>
+                <div className='home__side'>
+                    <div className='home__side__button'>
+                        <Icon className='home__side__button__icon' icon='user' />
+                        <div className='home__side__button__text'>Users</div>
+                    </div>
+                    <div className='home__side__button'>
+                        <Icon className='home__side__button__icon' icon='warehouse' />
+                        <div className='home__side__button__text'>Warehouses</div>
+                    </div>
                 </div>
             </div>
         )
