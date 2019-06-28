@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Heading } from '../common/headings';
 import Slideshow from '../common/slideshow';
@@ -15,15 +16,20 @@ class ProductDetail extends Component {
                     ]}/>
                 </div>
                 <div className='product-detail__content'>
-                    <Heading className='product-detail__title'>Product Detail</Heading>
+                    <Heading className='product-detail__title'>{this.props.selected_product.name}</Heading>
                     <div className='product-detail__content__description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam.
+                        {this.props.selected_product.description}
                     </div>
-
+                    <div className='product-detail__content__price'>${this.props.selected_product.price}</div>
                 </div>
             </div>
         )
     }
 }
 
-export default ProductDetail;
+function mapStateToProps(state) {
+    const { selected_product } = state.product;
+    return { selected_product };
+}
+
+export default connect(mapStateToProps)(ProductDetail);

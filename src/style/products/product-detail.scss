@@ -20,5 +20,14 @@
             font-size: 1.6rem;
             line-height: 2.6rem;
         }
+
+        &__price {
+            margin: .5rem 2rem;
+            
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: right;
+            color: $b-primary-color;
+        }
     }
 }

@@ -90,7 +90,9 @@ class Products extends Component {
         const tableData = this.props.products;
         const pagination = this.props.pagination;
         const tableEvents = {
-            onDoubleClick: () => {
+            onDoubleClick: (event) => {
+                const parent = event.target.parentElement;
+                this.props.selectSingleProduct(parent.id);
                 this.openModal('product_detail');
             },
             onClick: (event, index) => {
