@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 class Modal extends Component {
     closeModal = (event) => {
         event.target.classList.remove('active');
+        this.resetActive();
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
     }
 
     render() {

@@ -42,7 +42,6 @@ class Products extends Component {
     openAddProduct = () => {
         this.props.selectSingleProduct(-1);
         this.openModal('product_add');
-
     }
 
     openEditProduct = () => {
