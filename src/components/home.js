@@ -23,6 +23,14 @@ class Home extends Component {
         this.props.history.push('/order/search/10');
     }
 
+    toUser = () => {
+        this.props.history.push('/users');
+    }
+
+    toWarehouse = () => {
+        this.props.history.push('/warehouses');
+    }
+
     render() {
         return (
             <div className='home'>
@@ -36,11 +44,11 @@ class Home extends Component {
                     <Card className='home__content__card' title='Search'icon='search' onClick={this.toOrderSearch}/>
                 </div>
                 <div className='home__side'>
-                    <div className='home__side__button'>
+                    <div className='home__side__button' onClick={this.toUser}>
                         <Icon className='home__side__button__icon' icon='user' />
                         <div className='home__side__button__text'>Users</div>
                     </div>
-                    <div className='home__side__button'>
+                    <div className='home__side__button' onClick={this.toWarehouse}>
                         <Icon className='home__side__button__icon' icon='warehouse' />
                         <div className='home__side__button__text'>Warehouses</div>
                     </div>

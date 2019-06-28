@@ -25,6 +25,9 @@ import OrderNew from './components/orders/orderNew';
 import OrderDetail from './components/orders/orderDetail';
 import OrderSearch from './components/orders/orderSearch';
 
+import Users from './components/users/users';
+import Warehouses from './components/warehouses/warehouses';
+
 function main() {
   ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
@@ -39,6 +42,9 @@ function main() {
                     <Route path='/order/new' component={requireAuth(OrderNew)} />
                     <Route path='/order/search/:id' component={requireAuth(OrderSearch)} />
                     <Route path='/order/:id' component={requireAuth(OrderDetail)} />
+
+                    <Route path='/users' component={requireAuth(Users)} />
+                    <Route path='/warehouses' component={requireAuth(Warehouses)} />
                 </Switch>
             </App>
         </Router>
