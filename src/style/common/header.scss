@@ -5,10 +5,30 @@
     background-color: $b-secondary-color;
 
     display: grid;
-    grid-template-columns: 1fr [logo-s] 1fr [logo-e welcome-s] 1fr [welcome-e];
+    grid-template-columns: [back-s] 1fr [back-e logo-s] 1fr [logo-e welcome-s] 1fr [welcome-e];
     grid-template-rows: 1fr;
     align-items: center;
     justify-items: center;
+
+    &__back {
+        grid-column: back-s/back-e;
+        justify-self: start;
+        margin-left: 5rem;
+
+        font-size: 2.2rem;
+
+        &__icon {
+            cursor: pointer;
+
+            &:hover {
+                color: rgba(#000, .7);
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
 
     &__logo {
         grid-column: logo-s/logo-e;

@@ -7,6 +7,7 @@ import history from '../../history';
 import Icon from './icon';
 
 class Header extends Component {
+
     handleLogout = () => {
         const fields = {
             token: localStorage.getItem('token'),
@@ -17,10 +18,21 @@ class Header extends Component {
         })
     }
 
+    backToMenu = () => {
+        history.push('/home');
+    }
+
     render() {
         const { user } = this.props;
         return (
             <div className='header'>
+                {
+                    this.props.actual_page.includes('/home') ? "" :
+                    <div className='header__back'>
+                        <Icon className='header__back__icon' icon='angle-left' onClick={this.backToMenu}/>
+                    </div>
+                }
+                
                 <div className='header__logo'>
                     Header
                 </div>

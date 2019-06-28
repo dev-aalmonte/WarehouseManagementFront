@@ -15,7 +15,7 @@ export default class App extends Component {
     render() {
         return (
             <div className='app'>
-                <Header/>
+                <Header actual_page={window.location.href}/>
                 {this.props.children}
                 <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
                 <Modal className='modal-product_add'> <ProductAdd/> </Modal>
