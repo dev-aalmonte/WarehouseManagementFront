@@ -11,6 +11,10 @@ import {
     deleteProduct
 } from './product';
 
+import {
+    getWarehouses,
+} from './warehouse';
+
 export {
     // Auth
     login,
@@ -21,5 +25,9 @@ export {
     getProducts,
     addProduct,
     selectSingleProduct,
-    deleteProduct
+    deleteProduct,
+
+    // Warehouse
+    getWarehouses,
+
 }

@@ -8,3 +8,6 @@ export const SELECT_SINGLE_PRODUCT = 'SELECT_SINGLE_PRODUCT';
 export const ADD_PRODUCTS = 'ADD_PRODUCTS';
 export const EDIT_PRODUCTS = 'EDIT_PRODUCTS';
 export const DELETE_PRODUCTS = 'DELETE_PRODUCTS';
+
+// Warehouse
+export const GET_WAREHOUSES = 'GET_WAREHOUSES';
