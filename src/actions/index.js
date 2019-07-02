@@ -13,6 +13,9 @@ import {
 
 import {
     getWarehouses,
+    addWarehouse,
+    selectSingleWarehouse,
+    deleteWarehouse,
 } from './warehouse';
 
 export {
@@ -29,5 +32,8 @@ export {
 
     // Warehouse
     getWarehouses,
+    addWarehouse,
+    selectSingleWarehouse,
+    deleteWarehouse,
 
 }

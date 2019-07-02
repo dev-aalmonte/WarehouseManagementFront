@@ -23,9 +23,9 @@ class Warehouses extends Component {
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getProducts(`http://127.0.0.1:8000/api/warehouses?page=${current_page}`)
+            this.props.getWarehouses(`http://127.0.0.1:8000/api/warehouses?page=${current_page}`)
         else
-            this.props.getProducts();
+            this.props.getWarehouses();
     }
 
     resetActive() {
@@ -33,6 +33,10 @@ class Warehouses extends Component {
             element.classList.remove('active');
             element.classList.remove('to_delete');
         })
+    }
+
+    openModal = (name) => {
+        document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
     onKeyDown(event) {
@@ -49,17 +53,17 @@ class Warehouses extends Component {
 
     openAddWarehouse = () => {
         console.log("Open Warehouse Add");
-        // this.props.selectSingleProduct(-1);
-        // this.openModal('product_add');
+        this.props.selectSingleWarehouse(-1);
+        this.openModal('warehouse_add');
     }
 
     openEditWarehouse = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length === 1){
             console.log("Open Warehouse Edit");
-            // const selectedItem = allElementsSelected[0];
-            // this.props.selectSingleProduct(selectedItem.id);
-            // this.openModal('product_add');
+            const selectedItem = allElementsSelected[0];
+            this.props.selectSingleWarehouse(selectedItem.id);
+            this.openModal('warehouse_add');
         }
     }
 
@@ -67,13 +71,12 @@ class Warehouses extends Component {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length > 0)
             allElementsSelected.forEach((element) => {
-                console.log("Deleting", element.id);
-                // element.classList.add('to_delete');
-                // const rowID = this.props.products[element.id].id;
-                // this.props.deleteProduct(rowID, () => {
-                //     this.resetTable();
-                //     this.resetActive();
-                // });
+                element.classList.add('to_delete');
+                const rowID = this.props.warehouses[element.id].id;
+                this.props.deleteWarehouse(rowID, () => {
+                    this.resetTable();
+                    this.resetActive();
+                });
             })
     }
 
