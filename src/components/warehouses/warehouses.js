@@ -52,7 +52,6 @@ class Warehouses extends Component {
     }
 
     openAddWarehouse = () => {
-        console.log("Open Warehouse Add");
         this.props.selectSingleWarehouse(-1);
         this.openModal('warehouse_add');
     }
@@ -60,7 +59,6 @@ class Warehouses extends Component {
     openEditWarehouse = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length === 1){
-            console.log("Open Warehouse Edit");
             const selectedItem = allElementsSelected[0];
             this.props.selectSingleWarehouse(selectedItem.id);
             this.openModal('warehouse_add');
