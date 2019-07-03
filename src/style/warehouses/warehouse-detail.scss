@@ -1,0 +1,53 @@
+.warehouse-detail {
+    grid-column: s/e;
+    padding: 5rem 20rem;
+
+    display: grid;
+    grid-template-rows: [s] 12rem [m] 1fr [e];
+    
+    &__heading {
+        grid-row: s/m;
+    }
+
+    &__products {
+        grid-row: m/e;
+        
+        display: grid;
+        grid-template-rows: 7rem 1fr;
+
+        &__table-container {
+            width: 100%;
+
+            display: grid;
+            grid-template-rows: [s] 7rem [m] 1fr [e];
+            grid-template-columns: [s] .9fr [m] .1fr [e];
+
+            &__searchbar {
+                grid-row: s/m;
+                grid-column: s/m;
+                
+            }
+            
+            &__buttoms {
+                grid-row: s/m;
+                grid-column: m/e;
+                
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                
+                align-items: center;
+                justify-items: center;
+        
+                &__button {
+                    width: 3.6rem;
+                    height: 3.6rem;
+                }
+            }
+            
+            &__table {
+                grid-row: m/e;
+                grid-column: s/e;
+            }
+        }
+    }
+}

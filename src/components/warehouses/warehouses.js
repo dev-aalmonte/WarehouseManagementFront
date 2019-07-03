@@ -130,9 +130,9 @@ class Warehouses extends Component {
             <div className='warehouses'>
                 <Searchbar className='warehouses__searchbar' placeholder='Search a Warehouse' onKeyUp={this.displaySearchBarInput}/>
                 <div className='warehouses__buttoms'>
-                    <FormSmallButton onClick={() => this.deleteWarehouse()} className='products__buttoms__button' type='button' icon='minus'/>
-                    <FormSmallButton onClick={() => this.openEditWarehouse()} className='products__buttoms__button' type='button' icon='edit'/>
-                    <FormSmallButton onClick={() => this.openAddWarehouse()} className='products__buttoms__button' type='button' icon='plus'/>
+                    <FormSmallButton onClick={() => this.deleteWarehouse()} className='warehouses__buttoms__button' type='button' icon='minus'/>
+                    <FormSmallButton onClick={() => this.openEditWarehouse()} className='warehouses__buttoms__button' type='button' icon='edit'/>
+                    <FormSmallButton onClick={() => this.openAddWarehouse()} className='warehouses__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='warehouses__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
             </div>

@@ -39,13 +39,17 @@ class Table extends Component {
             <div className={`${className} table`}>
                 <div className='table__heading'>
                     {
+                        heading ?
                         heading.map((title, index) => {
                             return <div key={index} className='table__heading__item'>{title}</div>
                         })
+                        : 
+                        <div className='table__heading__item'>No data to show</div>
                     }
                 </div>
                 <div className='table__body'>
                     {
+                        body ?
                         body.map((item, index) => {
                             return (
                                 <div key={index} id={index} className='table__body__row' onClick={(event) => events.onClick(event, index)} onDoubleClick={(event) => events.onDoubleClick(event)}>
@@ -64,6 +68,10 @@ class Table extends Component {
                                 </div>
                             )
                         })
+                        :
+                        <div className='table__body__row'>    
+                            <div className='table__body__row__item'>No data to Show</div>
+                        </div>
                     }
                 </div>
                 {
