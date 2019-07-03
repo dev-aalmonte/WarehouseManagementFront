@@ -6,7 +6,8 @@ import {
     SELECT_SINGLE_WAREHOUSE,
     ADD_WAREHOUSES,
     EDIT_WAREHOUSES,
-    DELETE_WAREHOUSES
+    DELETE_WAREHOUSES,
+    DISPLAY_WAREHOUSE
 } from './types';
 
 const requestConfig = {
@@ -41,6 +42,22 @@ export function selectSingleWarehouse(id) {
             type: SELECT_SINGLE_WAREHOUSE,
             payload: id
         });
+    }
+}
+
+export function selectSingleWarehouseFromDB(id) {
+    return function (dispatch) {
+        axios.get(`${API_URL}/warehouses/${id}`)
+            .then(response => {
+                dispatch({
+                    type: DISPLAY_WAREHOUSE,
+                    payload: response.data
+                })
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }
 

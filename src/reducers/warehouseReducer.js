@@ -3,7 +3,8 @@ import {
     SELECT_SINGLE_WAREHOUSE,
     ADD_WAREHOUSES,
     EDIT_WAREHOUSES,
-    DELETE_WAREHOUSES
+    DELETE_WAREHOUSES,
+    DISPLAY_WAREHOUSE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -38,7 +39,13 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_warehouse: id == -1 ? {} : state.warehouses[id]
             }
-
+        
+        case DISPLAY_WAREHOUSE:
+            return {
+                ...state,
+                selected_warehouse: action.payload
+            }
+        
         case ADD_WAREHOUSES:
         case EDIT_WAREHOUSES:
         case DELETE_WAREHOUSES:

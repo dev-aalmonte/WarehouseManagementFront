@@ -16,6 +16,7 @@ import {
     addWarehouse,
     selectSingleWarehouse,
     deleteWarehouse,
+    selectSingleWarehouseFromDB,
 } from './warehouse';
 
 export {
@@ -35,5 +36,6 @@ export {
     addWarehouse,
     selectSingleWarehouse,
     deleteWarehouse,
+    selectSingleWarehouseFromDB,
 
 }
