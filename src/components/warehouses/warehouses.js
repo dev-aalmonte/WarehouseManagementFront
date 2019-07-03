@@ -85,7 +85,7 @@ class Warehouses extends Component {
         const tableData = this.props.warehouses;
         const tableEvents = {
             onDoubleClick: (event) => {
-                console.log("Go to Warehouse...");
+                this.props.history.push('/warehouse/1');
             },
             onClick: (event, index) => {
                 const parent = event.target.parentElement;

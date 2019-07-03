@@ -27,6 +27,7 @@ import OrderSearch from './components/orders/orderSearch';
 
 import Users from './components/users/users';
 import Warehouses from './components/warehouses/warehouses';
+import WarehouseDetail from './components/warehouses/warehouseDetail';
 
 function main() {
   ReactDOM.render(
@@ -45,6 +46,7 @@ function main() {
 
                     <Route path='/users' component={requireAuth(Users)} />
                     <Route path='/warehouses' component={requireAuth(Warehouses)} />
+                    <Route path='/warehouse/:id' component={requireAuth(WarehouseDetail)} />
                 </Switch>
             </App>
         </Router>
