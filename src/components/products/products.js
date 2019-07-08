@@ -71,18 +71,6 @@ class Products extends Component {
         this.props.getProducts(null, search);
     }
 
-    onKeyDown(event) {
-        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
-            this.setState({activeKey: event.key});
-        }
-    }
-
-    onKeyUp(event) {
-        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
-            this.setState({activeKey: ''});
-        }
-    }
-
     render() {
         const tableHeader = ["Product", "Price", "Weight", "Longitude"];
         const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
@@ -94,48 +82,10 @@ class Products extends Component {
                 const parent = event.target.parentElement;
                 this.props.selectSingleProduct(parent.id);
                 this.openModal('product_detail');
-            },
-            onClick: (event, index) => {
-                const parent = event.target.parentElement;
-                const parentIsActive = parent.classList.contains('active');
-                const allElements = document.querySelectorAll(`.table__body__row`);
-                
-                if(this.state.activeKey == 'Shift') {
-                    if(this.state.lastSelectedIndex == null)
-                        parent.classList.add('active');
-                    else if(this.state.lastSelectedIndex > index){
-                        const firstIndex = index;
-                        const lastIndex = this.state.lastSelectedIndex;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                    else if(this.state.lastSelectedIndex < index){
-                        const firstIndex = this.state.lastSelectedIndex;
-                        const lastIndex = index;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                }
-                else {
-                    allElements.forEach(element => {
-                        element.classList.remove('active');
-                    });
-
-                    if(!parentIsActive)
-                        parent.classList.add('active');
-                }
-                
-                this.setState({lastSelectedIndex: index});
             }
         }
         return (
-            <div className='products' onKeyDownCapture={event => this.onKeyDown(event)}  onKeyUpCapture={event => this.onKeyUp(event)} tabIndex="0">
+            <div className='products'>
                 <Searchbar className='products-searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                 <div className='products__buttoms'>
                     <FormSmallButton onClick={() => this.deleteProduct()} className='products__buttoms__button' type='button' icon='minus'/>

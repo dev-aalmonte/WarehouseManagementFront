@@ -7,14 +7,6 @@ import Table from '../common/table';
 import { FormSmallButton } from '../formFields';
 
 class Warehouses extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            lastSelectedIndex: null,
-            activeKey: ''
-        }
-    }
     
     componentWillMount() {
         this.props.getWarehouses();
@@ -37,18 +29,6 @@ class Warehouses extends Component {
 
     openModal = (name) => {
         document.querySelector(`.modal-${name}`).classList.add('active');
-    }
-
-    onKeyDown(event) {
-        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
-            this.setState({activeKey: event.key});
-        }
-    }
-
-    onKeyUp(event) {
-        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
-            this.setState({activeKey: ''});
-        }
     }
 
     openAddWarehouse = () => {
@@ -87,44 +67,6 @@ class Warehouses extends Component {
             onDoubleClick: (event) => {
                 const warehouseID = this.props.warehouses[event.target.parentElement.id].id;
                 this.props.history.push(`/warehouse/${warehouseID}`);
-            },
-            onClick: (event, index) => {
-                const parent = event.target.parentElement;
-                const parentIsActive = parent.classList.contains('active');
-                const allElements = document.querySelectorAll(`.table__body__row`);
-                
-                if(this.state.activeKey == 'Shift') {
-                    if(this.state.lastSelectedIndex == null)
-                        parent.classList.add('active');
-                    else if(this.state.lastSelectedIndex > index){
-                        const firstIndex = index;
-                        const lastIndex = this.state.lastSelectedIndex;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                    else if(this.state.lastSelectedIndex < index){
-                        const firstIndex = this.state.lastSelectedIndex;
-                        const lastIndex = index;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                }
-                else {
-                    allElements.forEach(element => {
-                        element.classList.remove('active');
-                    });
-
-                    if(!parentIsActive)
-                        parent.classList.add('active');
-                }
-                
-                this.setState({lastSelectedIndex: index});
             }
         }
         return (

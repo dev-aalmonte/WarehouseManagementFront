@@ -40,18 +40,6 @@ class Users extends Component {
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
-    onKeyDown(event) {
-        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
-            this.setState({activeKey: event.key});
-        }
-    }
-
-    onKeyUp(event) {
-        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
-            this.setState({activeKey: ''});
-        }
-    }
-
     openAddUser = () => {
         this.props.selectSingleUser(-1);
         // this.openModal('warehouse_add');
@@ -87,53 +75,15 @@ class Users extends Component {
         const tableEvents = {
             onDoubleClick: (event) => {
                 // For now just nothing
-            },
-            onClick: (event, index) => {
-                const parent = event.target.parentElement;
-                const parentIsActive = parent.classList.contains('active');
-                const allElements = document.querySelectorAll(`.table__body__row`);
-                
-                if(this.state.activeKey == 'Shift') {
-                    if(this.state.lastSelectedIndex == null)
-                        parent.classList.add('active');
-                    else if(this.state.lastSelectedIndex > index){
-                        const firstIndex = index;
-                        const lastIndex = this.state.lastSelectedIndex;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                    else if(this.state.lastSelectedIndex < index){
-                        const firstIndex = this.state.lastSelectedIndex;
-                        const lastIndex = index;
-
-                        allElements.forEach((element, index) => {
-                            if(index >= firstIndex && index <= lastIndex)
-                                element.classList.add('active');
-                        })
-                    }
-                }
-                else {
-                    allElements.forEach(element => {
-                        element.classList.remove('active');
-                    });
-
-                    if(!parentIsActive)
-                        parent.classList.add('active');
-                }
-                
-                this.setState({lastSelectedIndex: index});
             }
         }
         return (
             <div className='users'>
                 <Searchbar className='users__searchbar' placeholder='Search a Warehouse' onKeyUp={this.displaySearchBarInput}/>
                 <div className='users__buttoms'>
-                    <FormSmallButton onClick={() => this.deleteWarehouse()} className='users__buttoms__button' type='button' icon='minus'/>
-                    <FormSmallButton onClick={() => this.openEditWarehouse()} className='users__buttoms__button' type='button' icon='edit'/>
-                    <FormSmallButton onClick={() => this.openAddWarehouse()} className='users__buttoms__button' type='button' icon='plus'/>
+                    <FormSmallButton onClick={() => this.deleteUser()} className='users__buttoms__button' type='button' icon='minus'/>
+                    <FormSmallButton onClick={() => this.openEditUser()} className='users__buttoms__button' type='button' icon='edit'/>
+                    <FormSmallButton onClick={() => this.openAddUser()} className='users__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='users__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
             </div>

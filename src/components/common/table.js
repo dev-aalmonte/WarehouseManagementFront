@@ -5,6 +5,14 @@ import * as actions from '../../actions';
 import { FormSmallButton } from '../formFields';
 
 class Table extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            lastSelectedIndex: null,
+            activeKey: ''
+        }
+    }
 
     renderTemplate(template, item, column, index) {
         var templateItem = "";
@@ -28,15 +36,64 @@ class Table extends Component {
 
     paginationOnClick(url) {
         if (url != null){
-            console.log("Going to: ", url);
             this.props.getProducts(url);
         }
+    }
+
+    onKeyDown(event) {
+        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
+            this.setState({activeKey: event.key});
+        }
+    }
+
+    onKeyUp(event) {
+        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
+            this.setState({activeKey: ''});
+        }
+    }
+
+    rowOnClick = (event, index) => {
+        const parent = event.target.parentElement;
+        const parentIsActive = parent.classList.contains('active');
+        const allElements = document.querySelectorAll(`.table__body__row`);
+            
+        if(this.state.activeKey == 'Shift') {
+            if(this.state.lastSelectedIndex == null)
+                parent.classList.add('active');
+            else if(this.state.lastSelectedIndex > index){
+                const firstIndex = index;
+                const lastIndex = this.state.lastSelectedIndex;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+            else if(this.state.lastSelectedIndex < index){
+                const firstIndex = this.state.lastSelectedIndex;
+                const lastIndex = index;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+        }
+        else {
+            allElements.forEach(element => {
+                element.classList.remove('active');
+            });
+
+            if(!parentIsActive)
+                parent.classList.add('active');
+        }
+        this.setState({lastSelectedIndex: index});
     }
 
     render() {
         const { className, heading, body, columnName, template, pagination, events } = this.props;
         return (
-            <div className={`${className} table`}>
+            <div className={`${className} table`} onKeyDownCapture={event => this.onKeyDown(event)}  onKeyUpCapture={event => this.onKeyUp(event)} tabIndex="0">
                 <div className='table__heading'>
                     {
                         heading ?
@@ -52,7 +109,7 @@ class Table extends Component {
                         body ?
                         body.map((item, index) => {
                             return (
-                                <div key={index} id={index} className='table__body__row' onClick={(event) => events.onClick(event, index)} onDoubleClick={(event) => events.onDoubleClick(event)}>
+                                <div key={index} id={index} className='table__body__row' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => events.onDoubleClick(event)}>
                                     {
                                         columnName.map((column, index) => {
                                             var templateItem = '';
