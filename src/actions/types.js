@@ -16,3 +16,11 @@ export const ADD_WAREHOUSES = 'ADD_WAREHOUSES';
 export const EDIT_WAREHOUSES = 'EDIT_WAREHOUSES';
 export const DELETE_WAREHOUSES = 'DELETE_WAREHOUSES';
 export const DISPLAY_WAREHOUSE = 'DISPLAY_WAREHOUSE';
+
+// User
+export const GET_USERS = 'GET_USERS';
+export const SELECT_SINGLE_USER = 'SELECT_SINGLE_USER';
+export const ADD_USER = 'ADD_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const DISPLAY_USER = 'DISPLAY_USER';

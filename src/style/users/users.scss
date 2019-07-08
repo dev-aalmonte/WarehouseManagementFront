@@ -1,0 +1,36 @@
+.users {
+    grid-column: s/e;
+
+    display: grid;
+    grid-template-rows: [s] 7rem [m] 1fr [e];
+    grid-template-columns: [s] .9fr [m] .1fr [e];
+
+    padding: 5rem 20rem;
+
+    &__searchbar {
+        grid-row: s/m;
+        grid-column: s/m;
+        
+    }
+    
+    &__buttoms {
+        grid-row: s/m;
+        grid-column: m/e;
+        
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        
+        align-items: center;
+        justify-items: center;
+
+        &__button {
+            width: 3.6rem;
+            height: 3.6rem;
+        }
+    }
+    
+    &__table {
+        grid-row: m/e;
+        grid-column: s/e;
+    }
+}

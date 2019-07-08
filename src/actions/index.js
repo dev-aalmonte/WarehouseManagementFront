@@ -19,6 +19,14 @@ import {
     selectSingleWarehouseFromDB,
 } from './warehouse';
 
+import {
+    getUsers,
+    addUser,
+    selectSingleUser,
+    deleteUser,
+    selectSingleUserFromDB,
+} from './user';
+
 export {
     // Auth
     login,
@@ -38,4 +46,10 @@ export {
     deleteWarehouse,
     selectSingleWarehouseFromDB,
 
+    // User
+    getUsers,
+    addUser,
+    selectSingleUser,
+    deleteUser,
+    selectSingleUserFromDB,
 }
