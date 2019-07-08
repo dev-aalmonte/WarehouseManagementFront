@@ -58,6 +58,11 @@ class Warehouses extends Component {
             })
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getWarehouses(null, search);
+    }
+
     render() {
         const tableHeader = ["Warehouse", "Address"];
         const columnTable = ["name", "addressID"];

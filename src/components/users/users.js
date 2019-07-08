@@ -67,6 +67,11 @@ class Users extends Component {
             })
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getUsers(null, search);
+    }
+
     render() {
         const tableHeader = ["Name", "Warehouse", "Role"];
         const columnTable = ["first_name", "warehouseID", "roleID"];
