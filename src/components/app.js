@@ -9,6 +9,7 @@ import Modal from './common/modal';
 import ProductDetail from './products/productDetail';
 import ProductAdd from './products/productAdd';
 import WarehouseAdd from './warehouses/warehouseAdd';
+import UserAdd from './users/userAdd';
 
 library.add(faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt, faEdit, faMinus, faUser);
 
@@ -25,6 +26,9 @@ export default class App extends Component {
 
                 {/* Warehouse Modal */}
                 <Modal className='modal-warehouse_add'> <WarehouseAdd/> </Modal>
+
+                {/* User Modal */}
+                <Modal className='modal-user_add'> <UserAdd/> </Modal>
             </div>
         );
     }

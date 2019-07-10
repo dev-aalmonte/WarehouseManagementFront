@@ -27,6 +27,14 @@ import {
     selectSingleUserFromDB,
 } from './user';
 
+import {
+    getRoles,
+    addRole,
+    selectSingleRole,
+    deleteRole,
+    selectSingleRoleFromDB,
+} from './role';
+
 export {
     // Auth
     login,
@@ -52,4 +60,11 @@ export {
     selectSingleUser,
     deleteUser,
     selectSingleUserFromDB,
+
+    // Role
+    getRoles,
+    addRole,
+    selectSingleRole,
+    deleteRole,
+    selectSingleRoleFromDB,
 }

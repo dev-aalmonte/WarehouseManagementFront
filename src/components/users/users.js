@@ -42,7 +42,7 @@ class Users extends Component {
 
     openAddUser = () => {
         this.props.selectSingleUser(-1);
-        // this.openModal('warehouse_add');
+        this.openModal('user_add');
     }
 
     openEditUser = () => {
@@ -50,7 +50,7 @@ class Users extends Component {
         if(allElementsSelected.length === 1){
             const selectedItem = allElementsSelected[0];
             this.props.selectSingleUser(selectedItem.id);
-            // this.openModal('warehouse_add');
+            this.openModal('user_add');
         }
     }
 
@@ -59,7 +59,7 @@ class Users extends Component {
         if(allElementsSelected.length > 0)
             allElementsSelected.forEach((element) => {
                 element.classList.add('to_delete');
-                const rowID = this.props.warehouses[element.id].id;
+                const rowID = this.props.users[element.id].id;
                 this.props.deleteUser(rowID, () => {
                     this.resetTable();
                     this.resetActive();

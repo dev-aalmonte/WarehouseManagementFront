@@ -24,3 +24,11 @@ export const ADD_USER = 'ADD_USER';
 export const EDIT_USER = 'EDIT_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const DISPLAY_USER = 'DISPLAY_USER';
+
+// Role
+export const GET_ROLES = 'GET_ROLES';
+export const SELECT_SINGLE_ROLE = 'SELECT_SINGLE_ROLE';
+export const ADD_ROLE = 'ADD_ROLE';
+export const EDIT_ROLE = 'EDIT_ROLE';
+export const DELETE_ROLE = 'DELETE_ROLE';
+export const DISPLAY_ROLE = 'DISPLAY_ROLE';
