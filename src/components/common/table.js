@@ -113,12 +113,21 @@ class Table extends Component {
                                     {
                                         columnName.map((column, index) => {
                                             var templateItem = '';
-                                            if(typeof template[index] === 'undefined' || template[index] === null || template[index] === ''){
+                                            if(typeof column === "string"){
                                                 templateItem = item[column];
                                             }
-                                            else {
+                                            else if(Array.isArray(column)){
                                                 templateItem = this.renderTemplate(template, item, column, index);
                                             }
+                                            else if(typeof column === "object"){
+                                                if(Array.isArray(column.column)){
+                                                    templateItem = this.renderTemplate(template, item[column.key], column.column, index);
+                                                }
+                                                else {
+                                                    templateItem = item[column.key][column.column];
+                                                }
+                                            }
+                                            
                                             return <div key={index} className='table__body__row__item'>{templateItem}</div>  
                                         })
                                     }

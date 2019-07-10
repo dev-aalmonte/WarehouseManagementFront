@@ -74,8 +74,8 @@ class Users extends Component {
 
     render() {
         const tableHeader = ["Name", "Warehouse", "Role"];
-        const columnTable = ["first_name", "warehouseID", "roleID"];
-        const templateColumn = ["[data]", "[data]", "[data]"];
+        const columnTable = [["first_name", "last_name"], {key: 'warehouse', column: 'name'}, {key: 'role', column: 'role'}];
+        const templateColumn = ["[data] [data]", "[data]", "[data]"];
         const tableData = this.props.users;
         const tableEvents = {
             onDoubleClick: (event) => {

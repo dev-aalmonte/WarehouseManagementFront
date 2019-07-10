@@ -65,8 +65,8 @@ class Warehouses extends Component {
 
     render() {
         const tableHeader = ["Warehouse", "Address"];
-        const columnTable = ["name", "addressID"];
-        const templateColumn = ["[data]", "[data]"];
+        const columnTable = ["name", {key:'address', column: ['street_address', 'extra_address', 'city', 'state', 'country', 'zipcode']}];
+        const templateColumn = ["[data]", "[data] [data], [data], [data], [data], [data]"];
         const tableData = this.props.warehouses;
         const tableEvents = {
             onDoubleClick: (event) => {
