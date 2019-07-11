@@ -135,7 +135,7 @@ class Table extends Component {
                             )
                         })
                         :
-                        <div className='table__body__row'>    
+                        <div className='table__body__row'>
                             <div className='table__body__row__item'>No data to Show</div>
                         </div>
                     }

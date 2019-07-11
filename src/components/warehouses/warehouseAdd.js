@@ -33,7 +33,7 @@ class WarehouseAddForm extends Component {
                 <Field className='warehouse-add-form__state' type='text' name='state' title='State' placeholder='State' component={FormInput} />
                 <Field className='warehouse-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} />
                 <Field className='warehouse-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput}/>
-                <Field className='warehouse-add-form__submit' type='submit' name='submit' title='Add Product' onClick={() => console.log('submiting Product')} component={FormButton}/>
+                <Field className='warehouse-add-form__submit' type='submit' name='submit' title='Add Warehouse' component={FormButton}/>
             </form>
         )
     }

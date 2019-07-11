@@ -35,7 +35,7 @@ class UserAddForm extends Component {
                 <Field className='user-add-form__confirm' name='password' name='confirm' title='Confirm Password' placeholder='Confirm Password' component={FormInput} />
                 <Field className='user-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' options={warehouse} component={FormSelect}/>
                 <Field className='user-add-form__role' name='roleID' title='Role' placeholder='Select a Role' options={role} component={FormSelect}/>
-                <Field className='user-add-form__submit' type='submit' name='submit' title='Add Product' onClick={() => console.log('submiting Product')} component={FormButton}/>
+                <Field className='user-add-form__submit' type='submit' name='submit' title='Add User' component={FormButton}/>
             </form>
         )
     }
