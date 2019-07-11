@@ -5,13 +5,14 @@ import { reduxForm, Field } from 'redux-form';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
+import { API_URL } from '../../config';
 
 class UserAddForm extends Component {
 
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getUsers(`http://127.0.0.1:8000/api/users?page=${current_page}`)
+            this.props.getUsers(`${API_URL}/users?page=${current_page}`)
         else
             this.props.getUsers();
     }
@@ -50,7 +51,7 @@ class UserAdd extends Component {
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getUsers(`http://127.0.0.1:8000/api/users?page=${current_page}`)
+            this.props.getUsers(`${API_URL}/users?page=${current_page}`)
         else
             this.props.getUsers();
     }

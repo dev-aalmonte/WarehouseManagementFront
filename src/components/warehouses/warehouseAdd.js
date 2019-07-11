@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { reduxForm, Field } from 'redux-form';
+import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
@@ -10,7 +11,7 @@ class WarehouseAddForm extends Component {
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getWarehouses(`http://127.0.0.1:8000/api/warehouses?page=${current_page}`)
+            this.props.getWarehouses(`${API_URL}/warehouses?page=${current_page}`)
         else
             this.props.getWarehouses();
     }
@@ -43,7 +44,7 @@ class WarehouseAdd extends Component {
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getWarehouses(`http://127.0.0.1:8000/api/warehouses?page=${current_page}`)
+            this.props.getWarehouses(`${API_URL}/warehouses?page=${current_page}`)
         else
             this.props.getWarehouses();
     }
