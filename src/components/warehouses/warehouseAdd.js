@@ -5,24 +5,10 @@ import { reduxForm, Field } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormSelect } from '../formFields';
+import { FormInput, FormButton } from '../formFields';
 
 class WarehouseAddForm extends Component {
-    resetTable() {
-        const { current_page } = this.props.pagination;
-        if(current_page != null)
-            this.props.getWarehouses(`${API_URL}/warehouses?page=${current_page}`)
-        else
-            this.props.getWarehouses();
-    }
-
-    resetActive() {
-        document.querySelectorAll(`.table__body__row`).forEach((element) => {
-            element.classList.remove('active');
-            element.classList.remove('to_delete');
-        })
-    }
-
+    
     render() {
         const { className, handleSubmit } = this.props;
         return (

@@ -15,7 +15,9 @@ const INITIAL_STATE = {
         last_page: null
     },
     warehouses: [],
-    selected_warehouse: {}
+    selected_warehouse: {},
+    stocks: [],
+    selected_stock: {}
 }
 
 export default function(state = INITIAL_STATE, action){

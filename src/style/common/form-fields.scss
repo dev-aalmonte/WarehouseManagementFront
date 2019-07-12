@@ -178,7 +178,7 @@
                 display: grid;
                 align-content: center;
 
-                &:hover {
+                &:hover, &.selected {
                     background: $b-sub-color;
                 }
             }
@@ -206,6 +206,37 @@
         display: grid;
         grid-template-rows: repeat(auto-fill, 3rem);
         grid-row-gap: 3rem;
+
+        &__item-container {
+            border-bottom: 1px solid $b-hightlight-color;
+            border-radius: .5rem;
+
+            display: grid;
+            grid-template-columns: .6fr .2fr .2fr;
+            justify-items: center;
+
+            &__item {
+                font-size: 1.2rem;
+                padding-bottom: .8rem;
+            }
+        }
+    }
+}
+
+.form-list-modal.form-list {
+    .form-list__item-list {
+        align-self: start;
+        padding-top: 2rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+
+        height: 13rem;
+        max-height: 13rem;
+        overflow-y: scroll;
+
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 3rem);
+        grid-row-gap: 1.5rem;
 
         &__item-container {
             border-bottom: 1px solid $b-hightlight-color;
