@@ -5,7 +5,7 @@ import { reduxForm, Field, FieldArray } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormList } from '../formFields';
+import { FormInput, FormButton, FormList, FormSelect } from '../formFields';
 
 
 class StockAddForm extends Component {
@@ -18,7 +18,7 @@ class StockAddForm extends Component {
     }
 
     render() {
-        const { className, handleSubmit } = this.props;
+        const { className, handleSubmit, warehouse } = this.props;
         const suggestionList = ['Hello', 'There', 'I love', 'The hentai', 'The Traps', 'The futas', 'Everything'];
         const listOption = {
             type: "modal",
@@ -27,7 +27,7 @@ class StockAddForm extends Component {
         }
         return (
             <form onSubmit={handleSubmit} className={`${className} stock-add-form`}>
-                <Field className='stock-add-form__warehouse' type='text' name='warehouseID' title='Warehouse' placeholder='Search for Warehouse' component={FormInput} />
+                <Field className='stock-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' component={FormSelect} options={warehouse} />
                 <Field className='stock-add-form__stock' type='text' name='stock' title='Stock' placeholder='Stock' component={FormInput} />
                 <FieldArray className='stock-add-form__products' suggestion={suggestionList} name='products' title='Products' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption}/>
                 <Field className='stock-add-form__submit' type='submit' name='submit' title='Add To Stock' component={FormButton}/>
@@ -63,12 +63,18 @@ class StockAdd extends Component {
     }
 
     render() {
-        return(
+        const warehousesSelect = this.props.warehouses.map(warehouse => {
+            return {
+                key: warehouse.id,
+                value: warehouse.name
+            }
+        });
+        return (
             <div className='stock-add'>
                 <div className='stock-add__background'></div>
                 <div className='stock-add__content'>
                     <Heading className='stock-add__title'>Add to Stock</Heading>
-                    <StockAddForm onSubmit={(e) => this.onSubmit(e)} className='stock-add__content__form'/>
+                    <StockAddForm onSubmit={(e) => this.onSubmit(e)} className='stock-add__content__form' warehouse={warehousesSelect}/>
                 </div>
             </div>
         )
@@ -93,8 +99,8 @@ StockAddForm = connect(state => {
 })(StockAddForm)
 
 function mapStateToProps(state) {
-    const { selected_warehouse, selected_stock, pagination } = state.warehouse;
-    return { selected_warehouse, selected_stock, pagination };
+    const { selected_warehouse, selected_stock, pagination, warehouses } = state.warehouse;
+    return { selected_warehouse, selected_stock, pagination, warehouses };
 }
 
 export default connect(mapStateToProps, actions)(StockAdd);
