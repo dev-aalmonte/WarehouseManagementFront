@@ -68,6 +68,7 @@ export class FormList extends Component {
 
         this.state = {
             suggestionList: [],
+            selectedSuggestion: null,
             selectedIndex: -1,
             lastIndex: -1
         }
@@ -85,21 +86,35 @@ export class FormList extends Component {
     }
 
     generateSuggestion(list) {
+        const options = this.props;
+        const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
         return (
             list.map((item, index) => {
-                return <div key={index} className='form-list__input-container__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item}</div>
+                if(typeof item === 'string'){
+                    return <div key={index} className='form-list__input-container__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item}</div>
+                }
+                else {
+                    return <div key={index} className='form-list__input-container__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item[keyName]}</div>
+                }
             })
         )
     }
 
     selectSuggestion(suggestion) {
-        document.querySelector('.form-list__input-container__input').value = suggestion;
+        const options = this.props;
+        const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
+        this.setState({selectedSuggestion: suggestion});
+
+        document.querySelector('.form-list__input-container__input').value = suggestion[keyName];
         document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
     }
 
     handleKeyPress(event, fields) {
         const inputValue = event.target.value;
         const { suggestion, options } = this.props;
+
+        options.suggestion.event.onKeyUp(event);
+
         if(inputValue.length >= 2 && event.key === 'Enter') {
             if (event.target.value !== '') {
                 const suggestionElement = document.querySelector('.form-list__input-container__suggestions');
@@ -114,7 +129,7 @@ export class FormList extends Component {
     
                     objectName.map((name, index) => {
                         if(objectValueInput[index] === null) {
-                            objectToAdd[name] = event.target.value
+                            objectToAdd[name] = this.state.selectedSuggestion ? this.state.selectedSuggestion : event.target.value;
                         }
                         else {
                             objectToAdd[name] = document.querySelector(`${objectValueInput[index]} input`).value
@@ -145,7 +160,13 @@ export class FormList extends Component {
         }
         else if (inputValue.length >= 2) {
             let suggestionList = suggestion.filter(suggestion => {
-                return suggestion.toLowerCase().includes(inputValue.toLowerCase());
+                if(typeof suggestion === 'string'){
+                    return suggestion.toLowerCase().includes(inputValue.toLowerCase());
+                }
+                else {
+                    const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
+                    return suggestion[keyName].toLowerCase().includes(inputValue.toLowerCase());
+                }
             });
             const lastIndex = suggestionList.length - 1;
             this.setState({suggestionList, lastIndex})
@@ -176,7 +197,15 @@ export class FormList extends Component {
                                 <div key={index} className='form-list__item-list__item-container'>
                                     {
                                         objectName.map((name, index) => {
-                                            return <div key={index} className='form-list__item-list__item-container__item'>{item[name]}</div>
+                                            const options = this.props;
+                                            const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
+
+                                            if(typeof item[name] === 'string'){
+                                                return <div key={index} className='form-list__item-list__item-container__item'>{item[name]}</div>
+                                            }
+                                            else {
+                                                return <div key={index} className='form-list__item-list__item-container__item'>{item[name][keyName]}</div>
+                                            }
                                         })
                                     }
                                 </div>

@@ -17,19 +17,36 @@ class StockAddForm extends Component {
         }
     }
 
+    componentWillMount() {
+        this.props.getProducts();
+    }
+
+    listOnKeyUp = (event) => {
+        const search = event.target.value;
+        console.log("Key up:", event.target.value);
+        this.props.getProducts(null, search);
+    }
+
     render() {
-        const { className, handleSubmit, warehouse } = this.props;
-        const suggestionList = ['Hello', 'There', 'I love', 'The hentai', 'The Traps', 'The futas', 'Everything'];
+        const { className, handleSubmit, warehouse, onKeyPress } = this.props;
+        const suggestionList = this.props.products;
+        console.log("Suggestion List: ", suggestionList);
         const listOption = {
             type: "modal",
             objectName: ['product', 'stock'],
-            objectValueInput: [null, '.stock-add-form__stock']
+            objectValueInput: [null, '.stock-add-form__stock'],
+            suggestion: {
+                keyName: null,
+                event: {
+                    onKeyUp: this.listOnKeyUp
+                }
+            }
         }
         return (
-            <form onSubmit={handleSubmit} className={`${className} stock-add-form`}>
+            <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} stock-add-form`}>
                 <Field className='stock-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' component={FormSelect} options={warehouse} />
                 <Field className='stock-add-form__stock' type='text' name='stock' title='Stock' placeholder='Stock' component={FormInput} />
-                <FieldArray className='stock-add-form__products' suggestion={suggestionList} name='products' title='Products' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption}/>
+                <FieldArray className='stock-add-form__products' suggestion={suggestionList} name='products' title='Products' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption} onKeyUp={this.listOnKeyUp}/>
                 <Field className='stock-add-form__submit' type='submit' name='submit' title='Add To Stock' component={FormButton}/>
             </form>
         )
@@ -53,13 +70,19 @@ class StockAdd extends Component {
     }
 
     onSubmit = (fields) => {
-        this.props.addWarehouse(fields, () => {
-            document.querySelectorAll('.modal').forEach((element) => {
-                element.classList.remove('active');
-                this.resetTable();
-                this.resetActive();
-            })
-        });
+        console.log("Fields:", fields);
+        // this.props.addWarehouse(fields, () => {
+        //     document.querySelectorAll('.modal').forEach((element) => {
+        //         element.classList.remove('active');
+        //         this.resetTable();
+        //         this.resetActive();
+        //     })
+        // });
+    }
+
+    onKeyPress = (event) => {
+        if (event.key === 'Enter')
+            event.preventDefault();
     }
 
     render() {
@@ -74,7 +97,7 @@ class StockAdd extends Component {
                 <div className='stock-add__background'></div>
                 <div className='stock-add__content'>
                     <Heading className='stock-add__title'>Add to Stock</Heading>
-                    <StockAddForm onSubmit={(e) => this.onSubmit(e)} className='stock-add__content__form' warehouse={warehousesSelect}/>
+                    <StockAddForm onSubmit={(e) => this.onSubmit(e)} onKeyPress={this.onKeyPress} className='stock-add__content__form' warehouse={warehousesSelect}/>
                 </div>
             </div>
         )
@@ -88,6 +111,7 @@ StockAddForm = reduxForm({
 
 StockAddForm = connect(state => {
     const { selected_stock, selected_warehouse } = state.warehouse;
+    const { products } = state.product;
     const initialValues = selected_stock.id ? {
         id: selected_stock.id,
         productID: selected_stock.productID,
@@ -97,8 +121,8 @@ StockAddForm = connect(state => {
     {
         warehouseID: selected_warehouse.id
     };
-    return { initialValues };
-})(StockAddForm)
+    return { initialValues, products };
+}, actions)(StockAddForm)
 
 function mapStateToProps(state) {
     const { selected_warehouse, selected_stock, pagination, warehouses } = state.warehouse;
