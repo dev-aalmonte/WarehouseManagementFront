@@ -100,14 +100,14 @@ export class FormList extends Component {
     handleKeyPress(event, fields) {
         const inputValue = event.target.value;
         const { suggestion, options } = this.props;
-        if(event.key === 'Enter') {
+        if(inputValue.length >= 2 && event.key === 'Enter') {
             if (event.target.value !== '') {
                 const suggestionElement = document.querySelector('.form-list__input-container__suggestions');
                 const suggestionItemElement = document.querySelectorAll('.form-list__input-container__suggestions__suggestion.selected');
                 if(suggestionElement.classList.contains('active') && suggestionItemElement.length > 0){
                     suggestionItemElement[0].click();
                 }
-                else {
+                else if(!suggestionElement.classList.contains('active')) {
                     document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
                     const { objectName, objectValueInput } = options;
                     var objectToAdd = {}
