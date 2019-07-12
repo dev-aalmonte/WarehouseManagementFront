@@ -87,14 +87,16 @@ StockAddForm = reduxForm({
 })(StockAddForm);
 
 StockAddForm = connect(state => {
-    const { selected_stock } = state.warehouse;
+    const { selected_stock, selected_warehouse } = state.warehouse;
     const initialValues = selected_stock.id ? {
         id: selected_stock.id,
         productID: selected_stock.productID,
         warehouseID: selected_stock.warehouseID,
         stock: selected_stock.stock
     } :
-    {};
+    {
+        warehouseID: selected_warehouse.id
+    };
     return { initialValues };
 })(StockAddForm)
 
