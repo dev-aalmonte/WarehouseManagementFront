@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { reduxForm, Field, FieldArray, reset } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormList, FormSelect } from '../formFields';
-
 
 class StockAddForm extends Component {
     constructor(props){
@@ -23,14 +22,12 @@ class StockAddForm extends Component {
 
     listOnKeyUp = (event) => {
         const search = event.target.value;
-        console.log("Key up:", event.target.value);
         this.props.getProducts(null, search);
     }
 
     render() {
         const { className, handleSubmit, warehouse, onKeyPress } = this.props;
         const suggestionList = this.props.products;
-        console.log("Suggestion List: ", suggestionList);
         const listOption = {
             type: "modal",
             objectName: ['product', 'stock'],
