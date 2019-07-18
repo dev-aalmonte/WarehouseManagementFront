@@ -17,6 +17,10 @@ export const EDIT_WAREHOUSES = 'EDIT_WAREHOUSES';
 export const DELETE_WAREHOUSES = 'DELETE_WAREHOUSES';
 export const DISPLAY_WAREHOUSE = 'DISPLAY_WAREHOUSE';
 
+// Warehouse Stock
+export const ADD_WAREHOUSE_STOCK = 'ADD_WAREHOUSE_STOCK';
+
+
 // User
 export const GET_USERS = 'GET_USERS';
 export const SELECT_SINGLE_USER = 'SELECT_SINGLE_USER';

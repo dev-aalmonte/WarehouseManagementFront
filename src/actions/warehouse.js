@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
+
 import qs from 'querystring';
 import { API_URL } from '../config';
 import {
@@ -7,7 +9,10 @@ import {
     ADD_WAREHOUSES,
     EDIT_WAREHOUSES,
     DELETE_WAREHOUSES,
-    DISPLAY_WAREHOUSE
+    DISPLAY_WAREHOUSE,
+
+    // Stock
+    ADD_WAREHOUSE_STOCK
 } from './types';
 
 const requestConfig = {
@@ -116,5 +121,28 @@ export function deleteWarehouse(id, success) {
                 if(err)
                     console.log(err);
             })
+    }
+}
+
+// Stock
+
+export function addStock(fields, success) {
+    return function (dispatch) {
+        axios.post(`${API_URL}/stock`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: ADD_WAREHOUSE_STOCK,
+                        payload: response.data
+                    });
+                }
+                success(response);
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+
+        dispatch(reset('stock-add'));
     }
 }

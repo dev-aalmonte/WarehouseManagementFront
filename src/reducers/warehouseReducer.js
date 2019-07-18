@@ -4,7 +4,10 @@ import {
     ADD_WAREHOUSES,
     EDIT_WAREHOUSES,
     DELETE_WAREHOUSES,
-    DISPLAY_WAREHOUSE
+    DISPLAY_WAREHOUSE,
+
+    // Stock
+    ADD_WAREHOUSE_STOCK
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -48,6 +51,7 @@ export default function(state = INITIAL_STATE, action){
                 selected_warehouse: action.payload
             }
         
+        case ADD_WAREHOUSE_STOCK:
         case ADD_WAREHOUSES:
         case EDIT_WAREHOUSES:
         case DELETE_WAREHOUSES:

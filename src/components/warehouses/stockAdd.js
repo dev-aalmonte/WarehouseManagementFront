@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { reduxForm, Field, FieldArray, reset } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
@@ -70,14 +70,22 @@ class StockAdd extends Component {
     }
 
     onSubmit = (fields) => {
-        console.log("Fields:", fields);
-        // this.props.addWarehouse(fields, () => {
-        //     document.querySelectorAll('.modal').forEach((element) => {
-        //         element.classList.remove('active');
-        //         this.resetTable();
-        //         this.resetActive();
-        //     })
-        // });
+        fields.products.map(item => {
+            const fieldToSubmit = {
+                warehouseID: fields.warehouseID,
+                productID: item.product.id,
+                statusID: 2,
+                stock: item.stock
+            }
+
+            this.props.addStock(fieldToSubmit, (res) => {
+                document.querySelectorAll('.modal').forEach((element) => {
+                    element.classList.remove('active');
+                    this.resetTable();
+                    this.resetActive();
+                })
+            });
+        });
     }
 
     onKeyPress = (event) => {
@@ -119,7 +127,9 @@ StockAddForm = connect(state => {
         stock: selected_stock.stock
     } :
     {
-        warehouseID: selected_warehouse.id
+        warehouseID: selected_warehouse.id,
+        products: [],
+        stock: ""
     };
     return { initialValues, products };
 }, actions)(StockAddForm)

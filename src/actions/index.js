@@ -17,6 +17,9 @@ import {
     selectSingleWarehouse,
     deleteWarehouse,
     selectSingleWarehouseFromDB,
+
+    // Stock
+    addStock,
 } from './warehouse';
 
 import {
@@ -53,6 +56,9 @@ export {
     selectSingleWarehouse,
     deleteWarehouse,
     selectSingleWarehouseFromDB,
+
+    // Stock
+    addStock,
 
     // User
     getUsers,
