@@ -46,6 +46,9 @@ class WarehouseDetail extends Component {
     render() {
         const { selected_warehouse } = this.props;
         const { name, address } = selected_warehouse;
+
+        const tableHeader = ["Product", "Stock", "Status"];
+        
         return (
             <div className='warehouse-detail'>
                 <div className='warehouse-detail__heading'>
@@ -61,7 +64,7 @@ class WarehouseDetail extends Component {
                             <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
                             <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
                         </div>
-                        <Table className='warehouse-detail__products__table-container__table' />
+                        <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} />
                     </div>
                 </div>
             </div>

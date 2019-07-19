@@ -126,6 +126,26 @@ export function deleteWarehouse(id, success) {
 
 // Stock
 
+export function getStockPerWarehouse(warehouse, paginationURL = null, search = '') {
+    const requestURL = paginationURL ? paginationURL : `${API_URL}/warehouses`;
+    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
+    return function (dispatch) {
+        axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: GET_WAREHOUSES,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
 export function addStock(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/stock`, qs.stringify(fields), requestConfig)
