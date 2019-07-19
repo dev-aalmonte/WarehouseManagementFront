@@ -49,7 +49,16 @@ class WarehouseDetail extends Component {
         const { name, address } = selected_warehouse;
 
         const tableHeader = ["Product", "Stock", "Status"];
-        
+        const columnTable = [ {key: 'product', column: 'name'}, "stock", {key: 'status', column: 'name'} ];
+        const templateColumn = ["[data]", "[data]", "[data]"];
+        const tableData = this.props.stocks;
+        const tableEvents = {
+            onDoubleClick: (event) => {
+                console.log("I'm clicking");
+                // const warehouseID = this.props.warehouses[event.target.parentElement.id].id;
+                // this.props.history.push(`/warehouse/${warehouseID}`);
+            }
+        }
         return (
             <div className='warehouse-detail'>
                 <div className='warehouse-detail__heading'>
@@ -65,7 +74,7 @@ class WarehouseDetail extends Component {
                             <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
                             <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
                         </div>
-                        <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} />
+                        <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
                     </div>
                 </div>
             </div>
@@ -74,8 +83,8 @@ class WarehouseDetail extends Component {
 }
 
 function mapStateToProps(state) {
-    const { selected_warehouse } = state.warehouse;
-    return { selected_warehouse };
+    const { selected_warehouse, stocks } = state.warehouse;
+    return { selected_warehouse, stocks };
 }
 
 export default connect(mapStateToProps, actions)(WarehouseDetail);
