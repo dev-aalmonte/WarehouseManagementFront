@@ -18,8 +18,8 @@ export const DELETE_WAREHOUSES = 'DELETE_WAREHOUSES';
 export const DISPLAY_WAREHOUSE = 'DISPLAY_WAREHOUSE';
 
 // Warehouse Stock
+export const GET_WAREHOUSE_STOCK = 'GET_WAREHOUSE_STOCK';
 export const ADD_WAREHOUSE_STOCK = 'ADD_WAREHOUSE_STOCK';
-
 
 // User
 export const GET_USERS = 'GET_USERS';

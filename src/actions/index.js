@@ -19,6 +19,7 @@ import {
     selectSingleWarehouseFromDB,
 
     // Stock
+    getStockPerWarehouse,
     addStock,
 } from './warehouse';
 
@@ -58,6 +59,7 @@ export {
     selectSingleWarehouseFromDB,
 
     // Stock
+    getStockPerWarehouse,
     addStock,
 
     // User

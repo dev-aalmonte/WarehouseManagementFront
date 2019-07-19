@@ -10,6 +10,7 @@ import Table from '../common/table';
 class WarehouseDetail extends Component {
     componentWillMount() {
         this.props.selectSingleWarehouseFromDB(this.props.match.params.id);
+        this.props.getStockPerWarehouse(this.props.match.params.id);
     }
 
     openModal = (name) => {

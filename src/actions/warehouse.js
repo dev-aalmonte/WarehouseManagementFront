@@ -12,6 +12,7 @@ import {
     DISPLAY_WAREHOUSE,
 
     // Stock
+    GET_WAREHOUSE_STOCK,
     ADD_WAREHOUSE_STOCK
 } from './types';
 
@@ -127,14 +128,14 @@ export function deleteWarehouse(id, success) {
 // Stock
 
 export function getStockPerWarehouse(warehouse, paginationURL = null, search = '') {
-    const requestURL = paginationURL ? paginationURL : `${API_URL}/warehouses`;
+    const requestURL = paginationURL ? paginationURL : `${API_URL}/stock`;
     const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
     return function (dispatch) {
         axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
             .then(response => {
                 if(response.data){
                     dispatch({
-                        type: GET_WAREHOUSES,
+                        type: GET_WAREHOUSE_STOCK,
                         payload: response.data
                     });
                 }

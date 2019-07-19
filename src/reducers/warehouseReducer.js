@@ -7,6 +7,7 @@ import {
     DISPLAY_WAREHOUSE,
 
     // Stock
+    GET_WAREHOUSE_STOCK,
     ADD_WAREHOUSE_STOCK
 } from '../actions/types';
 
@@ -25,7 +26,7 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action){
     switch (action.type) {
-        case GET_WAREHOUSES:
+        case GET_WAREHOUSES: {
             const { next_page_url, prev_page_url, current_page, last_page, data } = action.payload;
             return {
                 ...state,
@@ -37,6 +38,7 @@ export default function(state = INITIAL_STATE, action){
                 },
                 warehouses: data
             }
+        }
 
         case SELECT_SINGLE_WAREHOUSE:
             const id = action.payload;
@@ -50,6 +52,21 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_warehouse: action.payload
             }
+
+        // Stock
+        case GET_WAREHOUSE_STOCK: {
+            const { next_page_url, prev_page_url, current_page, last_page, data } = action.payload;
+            return {
+                ...state,
+                pagination: {
+                    current_page,
+                    next_page_url,
+                    prev_page_url,
+                    last_page
+                },
+                stocks: data
+            }
+        }
         
         case ADD_WAREHOUSE_STOCK:
         case ADD_WAREHOUSES:
