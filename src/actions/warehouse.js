@@ -13,7 +13,8 @@ import {
 
     // Stock
     GET_WAREHOUSE_STOCK,
-    ADD_WAREHOUSE_STOCK
+    ADD_WAREHOUSE_STOCK,
+    DELETE_WAREHOUSE_STOCK
 } from './types';
 
 const requestConfig = {
@@ -165,5 +166,24 @@ export function addStock(fields, success) {
             });
 
         dispatch(reset('stock-add'));
+    }
+}
+
+export function deleteStock(id, success) {
+    return function (dispatch) {
+        axios.delete(`${API_URL}/stock/${id}`, requestConfig)
+            .then(response => {
+                if(response.data == 1) {
+                    dispatch({
+                        type: DELETE_WAREHOUSE_STOCK,
+                        payload: id
+                    });
+                }
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }

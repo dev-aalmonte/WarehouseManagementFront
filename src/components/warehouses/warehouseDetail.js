@@ -13,6 +13,21 @@ class WarehouseDetail extends Component {
         this.props.getStockPerWarehouse(this.props.match.params.id);
     }
 
+    resetTable() {
+        const { current_page } = this.props.pagination;
+        if(current_page != null)
+            this.props.getStockPerWarehouse(this.props.match.params.id, `http://127.0.0.1:8000/api/stock?page=${current_page}`)
+        else
+            this.props.getStockPerWarehouse(this.props.match.params.id);
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
+    }
+
     openModal = (name) => {
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
@@ -25,8 +40,7 @@ class WarehouseDetail extends Component {
     openEditStock = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length === 1){
-            // Get Actual stock
-            this.openModal('stock_add');
+            // this.openModal('stock_edit');
         }
     }
 
@@ -35,12 +49,11 @@ class WarehouseDetail extends Component {
         if(allElementsSelected.length > 0)
             allElementsSelected.forEach((element) => {
                 element.classList.add('to_delete');
-                const rowID = this.props.warehouses[element.id].id;
-                console.log("Deleting Stock");
-                // this.props.deleteWarehouse(rowID, () => {
-                //     this.resetTable();
-                //     this.resetActive();
-                // });
+                const rowID = this.props.stocks[element.id].id;
+                this.props.deleteStock(rowID, () => {
+                    this.resetTable();
+                    this.resetActive();
+                });
             })
     }
 
@@ -88,8 +101,8 @@ class WarehouseDetail extends Component {
 }
 
 function mapStateToProps(state) {
-    const { selected_warehouse, stocks } = state.warehouse;
-    return { selected_warehouse, stocks };
+    const { selected_warehouse, stocks, pagination } = state.warehouse;
+    return { selected_warehouse, stocks, pagination };
 }
 
 export default connect(mapStateToProps, actions)(WarehouseDetail);

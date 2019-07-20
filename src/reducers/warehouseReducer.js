@@ -8,7 +8,8 @@ import {
 
     // Stock
     GET_WAREHOUSE_STOCK,
-    ADD_WAREHOUSE_STOCK
+    ADD_WAREHOUSE_STOCK,
+    DELETE_WAREHOUSE_STOCK,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -69,6 +70,7 @@ export default function(state = INITIAL_STATE, action){
         }
         
         case ADD_WAREHOUSE_STOCK:
+        case DELETE_WAREHOUSE_STOCK:
         case ADD_WAREHOUSES:
         case EDIT_WAREHOUSES:
         case DELETE_WAREHOUSES:

@@ -21,6 +21,7 @@ import {
     // Stock
     getStockPerWarehouse,
     addStock,
+    deleteStock,
 } from './warehouse';
 
 import {
@@ -61,6 +62,7 @@ export {
     // Stock
     getStockPerWarehouse,
     addStock,
+    deleteStock,
 
     // User
     getUsers,
