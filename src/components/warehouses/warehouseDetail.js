@@ -44,6 +44,11 @@ class WarehouseDetail extends Component {
             })
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getStockPerWarehouse(this.props.match.params.id, null, search);
+    }
+
     render() {
         const { selected_warehouse } = this.props;
         const { name, address } = selected_warehouse;
@@ -68,7 +73,7 @@ class WarehouseDetail extends Component {
                 <div className='warehouse-detail__products'>
                     <Heading>Products</Heading>
                     <div className='warehouse-detail__products__table-container'>
-                        <Searchbar className='warehouse-detail__products__table-container__searchbar' placeholder='Search a Warehouse' onKeyUp={this.displaySearchBarInput}/>
+                        <Searchbar className='warehouse-detail__products__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                         <div className='warehouse-detail__products__table-container__buttoms'>
                             <FormSmallButton onClick={() => this.deleteStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='minus'/>
                             <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
