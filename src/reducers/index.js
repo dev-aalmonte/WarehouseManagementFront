@@ -7,6 +7,7 @@ import product from './productReducer';
 import warehouse from './warehouseReducer';
 import user from './userReducer';
 import role from './roleReducer';
+import status from './statusReducer';
 
 const rootReducer = combineReducers({
   form,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   product,
   warehouse,
   user,
-  role
+  role,
+  status
 });
 
 export default rootReducer;

@@ -20,7 +20,9 @@ import {
 
     // Stock
     getStockPerWarehouse,
+    selectSingleStock,
     addStock,
+    editStock,
     deleteStock,
 } from './warehouse';
 
@@ -39,6 +41,15 @@ import {
     deleteRole,
     selectSingleRoleFromDB,
 } from './role';
+
+import {
+    getStatus,
+    getStatusByProperty,
+    addStatus,
+    selectSingleStatus,
+    deleteStatus,
+    selectSingleStatusFromDB,
+} from './status';
 
 export {
     // Auth
@@ -61,6 +72,8 @@ export {
 
     // Stock
     getStockPerWarehouse,
+    selectSingleStock,
+    editStock,
     addStock,
     deleteStock,
 
@@ -77,4 +90,12 @@ export {
     selectSingleRole,
     deleteRole,
     selectSingleRoleFromDB,
+    
+    // Status
+    getStatus,
+    getStatusByProperty,
+    addStatus,
+    selectSingleStatus,
+    deleteStatus,
+    selectSingleStatusFromDB,
 }

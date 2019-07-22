@@ -13,7 +13,9 @@ import {
 
     // Stock
     GET_WAREHOUSE_STOCK,
+    SELECT_SINGLE_WAREHOUSE_STOCK,
     ADD_WAREHOUSE_STOCK,
+    EDIT_WAREHOUSE_STOCK,
     DELETE_WAREHOUSE_STOCK
 } from './types';
 
@@ -148,6 +150,15 @@ export function getStockPerWarehouse(warehouse, paginationURL = null, search = '
     }
 }
 
+export function selectSingleStock(id) {
+    return function (dispatch){
+        dispatch({
+            type: SELECT_SINGLE_WAREHOUSE_STOCK,
+            payload: id
+        });
+    }
+}
+
 export function addStock(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/stock`, qs.stringify(fields), requestConfig)
@@ -155,6 +166,27 @@ export function addStock(fields, success) {
                 if(response.data){
                     dispatch({
                         type: ADD_WAREHOUSE_STOCK,
+                        payload: response.data
+                    });
+                }
+                success(response);
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+
+        dispatch(reset('stock-add'));
+    }
+}
+
+export function editStock(fields, success) {
+    return function (dispatch) {
+        axios.put(`${API_URL}/stock/${fields.id}`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: EDIT_WAREHOUSE_STOCK,
                         payload: response.data
                     });
                 }

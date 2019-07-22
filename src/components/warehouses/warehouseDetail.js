@@ -11,6 +11,7 @@ class WarehouseDetail extends Component {
     componentWillMount() {
         this.props.selectSingleWarehouseFromDB(this.props.match.params.id);
         this.props.getStockPerWarehouse(this.props.match.params.id);
+        this.props.getStatusByProperty(1);
     }
 
     resetTable() {
@@ -40,7 +41,9 @@ class WarehouseDetail extends Component {
     openEditStock = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length === 1){
-            // this.openModal('stock_edit');
+            const selectedItem = allElementsSelected[0];
+            this.props.selectSingleStock(selectedItem.id);
+            this.openModal('stock_edit');
         }
     }
 

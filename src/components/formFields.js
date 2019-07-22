@@ -28,9 +28,12 @@ export class FormSelect extends Component {
                     <select className='form-select__input-container__input' {...input}>
                         <option value='' disabled>{placeholder}</option>
                         {
+                            options ?
                             options.map((option, index) => {
                                 return <option key={index} value={option.key}>{option.value}</option>
                             })
+                            :
+                            ""
                         }
                     </select>
                     <Icon onClick={this.openSelect} className='form-select__input-container__icon' icon='angle-down'/>
