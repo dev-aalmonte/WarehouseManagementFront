@@ -75,9 +75,19 @@ class WarehouseDetail extends Component {
         const tableData = this.props.stocks;
         const tableEvents = {
             onDoubleClick: (event) => {
-                console.log("I'm clicking");
-                // const warehouseID = this.props.warehouses[event.target.parentElement.id].id;
-                // this.props.history.push(`/warehouse/${warehouseID}`);
+                const elementChildren = event.target.parentElement.children;
+                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Availabre";
+                const stock = this.props.stocks[event.target.parentElement.id];
+                const fieldsToSubmit = {
+                    id: stock.id,
+                    stock: stock.stock,
+                    statusID: stock.statusID == 2 ? 5 : 2
+                }
+
+                this.props.editStock(fieldsToSubmit, () => {
+                    this.resetTable();
+                    this.resetActive();
+                });
             }
         }
         return (
