@@ -5,7 +5,7 @@ import * as actions from '../../actions';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import { Heading } from '../common/headings';
-import { FormSelect, FormList, FormButton } from '../formFields';
+import { FormSelect, FormList, FormButton, FormInput } from '../formFields';
 
 class OrderNewForm extends Component {
     listOnKeyUp = (event) => {
@@ -16,7 +16,6 @@ class OrderNewForm extends Component {
     render() {
         const { className, handleSubmit, onKeyPress } = this.props;
         const listOption = {
-            objectName: ['product', 'stock'],
             objectValueInput: [null, '.stock-add-form__stock'],
             suggestion: {
                 keyName: null,
@@ -39,7 +38,8 @@ class OrderNewForm extends Component {
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} order-add-form`}>
                 <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={statusOptions} component={FormSelect} />
-                <FieldArray suggestion={suggestionList} name='products' title='Product List' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption}/>
+                <Field className='order-add-form__quantity' name='quantity' title='Quantity' placeholder='Quantity' component={FormInput} />
+                <FieldArray className='order-add-form__products' suggestion={suggestionList} name='products' title='Product List' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption}/>
                 <Field className='order-add-form__submit' name="submit" type='submit' title='Make order' onClick={() => console.log("Submiting order")} component={FormButton} />
             </form>
         )
