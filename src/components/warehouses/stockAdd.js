@@ -33,7 +33,7 @@ class StockAddForm extends Component {
             objectName: ['product', 'stock'],
             objectValueInput: [null, '.stock-add-form__stock'],
             suggestion: {
-                keyName: null,
+                keyName: 'name',
                 event: {
                     onKeyUp: this.listOnKeyUp
                 }

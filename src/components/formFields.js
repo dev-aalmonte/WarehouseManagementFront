@@ -105,10 +105,10 @@ export class FormList extends Component {
 
     selectSuggestion(suggestion) {
         const options = this.props;
-        const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
+        const keyName = options.suggestion.keyName ? options.suggestion.keyName : null;
         this.setState({selectedSuggestion: suggestion});
 
-        document.querySelector('.form-list__input-container__input').value = suggestion[keyName];
+        document.querySelector('.form-list__input-container__input').value = keyName ? suggestion[keyName] : suggestion;
         document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
     }
 
@@ -198,7 +198,8 @@ export class FormList extends Component {
                             const { objectName, objectValueInput } = options;
                             return (
                                 <div key={index} className='form-list__item-list__item-container'>
-                                    {
+                                    {   
+                                        objectName ?
                                         objectName.map((name, index) => {
                                             const options = this.props;
                                             const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
@@ -209,7 +210,8 @@ export class FormList extends Component {
                                             else {
                                                 return <div key={index} className='form-list__item-list__item-container__item'>{item[name][keyName]}</div>
                                             }
-                                        })
+                                        }):
+                                        <div key={index} className='form-list__item-list__item-container__item'>{item}</div>
                                     }
                                 </div>
                             )
