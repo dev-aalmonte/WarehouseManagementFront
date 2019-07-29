@@ -12,6 +12,7 @@ import WarehouseAdd from './warehouses/warehouseAdd';
 import UserAdd from './users/userAdd';
 import StockAdd from './warehouses/stockAdd';
 import StockEdit from './warehouses/stockEdit';
+import ClientAdd from './clients/clientAdd';
 
 library.add(faQuestionCircle, faUsers, faArchive, faBoxes, faWarehouse, faSearch, faAngleLeft, faAngleRight, faAngleDown, faPlus, faSignOutAlt, faEdit, faMinus, faUser);
 
@@ -35,6 +36,9 @@ export default class App extends Component {
                 {/* Stock Modal */}
                 <Modal className='modal-stock_add'> <StockAdd/> </Modal>
                 <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
+
+                {/* Client Modal */}
+                <Modal className='modal-client_add'> <ClientAdd/> </Modal>
             </div>
         );
     }
