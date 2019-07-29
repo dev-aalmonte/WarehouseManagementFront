@@ -42,6 +42,10 @@
             color: rgba(20, 20, 20, 1);
         }
     }
+
+    &__back-control.hidden {
+        display: none;
+    }
     
     &__bulletpoint {
         @include SlideshowGradient;
@@ -76,11 +80,12 @@
                 background: rgba(20, 20, 20, 1);
             }
         }
-
-
-        
     }
     
+    &__bulletpoint.hidden {
+        display: none;
+    }
+
     &__foward-control {
         @include SlideshowGradient;
         @include Unselectable;
@@ -105,4 +110,12 @@
             color: rgba(20, 20, 20, 1);
         }
     }
+
+    &__foward-control.hidden {
+        display: none;
+    }
+}
+
+.slideshow.hidden {
+    display: none;
 }

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-const image = require.context('../../../static/assets/temp');
-
 import Icon from './icon';
 
 class Slideshow extends Component {
@@ -60,14 +58,14 @@ class Slideshow extends Component {
         const { className } = this.props;
         const { imageList, currentImageIndex } = this.state;
         return (
-            <div className={`${className} slideshow`}>
+            <div className={`${className} slideshow ${imageList.length == 0 ? 'hidden' : ''}`}>
                 <div className='slideshow__image-container'>
                     <img className='slideshow__image-container__image' src={imageList[currentImageIndex]} />
                 </div>
-                <div onClick={this.moveBackward} className='slideshow__back-control'>
+                <div onClick={this.moveBackward} className={`slideshow__back-control ${imageList.length == 1 ? 'hidden' : ''}`}>
                     <Icon className='slideshow__back-control__icon' icon='angle-left' />
                 </div>
-                <div className='slideshow__bulletpoint'>
+                <div className={`slideshow__bulletpoint ${imageList.length == 1 ? 'hidden' : ''}`}>
                     {
                         imageList.map((img, index) => {
                             const active = index == 0 ? 'active' : '';
@@ -77,7 +75,7 @@ class Slideshow extends Component {
                         })
                     }
                 </div>
-                <div onClick={this.moveFoward} className='slideshow__foward-control'>
+                <div onClick={this.moveFoward} className={`slideshow__foward-control ${imageList.length == 1 ? 'hidden' : ''}`}>
                     <Icon className='slideshow__foward-control__icon' icon='angle-right' />
                 </div>
             </div>

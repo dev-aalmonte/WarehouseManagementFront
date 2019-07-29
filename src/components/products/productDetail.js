@@ -9,11 +9,7 @@ class ProductDetail extends Component {
         return (
             <div className='product-detail'>
                 <div className='product-detail__slideshow'>
-                    <Slideshow className='product-detail__slideshow__slideshow' imgs={[
-                        '../../../static/assets/temp/1.jpg',
-                        '../../../static/assets/temp/2.jpg',
-                        '../../../static/assets/temp/3.jpg',
-                    ]}/>
+                    <Slideshow className='product-detail__slideshow__slideshow' imgs={[]}/>
                 </div>
                 <div className='product-detail__content'>
                     <Heading className='product-detail__title'>{this.props.selected_product.name}</Heading>
