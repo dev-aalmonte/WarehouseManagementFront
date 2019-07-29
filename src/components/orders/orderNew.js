@@ -34,7 +34,7 @@ class OrderNewForm extends Component {
                 value: 'Item 2'
             }
         ]
-        const suggestionList = ['Hello', 'There', 'I love', 'The hentai', 'The Traps', 'The futas', 'Everything'];
+        const suggestionList = ['Hello', 'There', 'Everything'];
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} order-add-form`}>
                 <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={statusOptions} component={FormSelect} />
