@@ -2,13 +2,17 @@
     grid-column: s/e;
 
     display: grid;
-    grid-template-rows: [s client-heading-s] 7rem [client-heading-e client-description-s] 12rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
+    grid-template-rows: [s client-heading-s] 7rem [client-heading-e client-sub-s] 3rem [client-sub-e client-description-s] 12rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
     // grid-template-columns: [s] .9fr [m] .1fr [e];
 
     padding: 5rem 20rem;
 
     &__heading {
         grid-row: client-heading-s/client-heading-e;
+    }
+
+    &__small-heading {
+        grid-row: client-sub-s/client-sub-e;
     }
     
     &__description {
