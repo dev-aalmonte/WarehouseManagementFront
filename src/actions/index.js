@@ -51,6 +51,14 @@ import {
     selectSingleStatusFromDB,
 } from './status';
 
+import {
+    getClients,
+    selectSingleClient,
+    selectSingleClientFromDB,
+    addClient,
+    deleteClient,
+} from './client';
+
 export {
     // Auth
     login,
@@ -98,4 +106,11 @@ export {
     selectSingleStatus,
     deleteStatus,
     selectSingleStatusFromDB,
+
+    // Client
+    getClients,
+    selectSingleClient,
+    selectSingleClientFromDB,
+    addClient,
+    deleteClient,
 }

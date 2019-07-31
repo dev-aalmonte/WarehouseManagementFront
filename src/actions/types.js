@@ -47,3 +47,11 @@ export const ADD_STATUS = 'ADD_STATUS';
 export const EDIT_STATUS = 'EDIT_STATUS';
 export const DELETE_STATUS = 'DELETE_STATUS';
 export const DISPLAY_STATUS = 'DISPLAY_STATUS';
+
+// Client
+export const GET_CLIENTS = 'GET_CLIENTS';
+export const SELECT_SINGLE_CLIENT = 'SELECT_SINGLE_CLIENT';
+export const ADD_CLIENTS = 'ADD_CLIENTS';
+export const EDIT_CLIENTS = 'EDIT_CLIENTS';
+export const DELETE_CLIENTS = 'DELETE_CLIENTS';
+export const DISPLAY_CLIENT = 'DISPLAY_CLIENT';

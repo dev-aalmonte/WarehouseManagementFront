@@ -32,15 +32,29 @@ class ClientAddForm extends Component {
 
 class ClientAdd extends Component {
 
+    resetTable() {
+        const { current_page } = this.props.pagination;
+        if(current_page != null)
+            this.props.getClients(`${API_URL}/clients?page=${current_page}`)
+        else
+            this.props.getClients();
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
+    }
+
     onSubmit = (fields) => {
-        console.log("Submiting Client");
-        // this.props.addProduct(fields, () => {
-        //     document.querySelectorAll('.modal').forEach((element) => {
-        //         element.classList.remove('active');
-        //         this.resetTable();
-        //         this.resetActive();
-        //     })
-        // });
+        this.props.addClient(fields, () => {
+            document.querySelectorAll('.modal').forEach((element) => {
+                element.classList.remove('active');
+                this.resetTable();
+                this.resetActive();
+            })
+        });
     }
 
     render() {
@@ -61,4 +75,28 @@ ClientAddForm = reduxForm({
     enableReinitialize: true
 })(ClientAddForm);
 
-export default ClientAdd;
+
+ClientAddForm = connect(state => {
+    const { selected_client } = state.client;
+    const initialValues = selected_client.id ? {
+        id: selected_client.id,
+        first_name: selected_client.first_name,
+        last_name: selected_client.last_name,
+        email: selected_client.email,
+        street_address: selected_client.billing_address.street_address,
+        extra_address: selected_client.billing_address.extra_address,
+        city: selected_client.billing_address.city,
+        state: selected_client.billing_address.state,
+        country: selected_client.billing_address.country,
+        zipcode: selected_client.billing_address.zipcode,
+    } :
+    {};
+    return { initialValues };
+})(ClientAddForm);
+
+function mapStateToProps(state) {
+    const { selected_client, pagination } = state.client;
+    return { selected_client, pagination };
+}
+
+export default connect(mapStateToProps, actions)(ClientAdd);
