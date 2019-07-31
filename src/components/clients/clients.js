@@ -61,6 +61,11 @@ class Clients extends Component {
             })
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getClients(null, search);
+    }
+
     render() {
         const tableHeader = ["Name", "Email", "Address"];
         const columnTable = [["first_name", "last_name"], "email", {key:'billing_address', column: ['street_address', 'extra_address', 'city', 'state', 'country', 'zipcode']}];
@@ -75,7 +80,7 @@ class Clients extends Component {
         return (
             <div className='clients'>
                 <Heading className='clients__heading'>Clients</Heading>
-                <Searchbar className='clients-searchbar' placeholder='Search a Client' />
+                <Searchbar className='clients-searchbar' placeholder='Search a Client' onKeyUp={this.displaySearchBarInput} />
                 <div className='clients__buttoms'>
                     <FormSmallButton onClick={() => this.deleteClient()} className='clients__buttoms__button' type='button' icon='minus'/>
                     <FormSmallButton onClick={() => this.openEditClient()} className='clients__buttoms__button' type='button' icon='edit'/>
