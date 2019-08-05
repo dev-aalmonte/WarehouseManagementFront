@@ -8,21 +8,6 @@ import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
 
 class ProductAddForm extends Component {
-    resetTable() {
-        const { current_page } = this.props.pagination;
-        if(current_page != null)
-            this.props.getProducts(`${API_URL}/products?page=${current_page}`)
-        else
-            this.props.getProducts();
-    }
-
-    resetActive() {
-        document.querySelectorAll(`.table__body__row`).forEach((element) => {
-            element.classList.remove('active');
-            element.classList.remove('to_delete');
-        })
-    }
-
     render() {
         const { className, handleSubmit } = this.props;
         const weightOption = [
@@ -65,6 +50,21 @@ class ProductAddForm extends Component {
 }
 
 class ProductAdd extends Component {
+    resetTable() {
+        const { current_page } = this.props.pagination;
+        if(current_page != null)
+            this.props.getProducts(`${API_URL}/products?page=${current_page}`)
+        else
+            this.props.getProducts();
+    }
+
+    resetActive() {
+        document.querySelectorAll(`.table__body__row`).forEach((element) => {
+            element.classList.remove('active');
+            element.classList.remove('to_delete');
+        })
+    }
+
     onSubmit = (fields) => {
         this.props.addProduct(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
@@ -95,13 +95,13 @@ ProductAddForm = reduxForm({
 })(ProductAddForm);
 
 ProductAddForm = connect((state) => {
-    const { selected_product } = state.product;
-    return { initialValues: selected_product };
+    const { selected_product, pagination } = state.product;
+    return { initialValues: selected_product, pagination };
 })(ProductAddForm);
 
 function mapStateToProps(state) {
-    const { selected_product } = state.product;
-    return { selected_product };
+    const { selected_product, pagination } = state.product;
+    return { selected_product, pagination };
 }
 
 export default connect(mapStateToProps, actions)(ProductAdd);
