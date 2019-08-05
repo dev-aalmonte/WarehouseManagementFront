@@ -33,7 +33,7 @@ class UserAddForm extends Component {
                 <Field className='user-add-form__username' type='text' name='username' title='Username' placeholder='Username' component={FormInput} />
                 <Field className='user-add-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput} />
                 <Field className='user-add-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput} />
-                <Field className='user-add-form__confirm' name='password' name='confirm' title='Confirm Password' placeholder='Confirm Password' component={FormInput} />
+                <Field className='user-add-form__confirm' type='password' name='confirm' title='Confirm Password' placeholder='Confirm Password' component={FormInput} />
                 <Field className='user-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' options={warehouse} component={FormSelect}/>
                 <Field className='user-add-form__role' name='roleID' title='Role' placeholder='Select a Role' options={role} component={FormSelect}/>
                 <Field className='user-add-form__submit' type='submit' name='submit' title='Add User' component={FormButton}/>
