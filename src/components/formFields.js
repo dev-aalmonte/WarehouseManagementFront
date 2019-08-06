@@ -14,6 +14,60 @@ export class FormInput extends Component {
     }
 }
 
+export class FormMoney extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            unformattedMoney: '0',
+            formattedMoney: ''
+        }
+    }
+
+    formatNumber(number){
+        let formattedMoneyReverse = number.split('').reverse();
+        return formattedMoneyReverse.map((value, index) => {
+            if(formattedMoneyReverse.length <= 2 && index == formattedMoneyReverse.length - 1)
+                return `.${value}`;
+
+            if(index == 2)
+                return `${value}.`;
+
+            if((index - 2) % 3 == 0)
+                return `${value},`;
+
+            return value;
+        }).reverse().join('');
+        
+    }
+
+    onKeyUp(event) {
+        if(event.key >= 0 && event.key <= 9 && event.which != 8 && isNaN(String.fromCharCode(event.which))){
+            const unformattedMoney = this.state.unformattedMoney == '0' ? event.key : `${this.state.unformattedMoney}${event.key}`;
+            const formattedMoney = this.formatNumber(unformattedMoney);
+            this.setState({unformattedMoney, formattedMoney});
+        }
+        else if(event.key == "Backspace") {
+            let unformattedMoney = this.state.unformattedMoney;
+            unformattedMoney = unformattedMoney.split('');
+            unformattedMoney.pop();
+            unformattedMoney = unformattedMoney.join('');
+            const formattedMoney = this.formatNumber(unformattedMoney);
+            this.setState({unformattedMoney, formattedMoney});
+        }
+    }
+
+    render() {
+        const { className, title, type, placeholder, input } = this.props;
+        return (
+            <div className={`${className} form-input`}>
+                <label className='form-input__label'>{title}</label>
+                <input className='form-input__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
+            </div>
+        )
+    }
+}
+
 export class FormSelect extends Component {
     openSelect = () => {
         console.log("Goes here!");

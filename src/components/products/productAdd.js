@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormSelect } from '../formFields';
+import { FormInput, FormButton, FormSelect, FormMoney } from '../formFields';
 
 class ProductAddForm extends Component {
     render() {
@@ -33,7 +33,7 @@ class ProductAddForm extends Component {
         return (
             <form onSubmit={handleSubmit} className={`${className} product-add-form`}>
                 <Field className='product-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput} />
-                <Field className='product-add-form__price' type='text' name='price' title='Price' placeholder='Price' component={FormInput} />
+                <Field className='product-add-form__price' type='text' name='price' title='Price' placeholder='Price' component={FormMoney} />
                 <Field className='product-add-form__description' type='text' name='description' title='Description' placeholder='Description' component={FormInput} />
                 <Field className='product-add-form__metric-weight' name='metric_weight' title='Metric Weight' placeholder='Select a metric weight' options={weightOption} component={FormSelect} />
                 <Field className='product-add-form__weight' type='text' name='weight' title='Weight' placeholder='Weight' component={FormInput} />
