@@ -6,6 +6,11 @@ class Modal extends Component {
         this.resetActive();
     }
 
+    onKeyUp = (event) => {
+        if(event.key == "Escape")
+            this.closeModal(event);
+    }
+
     resetActive() {
         document.querySelectorAll(`.table__body__row`).forEach((element) => {
             element.classList.remove('active');
@@ -16,7 +21,7 @@ class Modal extends Component {
     render() {
         const { className, children } = this.props;
         return (
-            <div onClick={this.closeModal} className={`${className} modal`}>
+            <div onClick={this.closeModal} onKeyUp={(e) => this.onKeyUp(e)} className={`${className} modal`} tabIndex='0'>
                 <div className='modal__content'>
                     { children }
                 </div>

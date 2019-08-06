@@ -31,7 +31,7 @@ class Clients extends Component {
     }
 
     openModal = (name) => {
-        document.querySelector(`.modal-${name}`).classList.add('active');
+        document.querySelector(`.modal-${name}`).classList.add('active').focus();
     }
     
     openAddClient = () => {
