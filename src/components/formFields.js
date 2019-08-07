@@ -60,7 +60,7 @@ export class FormMoney extends Component {
     render() {
         const { className, title, type, placeholder, input } = this.props;
         return (
-            <div className={`${className} form-input`}>
+            <div className={`${className} form-money`}>
                 <label className='form-input__label'>{title}</label>
                 <input className='form-input__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
             </div>
