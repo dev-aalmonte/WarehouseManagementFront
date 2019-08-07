@@ -65,20 +65,43 @@
         font-size: 1.6rem;
     }
 
-    &__input {
-        box-sizing: border-box;
-        height: 3rem;
+    &__input-container {
+        display: grid;  
+        grid-template-columns: 2rem 1fr;
+        grid-template-rows: 1fr;
 
-        padding-left: 1rem;
+        &__icon {
+            grid-column: 1/-1;
+            grid-row: 1/-1;
+            align-self: center;
+            
+            padding-left: 1rem;
+            z-index: 10;
 
-        background-color: $b-background-light-color;
+            font-size: 1.8rem;
+        }
+        
+        &__input {
+            grid-column: 1/-1;
+            grid-row: 1/-1;
 
-        border: none;
-        border-bottom: 1px solid #000;
-        border-radius: .5rem;
-        font-size: 1.4rem;
-        line-height: 2rem;
+            box-sizing: border-box;
+            width: 100%;
+            height: 3rem;
+    
+            padding-left: 3rem;
+            padding-right: 1rem;
+    
+            background-color: $b-background-light-color;
+    
+            border: none;
+            border-bottom: 1px solid #000;
+            border-radius: .5rem;
+            font-size: 1.4rem;
+            line-height: 2rem;
+        }
     }
+
 }
 
 .form-select {

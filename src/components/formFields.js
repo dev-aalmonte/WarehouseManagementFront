@@ -70,11 +70,14 @@ export class FormMoney extends Component {
     }
 
     render() {
-        const { className, title, type, placeholder, input } = this.props;
+        const { className, title, placeholder, input } = this.props;
         return (
             <div className={`${className} form-money`}>
                 <label className='form-money__label'>{title}</label>
-                <input className='form-money__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
+                <div className='form-money__input-container'>
+                    <Icon className='form-money__input-container__icon' icon="dollar-sign" />
+                    <input className='form-money__input-container__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
+                </div>
             </div>
         )
     }
