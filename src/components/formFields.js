@@ -4,11 +4,23 @@ import Icon from './common/icon';
 
 export class FormInput extends Component {
     render() {
-        const { className, title, type, placeholder, input, onKeyUp } = this.props;
+        const { className, title, type, placeholder, input, onKeyUp} = this.props;
         return (
             <div className={`${className} form-input`}>
                 <label className='form-input__label'>{title}</label>
                 <input className='form-input__input' type={type} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
+            </div>
+        )
+    }
+}
+
+export class FormQuantity extends Component {
+    render() {
+        const { className, title, placeholder, input, onKeyUp, min, max } = this.props;
+        return (
+            <div className={`${className} form-quantity`}>
+                <label className='form-quantity__label'>{title}</label>
+                <input className='form-quantity__input' type="number" min={min ? min : 0} max={max ? max : 99} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
             </div>
         )
     }
@@ -61,8 +73,8 @@ export class FormMoney extends Component {
         const { className, title, type, placeholder, input } = this.props;
         return (
             <div className={`${className} form-money`}>
-                <label className='form-input__label'>{title}</label>
-                <input className='form-input__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
+                <label className='form-money__label'>{title}</label>
+                <input className='form-money__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
             </div>
         )
     }

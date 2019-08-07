@@ -5,7 +5,7 @@ import { reduxForm, Field, FieldArray } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormList, FormSelect } from '../formFields';
+import { FormInput, FormButton, FormList, FormSelect, FormQuantity } from '../formFields';
 
 class StockAddForm extends Component {
     constructor(props){
@@ -42,7 +42,7 @@ class StockAddForm extends Component {
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} stock-add-form`}>
                 <Field className='stock-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' component={FormSelect} options={warehouse} />
-                <Field className='stock-add-form__stock' type='text' name='stock' title='Stock' placeholder='Stock' component={FormInput} />
+                <Field className='stock-add-form__stock' min="0" max="99" name='stock' title='Stock' placeholder='Stock' component={FormQuantity} />
                 <FieldArray className='stock-add-form__products' suggestion={suggestionList} name='products' title='Products' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption} onKeyUp={this.listOnKeyUp}/>
                 <Field className='stock-add-form__submit' type='submit' name='submit' title='Add To Stock' component={FormButton}/>
             </form>
