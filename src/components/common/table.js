@@ -114,7 +114,12 @@ class Table extends Component {
                                         columnName.map((column, index) => {
                                             var templateItem = '';
                                             if(typeof column === "string"){
-                                                templateItem = item[column];
+                                                if (template) {
+                                                    templateItem = this.renderTemplate(template, item, column, index);
+                                                }
+                                                else {
+                                                    templateItem = item[column];
+                                                }
                                             }
                                             else if(Array.isArray(column)){
                                                 templateItem = this.renderTemplate(template, item, column, index);
