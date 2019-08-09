@@ -52,12 +52,13 @@ class StockAddForm extends Component {
 
 class StockAdd extends Component {
     resetTable() {
-        const { warehouseID } = this.props.selected_stock;
+        const { id } = this.props.selected_warehouse;
         const { current_page } = this.props.pagination;
+        console.log("Warehouse ID:", id);
         if(current_page != null)
-            this.props.getStockPerWarehouse(warehouseID, `${API_URL}/stock?page=${current_page}`)
+            this.props.getStockPerWarehouse(id, `${API_URL}/stock?page=${current_page}`)
         else
-            this.props.getStockPerWarehouse(warehouseID);
+            this.props.getStockPerWarehouse(id);
     }
 
     resetActive() {

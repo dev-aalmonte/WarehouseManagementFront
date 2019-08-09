@@ -76,7 +76,7 @@ class WarehouseDetail extends Component {
         const tableEvents = {
             onDoubleClick: (event) => {
                 const elementChildren = event.target.parentElement.children;
-                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Availabre";
+                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
                 const stock = this.props.stocks[event.target.parentElement.id];
                 const fieldsToSubmit = {
                     id: stock.id,

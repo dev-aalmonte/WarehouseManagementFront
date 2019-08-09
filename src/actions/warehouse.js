@@ -137,6 +137,7 @@ export function getStockPerWarehouse(warehouse, paginationURL = null, search = '
         axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
             .then(response => {
                 if(response.data){
+                    console.log("Data:", response.data);
                     dispatch({
                         type: GET_WAREHOUSE_STOCK,
                         payload: response.data
