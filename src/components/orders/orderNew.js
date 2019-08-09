@@ -8,6 +8,11 @@ import { Heading } from '../common/headings';
 import { FormSelect, FormList, FormButton, FormInput } from '../formFields';
 
 class OrderNewForm extends Component {
+    componentWillMount() {
+        this.props.getProducts();
+        this.props.getClients();
+    }
+
     listOnKeyUp = (event) => {
         const search = event.target.value;
         this.props.getProducts(null, search);
@@ -16,28 +21,25 @@ class OrderNewForm extends Component {
     render() {
         const { className, handleSubmit, onKeyPress } = this.props;
         const listOption = {
-            objectValueInput: [null, '.stock-add-form__stock'],
+            objectName: ['product', 'quantity', 'price'],
+            objectValueInput: [null, '.order-add-form__quantity', 'price'],
             suggestion: {
-                keyName: null,
+                keyName: "name",
                 event: {
                     onKeyUp: this.listOnKeyUp
                 }
             }
         }
-        const statusOptions = [
-            {
-                key: 1,
-                value: 'Item 1'
-            },
-            {
-                key: 2,
-                value: 'Item 2'
+        const clientSelect = this.props.clients.map(client => {
+            return {
+                key: client.id,
+                value: `${client.first_name} ${client.last_name}`
             }
-        ]
-        const suggestionList = ['Hello', 'There', 'Everything'];
+        });
+        const suggestionList = this.props.products;
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} order-add-form`}>
-                <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={statusOptions} component={FormSelect} />
+                <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={clientSelect} component={FormSelect} />
                 <Field className='order-add-form__quantity' name='quantity' title='Quantity' placeholder='Quantity' component={FormInput} />
                 <FieldArray className='order-add-form__products' suggestion={suggestionList} name='products' title='Product List' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption}/>
                 <Field className='order-add-form__submit' name="submit" type='submit' title='Make order' onClick={() => console.log("Submiting order")} component={FormButton} />
@@ -70,6 +72,13 @@ OrderNewForm = reduxForm({
     form: 'order-add'
 })(OrderNewForm);
 
-OrderNewForm = connect(null, actions)(OrderNewForm);
+function mapStateToProps(state){
+    const { clients } = state.client;
+    const { products } = state.product;
+
+    return { clients, products };
+}
+
+OrderNewForm = connect(mapStateToProps, actions)(OrderNewForm);
 
 export default connect(null, actions)(OrderNew);

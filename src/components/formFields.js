@@ -140,6 +140,10 @@ export class FormList extends Component {
         }
     }
 
+    capitalizeString(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     toggleSelectSugestion(indexToChange) {
         const { selectedIndex } = this.state;
         const element = document.querySelectorAll('.form-list__input-container__suggestions__suggestion')[indexToChange];
@@ -197,9 +201,12 @@ export class FormList extends Component {
                         if(objectValueInput[index] === null) {
                             objectToAdd[name] = this.state.selectedSuggestion ? this.state.selectedSuggestion : event.target.value;
                         }
-                        else {
+                        else if(objectValueInput[index][0] == '.' || objectValueInput[index][0] == '#') {
                             objectToAdd[name] = document.querySelector(`${objectValueInput[index]} input`).value
                             document.querySelector(`${objectValueInput[index]} input`).value = ''
+                        }
+                        else {
+                            objectToAdd[name] = this.state.selectedSuggestion[name];
                         }
                     })
     
@@ -245,6 +252,7 @@ export class FormList extends Component {
 
     render() {
         const { className, placeholder, title, fields, input, options } = this.props;
+        const { objectName, objectValueInput } = options;
         return (
             <div className={`${className} form-list ${options.type === 'modal' ? 'form-list-modal' : ''}`}>
                 <div className='form-list__input-container'>
@@ -255,18 +263,26 @@ export class FormList extends Component {
                     </div>
                 </div>
                 <div className='form-list__item-list'>
+                    {/* Header */}
+                    <div className='form-list__item-list__header-container'>
+                        {
+                            objectName.map((name, index) => {
+                                return <div key={index} className='form-list__item-list__header-container__item'>{this.capitalizeString(name)}</div>
+                            })
+                        }
+                    </div>
+                    {/* Body */}
                     {   
                         fields.length !== 0 ?
                         fields.getAll().map((item, index) => {
-                            const { objectName, objectValueInput } = options;
                             return (
                                 <div key={index} className='form-list__item-list__item-container'>
                                     {   
                                         objectName ?
                                         objectName.map((name, index) => {
                                             const options = this.props;
-                                            const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name';
-
+                                            const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name'
+                                            
                                             if(typeof item[name] === 'string'){
                                                 return <div key={index} className='form-list__item-list__item-container__item'>{item[name]}</div>
                                             }

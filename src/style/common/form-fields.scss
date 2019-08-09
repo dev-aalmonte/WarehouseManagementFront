@@ -290,6 +290,21 @@
         grid-template-rows: repeat(auto-fill, 3rem);
         grid-row-gap: 3rem;
 
+        &__header-container {
+            border-bottom: 1px solid #000;
+            border-radius: .5rem;
+
+            display: grid;
+            grid-template-columns: .6fr .2fr .2fr;
+            justify-items: center;
+
+            &__item {
+                font-size: 1.4rem;
+                font-weight: 700;
+                padding-bottom: .8rem;
+            }
+        }
+
         &__item-container {
             border-bottom: 1px solid $b-hightlight-color;
             border-radius: .5rem;
