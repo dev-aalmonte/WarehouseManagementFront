@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CurrencyInput from 'react-currency-input';
 
 import Icon from './common/icon';
 
@@ -26,17 +27,22 @@ export class FormQuantity extends Component {
     }
 }
 
-export class FormMoney extends Component {
-    constructor(props){
-        super(props);
+export class FormDecimal extends Component {
+    unformatMoney(number) {
+        if (typeof number == 'number')
+            number = number.toString();
 
-        this.state = {
-            unformattedMoney: '0',
-            formattedMoney: ''
+        while (number.indexOf(",") != -1) {
+            number = number.replace(',', '');
         }
+        number = number.replace('.', '');
+        return number;
     }
 
     formatNumber(number){
+        if (typeof number == 'number')
+            number = number.toString();
+
         let formattedMoneyReverse = number.split('').reverse();
         return formattedMoneyReverse.map((value, index) => {
             if(formattedMoneyReverse.length <= 2 && index == formattedMoneyReverse.length - 1)
@@ -53,30 +59,18 @@ export class FormMoney extends Component {
         
     }
 
-    onKeyUp(event) {
-        if(event.key >= 0 && event.key <= 9 && event.which != 8 && isNaN(String.fromCharCode(event.which))){
-            const unformattedMoney = this.state.unformattedMoney == '0' ? event.key : `${this.state.unformattedMoney}${event.key}`;
-            const formattedMoney = this.formatNumber(unformattedMoney);
-            this.setState({unformattedMoney, formattedMoney});
-        }
-        else if(event.key == "Backspace") {
-            let unformattedMoney = this.state.unformattedMoney;
-            unformattedMoney = unformattedMoney.split('');
-            unformattedMoney.pop();
-            unformattedMoney = unformattedMoney.join('');
-            const formattedMoney = this.formatNumber(unformattedMoney);
-            this.setState({unformattedMoney, formattedMoney});
-        }
-    }
-
     render() {
-        const { className, title, placeholder, input } = this.props;
+        const { className, title, placeholder, input, icon } = this.props;
         return (
-            <div className={`${className} form-money`}>
-                <label className='form-money__label'>{title}</label>
-                <div className='form-money__input-container'>
-                    <Icon className='form-money__input-container__icon' icon="dollar-sign" />
-                    <input className='form-money__input-container__input' type='text' placeholder={placeholder} {...input} onKeyUp={event => this.onKeyUp(event)} value={this.state.formattedMoney} />
+            <div className={`${className} form-decimal`}>
+                <label className='form-decimal__label'>{title}</label>
+                <div className={`form-decimal__input-container ${icon ? "icon" : ''}`}>
+                    {
+                        icon ?
+                        <Icon className='form-decimal__input-container__icon' icon="dollar-sign" /> :
+                        ""
+                    }
+                    <CurrencyInput className='form-decimal__input-container__input' {...input} />
                 </div>
             </div>
         )

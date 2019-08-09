@@ -54,7 +54,7 @@
     }
 }
 
-.form-money {
+.form-decimal {
     width: 100%;
 
     display: grid;
@@ -89,7 +89,7 @@
             width: 100%;
             height: 3rem;
     
-            padding-left: 3rem;
+            padding-left: 1rem;
             padding-right: 1rem;
     
             background-color: $b-background-light-color;
@@ -100,8 +100,13 @@
             font-size: 1.4rem;
             line-height: 2rem;
         }
-    }
 
+        &.icon {
+            .form-decimal__input-container__input {
+                padding-left: 3rem;
+            }
+        }
+    }
 }
 
 .form-select {
