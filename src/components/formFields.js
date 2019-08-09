@@ -296,7 +296,9 @@ export class FormList extends Component {
                             )
                         })
                         :
-                        ''
+                        <div className='form-list__item-list__item-container'>
+                            <div className='form-list__item-list__item-container__item full'>Empty</div>
+                        </div>
                     }
                 </div>
             </div>
