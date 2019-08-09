@@ -167,7 +167,7 @@ export class FormList extends Component {
     }
 
     selectSuggestion(suggestion) {
-        const options = this.props;
+        const { options } = this.props;
         const keyName = options.suggestion.keyName ? options.suggestion.keyName : null;
         this.setState({selectedSuggestion: suggestion});
 
