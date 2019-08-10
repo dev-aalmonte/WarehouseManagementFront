@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
     font-weight: normal;
 
     -webkit-font-smoothing: antialiased;
@@ -32,7 +32,7 @@ body {
 
 .app {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: [s] 1fr [m] 1fr [e];
     grid-template-rows: [s] 6rem [m] 1fr [e];

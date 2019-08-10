@@ -153,8 +153,8 @@ class Table extends Component {
                                 Page: {pagination.current_page} of {pagination.last_page}
                             </div>
                             <div className='table__footer__paginationButtons'>
-                                <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`table__footer__paginationButtons__button ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
-                                <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`table__footer__paginationButtons__button ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
+                                <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`table__footer__paginationButtons__button prev ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
+                                <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`table__footer__paginationButtons__button next ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
                             </div>
                         </div>
                     ) :
