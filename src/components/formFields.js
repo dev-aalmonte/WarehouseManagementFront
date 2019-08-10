@@ -146,9 +146,9 @@ export class FormList extends Component {
 
     toggleSelectSugestion(indexToChange) {
         const { selectedIndex } = this.state;
-        const element = document.querySelectorAll('.form-list__input-container__suggestions__suggestion')[indexToChange];
+        const element = document.querySelectorAll('.form-list__input-container-list__input-container-suggestion__suggestions__suggestion')[indexToChange];
         if(selectedIndex !== -1) {
-            const elementToRemoveClass = document.querySelectorAll('.form-list__input-container__suggestions__suggestion')[selectedIndex];
+            const elementToRemoveClass = document.querySelectorAll('.form-list__input-container-list__input-container-suggestion__suggestions__suggestion')[selectedIndex];
             elementToRemoveClass.classList.remove('selected')
         }
         element.classList.add('selected');
@@ -161,10 +161,10 @@ export class FormList extends Component {
         return (
             list.map((item, index) => {
                 if(typeof item === 'string'){
-                    return <div key={index} className='form-list__input-container__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item}</div>
+                    return <div key={index} className='form-list__input-container-list__input-container-suggestion__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item}</div>
                 }
                 else {
-                    return <div key={index} className='form-list__input-container__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item[keyName]}</div>
+                    return <div key={index} className='form-list__input-container-list__input-container-suggestion__suggestions__suggestion' onClick={() => this.selectSuggestion(item)} onMouseEnter={() => this.toggleSelectSugestion(index)}>{item[keyName]}</div>
                 }
             })
         )
@@ -175,8 +175,8 @@ export class FormList extends Component {
         const keyName = options.suggestion.keyName ? options.suggestion.keyName : null;
         this.setState({selectedSuggestion: suggestion});
 
-        document.querySelector('.form-list__input-container__input').value = keyName ? suggestion[keyName] : suggestion;
-        document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
+        document.querySelector('.form-list__input-container-list__input-container-suggestion__input').value = keyName ? suggestion[keyName] : suggestion;
+        document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
     }
 
     handleKeyPress(event, fields) {
@@ -187,13 +187,13 @@ export class FormList extends Component {
 
         if(inputValue.length >= 2 && event.key === 'Enter') {
             if (event.target.value !== '') {
-                const suggestionElement = document.querySelector('.form-list__input-container__suggestions');
-                const suggestionItemElement = document.querySelectorAll('.form-list__input-container__suggestions__suggestion.selected');
+                const suggestionElement = document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions');
+                const suggestionItemElement = document.querySelectorAll('.form-list__input-container-list__input-container-suggestion__suggestions__suggestion.selected');
                 if(suggestionElement.classList.contains('active') && suggestionItemElement.length > 0){
                     suggestionItemElement[0].click();
                 }
                 else if(!suggestionElement.classList.contains('active')) {
-                    document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
+                    document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
                     const { objectName, objectValueInput } = options;
                     var objectToAdd = {}
     
@@ -243,23 +243,39 @@ export class FormList extends Component {
             });
             const lastIndex = suggestionList.length - 1;
             this.setState({suggestionList, lastIndex})
-            document.querySelector('.form-list__input-container__suggestions').classList.add('active');
+            document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.add('active');
         }
         else {
-            document.querySelector('.form-list__input-container__suggestions').classList.remove('active');
+            document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
         }
     }
 
     render() {
-        const { className, placeholder, title, fields, input, options } = this.props;
+        const { className, placeholder, title, fields, input, options, componentList } = this.props;
         const { objectName, objectValueInput } = options;
         return (
             <div className={`${className} form-list ${options.type === 'modal' ? 'form-list-modal' : ''}`}>
-                <div className='form-list__input-container'>
-                    <label className='form-list__input-container__label'>{title}</label>
-                    <input autoComplete='off' className='form-list__input-container__input' type='text' placeholder={placeholder} onKeyUp={(event) => this.handleKeyPress(event, fields)} {...input}/>
-                    <div className='form-list__input-container__suggestions'>
-                        {this.generateSuggestion(this.state.suggestionList)}
+                <div className='form-list__input-container-list'>
+                    <div className='form-list__input-container-list__input-container-suggestion'>
+                        <label className='form-list__input-container-list__input-container-suggestion__label'>{title}</label>
+                        <input autoComplete='off' className='form-list__input-container-list__input-container-suggestion__input' type='text' placeholder={placeholder} onKeyUp={(event) => this.handleKeyPress(event, fields)} {...input}/>
+                        <div className='form-list__input-container-list__input-container-suggestion__suggestions'>
+                            {this.generateSuggestion(this.state.suggestionList)}
+                        </div>
+                    </div>
+                    <div className='form-list__input-container-list__input-container'>
+                        {
+                            componentList ?
+                            componentList.map((component, index) => {
+                                return (
+                                    <div key={index}>
+                                        {component}
+                                    </div>
+                                );
+                            })
+                            :
+                            ''
+                        }
                     </div>
                 </div>
                 <div className='form-list__item-list'>
