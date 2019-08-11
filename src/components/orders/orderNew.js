@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-import { reduxForm, Field, FieldArray } from 'redux-form';
+import { reduxForm, Field, FieldArray, formValues } from 'redux-form';
 
 import { Heading } from '../common/headings';
 import { FormSelect, FormList, FormButton, FormInput } from '../formFields';
@@ -38,6 +38,18 @@ class OrderNewForm extends Component {
             }
         });
         const suggestionList = this.props.products;
+        let subtotal = 0;
+        const tax = 0;
+        const shipping = 0;
+        if(this.props.actualForm && this.props.actualForm.values){
+            const products = this.props.actualForm.values.products;
+            if(products) {
+                products.map((product) => {
+                    subtotal += Number(product.price) * Number(product.quantity);
+                })
+            }
+        }
+        const total = subtotal + tax + shipping;
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} order-add-form`}>
                 <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={clientSelect} component={FormSelect} />
@@ -46,20 +58,20 @@ class OrderNewForm extends Component {
                 <div className='order-add-form__products-footer'>
                     <div className='order-add-form__products-footer__field subtotal'>
                         <label className='order-add-form__products-footer__field__label'>Subtotal: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>0.00</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{subtotal}</div>
                     </div>
                     <div className='order-add-form__products-footer__field tax'>
                         <label className='order-add-form__products-footer__field__label'>Tax: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>0.00</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{tax}</div>
                     </div>
                     <div className='order-add-form__products-footer__field shipping'>
                         <label className='order-add-form__products-footer__field__label'>Shipping: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>0.00</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{shipping}</div>
                     </div>
                     <div></div>
                     <div className='order-add-form__products-footer__field total'>
                         <label className='order-add-form__products-footer__field__label'>Total: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>0.00</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{total}</div>
                     </div>
                 </div>
                 {/* End Footer */}
@@ -96,8 +108,9 @@ OrderNewForm = reduxForm({
 function mapStateToProps(state){
     const { clients } = state.client;
     const { products } = state.product;
+    const actualForm = state.form['order-add'];
 
-    return { clients, products };
+    return { clients, products, actualForm };
 }
 
 OrderNewForm = connect(mapStateToProps, actions)(OrderNewForm);
