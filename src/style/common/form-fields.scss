@@ -25,6 +25,34 @@
     }
 }
 
+.form-textarea {
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 1rem;
+
+    &__label {
+        font-size: 1.6rem;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        height: 10rem;
+
+        padding-left: 1rem;
+        padding-top: .6rem;
+
+        background-color: $b-background-light-color;
+
+        border: none;
+        border-bottom: 1px solid #000;
+        border-radius: .5rem;
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+}
+
 .form-quantity {
     width: 100%;
 

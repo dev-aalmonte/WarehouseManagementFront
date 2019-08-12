@@ -5,7 +5,7 @@ import { reduxForm, Field } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton } from '../formFields';
+import { FormInput, FormButton, FormTextArea } from '../formFields';
 
 
 class ClientAddForm extends Component {
@@ -16,7 +16,7 @@ class ClientAddForm extends Component {
                 <Field className='client-add-form__first-name' type='text' name='first_name' title='First Name' placeholder='First Name' component={FormInput} />
                 <Field className='client-add-form__last-name' type='text' name='last_name' title='Last Name' placeholder='Last Name' component={FormInput} />
                 <Field className='client-add-form__email' type='text' name='email' title='Email' placeholder='Email' component={FormInput} />
-                <Field className='client-add-form__description' type='text' name='description' title='Description' placeholder='Description' component={FormInput} />
+                <Field className='client-add-form__description' type='text' name='description' title='Description' placeholder='Description' component={FormTextArea} />
                 
                 <Field className='client-add-form__street-address' type='text' name='street_address' title='Street Address' placeholder='Street Address' component={FormInput} />
                 <Field className='client-add-form__extra-address' type='text' name='extra_address' title='Secondary' placeholder='Extra address information' component={FormInput} />
