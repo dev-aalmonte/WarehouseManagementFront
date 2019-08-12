@@ -103,7 +103,7 @@ class OrderNew extends Component {
                 }
 
                 this.props.addOrderDetail(fieldsDetails, () => {
-                    // console.log("Added Without Errors!");
+                    this.props.history.push('/order/complete');
                 })
             })        
         });

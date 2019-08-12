@@ -17,15 +17,21 @@ import history from './history';
 import requireAuth from './components/middleware/requireAuth';
 
 import Login from './components/auth/login';
+
 import Home from './components/home';
+
 import Products from './components/products/products';
+
 import Clients from './components/clients/clients';
 import Client from './components/clients/client';
+
 import OrderNew from './components/orders/orderNew';
 import OrderDetail from './components/orders/orderDetail';
 import OrderSearch from './components/orders/orderSearch';
+import OrderMessage from './components/orders/orderMessage';
 
 import Users from './components/users/users';
+
 import Warehouses from './components/warehouses/warehouses';
 import WarehouseDetail from './components/warehouses/warehouseDetail';
 
@@ -36,15 +42,21 @@ function main() {
             <App>
                 <Switch>
                     <Route exact path='/' component={Login} />
+
                     <Route path='/home' component={requireAuth(Home)} />
+
                     <Route path='/products' component={requireAuth(Products)} />
+
                     <Route path='/clients' component={requireAuth(Clients)} />
                     <Route path='/client/:id' component={requireAuth(Client)} />
+
                     <Route path='/order/new' component={requireAuth(OrderNew)} />
                     <Route path='/order/search/:id' component={requireAuth(OrderSearch)} />
-                    <Route path='/order/:id' component={requireAuth(OrderDetail)} />
+                    {/* <Route path='/order/:id' component={requireAuth(OrderDetail)} /> */}
+                    <Route path='/order/complete' component={requireAuth(OrderMessage)} />
 
                     <Route path='/users' component={requireAuth(Users)} />
+
                     <Route path='/warehouses' component={requireAuth(Warehouses)} />
                     <Route path='/warehouse/:id' component={requireAuth(WarehouseDetail)} />
                 </Switch>

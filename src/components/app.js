@@ -17,7 +17,8 @@ import { faQuestionCircle,
         faEdit, 
         faMinus, 
         faUser, 
-        faDollarSign } from '@fortawesome/free-solid-svg-icons';
+        faDollarSign, 
+        faCheck} from '@fortawesome/free-solid-svg-icons';
 
 import Modal from './common/modal';
 import ProductDetail from './products/productDetail';
@@ -42,7 +43,8 @@ library.add(faQuestionCircle,
             faEdit, 
             faMinus, 
             faUser,
-            faDollarSign);
+            faDollarSign,
+            faCheck);
 
 export default class App extends Component {
     render() {
