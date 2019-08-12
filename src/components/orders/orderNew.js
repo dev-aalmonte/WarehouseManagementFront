@@ -58,20 +58,20 @@ class OrderNewForm extends Component {
                 <div className='order-add-form__products-footer'>
                     <div className='order-add-form__products-footer__field subtotal'>
                         <label className='order-add-form__products-footer__field__label'>Subtotal: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{subtotal}</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{parseFloat(subtotal).toFixed(2)}</div>
                     </div>
                     <div className='order-add-form__products-footer__field tax'>
                         <label className='order-add-form__products-footer__field__label'>Tax: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{tax}</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{parseFloat(tax).toFixed(2)}</div>
                     </div>
                     <div className='order-add-form__products-footer__field shipping'>
                         <label className='order-add-form__products-footer__field__label'>Shipping: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{shipping}</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{parseFloat(shipping).toFixed(2)}</div>
                     </div>
                     <div></div>
                     <div className='order-add-form__products-footer__field total'>
                         <label className='order-add-form__products-footer__field__label'>Total: </label>
-                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{total}</div>
+                        <div className='order-add-form__products-footer__field__text'><Icon className='order-add-form__products-footer__field__text__icon' icon='dollar-sign'/>{parseFloat(total).toFixed(2)}</div>
                     </div>
                 </div>
                 {/* End Footer */}
