@@ -219,7 +219,7 @@
     &__input-container-list {
         display: grid;
 
-        grid-template-columns: .7fr .3fr;
+        grid-template-columns: .7fr .25fr .05fr;
         grid-column-gap: 1rem;
 
         &__input-container-suggestion {
@@ -280,6 +280,16 @@
                 &__suggestion {
                     cursor: pointer;
                 }
+            }
+        }
+
+        &__input-button {
+            align-self: end;
+            justify-self: center;
+            
+            &__button {
+                height: 3.6rem;
+                width: 3.6rem;
             }
         }
     }

@@ -119,10 +119,10 @@ export class FormButton extends Component {
 
 export class FormSmallButton extends Component {
     render() {
-        const { className, icon, type, onClick, input } = this.props;
+        const { className, icon, type, onClick, onKeyUp, input } = this.props;
         return (
             <div className={`${className} form-small-button`}>
-                <button type={type} {...input} onClick={onClick}><Icon className='form-small-button__icon' icon={icon}/></button>
+                <button type={type} {...input} onClick={onClick} onKeyUp={onKeyUp}><Icon className='form-small-button__icon' icon={icon}/></button>
             </div>
         )
     }
@@ -179,6 +179,29 @@ export class FormList extends Component {
         document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
     }
 
+    addSelectedValueToList(fields) {
+        const { options } = this.props;
+
+        const { objectName, objectValueInput } = options;
+        var objectToAdd = {};
+
+        objectName.map((name, index) => {
+            if(objectValueInput[index] === null) {
+                objectToAdd[name] = this.state.selectedSuggestion ? this.state.selectedSuggestion : '';
+            }
+            else if(objectValueInput[index][0] == '.' || objectValueInput[index][0] == '#') {
+                objectToAdd[name] = document.querySelector(`${objectValueInput[index]} input`).value;
+                document.querySelector(`${objectValueInput[index]} input`).value = '';
+            }
+            else {
+                objectToAdd[name] = this.state.selectedSuggestion[name];
+            }
+        })
+
+        fields.push(objectToAdd);
+        document.querySelector('.form-list__input-container-list__input-container-suggestion__input').value = '';
+    }
+
     handleKeyPress(event, fields) {
         const inputValue = event.target.value;
         const { suggestion, options } = this.props;
@@ -193,9 +216,9 @@ export class FormList extends Component {
                     suggestionItemElement[0].click();
                 }
                 else if(!suggestionElement.classList.contains('active')) {
-                    document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
+                    // Add To List
                     const { objectName, objectValueInput } = options;
-                    var objectToAdd = {}
+                    var objectToAdd = {};
     
                     objectName.map((name, index) => {
                         if(objectValueInput[index] === null) {
@@ -276,6 +299,9 @@ export class FormList extends Component {
                             :
                             ''
                         }
+                    </div>
+                    <div className='form-list__input-container-list__input-button'>
+                        <FormSmallButton onKeyUp={(event) => { event.key == "Enter" ? this.addSelectedValueToList(fields) : '' }} onClick={() => this.addSelectedValueToList(fields)} className='form-list__input-container-list__input-button__button' type='button' icon='plus'/>
                     </div>
                 </div>
                 <div className='form-list__item-list'>

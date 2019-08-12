@@ -94,7 +94,6 @@ class OrderNew extends Component {
         fields.total = total;
 
         this.props.addOrder(fields, (res) => {
-            console.log("Res ", res);
 
             fields.products.map(product => {
                 const fieldsDetails = {
@@ -104,7 +103,7 @@ class OrderNew extends Component {
                 }
 
                 this.props.addOrderDetail(fieldsDetails, () => {
-                    console.log("Added Without Errors!");
+                    // console.log("Added Without Errors!");
                 })
             })        
         });
