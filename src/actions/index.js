@@ -60,6 +60,7 @@ import {
 } from './client';
 
 import {
+    getOrdersPerClient,
     addOrder,
     addOrderDetail
 } from './order';
@@ -120,6 +121,7 @@ export {
     deleteClient,
 
     // Order
+    getOrdersPerClient,
     addOrder,
     addOrderDetail
 }

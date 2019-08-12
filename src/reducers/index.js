@@ -9,6 +9,7 @@ import user from './userReducer';
 import role from './roleReducer';
 import status from './statusReducer';
 import client from './clientReducer';
+import order from './orderReducer';
 
 const rootReducer = combineReducers({
   form,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   role,
   status, 
   client,
+  order
 });
 
 export default rootReducer;

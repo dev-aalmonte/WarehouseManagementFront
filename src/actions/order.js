@@ -2,6 +2,7 @@ import axios from 'axios';
 import qs from 'querystring';
 import { API_URL } from '../config';
 import {
+    GET_ORDERS_PER_CLIENT,
     ADD_ORDER,
     ADD_ORDER_DETAIL
 } from './types';
@@ -9,6 +10,26 @@ import {
 const requestConfig = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
+    }
+}
+
+export function getOrdersPerClient(clientID, paginationURL = null, search = '') {
+    const requestURL = paginationURL ? paginationURL : `${API_URL}/orders`;
+    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
+    return function (dispatch) {
+        axios.get(requestURL + searchURL + `&clientID=${clientID}`)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: GET_ORDERS_PER_CLIENT,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
     }
 }
 

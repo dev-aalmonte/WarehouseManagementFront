@@ -11,10 +11,20 @@ class Client extends Component {
 
     componentWillMount() {
         this.props.selectSingleClientFromDB(this.props.match.params.id);
+        this.props.getOrdersPerClient(this.props.match.params.id);
     }
 
     render() {
-        return(
+        const tableHeader = ["OrderID", "Subtotal", "Total", "Status"];
+        const columnTable = [["id"], ["subtotal"], ["total"], {key:"status", column:['name']}];
+        const templateColumn = ["# [data]", "$ [data]", "$ [data]", "[data]"];
+        const tableData = this.props.orders;
+        const tableEvents = {
+            onDoubleClick: (event) => {
+                
+            }
+        }
+        return (
             <div className='client'>
                 <Heading className='client__heading'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
                 <SmallHeading className='client__small-heading' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
@@ -24,15 +34,16 @@ class Client extends Component {
                     <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order' />
                     <FormSmallButton className='client__order-searchbar-container__button' type='button' icon='plus'/>
                 </div>
-                <Table className='client__order-table'/>
+                <Table className='client__order-table'  heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    const { selected_client, pagination } = state.client;
-    return { selected_client, pagination };
+    const { selected_client } = state.client;
+    const { orders, pagination } = state.order;
+    return { selected_client, pagination, orders };
 }
 
 export default connect(mapStateToProps, actions)(Client);
