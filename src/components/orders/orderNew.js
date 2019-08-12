@@ -83,7 +83,31 @@ class OrderNewForm extends Component {
 
 class OrderNew extends Component {
     onSubmit = (fields) => {
-        console.log(fields);
+        const subtotal = Number(document.querySelector('.subtotal > div').textContent);
+        const tax = Number(document.querySelector('.tax > div').textContent);
+        const shipping = Number(document.querySelector('.shipping > div').textContent);
+        const total = Number(document.querySelector('.total > div').textContent);
+
+        fields.subtotal = subtotal;
+        fields.tax = tax;
+        fields.shipping = shipping;
+        fields.total = total;
+
+        this.props.addOrder(fields, (res) => {
+            console.log("Res ", res);
+
+            fields.products.map(product => {
+                const fieldsDetails = {
+                    orderID: res.data.id,
+                    productID: product.product.id,
+                    quantity: product.quantity
+                }
+
+                this.props.addOrderDetail(fieldsDetails, () => {
+                    console.log("Added Without Errors!");
+                })
+            })        
+        });
     }
 
     onKeyPress = (event) => {

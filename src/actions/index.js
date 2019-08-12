@@ -59,6 +59,11 @@ import {
     deleteClient,
 } from './client';
 
+import {
+    addOrder,
+    addOrderDetail
+} from './order';
+
 export {
     // Auth
     login,
@@ -113,4 +118,8 @@ export {
     selectSingleClientFromDB,
     addClient,
     deleteClient,
+
+    // Order
+    addOrder,
+    addOrderDetail
 }

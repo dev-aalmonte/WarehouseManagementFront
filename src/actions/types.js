@@ -55,3 +55,7 @@ export const ADD_CLIENTS = 'ADD_CLIENTS';
 export const EDIT_CLIENTS = 'EDIT_CLIENTS';
 export const DELETE_CLIENTS = 'DELETE_CLIENTS';
 export const DISPLAY_CLIENT = 'DISPLAY_CLIENT';
+
+// Order
+export const ADD_ORDER = 'ADD_ORDER';
+export const ADD_ORDER_DETAIL = 'ADD_ORDER_DETAIL';
