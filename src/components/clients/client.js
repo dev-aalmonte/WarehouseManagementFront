@@ -6,12 +6,22 @@ import { Heading, Text, SmallHeading } from '../common/headings';
 import Table from '../common/table';
 import Searchbar from '../common/searchbar';
 import { FormSmallButton } from '../formFields';
+import Modal from '../common/modal';
+import OrderAdd from '../orders/orderAdd';
 
 class Client extends Component {
 
     componentWillMount() {
         this.props.selectSingleClientFromDB(this.props.match.params.id);
         this.props.getOrdersPerClient(this.props.match.params.id);
+    }
+
+    openModal = (name) => {
+        document.querySelector(`.modal-${name}`).classList.add('active');
+    }
+    
+    openAddOrder = () => {
+        this.openModal('order_add');
     }
 
     render() {
@@ -21,7 +31,7 @@ class Client extends Component {
         const tableData = this.props.orders;
         const tableEvents = {
             onDoubleClick: (event) => {
-                
+                console.log("Going to detail");
             }
         }
         return (
@@ -32,9 +42,10 @@ class Client extends Component {
                 <Heading className='client__order-heading'>Orders</Heading>
                 <div className='client__order-searchbar-container'>
                     <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order' />
-                    <FormSmallButton className='client__order-searchbar-container__button' type='button' icon='plus'/>
+                    <FormSmallButton onClick={() => this.openAddOrder()} className='client__order-searchbar-container__button' type='button' icon='plus'/>
                 </div>
                 <Table className='client__order-table'  heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
+                <Modal className='modal-order_add'> <OrderAdd/> </Modal>
             </div>
         )
     }

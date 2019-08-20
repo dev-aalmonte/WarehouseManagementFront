@@ -36,7 +36,7 @@
         
         display: grid;
         max-height: 62rem;
-        grid-template-rows: repeat(auto-fill, 4.1rem);
+        grid-template-rows: repeat(auto-fit, 4.1rem);
         
         &__row {
             cursor: pointer;

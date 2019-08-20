@@ -267,6 +267,7 @@ export class FormList extends Component {
             this.toggleSelectSugestion(indexToChange);
         }
         else if (inputValue.length >= 2) {
+            console.log("Goes here!");
             let suggestionList = suggestion.filter(suggestion => {
                 if(typeof suggestion === 'string'){
                     return suggestion.toLowerCase().includes(inputValue.toLowerCase());

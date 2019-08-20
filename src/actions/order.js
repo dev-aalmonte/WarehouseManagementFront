@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
 import qs from 'querystring';
 import { API_URL } from '../config';
 import {
@@ -45,6 +46,7 @@ export function addOrder(fields, success) {
                         });
                     }
                     success(response);
+                    dispatch(reset('order-add-modal'));
                 })
                 .catch(err => {
                     if(err)

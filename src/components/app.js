@@ -28,6 +28,7 @@ import UserAdd from './users/userAdd';
 import StockAdd from './warehouses/stockAdd';
 import StockEdit from './warehouses/stockEdit';
 import ClientAdd from './clients/clientAdd';
+import OrderAdd from './orders/orderAdd';
 
 library.add(faQuestionCircle, 
             faUsers, 

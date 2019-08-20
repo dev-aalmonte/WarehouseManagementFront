@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
-import { reduxForm, Field, FieldArray, formValues } from 'redux-form';
+import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import { Heading } from '../common/headings';
 import { FormSelect, FormList, FormButton, FormInput } from '../formFields';
