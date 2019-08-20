@@ -16,13 +16,18 @@ export function login(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/login`, qs.stringify(fields), requestConfig)
             .then(response => {
-                const { api_token } = response.data;
-                localStorage.setItem('token', api_token);
-                dispatch({
-                    type: AUTHENTICATE_USER,
-                    payload: response.data
-                })
-                success();
+                if(!response.data.error){
+                    const { api_token } = response.data;
+                    localStorage.setItem('token', api_token);
+                    dispatch({
+                        type: AUTHENTICATE_USER,
+                        payload: response.data
+                    })
+                    success(response);
+                }
+                else {
+                    console.log("Something is wrong");
+                }
             })
             .catch(err => {
                 if(err)

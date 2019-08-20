@@ -40,7 +40,7 @@ class Login extends Component {
     }
 
     onSubmit = (fields) => {
-        this.props.login(fields, () => {
+        this.props.login(fields, (res) => {
             this.props.history.push('/home');
         });
     }
