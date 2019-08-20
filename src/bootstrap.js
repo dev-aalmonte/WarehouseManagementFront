@@ -52,7 +52,7 @@ function main() {
 
                     <Route path='/order/new' component={requireAuth(OrderNew)} />
                     <Route path='/order/search/:id' component={requireAuth(OrderSearch)} />
-                    {/* <Route path='/order/:id' component={requireAuth(OrderDetail)} /> */}
+                    <Route path='/order/detail/:id' component={requireAuth(OrderDetail)} />
                     <Route path='/order/complete' component={requireAuth(OrderMessage)} />
 
                     <Route path='/users' component={requireAuth(Users)} />

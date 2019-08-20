@@ -31,7 +31,10 @@ class Client extends Component {
         const tableData = this.props.orders;
         const tableEvents = {
             onDoubleClick: (event) => {
-                console.log("Going to detail");
+                const parent = event.target.parentElement;
+                const orderID = parent.children[0].innerHTML.split(" ")[1];
+                this.props.getSingleOrderPerClient(parent.id);
+                this.props.history.push(`/order/detail/${orderID}`);
             }
         }
         return (
@@ -44,7 +47,7 @@ class Client extends Component {
                     <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order' />
                     <FormSmallButton onClick={() => this.openAddOrder()} className='client__order-searchbar-container__button' type='button' icon='plus'/>
                 </div>
-                <Table className='client__order-table'  heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
+                <Table className='client__order-table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
                 <Modal className='modal-order_add'> <OrderAdd/> </Modal>
             </div>
         )

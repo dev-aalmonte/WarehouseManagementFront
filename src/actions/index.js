@@ -61,6 +61,8 @@ import {
 
 import {
     getOrdersPerClient,
+    getSingleOrderPerClient,
+    getSingleOrderFromDB,
     addOrder,
     addOrderDetail
 } from './order';
@@ -122,6 +124,8 @@ export {
 
     // Order
     getOrdersPerClient,
+    getSingleOrderPerClient,
+    getSingleOrderFromDB,
     addOrder,
     addOrderDetail
 }

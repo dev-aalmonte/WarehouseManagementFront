@@ -4,6 +4,8 @@ import qs from 'querystring';
 import { API_URL } from '../config';
 import {
     GET_ORDERS_PER_CLIENT,
+    SELECT_SINGLE_ORDER_PER_CLIENT,
+    SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
     ADD_ORDER_DETAIL
 } from './types';
@@ -31,6 +33,31 @@ export function getOrdersPerClient(clientID, paginationURL = null, search = '') 
                 if(err)
                     console.log(err);
             });
+    }
+}
+
+export function getSingleOrderPerClient(id){
+    return function (dispatch){
+        dispatch({
+            type: SELECT_SINGLE_ORDER_PER_CLIENT,
+            payload: id
+        });
+    }
+}
+
+export function getSingleOrderFromDB(orderID){
+    return function (dispatch) {
+        axios.get(`${API_URL}/orders/${orderID}`)
+            .then(response => {
+                dispatch({
+                    type: SELECT_SINGLE_ORDER_FROM_DB,
+                    payload: response.data
+                })
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }
 
