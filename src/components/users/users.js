@@ -6,6 +6,8 @@ import { Heading } from '../common/headings';
 import Searchbar from '../common/searchbar';
 import { FormSmallButton } from '../formFields';
 import Table from '../common/table';
+import Modal from '../common/modal';
+import UserAdd from './userAdd';
 
 class Users extends Component {
     constructor(props) {
@@ -91,6 +93,8 @@ class Users extends Component {
                     <FormSmallButton onClick={() => this.openAddUser()} className='users__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='users__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
+                
+                <Modal className='modal-user_add'> <UserAdd/> </Modal>
             </div>
         )
     }

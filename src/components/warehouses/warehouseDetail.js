@@ -6,6 +6,9 @@ import { Heading, Text } from '../common/headings';
 import { FormSmallButton } from '../formFields';
 import Searchbar from '../common/searchbar';
 import Table from '../common/table';
+import Modal from '../common/modal';
+import StockAdd from './stockAdd';
+import StockEdit from './stockEdit';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -106,6 +109,9 @@ class WarehouseDetail extends Component {
                             <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
                         </div>
                         <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
+
+                        <Modal className='modal-stock_add'> <StockAdd/> </Modal>
+                        <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
                     </div>
                 </div>
             </div>

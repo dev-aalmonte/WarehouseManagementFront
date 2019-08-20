@@ -8,6 +8,8 @@ import Searchbar from '../common/searchbar';
 import Table from '../common/table';
 import { Heading } from '../common/headings';
 import { API_URL } from '../../config';
+import Modal from '../common/modal';
+import ClientAdd from './clientAdd';
 
 class Clients extends Component {
 
@@ -87,6 +89,8 @@ class Clients extends Component {
                     <FormSmallButton onClick={() => this.openAddClient()} className='clients__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='clients__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}  />
+
+                <Modal className='modal-client_add'> <ClientAdd/> </Modal>
             </div>
         )
     }

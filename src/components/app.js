@@ -55,21 +55,21 @@ export default class App extends Component {
                 {this.props.children}
 
                 {/* Product Modal */}
-                <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
-                <Modal className='modal-product_add'> <ProductAdd/> </Modal>
+                {/* <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
+                <Modal className='modal-product_add'> <ProductAdd/> </Modal> */}
 
                 {/* Warehouse Modal */}
-                <Modal className='modal-warehouse_add'> <WarehouseAdd/> </Modal>
+                {/* <Modal className='modal-warehouse_add'> <WarehouseAdd/> </Modal> */}
 
                 {/* User Modal */}
-                <Modal className='modal-user_add'> <UserAdd/> </Modal>
+                {/* <Modal className='modal-user_add'> <UserAdd/> </Modal> */}
 
                 {/* Stock Modal */}
-                <Modal className='modal-stock_add'> <StockAdd/> </Modal>
-                <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
+                {/* <Modal className='modal-stock_add'> <StockAdd/> </Modal>
+                <Modal className='modal-stock_edit'> <StockEdit/> </Modal> */}
 
                 {/* Client Modal */}
-                <Modal className='modal-client_add'> <ClientAdd/> </Modal>
+                {/* <Modal className='modal-client_add'> <ClientAdd/> </Modal> */}
             </div>
         );
     }

@@ -5,6 +5,9 @@ import * as actions from '../../actions';
 import Searchbar from '../common/searchbar';
 import { FormSmallButton } from '../formFields';
 import Table from '../common/table';
+import Modal from '../common/modal';
+import ProductDetail from './productDetail';
+import ProductAdd from './productAdd';
 
 class Products extends Component {
     constructor(props) {
@@ -93,6 +96,9 @@ class Products extends Component {
                     <FormSmallButton onClick={() => this.openAddProduct()} className='products__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} />
+
+                <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
+                <Modal className='modal-product_add'> <ProductAdd/> </Modal>
             </div>
         )
     }

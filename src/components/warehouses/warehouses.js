@@ -5,6 +5,8 @@ import * as actions from '../../actions';
 import Searchbar from '../common/searchbar';
 import Table from '../common/table';
 import { FormSmallButton } from '../formFields';
+import Modal from '../common/modal';
+import WarehouseAdd from './warehouseAdd';
 
 class Warehouses extends Component {
     
@@ -83,6 +85,8 @@ class Warehouses extends Component {
                     <FormSmallButton onClick={() => this.openAddWarehouse()} className='warehouses__buttoms__button' type='button' icon='plus'/>
                 </div>
                 <Table className='warehouses__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
+
+                <Modal className='modal-warehouse_add'> <WarehouseAdd/> </Modal>
             </div>
         )
     }
