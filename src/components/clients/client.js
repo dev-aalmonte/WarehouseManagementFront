@@ -24,6 +24,11 @@ class Client extends Component {
         this.openModal('order_add');
     }
 
+    displaySearchBarInput = (event) => {
+        const search = event.target.value;
+        this.props.getOrdersPerClient(this.props.match.params.id, null, search);
+    }
+
     render() {
         const tableHeader = ["OrderID", "Subtotal", "Total", "Status"];
         const columnTable = [["id"], ["subtotal"], ["total"], {key:"status", column:['name']}];
@@ -44,7 +49,7 @@ class Client extends Component {
                 <Text className='client__description'>{this.props.selected_client.description ? this.props.selected_client.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros." }</Text>
                 <Heading className='client__order-heading'>Orders</Heading>
                 <div className='client__order-searchbar-container'>
-                    <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order' />
+                    <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order ID'  onKeyUp={this.displaySearchBarInput} />
                     <FormSmallButton onClick={() => this.openAddOrder()} className='client__order-searchbar-container__button' type='button' icon='plus'/>
                 </div>
                 <Table className='client__order-table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
