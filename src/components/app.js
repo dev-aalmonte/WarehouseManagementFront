@@ -18,7 +18,8 @@ import { faQuestionCircle,
         faMinus, 
         faUser, 
         faDollarSign, 
-        faCheck} from '@fortawesome/free-solid-svg-icons';
+        faCheck,
+        faTimes} from '@fortawesome/free-solid-svg-icons';
 
 library.add(faQuestionCircle, 
             faUsers, 
@@ -35,7 +36,8 @@ library.add(faQuestionCircle,
             faMinus, 
             faUser,
             faDollarSign,
-            faCheck);
+            faCheck,
+            faTimes);
 
 export default class App extends Component {
     render() {

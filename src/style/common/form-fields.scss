@@ -341,7 +341,7 @@
             border-radius: .5rem;
 
             display: grid;
-            grid-template-columns: .6fr .2fr .2fr;
+            grid-template-columns: .1fr .6fr .2fr .2fr;
             justify-items: center;
 
             &__item {
@@ -356,12 +356,25 @@
             border-radius: .5rem;
 
             display: grid;
-            grid-template-columns: .6fr .2fr .2fr;
+            grid-template-columns: .1fr .6fr .2fr .2fr;
             justify-items: center;
 
             &__item {
                 font-size: 1.2rem;
                 padding-bottom: .8rem;
+
+                &__icon {
+                    cursor: pointer;
+                    color: #444444;
+                }
+                
+                &__icon:hover {
+                    color: #DB2C2C;
+                }
+
+                &__icon:active {
+                    transform: scale(0.9);
+                }
             }
 
             &__item.full {
@@ -391,7 +404,7 @@
             border-radius: .5rem;
 
             display: grid;
-            grid-template-columns: .6fr .2fr .2fr;
+            grid-template-columns: .1fr .6fr .2fr .2fr;
             justify-items: center;
 
             &__item {

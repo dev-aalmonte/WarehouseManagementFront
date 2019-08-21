@@ -267,7 +267,6 @@ export class FormList extends Component {
             this.toggleSelectSugestion(indexToChange);
         }
         else if (inputValue.length >= 2) {
-            console.log("Goes here!");
             let suggestionList = suggestion.filter(suggestion => {
                 if(typeof suggestion === 'string'){
                     return suggestion.toLowerCase().includes(inputValue.toLowerCase());
@@ -284,6 +283,11 @@ export class FormList extends Component {
         else {
             document.querySelector('.form-list__input-container-list__input-container-suggestion__suggestions').classList.remove('active');
         }
+    }
+
+    removeElementFromList(fields, index) {
+        console.log("Removing: ", index);
+        fields.remove(index);
     }
 
     render() {
@@ -320,6 +324,7 @@ export class FormList extends Component {
                 <div className='form-list__item-list'>
                     {/* Header */}
                     <div className='form-list__item-list__header-container'>
+                        <div className='form-list__item-list__header-container__item'></div>
                         {
                             objectName.map((name, index) => {
                                 return <div key={index} className='form-list__item-list__header-container__item'>{this.capitalizeString(name)}</div>
@@ -332,6 +337,7 @@ export class FormList extends Component {
                         fields.getAll().map((item, index) => {
                             return (
                                 <div key={index} className='form-list__item-list__item-container'>
+                                    <div className='form-list__item-list__item-container__item icon-container'><Icon className='form-list__item-list__item-container__item__icon' icon='times' onClick={() => this.removeElementFromList(fields, index)} /></div>
                                     {   
                                         objectName ?
                                         objectName.map((name, index) => {
