@@ -5,11 +5,21 @@ import Icon from './common/icon';
 
 export class FormInput extends Component {
     render() {
-        const { className, title, type, placeholder, input, onKeyUp} = this.props;
+        const { className, title, type, placeholder, input, onKeyUp, meta } = this.props;
+        if (meta){
+            const { touched, error, warning } = meta;
+            return (
+                <div className={`${className} form-input`}>
+                    <label className='form-input__label'>{title} {touched && ((error && <span className="form-input__label__error">{error}</span>) || (warning && <span className="form-input__label__warn">{warning}</span>))}</label>
+                    <input className={`form-input__input ${touched && ((error && 'error') || (warning && 'warn'))}`} type={type} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
+                </div>
+            )
+        }
         return (
             <div className={`${className} form-input`}>
                 <label className='form-input__label'>{title}</label>
                 <input className='form-input__input' type={type} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
+                {/* {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))} */}
             </div>
         )
     }
@@ -17,7 +27,16 @@ export class FormInput extends Component {
 
 export class FormTextArea extends Component {
     render() {
-        const { className, title, placeholder, input, onKeyUp} = this.props;
+        const { className, title, placeholder, input, onKeyUp, meta} = this.props;
+        if(meta) {
+            const { touched, error, warning } = meta;
+            return (
+                <div className={`${className} form-textarea`}>
+                    <label className='form-textarea__label'>{title} {touched && ((error && <span className="form-textarea__label__error">{error}</span>) || (warning && <span className="form-textarea__label__warn">{warning}</span>))}</label>
+                    <textarea className={`form-textarea__input ${touched && ((error && 'error') || (warning && 'warn'))}`} rows='4' placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f}></textarea>
+                </div>
+            )
+        }
         return (
             <div className={`${className} form-textarea`}>
                 <label className='form-textarea__label'>{title}</label>
@@ -29,7 +48,16 @@ export class FormTextArea extends Component {
 
 export class FormQuantity extends Component {
     render() {
-        const { className, title, placeholder, input, onKeyUp, min, max } = this.props;
+        const { className, title, placeholder, input, onKeyUp, min, max, meta } = this.props;
+        if(meta) {
+            const { touched, error, warning } = meta;
+            return (
+                <div className={`${className} form-quantity`}>
+                    <label className='form-quantity__label'>{title} {touched && ((error && <span className="form-quantity__label__error">{error}</span>) || (warning && <span className="form-quantity__label__warn">{warning}</span>))}</label>
+                    <input className={`form-quantity__input ${touched && ((error && 'error') || (warning && 'warn'))}`} type="number" min={min ? min : 0} max={max ? max : 99} placeholder={placeholder} {...input} onKeyUp={event => onKeyUp ? onKeyUp(event) : f => f} />
+                </div>
+            )
+        }
         return (
             <div className={`${className} form-quantity`}>
                 <label className='form-quantity__label'>{title}</label>
@@ -42,7 +70,7 @@ export class FormQuantity extends Component {
 export class FormDecimal extends Component {
     unformatMoney(number) {
         if (typeof number == 'number')
-            number = number.toString();
+        number = number.toString();
 
         while (number.indexOf(",") != -1) {
             number = number.replace(',', '');
@@ -53,26 +81,42 @@ export class FormDecimal extends Component {
 
     formatNumber(number){
         if (typeof number == 'number')
-            number = number.toString();
+        number = number.toString();
 
         let formattedMoneyReverse = number.split('').reverse();
         return formattedMoneyReverse.map((value, index) => {
             if(formattedMoneyReverse.length <= 2 && index == formattedMoneyReverse.length - 1)
-                return `.${value}`;
+            return `.${value}`;
 
             if(index == 2)
                 return `${value}.`;
 
-            if((index - 2) % 3 == 0)
+                if((index - 2) % 3 == 0)
                 return `${value},`;
-
+                
             return value;
         }).reverse().join('');
         
     }
 
     render() {
-        const { className, title, placeholder, input, icon } = this.props;
+        const { className, title, placeholder, input, icon, meta } = this.props;
+        if(meta) {
+            const { touched, error, warning } = meta;
+            return (
+                <div className={`${className} form-decimal`}>
+                    <label className='form-decimal__label'>{title} {touched && ((error && <span className="form-decimal__label__error">{error}</span>) || (warning && <span className="form-decimal__label__warn">{warning}</span>))}</label>
+                    <div className={`form-decimal__input-container ${icon ? "icon" : ''}`}>
+                        {
+                            icon ?
+                            <Icon className='form-decimal__input-container__icon' icon="dollar-sign" /> :
+                            ""
+                        }
+                        <CurrencyInput className={`form-decimal__input-container__input ${touched && ((error && 'error') || (warning && 'warn'))}`} {...input} />
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className={`${className} form-decimal`}>
                 <label className='form-decimal__label'>{title}</label>
@@ -95,7 +139,29 @@ export class FormSelect extends Component {
     }
 
     render() {
-        const { className, title, options, placeholder, input } = this.props;
+        const { className, title, options, placeholder, input, meta } = this.props;
+        if (meta) {
+            const { touched, error, warning } = meta;
+            return (
+                <div className={`${className} form-select`}>
+                    <label className='form-select__label'>{title} {touched && ((error && <span className="form-input__label__error">{error}</span>) || (warning && <span className="form-input__label__warn">{warning}</span>))}</label>
+                    <div className='form-select__input-container'>
+                        <select className={`form-select__input-container__input ${touched && ((error && 'error') || (warning && 'warn'))}`} {...input}>
+                            <option value='' disabled>{placeholder}</option>
+                            {
+                                options ?
+                                options.map((option, index) => {
+                                    return <option key={index} value={option.key}>{option.value}</option>
+                                })
+                                :
+                                ""
+                            }
+                        </select>
+                        <Icon onClick={this.openSelect} className='form-select__input-container__icon' icon='angle-down'/>
+                    </div>
+                </div>
+            )
+        }
         return (
             <div className={`${className} form-select`}>
                 <label className='form-select__label'>{title}</label>

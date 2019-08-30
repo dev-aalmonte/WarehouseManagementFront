@@ -6,6 +6,7 @@ import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton } from '../formFields';
+import { required } from '../formFieldsValidation';
 
 class WarehouseAddForm extends Component {
     
@@ -13,14 +14,14 @@ class WarehouseAddForm extends Component {
         const { className, handleSubmit } = this.props;
         return (
             <form onSubmit={handleSubmit} className={`${className} warehouse-add-form`}>
-                <Field className='warehouse-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput} />
-                <Field className='warehouse-add-form__street-address' type='text' name='street_address' title='Street Address' placeholder='Street Address' component={FormInput} />
+                <Field className='warehouse-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput} validate={[required]} />
+                <Field className='warehouse-add-form__street-address' type='text' name='street_address' title='Street Address' placeholder='Street Address' component={FormInput} validate={[required]} />
                 <Field className='warehouse-add-form__extra-address' type='text' name='extra_address' title='Secondary' placeholder='Extra address information' component={FormInput} />
-                <Field className='warehouse-add-form__city' name='city' title='City' placeholder='City' component={FormInput} />
-                <Field className='warehouse-add-form__state' type='text' name='state' title='State' placeholder='State' component={FormInput} />
-                <Field className='warehouse-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} />
-                <Field className='warehouse-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput}/>
-                <Field className='warehouse-add-form__submit' type='submit' name='submit' title='Add Warehouse' component={FormButton}/>
+                <Field className='warehouse-add-form__city' name='city' title='City' placeholder='City' component={FormInput} validate={[required]} />
+                <Field className='warehouse-add-form__state' type='text' name='state' title='State' placeholder='State' component={FormInput} validate={[required]} />
+                <Field className='warehouse-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} validate={[required]} />
+                <Field className='warehouse-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput} validate={[required]} />
+                <Field className='warehouse-add-form__submit' type='submit' name='submit' title='Add Warehouse' component={FormButton} validate={[required]} />
             </form>
         )
     }

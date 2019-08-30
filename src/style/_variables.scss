@@ -11,6 +11,30 @@
     -ms-user-select: none; /* IE10+ */
 }
 
+@mixin FormLabelErrorAndWarn {
+    &__error {
+        margin-left: 1rem;
+        color: $f-error;
+        font-size: 1.2rem;
+    }
+    
+    &__warn {
+        margin-left: 1rem;
+        color: $f-warn;
+        font-size: 1.2rem;
+    }
+}
+
+@mixin FormInputErrorAndWarn {
+    &.error {
+        border-bottom: 2px solid $f-error;
+    }
+
+    &.warn {
+        border-bottom: 2px solid $f-warn;
+    }
+}
+
 // Background Colors
 $b-primary-color: #4a707a;
 $b-secondary-color: #7697a0;
@@ -23,3 +47,7 @@ $b-background-light-color: #FFFFFE;
 // Text color
 $t-primary-color: #000;
 $t-secondary-color: #111;
+
+// Form Color
+$f-error: #DB2C2C;
+$f-warn: #DBC92C;
