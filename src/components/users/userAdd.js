@@ -6,6 +6,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
 import { API_URL } from '../../config';
+import { required } from '../formFieldsValidation';
 
 class UserAddForm extends Component {
 
@@ -28,14 +29,14 @@ class UserAddForm extends Component {
         const { className, handleSubmit, warehouse, role } = this.props;
         return (
             <form onSubmit={handleSubmit} className={`${className} user-add-form`}>
-                <Field className='user-add-form__first_name' type='text' name='first_name' title='First Name' placeholder='First Name' component={FormInput} />
-                <Field className='user-add-form__last_name' type='text' name='last_name' title='Last Name' placeholder='Last Name' component={FormInput} />
-                <Field className='user-add-form__username' type='text' name='username' title='Username' placeholder='Username' component={FormInput} />
-                <Field className='user-add-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput} />
-                <Field className='user-add-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput} />
-                <Field className='user-add-form__confirm' type='password' name='confirm' title='Confirm Password' placeholder='Confirm Password' component={FormInput} />
-                <Field className='user-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' options={warehouse} component={FormSelect}/>
-                <Field className='user-add-form__role' name='roleID' title='Role' placeholder='Select a Role' options={role} component={FormSelect}/>
+                <Field className='user-add-form__first_name' type='text' name='first_name' title='First Name' placeholder='First Name' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__last_name' type='text' name='last_name' title='Last Name' placeholder='Last Name' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__username' type='text' name='username' title='Username' placeholder='Username' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__confirm' type='password' name='confirm' title='Confirm Password' placeholder='Confirm Password' component={FormInput} validate={[required]} />
+                <Field className='user-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' options={warehouse} component={FormSelect} validate={[required]} />
+                <Field className='user-add-form__role' name='roleID' title='Role' placeholder='Select a Role' options={role} component={FormSelect} validate={[required]} />
                 <Field className='user-add-form__submit' type='submit' name='submit' title='Add User' component={FormButton}/>
             </form>
         )

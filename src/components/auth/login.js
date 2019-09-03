@@ -9,14 +9,15 @@ import { Heading } from '../common/headings';
 import { PlaceholderImage, BackgroundImage } from '../common/image';
 
 import background from '../../../static/assets/img/login-img.jpg';
+import { required } from '../formFieldsValidation';
 
 class LoginForm extends Component {
     render() {
         const { className, handleSubmit } = this.props;
         return (
             <form onSubmit={handleSubmit} className={`${className} login-form`}>
-                <Field className='login-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput}/>
-                <Field className='login-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput}/>
+                <Field className='login-form__email' type='email' name='email' title='Email' placeholder='Email' component={FormInput} validate={[required]}/>
+                <Field className='login-form__password' type='password' name='password' title='Password' placeholder='Password' component={FormInput} validate={[required]}/>
                 <Field className='login-form__login' type='submit' name='login' title='Login' onClick={() => console.log('submiting')} component={FormButton}/>
             </form>
         )

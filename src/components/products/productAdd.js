@@ -6,6 +6,7 @@ import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect, FormDecimal } from '../formFields';
+import { required } from '../formFieldsValidation';
 
 class ProductAddForm extends Component {
     render() {
@@ -32,17 +33,15 @@ class ProductAddForm extends Component {
         ]
         return (
             <form onSubmit={handleSubmit} className={`${className} product-add-form`}>
-                <Field className='product-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput} />
-                <Field className='product-add-form__price' type='text' name='price' title='Price' placeholder='Price' component={FormDecimal} icon='dollar-sign' />
-                <Field className='product-add-form__description' type='text' name='description' title='Description' placeholder='Description' component={FormInput} />
+                <Field className='product-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput}  validate={[required]} />
+                <Field className='product-add-form__price' type='text' name='price' title='Price' placeholder='Price' component={FormDecimal} icon='dollar-sign' validate={[required]} />
+                <Field className='product-add-form__description' type='text' name='description' title='Description' placeholder='Description' component={FormInput} validate={[required]} />
                 <Field className='product-add-form__metric-weight' name='metric_weight' title='Metric Weight' placeholder='Select a metric weight' options={weightOption} component={FormSelect} />
                 <Field className='product-add-form__weight' type='text' name='weight' title='Weight' placeholder='Weight' component={FormDecimal} />
                 <Field className='product-add-form__metric-longitude' name='metric_longitude' title='Metric Longitude' placeholder='Select a metric longitude' options={longitudeOption} component={FormSelect} />
                 <Field className='product-add-form__width' type='text' name='width' title='Width' placeholder='Width' component={FormDecimal}/>
                 <Field className='product-add-form__height' type='text' name='height' title='Height' placeholder='Height' component={FormDecimal} />
                 <Field className='product-add-form__length' type='text' name='length' title='Length' placeholder='Length' component={FormDecimal} />
-                {/* <Field className='product-add-form__status' name='status' title='Status' placeholder='Select a status' options={statusOptions} component={FormSelect} />
-                <Field className='product-add-form__warehouse' name='warehouse' title='Warehouse' placeholder='Select a warehouse'  options={statusOptions} component={FormSelect} /> */}
                 <Field className='product-add-form__submit' type='submit' name='submit' title='Add Product' onClick={() => console.log('submiting Product')} component={FormButton}/>
             </form>
         )
