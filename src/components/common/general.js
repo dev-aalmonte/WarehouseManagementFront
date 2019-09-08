@@ -1,4 +1,8 @@
+import React from 'react';
+
+
 import { toast } from "react-toastify";
+import NotifyTemplate from "./notifyTemplate";
 
 export function getStateList(options = 0){
     const states = [
@@ -426,8 +430,58 @@ export function notify(type, text, options) {
     }
 }
 
-export function notifyAlert(type, text, options){
+export function notifyUpdate(toastID, type, text, options) {
     options = options || { 
+        postion: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false
+    }
+    
+    switch(type) {
+        case "info":
+        case "Info":
+        case "INFO":
+            toast.update(toastID, {...options, render: text, type: 'info'});
+            break;
+
+        case "success":
+        case "Success":
+        case "SUCCESS":
+            toast.update(toastID, text, {...options, render: text, type: 'success'});
+            break;
+
+        case "warn":
+        case "Warn":
+        case "WARN":
+            toast.update(toastID, text, {...options, render: text, type:toast.TYPE.WARNING});
+            break;
+
+        case "error":
+        case "Error":
+        case "ERROR":
+            toast.update(toastID, text, {...options, render: text, type:toast.TYPE.ERROR});
+            break;
+
+        default: 
+            toast.update(toastID, text, {...options, render: text, type:toast.TYPE.SUCCESS});
+    }
+}
+
+export function notifyRemove(notifyID) {
+    if(notifyID) {
+        toast.dismiss(notifyID);
+    }
+    else{
+        toast.dismiss();
+    }
+}
+
+export function notifyConfirm(text, success, decline){
+    const toastId = Math.ceil(Math.random() * 100000000000).toString();
+    const options = { 
         postion: "top-left",
         autoClose: false,
         hideProgressBar: true,
@@ -435,33 +489,6 @@ export function notifyAlert(type, text, options){
         pauseOnHover: true,
         draggable: false
     }
-
-    switch(type) {
-        case "info":
-        case "Info":
-        case "INFO":
-            toast.info(text, options);
-            break;
-
-        case "success":
-        case "Success":
-        case "SUCCESS":
-            toast.success(text, options);
-            break;
-
-        case "warn":
-        case "Warn":
-        case "WARN":
-            toast.warn(text, options);
-            break;
-
-        case "error":
-        case "Error":
-        case "ERROR":
-            toast.error(text, options);
-            break;
-
-        default: 
-            toast(text, options);
-    }
+    
+    toast(<NotifyTemplate success={() => success(toastId)} decline={() => decline(toastId)}>{text}</NotifyTemplate>, {...options, toastId});
 }

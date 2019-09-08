@@ -1,0 +1,22 @@
+.notify-template {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 1rem;
+    grid-column-gap: 1rem;
+
+    &__text {
+        grid-row: 1/2;
+        grid-column: 1/-1;
+    }
+    
+    &__accept {
+        grid-row: 2/3;
+        grid-column: 1/2;
+    }
+    
+    &__decline {
+        grid-row: 2/3;
+        grid-column: 2/3;
+    }
+}

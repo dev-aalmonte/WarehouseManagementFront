@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import { notify } from '../common/general';
+import { notify, notifyConfirm, notifyUpdate, notifyRemove } from '../common/general';
 
 import { Heading, Text } from '../common/headings';
 import { FormSmallButton } from '../formFields';
@@ -10,6 +10,7 @@ import Table from '../common/table';
 import Modal from '../common/modal';
 import StockAdd from './stockAdd';
 import StockEdit from './stockEdit';
+import { toast } from 'react-toastify';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -57,13 +58,20 @@ class WarehouseDetail extends Component {
     deleteStock = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         if(allElementsSelected.length > 0){
-            allElementsSelected.forEach((element) => {
-                element.classList.add('to_delete');
-                const rowID = this.props.stocks[element.id].id;
-                this.props.deleteStock(rowID, () => {
-                    this.resetTable();
-                    this.resetActive();
-                });
+            notifyConfirm("Are you sure you want to delete it?", (toastID) => {
+                notifyRemove(toastID);
+                allElementsSelected.forEach((element) => {
+                    element.classList.add('to_delete');
+                    const rowID = this.props.stocks[element.id].id;
+                    this.props.deleteStock(rowID, () => {
+                        this.resetTable();
+                        this.resetActive();
+                        notify('success', 'The data has been removed successfully');
+                    });
+                })
+            }, 
+            (toastID) => {
+                notifyRemove(toastID);
             })
         }
     }
