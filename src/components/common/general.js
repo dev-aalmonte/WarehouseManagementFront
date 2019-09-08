@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export function getStateList(options = 0){
     const states = [
         {key: "AL", value: "Alabama"},
@@ -381,5 +383,85 @@ export function getCountryList() {
 
         default:
             return countries;
+    }
+}
+
+export function notify(type, text, options) {
+    options = options || { 
+        postion: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    }
+
+    switch(type) {
+        case "info":
+        case "Info":
+        case "INFO":
+            toast.info(text, options);
+            break;
+
+        case "success":
+        case "Success":
+        case "SUCCESS":
+            toast.success(text, options);
+            break;
+
+        case "warn":
+        case "Warn":
+        case "WARN":
+            toast.warn(text, options);
+            break;
+
+        case "error":
+        case "Error":
+        case "ERROR":
+            toast.error(text, options);
+            break;
+
+        default: 
+            toast(text, options);
+    }
+}
+
+export function notifyAlert(type, text, options){
+    options = options || { 
+        postion: "top-left",
+        autoClose: false,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false
+    }
+
+    switch(type) {
+        case "info":
+        case "Info":
+        case "INFO":
+            toast.info(text, options);
+            break;
+
+        case "success":
+        case "Success":
+        case "SUCCESS":
+            toast.success(text, options);
+            break;
+
+        case "warn":
+        case "Warn":
+        case "WARN":
+            toast.warn(text, options);
+            break;
+
+        case "error":
+        case "Error":
+        case "ERROR":
+            toast.error(text, options);
+            break;
+
+        default: 
+            toast(text, options);
     }
 }

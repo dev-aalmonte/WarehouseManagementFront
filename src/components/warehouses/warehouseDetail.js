@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import { notify } from '../common/general';
 
 import { Heading, Text } from '../common/headings';
 import { FormSmallButton } from '../formFields';
@@ -48,11 +49,14 @@ class WarehouseDetail extends Component {
             this.props.selectSingleStock(selectedItem.id);
             this.openModal('stock_edit');
         }
+        else {
+            notify('warn', 'You need to select only one item in order to edit');
+        }
     }
 
     deleteStock = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        if(allElementsSelected.length > 0)
+        if(allElementsSelected.length > 0){
             allElementsSelected.forEach((element) => {
                 element.classList.add('to_delete');
                 const rowID = this.props.stocks[element.id].id;
@@ -61,6 +65,7 @@ class WarehouseDetail extends Component {
                     this.resetActive();
                 });
             })
+        }
     }
 
     displaySearchBarInput = (event) => {
@@ -108,6 +113,7 @@ class WarehouseDetail extends Component {
                             <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
                             <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
                         </div>
+
                         <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
 
                         <Modal className='modal-stock_add'> <StockAdd/> </Modal>

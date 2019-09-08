@@ -21,6 +21,9 @@ import { faQuestionCircle,
         faCheck,
         faTimes} from '@fortawesome/free-solid-svg-icons';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 library.add(faQuestionCircle, 
             faUsers, 
             faArchive, 
@@ -45,6 +48,8 @@ export default class App extends Component {
             <div className='app'>
                 <Header actual_page={window.location.href}/>
                 {this.props.children}
+
+                <ToastContainer autoClose={3000}/>
             </div>
         );
     }
