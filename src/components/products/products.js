@@ -8,6 +8,7 @@ import Table from '../common/table';
 import Modal from '../common/modal';
 import ProductDetail from './productDetail';
 import ProductAdd from './productAdd';
+import { notify, notifyConfirm, notifyRemove, notifyUpdate } from '../common/general';
 
 class Products extends Component {
     constructor(props) {
@@ -54,19 +55,34 @@ class Products extends Component {
             this.props.selectSingleProduct(selectedItem.id);
             this.openModal('product_add');
         }
+        else {
+            notify('warn', 'You need to select only one item in order to edit');
+        }
     }
 
     deleteProduct = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        if(allElementsSelected.length > 0)
-            allElementsSelected.forEach((element) => {
-                element.classList.add('to_delete');
-                const rowID = this.props.products[element.id].id;
-                this.props.deleteProduct(rowID, () => {
-                    this.resetTable();
-                    this.resetActive();
-                });
+        if(allElementsSelected.length > 0){
+            notifyConfirm('Are you sure you want to delete it?', (toastID) => {
+                notifyRemove(toastID);
+                allElementsSelected.forEach((element) => {
+                    element.classList.add('to_delete');
+                    const rowID = this.props.products[element.id].id;
+                    this.props.deleteProduct(rowID, () => {
+                        this.resetTable();
+                        this.resetActive();
+                    });
+                })
+                notify('success', 'The products has been removed successfully');
+            },
+            (toastID) => {
+                notifyRemove(toastID);
             })
+        }
+        else {
+            notify('warn', 'You need to select at least one item in order to remove');
+
+        }
     }
 
     displaySearchBarInput = (event) => {

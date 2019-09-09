@@ -7,6 +7,7 @@ import { API_URL } from '../../config';
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormList } from '../formFields';
 import Icon from '../common/icon';
+import { notify } from '../common/general';
 
 class OrderAddForm extends Component {
     componentWillMount(){
@@ -130,6 +131,7 @@ class OrderAdd extends Component {
 
                 this.props.addOrderDetail(fieldsDetails, () => {
                     document.querySelectorAll('.modal').forEach((element) => {
+                        notify('success', 'The order has been added successfully');
                         element.classList.remove('active');
                         this.resetTable(this.props.selected_client.id);
                         this.resetActive();

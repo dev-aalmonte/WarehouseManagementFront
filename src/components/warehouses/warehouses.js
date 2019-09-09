@@ -7,6 +7,7 @@ import Table from '../common/table';
 import { FormSmallButton } from '../formFields';
 import Modal from '../common/modal';
 import WarehouseAdd from './warehouseAdd';
+import { notify, notifyConfirm, notifyRemove } from '../common/general';
 
 class Warehouses extends Component {
     
@@ -45,19 +46,33 @@ class Warehouses extends Component {
             this.props.selectSingleWarehouse(selectedItem.id);
             this.openModal('warehouse_add');
         }
+        else {
+            notify('warn', 'You need to select only one item in order to edit');
+        }
     }
 
     deleteWarehouse = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        if(allElementsSelected.length > 0)
-            allElementsSelected.forEach((element) => {
-                element.classList.add('to_delete');
-                const rowID = this.props.warehouses[element.id].id;
-                this.props.deleteWarehouse(rowID, () => {
-                    this.resetTable();
-                    this.resetActive();
-                });
+        if(allElementsSelected.length > 0) {
+            notifyConfirm("Are you sure you want to delete it?", (toastID) => {
+                notifyRemove(toastID);
+                allElementsSelected.forEach((element) => {
+                    element.classList.add('to_delete');
+                    const rowID = this.props.warehouses[element.id].id;
+                    this.props.deleteWarehouse(rowID, () => {
+                        this.resetTable();
+                        this.resetActive();
+                    });
+                })
+                notify('success', 'The warehouse has been removed successfully');
+            },
+            (toastID) => {
+                notifyRemove(toastID);
             })
+        }
+        else {
+            notify('warn', 'You need to select at least one item in order to remove');
+        }
     }
 
     displaySearchBarInput = (event) => {

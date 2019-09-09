@@ -7,6 +7,7 @@ import { API_URL } from '../../config';
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormTextArea } from '../formFields';
 import { required } from '../formFieldsValidation';
+import { notify } from '../common/general';
 
 
 class ClientAddForm extends Component {
@@ -52,6 +53,7 @@ class ClientAdd extends Component {
     onSubmit = (fields) => {
         this.props.addClient(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
+                notify('success', 'The client has been added successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();

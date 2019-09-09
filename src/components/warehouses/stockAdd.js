@@ -6,6 +6,7 @@ import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormList, FormSelect, FormQuantity } from '../formFields';
+import { notify } from '../common/general';
 
 class StockAddForm extends Component {
     constructor(props){
@@ -77,6 +78,7 @@ class StockAdd extends Component {
 
             this.props.addStock(fieldToSubmit, (res) => {
                 document.querySelectorAll('.modal').forEach((element) => {
+                    notify('success', 'The products has been added in the warehouse successfully');
                     element.classList.remove('active');
                     this.resetTable();
                     this.resetActive();

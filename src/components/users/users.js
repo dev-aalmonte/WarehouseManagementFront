@@ -8,6 +8,8 @@ import { FormSmallButton } from '../formFields';
 import Table from '../common/table';
 import Modal from '../common/modal';
 import UserAdd from './userAdd';
+import { notify, notifyConfirm, notifyRemove } from '../common/general';
+import { toast } from 'react-toastify';
 
 class Users extends Component {
     constructor(props) {
@@ -54,19 +56,33 @@ class Users extends Component {
             this.props.selectSingleUser(selectedItem.id);
             this.openModal('user_add');
         }
+        else {
+            notify('warn', 'You need to select onyl one item in order to edit');
+        }
     }
 
     deleteUser = () => {
         const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        if(allElementsSelected.length > 0)
-            allElementsSelected.forEach((element) => {
-                element.classList.add('to_delete');
-                const rowID = this.props.users[element.id].id;
-                this.props.deleteUser(rowID, () => {
-                    this.resetTable();
-                    this.resetActive();
-                });
+        if(allElementsSelected.length > 0){
+            notifyConfirm("Are you sure you want to delete it?", (toastID) => {
+                notifyRemove(toastID);
+                allElementsSelected.forEach((element) => {
+                    element.classList.add('to_delete');
+                    const rowID = this.props.users[element.id].id;
+                    this.props.deleteUser(rowID, () => {
+                        this.resetTable();
+                        this.resetActive();
+                    });
+                })
+                notify('success', 'The user has been removed successfully');
+            },
+            (toastID) => {
+                notifyRemove(toastID);
             })
+        }
+        else {
+            notify('warn', 'You need to select at least one item in order to remove');
+        }
     }
 
     displaySearchBarInput = (event) => {

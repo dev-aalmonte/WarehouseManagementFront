@@ -10,7 +10,6 @@ import Table from '../common/table';
 import Modal from '../common/modal';
 import StockAdd from './stockAdd';
 import StockEdit from './stockEdit';
-import { toast } from 'react-toastify';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -66,13 +65,16 @@ class WarehouseDetail extends Component {
                     this.props.deleteStock(rowID, () => {
                         this.resetTable();
                         this.resetActive();
-                        notify('success', 'The data has been removed successfully');
                     });
                 })
+                notify('success', 'The product has been removed successfully from the warehouse');
             }, 
             (toastID) => {
                 notifyRemove(toastID);
             })
+        }
+        else {
+            notify('warn', 'You need to select at least one item in order to remove');
         }
     }
 

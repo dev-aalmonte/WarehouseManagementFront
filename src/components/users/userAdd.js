@@ -7,6 +7,7 @@ import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect } from '../formFields';
 import { API_URL } from '../../config';
 import { required } from '../formFieldsValidation';
+import { notify } from '../common/general';
 
 class UserAddForm extends Component {
 
@@ -67,6 +68,7 @@ class UserAdd extends Component {
     onSubmit = (fields) => {
         this.props.addUser(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
+                notify('success', 'The user has been added successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();

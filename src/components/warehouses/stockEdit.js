@@ -7,6 +7,7 @@ import { FormInput, FormButton, FormSelect } from '../formFields';
 import { API_URL } from '../../config';
 
 import { Heading, SmallHeading } from '../common/headings';
+import { notify } from '../common/general';
 
 class StockEditForm extends Component {
     render() {
@@ -42,6 +43,7 @@ class StockEdit extends Component {
         // console.log("Fields to Edit: ", fields);
         this.props.editStock(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
+                notify('success', 'The product has been modified in the warehouse successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();

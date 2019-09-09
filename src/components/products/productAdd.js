@@ -7,6 +7,7 @@ import { API_URL } from '../../config';
 import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect, FormDecimal } from '../formFields';
 import { required } from '../formFieldsValidation';
+import { notify } from '../common/general';
 
 class ProductAddForm extends Component {
     render() {
@@ -83,6 +84,7 @@ class ProductAdd extends Component {
         
         this.props.addProduct(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
+                notify('success', 'The product has been added successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();

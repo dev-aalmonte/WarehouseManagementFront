@@ -7,6 +7,7 @@ import { API_URL } from '../../config';
 import { Heading } from '../common/headings';
 import { FormInput, FormButton } from '../formFields';
 import { required } from '../formFieldsValidation';
+import { notify } from '../common/general';
 
 class WarehouseAddForm extends Component {
     
@@ -46,6 +47,7 @@ class WarehouseAdd extends Component {
     onSubmit = (fields) => {
         this.props.addWarehouse(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
+                notify('success', 'The warehouse has been added successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();
