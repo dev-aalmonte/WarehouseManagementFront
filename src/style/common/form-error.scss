@@ -1,0 +1,13 @@
+.form-error {
+    height: 4.4rem;
+    background: rgba($f-error, .7);
+
+    padding-left: 2rem;
+    
+    border-radius: .5rem;
+
+    font-size: 1.2rem;
+
+    display: grid;
+    align-items: center;
+}

@@ -10,6 +10,7 @@ import { PlaceholderImage, BackgroundImage } from '../common/image';
 
 import background from '../../../static/assets/img/login-img.jpg';
 import { required } from '../formFieldsValidation';
+import FormError from '../common/formError';
 
 class LoginForm extends Component {
     render() {
@@ -25,6 +26,13 @@ class LoginForm extends Component {
 }
 
 class Login extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            formerr: ''
+        }
+    }
 
     componentWillMount() {
         const localToken = localStorage.getItem('token');
@@ -43,6 +51,9 @@ class Login extends Component {
     onSubmit = (fields) => {
         this.props.login(fields, (res) => {
             this.props.history.push('/home');
+        }, 
+        (res) => {
+            this.setState({formerr: res.data.error});
         });
     }
 
@@ -55,6 +66,11 @@ class Login extends Component {
                 </div>
                 <div className='login__content'>
                     <Heading className='login__content__heading'> Login</Heading>
+                    {this.state.formerr != '' ?
+                        <FormError className='login__content__form-err'>{this.state.formerr}</FormError>
+                        :
+                        ''
+                     }
                     <LoginForm onSubmit={this.onSubmit} className='login__content__form' />
                 </div>
             </div>

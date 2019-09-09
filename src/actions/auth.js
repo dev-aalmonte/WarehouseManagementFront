@@ -12,7 +12,7 @@ const requestConfig = {
     }
 }
 
-export function login(fields, success) {
+export function login(fields, success, error) {
     return function (dispatch) {
         axios.post(`${API_URL}/login`, qs.stringify(fields), requestConfig)
             .then(response => {
@@ -26,7 +26,7 @@ export function login(fields, success) {
                     success(response);
                 }
                 else {
-                    console.log("Something is wrong");
+                    error(response);
                 }
             })
             .catch(err => {
