@@ -44,7 +44,7 @@ export function selectSingleProduct(id) {
     }
 }
 
-export function addProduct(fields, success) {
+export function addProduct(fields, success, error) {
     if(!fields.id) {
         return function (dispatch) {
             axios.post(`${API_URL}/products`, qs.stringify(fields), requestConfig)
@@ -59,7 +59,7 @@ export function addProduct(fields, success) {
                 })
                 .catch(err => {
                     if(err)
-                        console.log(err);
+                        error(err.response.data.error)
                 });
         }
     }

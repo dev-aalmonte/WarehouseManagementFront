@@ -14,7 +14,23 @@
         padding: 2.6rem;
 
         display: grid;
-        grid-template-rows: .2fr .8fr;
+        grid-template-rows: [header-s] .2fr [header-e error-s] .2fr [error-e form-s] .8fr [form-e];
+
+        &__title {
+            grid-row: header-s/header-e;
+            align-self: end;
+        }
+
+        &__form-err {
+            grid-row: error-s/error-e;
+            align-self: center;
+
+        }
+
+        &__form {
+            grid-row: form-s/form-e;
+
+        }
     }
 }
 
@@ -101,6 +117,5 @@
         justify-self: end;
 
         padding-right: 4rem;
-        padding-top: 2rem;
     }
 }

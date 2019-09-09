@@ -66,11 +66,12 @@ class Login extends Component {
                 </div>
                 <div className='login__content'>
                     <Heading className='login__content__heading'> Login</Heading>
-                    {this.state.formerr != '' ?
-                        <FormError className='login__content__form-err'>{this.state.formerr}</FormError>
+                    {
+                        this.state.formerr != '' ?
+                            <FormError className='login__content__form-err'>{this.state.formerr}</FormError>
                         :
-                        ''
-                     }
+                            ''
+                    }
                     <LoginForm onSubmit={this.onSubmit} className='login__content__form' />
                 </div>
             </div>

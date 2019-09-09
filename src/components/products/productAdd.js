@@ -8,6 +8,7 @@ import { Heading } from '../common/headings';
 import { FormInput, FormButton, FormSelect, FormDecimal } from '../formFields';
 import { required } from '../formFieldsValidation';
 import { notify } from '../common/general';
+import FormError from '../common/formError';
 
 class ProductAddForm extends Component {
     render() {
@@ -50,6 +51,15 @@ class ProductAddForm extends Component {
 }
 
 class ProductAdd extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            formerr: []
+        }
+    }
+
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
@@ -77,10 +87,10 @@ class ProductAdd extends Component {
 
     onSubmit = (fields) => {
         fields.price = this.unformatNumber(fields.price);
-        fields.weight = this.unformatNumber(fields.weight);
-        fields.width = this.unformatNumber(fields.width);
-        fields.height = this.unformatNumber(fields.height);
-        fields.length = this.unformatNumber(fields.length);
+        fields.weight = fields.weight ? this.unformatNumber(fields.weight) : fields.weight;
+        fields.width = fields.width ? this.unformatNumber(fields.width) : fields.width;
+        fields.height = fields.height ? this.unformatNumber(fields.height) : fields.height;
+        fields.length = fields.length ? this.unformatNumber(fields.length) : fields.length;
         
         this.props.addProduct(fields, () => {
             document.querySelectorAll('.modal').forEach((element) => {
@@ -89,6 +99,10 @@ class ProductAdd extends Component {
                 this.resetTable();
                 this.resetActive();
             })
+        },
+        (res) => {
+            this.setState({formerr: res.name})
+            console.log("Error response: ", res.name);
         });
     }
 
@@ -97,7 +111,12 @@ class ProductAdd extends Component {
             <div className={`product-add`}>
                 <div className='product-add__background'></div>
                 <div className='product-add__content'>
-                    <Heading className='product-add__title'>Add Product</Heading>
+                    <Heading className='product-add__content__title'>Add Product</Heading>
+                    {   
+                        this.state.formerr.map(message => {
+                            return <FormError className='product-add__content__form-err'>{message}</FormError>
+                        })
+                    }
                     <ProductAddForm onSubmit={(e) => this.onSubmit(e)} className='product-add__content__form' />
                 </div>
             </div>
