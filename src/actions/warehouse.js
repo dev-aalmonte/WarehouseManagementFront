@@ -70,7 +70,7 @@ export function selectSingleWarehouseFromDB(id) {
     }
 }
 
-export function addWarehouse(fields, success) {
+export function addWarehouse(fields, success, error) {
     if(!fields.id) {
         return function (dispatch) {
             axios.post(`${API_URL}/warehouses`, qs.stringify(fields), requestConfig)
@@ -85,7 +85,7 @@ export function addWarehouse(fields, success) {
                 })
                 .catch(err => {
                     if(err)
-                        console.log(err);
+                        error(err.response.data.error)
                 });
         }
     }

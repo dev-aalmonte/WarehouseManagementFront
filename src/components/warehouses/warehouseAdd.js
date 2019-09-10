@@ -29,6 +29,15 @@ class WarehouseAddForm extends Component {
 }
 
 class WarehouseAdd extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            formerr: []
+        }
+    }
+    
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
@@ -52,15 +61,23 @@ class WarehouseAdd extends Component {
                 this.resetTable();
                 this.resetActive();
             })
+        },
+        (res) => {
+            this.setState({formerr: res.name})
         });
     }
 
     render() {
-        return(
+        return (
             <div className={`warehouse-add`}>
                 <div className='warehouse-add__background'></div>
                 <div className='warehouse-add__content'>
-                    <Heading className='warehouse-add__title'>Add Warehouse</Heading>
+                    <Heading className='warehouse-add__content__title'>Add Warehouse</Heading>
+                    {   
+                        this.state.formerr.map(message => {
+                            return <FormError className='product-add__content__form-err'>{message}</FormError>
+                        })
+                    }
                     <WarehouseAddForm onSubmit={(e) => this.onSubmit(e)} className='warehouse-add__content__form'/>
                 </div>
             </div>
