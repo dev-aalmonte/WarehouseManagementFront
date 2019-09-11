@@ -1,0 +1,43 @@
+.tabs {
+    display: grid;
+    grid-template-rows: .1fr .9fr;
+
+    &__header {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(auto-fill, 10rem);
+
+        border-bottom: .1rem solid #000;
+        border-radius: .5rem;
+
+        &__item {
+            cursor: pointer;
+
+            align-self: end;
+            justify-self: center;
+
+            padding-bottom: 1rem;
+
+            font-size: 1.2rem;
+
+            &:hover {
+                padding-bottom: .9rem;
+                border-bottom: .1rem solid $b-primary-color;
+            }
+
+            &.active {
+                padding-bottom: .9rem;
+                border-bottom: .1rem solid $b-primary-color;
+            }
+        }
+
+        & > * {
+            grid-row: 1/-1;
+        }
+    }
+
+    &__content {
+        margin-top: 2rem;
+        margin-left: .5rem;
+    }
+}
