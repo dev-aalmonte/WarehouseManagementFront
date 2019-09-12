@@ -39,5 +39,23 @@
     &__content {
         margin-top: 2rem;
         margin-left: .5rem;
+
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
+
+        & > * {
+            grid-row: 1/-1;
+            grid-column: 1/-1;
+            align-self: start;
+        }
+
+        &__tab {
+            opacity: 0;
+
+            &.active {
+                opacity: 1;
+            }
+        }
     }
 }

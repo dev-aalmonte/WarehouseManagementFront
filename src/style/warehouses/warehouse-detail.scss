@@ -9,9 +9,11 @@
         grid-row: s/m;
     }
 
-    &__products {
+    &__tabs {
         grid-row: m/e;
-        
+    }
+
+    &__products {
         display: grid;
         grid-template-rows: 7rem 1fr;
 

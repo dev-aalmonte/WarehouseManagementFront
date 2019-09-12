@@ -115,10 +115,24 @@ class WarehouseDetail extends Component {
                     <Heading>{name}</Heading>
                     <Text>{address ? `${address.street_address} ${address.extra_address}, ${address.city}, ${address.state}, ${address.country}, ${address.zipcode}` : ''}</Text>
                 </div>
+                {/* <div className='warehouse-detail__products'>
+                    <Heading>Products</Heading>
+                    <div className='warehouse-detail__products__table-container'>
+                        <Searchbar className='warehouse-detail__products__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
+                        <div className='warehouse-detail__products__table-container__buttoms'>
+                            <FormSmallButton onClick={() => this.deleteStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='minus'/>
+                            <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
+                            <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
+                        </div>
 
-                <Tabs className='warehouse-detail__tabs' tabName={['Products', 'Location']} components={[
-                    (
-                    <div className='warehouse-detail__products'>
+                        <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
+
+                        <Modal className='modal-stock_add'> <StockAdd/> </Modal>
+                        <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
+                    </div>
+                </div> */}
+                <Tabs className='warehouse-detail__tabs' tabName={['Products', 'Location']}>
+                    <div id='Products' className='warehouse-detail__products tabs__content__tab active'>
                         <Heading>Products</Heading>
                         <div className='warehouse-detail__products__table-container'>
                             <Searchbar className='warehouse-detail__products__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
@@ -129,18 +143,15 @@ class WarehouseDetail extends Component {
                             </div>
 
                             <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
-
-                            <Modal className='modal-stock_add'> <StockAdd/> </Modal>
-                            <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
                         </div>
                     </div>
-                    ),
-                    (
-                    <div className='warehouse-detail__location'>
+                    <div id='Location' className='warehouse-detail__location tabs__content__tab'>
                         <Heading>Location</Heading>
                     </div>
-                    )
-                ]} />
+                </Tabs>
+
+                <Modal className='modal-stock_add'> <StockAdd/> </Modal>
+                <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
                 
             </div>
         )

@@ -5,18 +5,18 @@ class Tabs extends Component {
         super(props);
 
         this.state = {
-            components: props.components,
             tabName: props.tabName,
             activeIndex: 0
         }
     }
 
-    renderComponent(index){
-        return this.state.components[index];
-    }
-
-    changeIndex(index) {
+    changeActive(index) {
+        const activeIndex = this.state.activeIndex;
+        const tabName = this.state.tabName;
+        document.querySelector(`#${tabName[activeIndex]}`).classList.remove('active');
+        document.querySelector(`#${tabName[index]}`).classList.add('active');
         this.setState({activeIndex: index});
+
     }
 
     render() {
@@ -26,7 +26,7 @@ class Tabs extends Component {
                     {
                         this.state.tabName.map((name, index) => {
                             return (
-                                <div key={index} className={`tabs__header__item ${this.state.activeIndex == index ? 'active' : ''}`}  onClick={() => this.changeIndex(index)}>
+                                <div key={index} className={`tabs__header__item ${this.state.activeIndex == index ? 'active' : ''}`}  onClick={() => this.changeActive(index)}>
                                     {name}
                                 </div>
                             );
@@ -34,9 +34,7 @@ class Tabs extends Component {
                     }
                 </div>
                 <div className='tabs__content'>
-                    {
-                        this.renderComponent(this.state.activeIndex)
-                    }
+                    {this.props.children}
                 </div>
             </div>
         )
