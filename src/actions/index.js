@@ -24,6 +24,9 @@ import {
     addStock,
     editStock,
     deleteStock,
+
+    // Location
+    getLocationPerWarehouse,
 } from './warehouse';
 
 import {
@@ -92,6 +95,9 @@ export {
     editStock,
     addStock,
     deleteStock,
+
+    // Location
+    getLocationPerWarehouse,
 
     // User
     getUsers,

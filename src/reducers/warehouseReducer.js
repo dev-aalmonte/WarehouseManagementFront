@@ -12,6 +12,9 @@ import {
     ADD_WAREHOUSE_STOCK,
     EDIT_WAREHOUSE_STOCK,
     DELETE_WAREHOUSE_STOCK,
+
+    // Location
+    GET_WAREHOUSE_LOCATIONS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -24,7 +27,15 @@ const INITIAL_STATE = {
     warehouses: [],
     selected_warehouse: {},
     stocks: [],
-    selected_stock: {}
+    selected_stock: {},
+    locations: [],
+    selected_location: {},
+    pagination_location: {
+        current_page: null,
+        next_page_url: null,
+        prev_page_url: null,
+        last_page: null,
+    }
 }
 
 export default function(state = INITIAL_STATE, action){
@@ -76,6 +87,21 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_stock: action.payload == -1 ? {} : state.stocks[action.payload]
             }
+        
+        // Locations
+        case GET_WAREHOUSE_LOCATIONS: {
+            const { next_page_url, prev_page_url, current_page, last_page, data } = action.payload;
+            return {
+                ...state,
+                pagination_location: {
+                    current_page,
+                    next_page_url,
+                    prev_page_url,
+                    last_page
+                },
+                locations: data
+            }
+        }
         
         case ADD_WAREHOUSE_STOCK:
         case EDIT_WAREHOUSE_STOCK:            

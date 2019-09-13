@@ -16,6 +16,7 @@ class WarehouseDetail extends Component {
     componentWillMount() {
         this.props.selectSingleWarehouseFromDB(this.props.match.params.id);
         this.props.getStockPerWarehouse(this.props.match.params.id);
+        this.props.getLocationPerWarehouse(this.props.match.params.id);
         this.props.getStatusByProperty(1);
     }
 
@@ -38,8 +39,8 @@ class WarehouseDetail extends Component {
         document.querySelector(`.modal-${name}`).classList.add('active');
     }
 
+    // Stock
     openAddStock = () => {
-        // Remove actual Stock
         this.openModal('stock_add');
     }
 
@@ -79,6 +80,53 @@ class WarehouseDetail extends Component {
         }
     }
 
+    // End Stock
+
+    // Location
+    openAddLocation = () => {
+        console.log("Open Add Location Modal");
+        // this.openModal('stock_add');
+    }
+
+    openEditLocation = () => {
+        console.log("Open Edit Location Modal");
+        // const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        // if(allElementsSelected.length === 1){
+        //     const selectedItem = allElementsSelected[0];
+        //     this.props.selectSingleStock(selectedItem.id);
+        //     this.openModal('stock_edit');
+        // }
+        // else {
+        //     notify('warn', 'You need to select only one item in order to edit');
+        // }
+    }
+
+    deleteLocation = () => {
+        console.log("Delete Locations");
+        // const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        // if(allElementsSelected.length > 0){
+        //     notifyConfirm("Are you sure you want to delete it?", (toastID) => {
+        //         notifyRemove(toastID);
+        //         allElementsSelected.forEach((element) => {
+        //             element.classList.add('to_delete');
+        //             const rowID = this.props.stocks[element.id].id;
+        //             this.props.deleteStock(rowID, () => {
+        //                 this.resetTable();
+        //                 this.resetActive();
+        //             });
+        //         })
+        //         notify('success', 'The product has been removed successfully from the warehouse');
+        //     }, 
+        //     (toastID) => {
+        //         notifyRemove(toastID);
+        //     })
+        // }
+        // else {
+        //     notify('warn', 'You need to select at least one item in order to remove');
+        // }
+    }
+    // End Location
+
     displaySearchBarInput = (event) => {
         const search = event.target.value;
         this.props.getStockPerWarehouse(this.props.match.params.id, null, search);
@@ -88,11 +136,11 @@ class WarehouseDetail extends Component {
         const { selected_warehouse } = this.props;
         const { name, address } = selected_warehouse;
 
-        const tableHeader = ["Product", "Stock", "Status"];
-        const columnTable = [ {key: 'product', column: 'name'}, "stock", {key: 'status', column: 'name'} ];
-        const templateColumn = ["[data]", "[data]", "[data]"];
-        const tableData = this.props.stocks;
-        const tableEvents = {
+        const tableHeaderProducts = ["Product", "Stock", "Status"];
+        const columnTableProducts = [ {key: 'product', column: 'name'}, "stock", {key: 'status', column: 'name'} ];
+        const templateColumnProducts = ["[data]", "[data]", "[data]"];
+        const tableDataProducts = this.props.stocks;
+        const tableEventsProducts = {
             onDoubleClick: (event) => {
                 const elementChildren = event.target.parentElement.children;
                 elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
@@ -109,6 +157,58 @@ class WarehouseDetail extends Component {
                 });
             }
         }
+
+        const tableHeaderLocation = ["Full Code", "Section", "Aisle", "Column", "Row"];
+        const columnTableLocation = [ 'location', 'section', 'aisle', 'column', 'row' ];
+        const templateColumnLocation = ["[data]", "[data]", "[data]", "[data]", "[data]"];
+        const tableDataLocation = this.props.locations;
+        let dataTable = [];
+        if(tableDataLocation.length){
+            tableDataLocation[0].section.map(section => {
+                let sectionName = section.code;
+                let aisleName = '';
+                let columnName = '';
+                let rowName = '';
+    
+                section.aisle.map(aisle => {
+                    aisleName = aisle.number;
+    
+                    aisle.column.map(column => {
+                        columnName = column.number;
+    
+                        column.row.map(row => {
+                            rowName = row.number;
+    
+                            dataTable.push({
+                                location: `${sectionName}-${aisleName}-${columnName}-${rowName}`,
+                                section: sectionName,
+                                aisle: aisleName,
+                                column: columnName,
+                                row: rowName 
+                            })
+                        })
+                    })
+                })
+            })
+        }
+        const tableEventsLocation = {
+            onDoubleClick: (event) => {
+                const elementChildren = event.target.parentElement.children;
+                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
+                const stock = this.props.stocks[event.target.parentElement.id];
+                const fieldsToSubmit = {
+                    id: stock.id,
+                    stock: stock.stock,
+                    statusID: stock.statusID == 2 ? 5 : 2
+                }
+
+                this.props.editStock(fieldsToSubmit, () => {
+                    this.resetTable();
+                    this.resetActive();
+                });
+            }
+        }
+
         return (
             <div className='warehouse-detail'>
                 <div className='warehouse-detail__heading'>
@@ -126,11 +226,21 @@ class WarehouseDetail extends Component {
                                 <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
                             </div>
 
-                            <Table className='warehouse-detail__products__table-container__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents} />
+                            <Table className='warehouse-detail__products__table-container__table' heading={tableHeaderProducts} body={tableDataProducts} columnName={columnTableProducts} template={templateColumnProducts} events={tableEventsProducts} />
                         </div>
                     </div>
                     <div id='Location' className='warehouse-detail__location tabs__content__tab'>
                         <Heading>Location</Heading>
+                        <div className='warehouse-detail__location__table-container'>
+                            <Searchbar className='warehouse-detail__location__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
+                            <div className='warehouse-detail__location__table-container__buttoms'>
+                                <FormSmallButton onClick={() => this.deleteLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='minus'/>
+                                <FormSmallButton onClick={() => this.openEditLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='edit'/>
+                                <FormSmallButton onClick={() => this.openAddLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='plus'/>
+                            </div>
+
+                            <Table className='warehouse-detail__location__table-container__table' heading={tableHeaderLocation} body={dataTable} columnName={columnTableLocation} template={templateColumnLocation} events={tableEventsLocation} />
+                        </div>
                     </div>
                 </Tabs>
 
@@ -143,8 +253,8 @@ class WarehouseDetail extends Component {
 }
 
 function mapStateToProps(state) {
-    const { selected_warehouse, stocks, pagination } = state.warehouse;
-    return { selected_warehouse, stocks, pagination };
+    const { selected_warehouse, stocks, pagination, locations, pagination_location } = state.warehouse;
+    return { selected_warehouse, stocks, pagination, locations, pagination_location };
 }
 
 export default connect(mapStateToProps, actions)(WarehouseDetail);

@@ -16,7 +16,10 @@ import {
     SELECT_SINGLE_WAREHOUSE_STOCK,
     ADD_WAREHOUSE_STOCK,
     EDIT_WAREHOUSE_STOCK,
-    DELETE_WAREHOUSE_STOCK
+    DELETE_WAREHOUSE_STOCK,
+    
+    // Location 
+    GET_WAREHOUSE_LOCATIONS
 } from './types';
 
 const requestConfig = {
@@ -137,7 +140,6 @@ export function getStockPerWarehouse(warehouse, paginationURL = null, search = '
         axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
             .then(response => {
                 if(response.data){
-                    console.log("Data:", response.data);
                     dispatch({
                         type: GET_WAREHOUSE_STOCK,
                         payload: response.data
@@ -218,5 +220,28 @@ export function deleteStock(id, success) {
                 if(err)
                     console.log(err);
             })
+    }
+}
+
+// Location
+
+export function getLocationPerWarehouse(warehouse, paginationURL = null, search = '') {
+    const requestURL = paginationURL ? paginationURL : `${API_URL}/location`;
+    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
+    return function (dispatch) {
+        axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
+            .then(response => {
+                if(response.data){
+                    console.log("Location Data:", response.data);
+                    dispatch({
+                        type: GET_WAREHOUSE_LOCATIONS,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
     }
 }
