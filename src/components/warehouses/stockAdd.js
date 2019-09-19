@@ -78,13 +78,13 @@ class StockAdd extends Component {
 
             this.props.addStock(fieldToSubmit, (res) => {
                 document.querySelectorAll('.modal').forEach((element) => {
-                    notify('success', 'The products has been added in the warehouse successfully');
                     element.classList.remove('active');
                     this.resetTable();
                     this.resetActive();
                 })
             });
         });
+        notify('success', 'The products has been added in the warehouse successfully');
     }
 
     onKeyPress = (event) => {

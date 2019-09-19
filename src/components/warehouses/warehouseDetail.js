@@ -11,6 +11,7 @@ import Modal from '../common/modal';
 import StockAdd from './stockAdd';
 import StockEdit from './stockEdit';
 import Tabs from '../common/tabs';
+import LocationAdd from './locationAdd';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -84,8 +85,7 @@ class WarehouseDetail extends Component {
 
     // Location
     openAddLocation = () => {
-        console.log("Open Add Location Modal");
-        // this.openModal('stock_add');
+        this.openModal('location_add');
     }
 
     openEditLocation = () => {
@@ -246,6 +246,8 @@ class WarehouseDetail extends Component {
 
                 <Modal className='modal-stock_add'> <StockAdd/> </Modal>
                 <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
+
+                <Modal className='modal-location_add'> <LocationAdd/> </Modal>
                 
             </div>
         )

@@ -352,29 +352,33 @@ export class FormList extends Component {
     }
 
     removeElementFromList(fields, index) {
-        console.log("Removing: ", index);
         fields.remove(index);
     }
 
     render() {
-        const { className, placeholder, title, fields, input, options, componentList } = this.props;
+        const { className, placeholder, title, fields, input, options, componentList, suggestion } = this.props;
         const { objectName, objectValueInput } = options;
         return (
             <div className={`${className} form-list ${options.type === 'modal' ? 'form-list-modal' : ''}`}>
                 <div className='form-list__input-container-list'>
-                    <div className='form-list__input-container-list__input-container-suggestion'>
-                        <label className='form-list__input-container-list__input-container-suggestion__label'>{title}</label>
-                        <input autoComplete='off' className='form-list__input-container-list__input-container-suggestion__input' type='text' placeholder={placeholder} onKeyUp={(event) => this.handleKeyPress(event, fields)} {...input}/>
-                        <div className='form-list__input-container-list__input-container-suggestion__suggestions'>
-                            {this.generateSuggestion(this.state.suggestionList)}
+                    {
+                        suggestion ?
+                        <div className='form-list__input-container-list__input-container-suggestion'>
+                            <label className='form-list__input-container-list__input-container-suggestion__label'>{title}</label>
+                            <input autoComplete='off' className='form-list__input-container-list__input-container-suggestion__input' type='text' placeholder={placeholder} onKeyUp={(event) => this.handleKeyPress(event, fields)} {...input}/>
+                            <div className='form-list__input-container-list__input-container-suggestion__suggestions'>
+                                {this.generateSuggestion(this.state.suggestionList)}
+                            </div>
                         </div>
-                    </div>
-                    <div className='form-list__input-container-list__input-container'>
+                        :
+                        ''
+                    }
+                    <div className={`form-list__input-container-list__input-container ${suggestion ? '' : 'full'}`}>
                         {
                             componentList ?
                             componentList.map((component, index) => {
                                 return (
-                                    <div key={index}>
+                                    <div key={index} className='form-list__input-container-list__input-container__item'>
                                         {component}
                                     </div>
                                 );
@@ -389,7 +393,7 @@ export class FormList extends Component {
                 </div>
                 <div className='form-list__item-list'>
                     {/* Header */}
-                    <div className='form-list__item-list__header-container'>
+                    <div className={`form-list__item-list__header-container ${suggestion ? '' : 'full'}`}>
                         <div className='form-list__item-list__header-container__item'></div>
                         {
                             objectName.map((name, index) => {
@@ -402,7 +406,7 @@ export class FormList extends Component {
                         fields.length !== 0 ?
                         fields.getAll().map((item, index) => {
                             return (
-                                <div key={index} className='form-list__item-list__item-container'>
+                                <div key={index} className={`form-list__item-list__item-container ${suggestion ? '' : 'full'}`}>
                                     <div className='form-list__item-list__item-container__item icon-container'><Icon className='form-list__item-list__item-container__item__icon' icon='times' onClick={() => this.removeElementFromList(fields, index)} /></div>
                                     {   
                                         objectName ?
