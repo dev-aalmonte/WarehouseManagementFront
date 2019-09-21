@@ -20,7 +20,8 @@ import {
     
     // Location 
     GET_WAREHOUSE_LOCATIONS,
-    ADD_WAREHOUSE_LOCATION
+    ADD_WAREHOUSE_LOCATION,
+    DELETE_WAREHOUSE_LOCATION
 } from './types';
 
 const requestConfig = {
@@ -231,26 +232,26 @@ export function getLocationPerWarehouse(warehouse, paginationURL = null, search 
     const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
     return function (dispatch) {
         axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
-            .then(response => {
-                if(response.data){
-                    console.log("Location Data:", response.data);
-                    dispatch({
-                        type: GET_WAREHOUSE_LOCATIONS,
+        .then(response => {
+            if(response.data){
+                console.log("Location Data:", response.data);
+                dispatch({
+                    type: GET_WAREHOUSE_LOCATIONS,
                         payload: response.data
                     });
                 }
             })
             .catch(err => {
                 if(err)
-                    console.log(err);
+                console.log(err);
             });
-    }
+        }
 }
 
 export function addLocation(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/location`, qs.stringify(fields), requestConfig)
-            .then(response => {
+        .then(response => {
                 if(response.data){
                     dispatch({
                         type: ADD_WAREHOUSE_LOCATION,
@@ -261,9 +262,28 @@ export function addLocation(fields, success) {
             })
             .catch(err => {
                 if(err)
-                    console.log(err);
+                console.log(err);
             });
+            
+            dispatch(reset('location-add'));
+        }
+    }
 
-        dispatch(reset('location-add'));
+export function deleteLocation(id, success) {
+    return function (dispatch) {
+        axios.delete(`${API_URL}/location/${id}`, requestConfig)
+            .then(response => {
+                if(response.data == 1) {
+                    dispatch({
+                        type: DELETE_WAREHOUSE_LOCATION,
+                        payload: id
+                    });
+                }
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }

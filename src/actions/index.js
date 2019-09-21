@@ -27,7 +27,8 @@ import {
 
     // Location
     getLocationPerWarehouse,
-    addLocation
+    addLocation,
+    deleteLocation
 } from './warehouse';
 
 import {
@@ -100,6 +101,7 @@ export {
     // Location
     getLocationPerWarehouse,
     addLocation,
+    deleteLocation,
 
     // User
     getUsers,

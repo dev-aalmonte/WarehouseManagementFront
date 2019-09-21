@@ -15,7 +15,8 @@ import {
 
     // Location
     GET_WAREHOUSE_LOCATIONS,
-    ADD_WAREHOUSE_LOCATION
+    ADD_WAREHOUSE_LOCATION,
+    DELETE_WAREHOUSE_LOCATION
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -105,6 +106,7 @@ export default function(state = INITIAL_STATE, action){
         }
         
         case ADD_WAREHOUSE_LOCATION:
+        case DELETE_WAREHOUSE_LOCATION:
         case ADD_WAREHOUSE_STOCK:
         case EDIT_WAREHOUSE_STOCK:            
         case DELETE_WAREHOUSE_STOCK:

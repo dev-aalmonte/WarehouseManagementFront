@@ -102,28 +102,28 @@ class WarehouseDetail extends Component {
     }
 
     deleteLocation = () => {
-        console.log("Delete Locations");
-        // const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
-        // if(allElementsSelected.length > 0){
-        //     notifyConfirm("Are you sure you want to delete it?", (toastID) => {
-        //         notifyRemove(toastID);
-        //         allElementsSelected.forEach((element) => {
-        //             element.classList.add('to_delete');
-        //             const rowID = this.props.stocks[element.id].id;
-        //             this.props.deleteStock(rowID, () => {
-        //                 this.resetTable();
-        //                 this.resetActive();
-        //             });
-        //         })
-        //         notify('success', 'The product has been removed successfully from the warehouse');
-        //     }, 
-        //     (toastID) => {
-        //         notifyRemove(toastID);
-        //     })
-        // }
-        // else {
-        //     notify('warn', 'You need to select at least one item in order to remove');
-        // }
+        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        if(allElementsSelected.length > 0){
+            notifyConfirm("Are you sure you want to delete it?", (toastID) => {
+                notifyRemove(toastID);
+                allElementsSelected.forEach((element) => {
+                    element.classList.add('to_delete');
+                    console.log("Element:", element);
+                    // const rowID = this.props.locations[element.id].id;
+                    // this.props.deleteLocation(rowID, () => {
+                    //     this.resetTable();
+                    //     this.resetActive();
+                    // });
+                })
+                notify('success', 'The product has been removed successfully from the warehouse');
+            }, 
+            (toastID) => {
+                notifyRemove(toastID);
+            })
+        }
+        else {
+            notify('warn', 'You need to select at least one item in order to remove');
+        }
     }
     // End Location
 
@@ -193,19 +193,19 @@ class WarehouseDetail extends Component {
         }
         const tableEventsLocation = {
             onDoubleClick: (event) => {
-                const elementChildren = event.target.parentElement.children;
-                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
-                const stock = this.props.stocks[event.target.parentElement.id];
-                const fieldsToSubmit = {
-                    id: stock.id,
-                    stock: stock.stock,
-                    statusID: stock.statusID == 2 ? 5 : 2
-                }
+                // const elementChildren = event.target.parentElement.children;
+                // elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
+                // const stock = this.props.stocks[event.target.parentElement.id];
+                // const fieldsToSubmit = {
+                //     id: stock.id,
+                //     stock: stock.stock,
+                //     statusID: stock.statusID == 2 ? 5 : 2
+                // }
 
-                this.props.editStock(fieldsToSubmit, () => {
-                    this.resetTable();
-                    this.resetActive();
-                });
+                // this.props.editStock(fieldsToSubmit, () => {
+                //     this.resetTable();
+                //     this.resetActive();
+                // });
             }
         }
 
@@ -235,7 +235,7 @@ class WarehouseDetail extends Component {
                             <Searchbar className='warehouse-detail__location__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                             <div className='warehouse-detail__location__table-container__buttoms'>
                                 <FormSmallButton onClick={() => this.deleteLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='minus'/>
-                                <FormSmallButton onClick={() => this.openEditLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='edit'/>
+                                {/* <FormSmallButton onClick={() => this.openEditLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='edit'/> */}
                                 <FormSmallButton onClick={() => this.openAddLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='plus'/>
                             </div>
 
