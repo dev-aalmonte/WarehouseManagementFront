@@ -51,11 +51,11 @@ class LocationAddForm extends Component {
 class LocationAdd extends Component {
     resetTable() {
         const { id } = this.props.selected_warehouse;
-        const { current_page } = this.props.pagination;
+        const { current_page } = this.props.pagination_location;
         if(current_page != null)
-            this.props.getStockPerWarehouse(id, `${API_URL}/stock?page=${current_page}`)
+            this.props.getLocationPerWarehouse(id, `${API_URL}/location?page=${current_page}`)
         else
-            this.props.getStockPerWarehouse(id);
+            this.props.getLocationPerWarehouse(id);
     }
 
     resetActive() {
@@ -66,24 +66,24 @@ class LocationAdd extends Component {
     }
 
     onSubmit = (fields) => {
-        console.log("Fields", fields);
-        // fields.products.map(item => {
-        //     const fieldToSubmit = {
-        //         warehouseID: fields.warehouseID,
-        //         productID: item.product.id,
-        //         statusID: 2,
-        //         stock: item.stock
-        //     }
+        fields.locations.map(item => {
+            const fieldToSubmit = {
+                warehouseID: fields.warehouseID,
+                section: item.Section,
+                aisle: item.Aisle,
+                column: item.Column,
+                row: item.Row,
+            }
 
-        //     this.props.addStock(fieldToSubmit, (res) => {
-        //         document.querySelectorAll('.modal').forEach((element) => {
-        //             element.classList.remove('active');
-        //             this.resetTable();
-        //             this.resetActive();
-        //         })
-        //     });
-        // });
-        notify('success', 'The products has been added in the warehouse successfully');
+            this.props.addLocation(fieldToSubmit, (res) => {
+                document.querySelectorAll('.modal').forEach((element) => {
+                    element.classList.remove('active');
+                    this.resetTable();
+                    this.resetActive();
+                })
+            });
+        });
+        notify('success', 'The locations has been added in the warehouse successfully');
     }
 
     onKeyPress = (event) => {
@@ -122,8 +122,8 @@ LocationAddForm = connect(state => {
 }, actions)(LocationAddForm)
 
 function mapStateToProps(state) {
-    const { selected_warehouse, selected_stock, pagination, warehouses } = state.warehouse;
-    return { selected_warehouse, selected_stock, pagination, warehouses };
+    const { selected_warehouse, selected_stock, pagination_location, warehouses } = state.warehouse;
+    return { selected_warehouse, selected_stock, pagination_location, warehouses };
 }
 
 export default connect(mapStateToProps, actions)(LocationAdd);

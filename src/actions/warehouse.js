@@ -19,7 +19,8 @@ import {
     DELETE_WAREHOUSE_STOCK,
     
     // Location 
-    GET_WAREHOUSE_LOCATIONS
+    GET_WAREHOUSE_LOCATIONS,
+    ADD_WAREHOUSE_LOCATION
 } from './types';
 
 const requestConfig = {
@@ -243,5 +244,26 @@ export function getLocationPerWarehouse(warehouse, paginationURL = null, search 
                 if(err)
                     console.log(err);
             });
+    }
+}
+
+export function addLocation(fields, success) {
+    return function (dispatch) {
+        axios.post(`${API_URL}/location`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: ADD_WAREHOUSE_LOCATION,
+                        payload: response.data
+                    });
+                }
+                success(response);
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+
+        dispatch(reset('location-add'));
     }
 }

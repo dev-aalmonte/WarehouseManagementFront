@@ -27,6 +27,7 @@ import {
 
     // Location
     getLocationPerWarehouse,
+    addLocation
 } from './warehouse';
 
 import {
@@ -98,6 +99,7 @@ export {
 
     // Location
     getLocationPerWarehouse,
+    addLocation,
 
     // User
     getUsers,
