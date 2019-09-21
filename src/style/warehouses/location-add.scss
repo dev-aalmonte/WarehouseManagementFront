@@ -14,7 +14,7 @@
         padding: 2.6rem;
 
         display: grid;
-        grid-template-rows: .2fr .8fr;
+        grid-template-rows: .1.5fr .8fr;
     }
 }
 
@@ -23,7 +23,7 @@
     grid-template-rows: repeat(6, 4rem);
     grid-template-columns: repeat(6, 11rem);
 
-    grid-row-gap: 3rem;
+    grid-row-gap: 2.5rem;
     grid-column-gap: 1.8rem;
 
     &__warehouse {
@@ -36,7 +36,7 @@
         grid-column: 5/-1;
     }
 
-    &__products {
+    &__locations {
         grid-row: 2/6;
         grid-column: 1/-1;
     }

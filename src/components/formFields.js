@@ -263,6 +263,9 @@ export class FormList extends Component {
         const { objectName, objectValueInput } = options;
         var objectToAdd = {};
 
+        // console.log("Object Name: ", objectName);
+        // console.log("Object Value Input: ", objectValueInput);
+
         objectName.map((name, index) => {
             if(objectValueInput[index] === null) {
                 objectToAdd[name] = this.state.selectedSuggestion ? this.state.selectedSuggestion : '';
@@ -412,7 +415,7 @@ export class FormList extends Component {
                                         objectName ?
                                         objectName.map((name, index) => {
                                             const options = this.props;
-                                            const keyName = options.suggestion.keyName ? options.suggestion.keyName : 'name'
+                                            const keyName = options.suggestion && options.suggestion.keyName ? options.suggestion.keyName : 'name';
                                             
                                             if(typeof item[name] === 'string'){
                                                 return <div key={index} className='form-list__item-list__item-container__item'>{item[name]}</div>
