@@ -55,8 +55,12 @@ class Table extends Component {
     rowOnClick = (event, index) => {
         const parent = event.target.parentElement;
         const parentIsActive = parent.classList.contains('active');
-        const allElements = document.querySelectorAll(`.table__body__row`);
-            
+
+        const allElements = parent.parentElement.childNodes;
+        
+        if(parent.parentElement.classList.contains("table"))
+            return;
+
         if(this.state.activeKey == 'Shift') {
             if(this.state.lastSelectedIndex == null)
                 parent.classList.add('active');
