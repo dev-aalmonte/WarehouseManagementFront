@@ -162,50 +162,9 @@ class WarehouseDetail extends Component {
         const columnTableLocation = [ 'location', 'section', 'aisle', 'column', 'row' ];
         const templateColumnLocation = ["[data]", "[data]", "[data]", "[data]", "[data]"];
         const tableDataLocation = this.props.locations;
-        let dataTable = [];
-        if(tableDataLocation.length){
-            tableDataLocation[0].section.map(section => {
-                let sectionName = section.code;
-                let aisleName = '';
-                let columnName = '';
-                let rowName = '';
-    
-                section.aisle.map(aisle => {
-                    aisleName = aisle.number;
-    
-                    aisle.column.map(column => {
-                        columnName = column.number;
-    
-                        column.row.map(row => {
-                            rowName = row.number;
-    
-                            dataTable.push({
-                                location: `${sectionName}-${aisleName}-${columnName}-${rowName}`,
-                                section: sectionName,
-                                aisle: aisleName,
-                                column: columnName,
-                                row: rowName 
-                            })
-                        })
-                    })
-                })
-            })
-        }
         const tableEventsLocation = {
             onDoubleClick: (event) => {
-                // const elementChildren = event.target.parentElement.children;
-                // elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
-                // const stock = this.props.stocks[event.target.parentElement.id];
-                // const fieldsToSubmit = {
-                //     id: stock.id,
-                //     stock: stock.stock,
-                //     statusID: stock.statusID == 2 ? 5 : 2
-                // }
 
-                // this.props.editStock(fieldsToSubmit, () => {
-                //     this.resetTable();
-                //     this.resetActive();
-                // });
             }
         }
 
@@ -235,11 +194,10 @@ class WarehouseDetail extends Component {
                             <Searchbar className='warehouse-detail__location__table-container__searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                             <div className='warehouse-detail__location__table-container__buttoms'>
                                 <FormSmallButton onClick={() => this.deleteLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='minus'/>
-                                {/* <FormSmallButton onClick={() => this.openEditLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='edit'/> */}
                                 <FormSmallButton onClick={() => this.openAddLocation()} className='warehouse-detail__location__table-container__buttoms__button' type='button' icon='plus'/>
                             </div>
 
-                            <Table className='warehouse-detail__location__table-container__table' heading={tableHeaderLocation} body={dataTable} columnName={columnTableLocation} template={templateColumnLocation} events={tableEventsLocation} />
+                            <Table className='warehouse-detail__location__table-container__table' heading={tableHeaderLocation} body={tableDataLocation} columnName={columnTableLocation} template={templateColumnLocation} events={tableEventsLocation} />
                         </div>
                     </div>
                 </Tabs>
