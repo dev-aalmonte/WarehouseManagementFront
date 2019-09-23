@@ -35,7 +35,7 @@ class LocationAddForm extends Component {
         }
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} location-add-form`}>
-                <Field className='location-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' component={FormSelect} options={warehouse} />
+                {/* <Field className='location-add-form__warehouse' name='warehouseID' title='Warehouse' placeholder='Select a Warehouse' component={FormSelect} options={warehouse} /> */}
                 <FieldArray className='location-add-form__locations' name='locations' title='Products' component={FormList} options={listOption} onKeyUp={this.listOnKeyUp} componentList={[
                     <Field className='location-add-form__section' name='section' title='Section' placeholder='Section' component={FormInput} />,
                     <Field className='location-add-form__aisle' min="0" max="99" name='aisle' title='Aisle' placeholder='Aisle' component={FormQuantity} />,

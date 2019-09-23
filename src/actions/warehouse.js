@@ -269,17 +269,17 @@ export function addLocation(fields, success) {
         }
     }
 
-export function deleteLocation(id, success) {
+export function deleteLocation(fields, success) {
     return function (dispatch) {
-        axios.delete(`${API_URL}/location/${id}`, requestConfig)
+        axios.delete(`${API_URL}/location/0`, {...requestConfig, data: qs.stringify(fields)})
             .then(response => {
                 if(response.data == 1) {
                     dispatch({
                         type: DELETE_WAREHOUSE_LOCATION,
-                        payload: id
+                        payload: fields
                     });
                 }
-                success();
+                success(response);
             })
             .catch(err => {
                 if(err)

@@ -21,12 +21,21 @@ class WarehouseDetail extends Component {
         this.props.getStatusByProperty(1);
     }
 
-    resetTable() {
-        const { current_page } = this.props.pagination;
-        if(current_page != null)
-            this.props.getStockPerWarehouse(this.props.match.params.id, `http://127.0.0.1:8000/api/stock?page=${current_page}`)
-        else
-            this.props.getStockPerWarehouse(this.props.match.params.id);
+    resetTable(table) {
+        if(table == 'stock') {
+            const { current_page } = this.props.pagination;
+            if(current_page != null)
+                this.props.getStockPerWarehouse(this.props.match.params.id, `http://127.0.0.1:8000/api/stock?page=${current_page}`)
+            else
+                this.props.getStockPerWarehouse(this.props.match.params.id);
+        }
+        if(table == 'location'){
+            const { current_page } = this.props.pagination_location;
+            if(current_page != null)
+                this.props.getLocationPerWarehouse(this.props.match.params.id, `http://127.0.0.1:8000/api/location?page=${current_page}`)
+            else
+                this.props.getLocationPerWarehouse(this.props.match.params.id);
+        }
     }
 
     resetActive() {
@@ -66,7 +75,7 @@ class WarehouseDetail extends Component {
                     element.classList.add('to_delete');
                     const rowID = this.props.stocks[element.id].id;
                     this.props.deleteStock(rowID, () => {
-                        this.resetTable();
+                        this.resetTable('stock');
                         this.resetActive();
                     });
                 })
@@ -108,12 +117,13 @@ class WarehouseDetail extends Component {
                 notifyRemove(toastID);
                 allElementsSelected.forEach((element) => {
                     element.classList.add('to_delete');
-                    console.log("Element:", element);
-                    // const rowID = this.props.locations[element.id].id;
-                    // this.props.deleteLocation(rowID, () => {
-                    //     this.resetTable();
-                    //     this.resetActive();
-                    // });
+                    const row = this.props.locations[element.id];
+                    // console.log("Row to delete: ", row);
+                    this.props.deleteLocation(row, (res) => {
+                        console.log("Result:", res);
+                        this.resetTable('location');
+                        this.resetActive();
+                    });
                 })
                 notify('success', 'The product has been removed successfully from the warehouse');
             }, 
@@ -152,7 +162,7 @@ class WarehouseDetail extends Component {
                 }
 
                 this.props.editStock(fieldsToSubmit, () => {
-                    this.resetTable();
+                    this.resetTable('stock');
                     this.resetActive();
                 });
             }
