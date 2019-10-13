@@ -28,3 +28,7 @@
     z-index: 10;
     opacity: 1;
 }
+
+.modal.xsmall {
+    grid-template-rows: .6fr [content-s] .2fr [content-e] .6fr;
+}

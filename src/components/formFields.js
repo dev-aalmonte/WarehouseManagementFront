@@ -135,18 +135,26 @@ export class FormDecimal extends Component {
 
 export class FormSelect extends Component {
     openSelect = () => {
-        console.log("Goes here!");
+        // console.log("Goes here!");
+    }
+
+
+    onChange(value) {
+        const { input, onChangeEvent } = this.props;
+        input.onChange(value);
+        if(onChangeEvent)
+            onChangeEvent(value.target.value);
     }
 
     render() {
-        const { className, title, options, placeholder, input, meta } = this.props;
+        const { className, title, options, placeholder, input, meta} = this.props;
         if (meta) {
             const { touched, error, warning } = meta;
             return (
                 <div className={`${className} form-select`}>
                     <label className='form-select__label'>{title} {touched && ((error && <span className="form-input__label__error">{error}</span>) || (warning && <span className="form-input__label__warn">{warning}</span>))}</label>
                     <div className='form-select__input-container'>
-                        <select className={`form-select__input-container__input ${touched && ((error && 'error') || (warning && 'warn'))}`} {...input}>
+                        <select className={`form-select__input-container__input ${touched && ((error && 'error') || (warning && 'warn'))}`} {...input} onChange={value => this.onChange(value)}>
                             <option value='' disabled>{placeholder}</option>
                             {
                                 options ?

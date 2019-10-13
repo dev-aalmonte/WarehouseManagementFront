@@ -72,6 +72,13 @@ import {
     addOrderDetail
 } from './order';
 
+import {
+    getSectionByWarehouse,
+    getAisleBySection,
+    getColumnByAisle,
+    getRowByColumn    
+} from './location';
+
 export {
     // Auth
     login,
@@ -137,5 +144,11 @@ export {
     getSingleOrderPerClient,
     getSingleOrderFromDB,
     addOrder,
-    addOrderDetail
+    addOrderDetail,
+
+    // Location
+    getSectionByWarehouse,
+    getAisleBySection,
+    getColumnByAisle,
+    getRowByColumn
 }

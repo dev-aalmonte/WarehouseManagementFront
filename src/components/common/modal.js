@@ -19,9 +19,9 @@ class Modal extends Component {
     }
 
     render() {
-        const { className, children } = this.props;
+        const { className, children, type = 'normal' } = this.props;
         return (
-            <div onClick={this.closeModal} onKeyUp={(e) => this.onKeyUp(e)} className={`${className} modal`} tabIndex='0'>
+            <div onClick={this.closeModal} onKeyUp={(e) => this.onKeyUp(e)} className={`${className} modal ${type}`} tabIndex='0'>
                 <div className='modal__content'>
                     { children }
                 </div>

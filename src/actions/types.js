@@ -67,3 +67,9 @@ export const SELECT_SINGLE_ORDER_PER_CLIENT = 'SELECT_SINGLE_ORDER_PER_CLIENT';
 export const SELECT_SINGLE_ORDER_FROM_DB = 'SELECT_SINGLE_ORDER_FROM_DB'; 
 export const ADD_ORDER = 'ADD_ORDER';
 export const ADD_ORDER_DETAIL = 'ADD_ORDER_DETAIL';
+
+// Location
+export const GET_SECTION = 'GET_SECTION';
+export const GET_AISLE = 'GET_AISLE';
+export const GET_COLUMN = 'GET_COLUMN';
+export const GET_ROW = 'GET_ROW';

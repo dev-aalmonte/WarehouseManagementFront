@@ -10,6 +10,7 @@ import role from './roleReducer';
 import status from './statusReducer';
 import client from './clientReducer';
 import order from './orderReducer';
+import location from './locationReducer';
 
 const rootReducer = combineReducers({
   form,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   role,
   status, 
   client,
-  order
+  order,
+  location
 });
 
 export default rootReducer;

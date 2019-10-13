@@ -12,6 +12,7 @@ import StockAdd from './stockAdd';
 import StockEdit from './stockEdit';
 import Tabs from '../common/tabs';
 import LocationAdd from './locationAdd';
+import LocationItemAdd from './locationItemAdd';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -98,7 +99,7 @@ class WarehouseDetail extends Component {
     }
 
     openEditLocation = () => {
-        console.log("Open Edit Location Modal");
+        // console.log("Open Edit Location Modal");
         // const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
         // if(allElementsSelected.length === 1){
         //     const selectedItem = allElementsSelected[0];
@@ -118,9 +119,7 @@ class WarehouseDetail extends Component {
                 allElementsSelected.forEach((element) => {
                     element.classList.add('to_delete');
                     const row = this.props.locations[element.id];
-                    // console.log("Row to delete: ", row);
                     this.props.deleteLocation(row, (res) => {
-                        console.log("Result:", res);
                         this.resetTable('location');
                         this.resetActive();
                     });
@@ -133,6 +132,18 @@ class WarehouseDetail extends Component {
         }
         else {
             notify('warn', 'You need to select at least one item in order to remove');
+        }
+    }
+
+    openAddProductToLocation = () => {
+        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        if(allElementsSelected.length === 1) {
+            const selectedItem = allElementsSelected[0];
+            this.props.selectSingleStock(selectedItem.id);
+            this.openModal('location_item_add');
+        }
+        else {
+            notify('warn', 'You need to select only one item in order to add a item in a location');
         }
     }
     // End Location
@@ -193,6 +204,7 @@ class WarehouseDetail extends Component {
                                 <FormSmallButton onClick={() => this.deleteStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='minus'/>
                                 <FormSmallButton onClick={() => this.openEditStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='edit'/>
                                 <FormSmallButton onClick={() => this.openAddStock()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='plus'/>
+                                <FormSmallButton onClick={() => this.openAddProductToLocation()} className='warehouse-detail__products__table-container__buttoms__button' type='button' icon='box'/>
                             </div>
 
                             <Table className='warehouse-detail__products__table-container__table' heading={tableHeaderProducts} body={tableDataProducts} columnName={columnTableProducts} template={templateColumnProducts} events={tableEventsProducts} />
@@ -216,6 +228,7 @@ class WarehouseDetail extends Component {
                 <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
 
                 <Modal className='modal-location_add'> <LocationAdd/> </Modal>
+                <Modal className='modal-location_item_add' type='xsmall'> <LocationItemAdd warehouseID={this.props.selected_warehouse.id}/> </Modal>
                 
             </div>
         )

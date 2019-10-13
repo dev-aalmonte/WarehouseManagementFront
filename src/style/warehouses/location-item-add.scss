@@ -1,0 +1,64 @@
+.location-item-add {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: [background-s] .3fr [background-e content-s] .7fr [content-e];
+
+    &__background {
+        grid-column: background-s/background-e;
+        background: $b-secondary-color;
+    }
+ 
+    &__content {
+        grid-column: content-s/content-e;
+        padding: 2.6rem;
+
+        display: grid;
+        grid-template-rows: .2fr .8fr;
+
+        &__header {
+
+            &__subheading {
+                margin-top: 1rem;
+                padding-left: 1rem;
+            }
+        }
+    }
+}
+
+.location-item-add-form {
+    display: grid;
+    grid-template-rows: repeat(1, 4rem);
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: 4rem;
+
+    grid-row-gap: 10rem;
+    grid-column-gap: 1.8rem;
+
+    &__section {
+        grid-row: 1/2;
+        grid-column: 1/2;
+    }
+
+    &__aisle {
+        grid-row: 1/2;
+        grid-column: 2/3;
+    }
+
+    &__column {
+        grid-row: 1/2;
+        grid-column: 3/4;
+    }
+
+    &__row {
+        grid-row: 1/2;
+        grid-column: 4/5;
+    }
+
+    &__submit {
+        grid-row: 2/3;
+        grid-column: 4/5;
+        justify-self: end;
+    }
+}
