@@ -28,12 +28,12 @@
 
 .location-item-add-form {
     display: grid;
-    grid-template-rows: repeat(1, 4rem);
+    grid-template-rows: repeat(2, 4rem);
     grid-template-columns: repeat(4, 1fr);
 
     margin-top: 4rem;
 
-    grid-row-gap: 10rem;
+    grid-row-gap: 2.8rem;
     grid-column-gap: 1.8rem;
 
     &__section {
@@ -56,9 +56,15 @@
         grid-column: 4/5;
     }
 
-    &__submit {
+    &__stock {
         grid-row: 2/3;
+        grid-column: 1/-1;
+    }
+
+    &__submit {
+        grid-row: 3/4;
         grid-column: 4/5;
         justify-self: end;
+        margin-top: 2rem;
     }
 }

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { reset } from 'redux-form';
+import qs from 'querystring';
 import { API_URL } from '../config';
 
 import {
@@ -6,6 +8,7 @@ import {
     GET_AISLE,
     GET_COLUMN,
     GET_ROW,
+    ADD_ITEM_TO_LOCATION,
 } from './types';
 
 const requestConfig = {
@@ -82,6 +85,26 @@ export function getRowByColumn(columnID) {
                         payload: response.data
                     });
                 }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
+export function addItemToLocation(fields, success){
+    return function (dispatch) {
+        axios.post(`${API_URL}/location/item`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: ADD_ITEM_TO_LOCATION,
+                        payload: response.data
+                    });
+                }
+                success(response);
+                dispatch(reset('location-item-add'));
             })
             .catch(err => {
                 if(err)

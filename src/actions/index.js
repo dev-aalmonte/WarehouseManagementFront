@@ -76,7 +76,8 @@ import {
     getSectionByWarehouse,
     getAisleBySection,
     getColumnByAisle,
-    getRowByColumn    
+    getRowByColumn,
+    addItemToLocation
 } from './location';
 
 export {
@@ -150,5 +151,6 @@ export {
     getSectionByWarehouse,
     getAisleBySection,
     getColumnByAisle,
-    getRowByColumn
+    getRowByColumn,
+    addItemToLocation
 }

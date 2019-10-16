@@ -73,3 +73,4 @@ export const GET_SECTION = 'GET_SECTION';
 export const GET_AISLE = 'GET_AISLE';
 export const GET_COLUMN = 'GET_COLUMN';
 export const GET_ROW = 'GET_ROW';
+export const ADD_ITEM_TO_LOCATION = 'ADD_ITEM_TO_LOCATION';

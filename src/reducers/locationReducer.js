@@ -2,7 +2,8 @@ import {
     GET_SECTION,
     GET_AISLE,
     GET_COLUMN,
-    GET_ROW
+    GET_ROW,
+    ADD_ITEM_TO_LOCATION
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -56,6 +57,7 @@ export default function(state = INITIAL_STATE, action){
         //         selected_status: id == -1 ? {} : state.status[id]
         //     }
         
+        case ADD_ITEM_TO_LOCATION:
         default: 
             return state;
     }

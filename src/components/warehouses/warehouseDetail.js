@@ -157,9 +157,9 @@ class WarehouseDetail extends Component {
         const { selected_warehouse } = this.props;
         const { name, address } = selected_warehouse;
 
-        const tableHeaderProducts = ["Product", "Stock", "Status"];
-        const columnTableProducts = [ {key: 'product', column: 'name'}, "stock", {key: 'status', column: 'name'} ];
-        const templateColumnProducts = ["[data]", "[data]", "[data]"];
+        const tableHeaderProducts = ["Product", "Stock", "Unassigned", "Assigned", "Status"];
+        const columnTableProducts = [ {key: 'product', column: 'name'}, "stock", 'unassigned', 'assigned', {key: 'status', column: 'name'}];
+        const templateColumnProducts = ["[data]", "[data]", "[data]", "[data]", "[data]"];
         const tableDataProducts = this.props.stocks;
         const tableEventsProducts = {
             onDoubleClick: (event) => {
