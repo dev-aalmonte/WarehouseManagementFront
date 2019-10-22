@@ -14,6 +14,7 @@ import Tabs from '../common/tabs';
 import LocationAdd from './locationAdd';
 import LocationItemAdd from './locationItemAdd';
 import LocationItemShow from './locationItemShow';
+import StockLocationShow from './stockLocationShow';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -141,7 +142,7 @@ class WarehouseDetail extends Component {
         if(allElementsSelected.length === 1) {
             const selectedItem = allElementsSelected[0];
             this.props.selectSingleStock(selectedItem.id);
-            this.openModal('location_item_add');
+            this.openModal('stock_location_show');
         }
         else {
             notify('warn', 'You need to select only one item in order to add a item in a location');
@@ -164,19 +165,22 @@ class WarehouseDetail extends Component {
         const tableDataProducts = this.props.stocks;
         const tableEventsProducts = {
             onDoubleClick: (event) => {
-                const elementChildren = event.target.parentElement.children;
-                elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
+                // const elementChildren = event.target.parentElement.children;
+                // elementChildren[elementChildren.length - 1].innerText = elementChildren[elementChildren.length - 1].innerText == "Not Available" ? "Available" : "Not Available";
                 const stock = this.props.stocks[event.target.parentElement.id];
-                const fieldsToSubmit = {
-                    id: stock.id,
-                    stock: stock.stock,
-                    statusID: stock.statusID == 2 ? 5 : 2
-                }
+                this.props.selectSingleStock(event.target.parentElement.id);
+                this.props.getStockLocations(stock.id);
+                this.openModal('stock_location_show');
+                // const fieldsToSubmit = {
+                //     id: stock.id,
+                //     stock: stock.stock,
+                //     statusID: stock.statusID == 2 ? 5 : 2
+                // }
 
-                this.props.editStock(fieldsToSubmit, () => {
-                    this.resetTable('stock');
-                    this.resetActive();
-                });
+                // this.props.editStock(fieldsToSubmit, () => {
+                //     this.resetTable('stock');
+                //     this.resetActive();
+                // });
             }
         }
 
@@ -230,6 +234,7 @@ class WarehouseDetail extends Component {
 
                 <Modal className='modal-stock_add'> <StockAdd/> </Modal>
                 <Modal className='modal-stock_edit'> <StockEdit/> </Modal>
+                <Modal className='modal-stock_location_show'> <StockLocationShow/> </Modal>
 
                 <Modal className='modal-location_add'> <LocationAdd/> </Modal>
                 <Modal className='modal-location_item_add' type='xsmall'> <LocationItemAdd warehouseID={this.props.selected_warehouse.id}/> </Modal>

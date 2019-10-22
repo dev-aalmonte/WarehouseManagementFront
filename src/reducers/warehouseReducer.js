@@ -8,6 +8,7 @@ import {
 
     // Stock
     GET_WAREHOUSE_STOCK,
+    GET_WAREHOUSE_STOCK_LOCATION,
     SELECT_SINGLE_WAREHOUSE_STOCK,
     ADD_WAREHOUSE_STOCK,
     EDIT_WAREHOUSE_STOCK,
@@ -17,7 +18,7 @@ import {
     GET_WAREHOUSE_LOCATIONS,
     SELECT_SINGLE_WAREHOUSE_LOCATION,
     ADD_WAREHOUSE_LOCATION,
-    DELETE_WAREHOUSE_LOCATION
+    DELETE_WAREHOUSE_LOCATION,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -31,6 +32,7 @@ const INITIAL_STATE = {
     selected_warehouse: {},
     stocks: [],
     selected_stock: {},
+    locations_on_stock: [],
     locations: [],
     selected_location: {},
     pagination_location: {
@@ -82,6 +84,14 @@ export default function(state = INITIAL_STATE, action){
                     last_page
                 },
                 stocks: data
+            }
+        }
+
+        case GET_WAREHOUSE_STOCK_LOCATION: {
+            const locations_on_stock = action.payload;
+            return {
+                ...state,
+                locations_on_stock
             }
         }
 

@@ -22,7 +22,8 @@ import {
     GET_WAREHOUSE_LOCATIONS,
     ADD_WAREHOUSE_LOCATION,
     DELETE_WAREHOUSE_LOCATION,
-    SELECT_SINGLE_WAREHOUSE_LOCATION
+    SELECT_SINGLE_WAREHOUSE_LOCATION,
+    GET_WAREHOUSE_STOCK_LOCATION
 } from './types';
 
 const requestConfig = {
@@ -226,6 +227,24 @@ export function deleteStock(id, success) {
     }
 }
 
+export function getStockLocations(product_warehouseID){
+    const requestURL = `${API_URL}/stock/location/${product_warehouseID}`;
+    return function (dispatch) {
+        axios.get(requestURL)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: GET_WAREHOUSE_STOCK_LOCATION,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
 // Location
 
 export function getLocationPerWarehouse(warehouse, paginationURL = null, search = '') {

@@ -24,6 +24,7 @@ import {
     addStock,
     editStock,
     deleteStock,
+    getStockLocations,
 
     // Location
     getLocationPerWarehouse,
@@ -107,6 +108,7 @@ export {
     editStock,
     addStock,
     deleteStock,
+    getStockLocations,
 
     // Warehouse Location
     getLocationPerWarehouse,
