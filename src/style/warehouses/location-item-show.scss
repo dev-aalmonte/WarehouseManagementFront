@@ -1,0 +1,27 @@
+.location-item-show {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: [background-s] .3fr [background-e content-s] .7fr [content-e];
+
+    &__background {
+        grid-column: background-s/background-e;
+        background: $b-secondary-color;
+    }
+ 
+    &__content {
+        grid-column: content-s/content-e;
+        padding: 2.6rem;
+
+        display: grid;
+        grid-template-rows: .2fr .8fr;
+
+        &__header {
+
+            &__subheading {
+                margin-top: 1rem;
+                padding-left: 1rem;
+            }
+        }
+    }
+}

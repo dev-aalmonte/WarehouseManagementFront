@@ -13,6 +13,7 @@ import StockEdit from './stockEdit';
 import Tabs from '../common/tabs';
 import LocationAdd from './locationAdd';
 import LocationItemAdd from './locationItemAdd';
+import LocationItemShow from './locationItemShow';
 
 class WarehouseDetail extends Component {
     componentWillMount() {
@@ -185,7 +186,10 @@ class WarehouseDetail extends Component {
         const tableDataLocation = this.props.locations;
         const tableEventsLocation = {
             onDoubleClick: (event) => {
-
+                const location = this.props.locations[event.target.parentElement.id];
+                this.props.selectSingleLocation(event.target.parentElement.id);
+                this.props.getItemsByRow(location.rowID);
+                this.openModal('location_item_show');
             }
         }
 
@@ -229,6 +233,7 @@ class WarehouseDetail extends Component {
 
                 <Modal className='modal-location_add'> <LocationAdd/> </Modal>
                 <Modal className='modal-location_item_add' type='xsmall'> <LocationItemAdd warehouseID={this.props.selected_warehouse.id}/> </Modal>
+                <Modal className='modal-location_item_show'> <LocationItemShow location={this.props.selected_location}/> </Modal>
                 
             </div>
         )
@@ -236,8 +241,8 @@ class WarehouseDetail extends Component {
 }
 
 function mapStateToProps(state) {
-    const { selected_warehouse, stocks, pagination, locations, pagination_location } = state.warehouse;
-    return { selected_warehouse, stocks, pagination, locations, pagination_location };
+    const { selected_warehouse, stocks, pagination, locations, selected_location, pagination_location } = state.warehouse;
+    return { selected_warehouse, stocks, pagination, locations, selected_location, pagination_location };
 }
 
 export default connect(mapStateToProps, actions)(WarehouseDetail);

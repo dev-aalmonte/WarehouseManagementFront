@@ -3,7 +3,8 @@ import {
     GET_AISLE,
     GET_COLUMN,
     GET_ROW,
-    ADD_ITEM_TO_LOCATION
+    ADD_ITEM_TO_LOCATION,
+    GET_ITEMS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -17,7 +18,10 @@ const INITIAL_STATE = {
     selected_column: {},
 
     rows: [],
-    selected_row: {}
+    selected_row: {},
+
+    products_on_location: []
+
 }
 
 export default function(state = INITIAL_STATE, action){
@@ -50,6 +54,13 @@ export default function(state = INITIAL_STATE, action){
                 rows
             }
         
+        case GET_ITEMS:
+            const products_on_location = action.payload;
+            return {
+                ...state,
+                products_on_location
+            }
+            
         // case SELECT_SINGLE_STATUS:
         //     const id = action.payload;
         //     return {

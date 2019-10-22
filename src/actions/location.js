@@ -9,6 +9,7 @@ import {
     GET_COLUMN,
     GET_ROW,
     ADD_ITEM_TO_LOCATION,
+    GET_ITEMS,
 } from './types';
 
 const requestConfig = {
@@ -82,6 +83,25 @@ export function getRowByColumn(columnID) {
                 if(response.data){
                     dispatch({
                         type: GET_ROW,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
+export function getItemsByRow(rowID) {
+    const requestURL = `${API_URL}/location/item/${rowID}`;
+    return function (dispatch) {
+        axios.get(requestURL)
+            .then(response => {
+                if(response.data){
+                    dispatch({
+                        type: GET_ITEMS,
                         payload: response.data
                     });
                 }

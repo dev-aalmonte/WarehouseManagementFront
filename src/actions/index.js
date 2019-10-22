@@ -27,6 +27,7 @@ import {
 
     // Location
     getLocationPerWarehouse,
+    selectSingleLocation,
     addLocation,
     deleteLocation
 } from './warehouse';
@@ -77,6 +78,7 @@ import {
     getAisleBySection,
     getColumnByAisle,
     getRowByColumn,
+    getItemsByRow,
     addItemToLocation
 } from './location';
 
@@ -99,15 +101,16 @@ export {
     deleteWarehouse,
     selectSingleWarehouseFromDB,
 
-    // Stock
+    // Warehouse Stock
     getStockPerWarehouse,
     selectSingleStock,
     editStock,
     addStock,
     deleteStock,
 
-    // Location
+    // Warehouse Location
     getLocationPerWarehouse,
+    selectSingleLocation,
     addLocation,
     deleteLocation,
 
@@ -152,5 +155,6 @@ export {
     getAisleBySection,
     getColumnByAisle,
     getRowByColumn,
+    getItemsByRow,
     addItemToLocation
 }

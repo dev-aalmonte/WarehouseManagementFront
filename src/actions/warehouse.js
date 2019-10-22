@@ -21,7 +21,8 @@ import {
     // Location 
     GET_WAREHOUSE_LOCATIONS,
     ADD_WAREHOUSE_LOCATION,
-    DELETE_WAREHOUSE_LOCATION
+    DELETE_WAREHOUSE_LOCATION,
+    SELECT_SINGLE_WAREHOUSE_LOCATION
 } from './types';
 
 const requestConfig = {
@@ -234,7 +235,6 @@ export function getLocationPerWarehouse(warehouse, paginationURL = null, search 
         axios.get(requestURL + searchURL + `&warehouse=${warehouse}`)
         .then(response => {
             if(response.data){
-                console.log("Location Data:", response.data);
                 dispatch({
                     type: GET_WAREHOUSE_LOCATIONS,
                         payload: response.data
@@ -246,6 +246,15 @@ export function getLocationPerWarehouse(warehouse, paginationURL = null, search 
                 console.log(err);
             });
         }
+}
+
+export function selectSingleLocation(id) {
+    return function (dispatch){
+        dispatch({
+            type: SELECT_SINGLE_WAREHOUSE_LOCATION,
+            payload: id
+        });
+    }
 }
 
 export function addLocation(fields, success) {

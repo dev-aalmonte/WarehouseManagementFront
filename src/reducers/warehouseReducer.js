@@ -15,6 +15,7 @@ import {
 
     // Location
     GET_WAREHOUSE_LOCATIONS,
+    SELECT_SINGLE_WAREHOUSE_LOCATION,
     ADD_WAREHOUSE_LOCATION,
     DELETE_WAREHOUSE_LOCATION
 } from '../actions/types';
@@ -104,6 +105,12 @@ export default function(state = INITIAL_STATE, action){
                 locations: data
             }
         }
+
+        case SELECT_SINGLE_WAREHOUSE_LOCATION: 
+            return {
+                ...state,
+                selected_location: action.payload == -1 ? {} : state.locations[action.payload]
+            }
         
         case ADD_WAREHOUSE_LOCATION:
         case DELETE_WAREHOUSE_LOCATION:
