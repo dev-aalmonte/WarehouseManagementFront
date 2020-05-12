@@ -24,6 +24,8 @@ export default function(state = INITIAL_STATE, action){
                 authenticated: false,
                 user: {}
             }
+
+        
         default: 
             return state;
     }

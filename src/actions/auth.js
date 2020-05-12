@@ -30,8 +30,10 @@ export function login(fields, success, error) {
                 }
             })
             .catch(err => {
-                if(err)
+                if(err){
+                    error(err);
                     console.log(err);
+                }
             });
     }
 }

@@ -27,7 +27,7 @@ class Header extends Component {
         return (
             <div className='header'>
                 {
-                    this.props.actual_page.includes('/home') ? "" :
+                    (this.props.actual_page.includes('/home') || this.props.actual_page.includes('/')) ? "" :
                     <div className='header__back'>
                         <Icon className='header__back__icon' icon='angle-left' onClick={this.backToMenu}/>
                     </div>

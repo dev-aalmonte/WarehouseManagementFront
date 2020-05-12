@@ -53,7 +53,12 @@ class Login extends Component {
             this.props.history.push('/home');
         }, 
         (res) => {
-            this.setState({formerr: res.data.error});
+            if(res.message == "Network Error"){
+                this.setState({formerr: "There is a problem on the server side, please try again later"});
+            }
+            else {     
+                this.setState({formerr: res.data.error});
+            }
         });
     }
 
