@@ -20,7 +20,8 @@ import { faQuestionCircle,
         faDollarSign, 
         faCheck,
         faTimes,
-        faBox} from '@fortawesome/free-solid-svg-icons';
+        faBox,
+        faBoxOpen} from '@fortawesome/free-solid-svg-icons';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -42,7 +43,8 @@ library.add(faQuestionCircle,
             faDollarSign,
             faCheck,
             faTimes,
-            faBox);
+            faBox,
+            faBoxOpen);
 
 export default class App extends Component {
     render() {

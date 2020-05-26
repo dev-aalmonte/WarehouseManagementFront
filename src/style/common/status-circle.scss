@@ -1,0 +1,19 @@
+.status-circle {
+    width: 1rem;
+    height: 1rem;
+
+    border: .2rem solid $t-secondary-color;
+    border-radius: 50%;
+
+    &.available {
+        background-color: $f-succ;
+    }
+
+    &.busy {
+        background-color: $f-warn;
+    }
+
+    &.canceled {
+        background-color: $f-error;
+    }
+}

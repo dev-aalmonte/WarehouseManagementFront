@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import Searchbar from '../common/searchbar';
+import Icon from '../common/icon';
+import StatusCircle from '../common/statusCircle';
 import { Heading } from '../common/headings';
 
 class OrderHold extends Component {
@@ -24,8 +26,8 @@ class OrderHold extends Component {
                 <div className='orders-hold__body'>
                     <div className='orders-hold__body__list'>
                         <div className='orders-hold__body__list__list-item'>
-                            <div className='orders-hold__body__list__list-item__status'>Status</div>
-                            <div className='orders-hold__body__list__list-item__icon'>Icon</div>
+                            <div className='orders-hold__body__list__list-item__status'><StatusCircle className='orders-hold__body__list__list-item__status__status-circle' status='available'/></div>
+                            <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon='box-open' /></div>
                             <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
                             <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
                             <div className='orders-hold__body__list__list-item__button'>Buttons Actions Here</div>

@@ -39,7 +39,7 @@
 $b-primary-color: #4a707a;
 $b-secondary-color: #7697a0;
 $b-sub-color: #94b0b7;
-$b-hightlight-color: #c2c8c5;
+$b-hightlight-color: rgba(#c2c8c5, .5);
 $b-background-color: #ddddda;
 $b-background-light-color: #FFFFFE;
 
@@ -51,3 +51,4 @@ $t-secondary-color: #111;
 // Form Color
 $f-error: #DB2C2C;
 $f-warn: #DBC92C;
+$f-succ: #2F801E;
