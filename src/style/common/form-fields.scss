@@ -237,7 +237,7 @@
         font-size: 1.8rem;
     
         transition: all .05s ease;
-    
+
         &:focus {
             outline: none;
         }
@@ -248,6 +248,36 @@
     
         &:active {
             transform: scale(0.97);
+        }
+    }
+
+    &.success {
+        button {
+            background: $f-succ;
+
+            &:hover {
+                background: $b-hightlight-color-succ;
+            }
+        }
+    }
+
+    &.warning {
+        button {
+            background: $f-warn;
+    
+            &:hover {
+                background: $b-hightlight-color-warn;
+            }
+        }
+    }
+
+    &.danger {
+        button {
+            background: $f-error;
+    
+            &:hover {
+                background: $b-hightlight-color-error;
+            }
         }
     }
 }

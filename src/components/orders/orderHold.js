@@ -6,6 +6,7 @@ import Searchbar from '../common/searchbar';
 import Icon from '../common/icon';
 import StatusCircle from '../common/statusCircle';
 import { Heading } from '../common/headings';
+import { FormSmallButton } from '../formFields';
 
 class OrderHold extends Component {
 
@@ -16,6 +17,18 @@ class OrderHold extends Component {
     displaySearchBarInput = (event) => {
         const search = event.target.value;
         this.props.getOrdersPerStatus(3, null, search);
+    }
+
+    assignAgent() {
+
+    }
+
+    startOrder() {
+
+    }
+
+    cancelOrder() {
+
     }
 
     render() {
@@ -30,7 +43,11 @@ class OrderHold extends Component {
                             <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon='box-open' /></div>
                             <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
                             <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
-                            <div className='orders-hold__body__list__list-item__button'>Buttons Actions Here</div>
+                            <div className='orders-hold__body__list__list-item__buttons'>
+                                <FormSmallButton onClick={() => this.assignAgent()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='user-plus'/>
+                                <FormSmallButton onClick={() => this.startOrder()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
+                                <FormSmallButton onClick={() => this.cancelOrder()} className='orders-hold__body__list__list-item__buttons__button danger' type='button' icon='minus'/>
+                            </div>
                         </div>
                         <div className='orders-hold__body__list__list-item'>
                             <div className='orders-hold__body__list__list-item__status'>Status</div>

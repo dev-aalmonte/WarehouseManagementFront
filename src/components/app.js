@@ -5,6 +5,7 @@ import Header from './common/header';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faQuestionCircle, 
         faUsers, 
+        faUserPlus,
         faArchive, 
         faBoxes, 
         faWarehouse, 
@@ -28,6 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 library.add(faQuestionCircle, 
             faUsers, 
+            faUserPlus,
             faArchive, 
             faBoxes, 
             faWarehouse, 
