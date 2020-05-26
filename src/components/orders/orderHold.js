@@ -32,42 +32,33 @@ class OrderHold extends Component {
     }
 
     render() {
+        const data = this.props.orders;
         return (
             <div className='orders-hold'>
                 <Heading className='orders-hold__heading'>Hold Orders</Heading>
                 <Searchbar className='orders-hold__searchbar' placeholder='Search by Order Number' onKeyUp={this.displaySearchBarInput} />
                 <div className='orders-hold__body'>
                     <div className='orders-hold__body__list'>
-                        <div className='orders-hold__body__list__list-item'>
-                            <div className='orders-hold__body__list__list-item__status'><StatusCircle className='orders-hold__body__list__list-item__status__status-circle' status='available'/></div>
-                            <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon='box-open' /></div>
-                            <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
-                            <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
-                            <div className='orders-hold__body__list__list-item__buttons'>
-                                <FormSmallButton onClick={() => this.assignAgent()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='user-plus'/>
-                                <FormSmallButton onClick={() => this.startOrder()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
-                                <FormSmallButton onClick={() => this.cancelOrder()} className='orders-hold__body__list__list-item__buttons__button danger' type='button' icon='minus'/>
-                            </div>
-                        </div>
-                        <div className='orders-hold__body__list__list-item'>
-                            <div className='orders-hold__body__list__list-item__status'>Status</div>
-                            <div className='orders-hold__body__list__list-item__icon'>Icon</div>
-                            <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
-                            <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
-                            <div className='orders-hold__body__list__list-item__button'>Buttons Actions Here</div>
-                        </div><div className='orders-hold__body__list__list-item'>
-                            <div className='orders-hold__body__list__list-item__status'>Status</div>
-                            <div className='orders-hold__body__list__list-item__icon'>Icon</div>
-                            <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
-                            <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
-                            <div className='orders-hold__body__list__list-item__button'>Buttons Actions Here</div>
-                        </div><div className='orders-hold__body__list__list-item'>
-                            <div className='orders-hold__body__list__list-item__status'>Status</div>
-                            <div className='orders-hold__body__list__list-item__icon'>Icon</div>
-                            <div className='orders-hold__body__list__list-item__order'>Order ID Here</div>
-                            <div className='orders-hold__body__list__list-item__agent'>Agent Name Here</div>
-                            <div className='orders-hold__body__list__list-item__button'>Buttons Actions Here</div>
-                        </div>
+                        {
+                            data ?
+                            data.map((order, index) => {
+                                return (
+                                    <div className='orders-hold__body__list__list-item'>
+                                        <div className='orders-hold__body__list__list-item__status'><StatusCircle className='orders-hold__body__list__list-item__status__status-circle' status='available'/></div>
+                                        <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon='box-open' /></div>
+                                        <div className='orders-hold__body__list__list-item__order'>Order #: {order.id}</div>
+                                        <div className='orders-hold__body__list__list-item__agent'>{order.client.first_name} {order.client.last_name}</div>
+                                        <div className='orders-hold__body__list__list-item__buttons'>
+                                            <FormSmallButton onClick={() => this.assignAgent()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='user-plus'/>
+                                            <FormSmallButton onClick={() => this.startOrder()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
+                                            <FormSmallButton onClick={() => this.cancelOrder()} className='orders-hold__body__list__list-item__buttons__button danger' type='button' icon='minus'/>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                            :
+                            ""
+                        }
                     </div>
                 </div>
             </div>
