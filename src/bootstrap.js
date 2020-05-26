@@ -29,6 +29,7 @@ import OrderNew from './components/orders/orderNew';
 import OrderDetail from './components/orders/orderDetail';
 import OrderSearch from './components/orders/orderSearch';
 import OrderMessage from './components/orders/orderMessage';
+import OrderHold from './components/orders/orderHold';
 
 import Users from './components/users/users';
 
@@ -51,6 +52,7 @@ function main() {
                     <Route path='/client/:id' component={requireAuth(Client)} />
 
                     <Route path='/order/new' component={requireAuth(OrderNew)} />
+                    <Route path='/order/hold' component={requireAuth(OrderHold)} />
                     <Route path='/order/search/:id' component={requireAuth(OrderSearch)} />
                     <Route path='/order/detail/:id' component={requireAuth(OrderDetail)} />
                     <Route path='/order/complete' component={requireAuth(OrderMessage)} />

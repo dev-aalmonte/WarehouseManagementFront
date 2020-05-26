@@ -20,7 +20,8 @@ class Home extends Component {
     }
 
     toOrderSearch = () => {
-        this.props.history.push('/order/search/10');
+        this.props.history.push('/order/hold');
+        // this.props.history.push('/order/search/10');
     }
 
     toUser = () => {

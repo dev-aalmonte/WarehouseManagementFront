@@ -1,0 +1,89 @@
+.orders-hold {
+    grid-column: s/e;
+
+    display: grid;
+    grid-template-rows: [s heading-s] 7rem [heading-e search-s] 7rem [search-e m] 1fr [e];
+    grid-template-columns: [s] .9fr [m] .1fr [e];
+
+    padding: 5rem 20rem;
+
+    &__heading {
+        grid-row: heading-s/heading-e;
+        grid-column: s/e;
+    }
+
+    &__searchbar {
+        grid-row: search-s/search-e;
+        grid-column: s/e;
+    }
+
+    &__body {
+        grid-row: m/e;
+        grid-column: s/e;
+        
+        &__list {
+            display: grid;
+            grid-template-rows: repeat(auto-fit, 6rem);
+            row-gap: 2rem;
+
+            &__list-item {
+                height: 6rem;
+                
+                display: grid;
+                grid-template-columns: [status-s] 6rem [status-e icon-s] 6rem [icon-e order-s] 1fr [order-e action-s] 8rem [action-e];
+                grid-template-rows: [list-s] 1fr [list-m] 1fr [list-e];
+
+                &:hover {
+                    background-color: $b-hightlight-color;
+                }
+
+                &__status {
+                    grid-row: list-s/list-e;
+                    grid-column: status-s/status-e;
+
+                    align-self: center;
+                    justify-self: center;
+                }
+
+                &__icon {
+                    grid-row: list-s/list-e;
+                    grid-column: icon-s/icon-e;
+
+                    align-self: center;
+                    justify-self: center;
+                }
+
+                &__order {
+                    grid-row: list-s/list-m;
+                    grid-column: order-s/order-e;
+                        
+                    align-self: end;
+
+                    padding-left: 1.2rem;
+
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                }
+                
+                &__agent {
+                    grid-row: list-m/list-e;
+                    grid-column: order-s/order-e;
+                    
+                    padding-left: 1.2rem;
+
+                    align-self: center;
+
+                    font-size: 1.2rem;
+                }
+
+                &__button {
+                    grid-row: list-s/list-e;
+                    grid-column: action-s/action-e;
+
+                    align-self: center;
+                    justify-self: center;
+                }
+            }
+        }
+    }
+}

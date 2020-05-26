@@ -36,6 +36,26 @@ export function getOrdersPerClient(clientID, paginationURL = null, search = '') 
     }
 }
 
+export function getOrdersPerStatus(statusID, paginationURL = null, search = '') {
+    const requestURL = paginationURL || `${API_URL}/orders`;
+    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`
+    return function (dispatch) { 
+        axios.get(requestURL + searchURL + `&statusID=${statusID}`)
+            .then(response => {
+                if(response.data) {
+                    dispatch({
+                        type: GET_ORDERS_PER_CLIENT,
+                        payload: response.data
+                    });
+                }
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
+    }
+}
+
 export function getSingleOrderPerClient(id){
     return function (dispatch){
         dispatch({

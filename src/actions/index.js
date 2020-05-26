@@ -68,6 +68,7 @@ import {
 
 import {
     getOrdersPerClient,
+    getOrdersPerStatus,
     getSingleOrderPerClient,
     getSingleOrderFromDB,
     addOrder,
@@ -147,6 +148,7 @@ export {
 
     // Order
     getOrdersPerClient,
+    getOrdersPerStatus,
     getSingleOrderPerClient,
     getSingleOrderFromDB,
     addOrder,
