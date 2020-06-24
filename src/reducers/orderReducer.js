@@ -4,6 +4,7 @@ import {
     SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
     ADD_ORDER_DETAIL,
+    ASSIGN_USER_ORDER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -47,6 +48,7 @@ export default function(state = INITIAL_STATE, action){
 
         case ADD_ORDER:
         case ADD_ORDER_DETAIL:
+        case ASSIGN_USER_ORDER:
         default: 
             return state;
     }

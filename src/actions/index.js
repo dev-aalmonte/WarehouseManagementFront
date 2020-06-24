@@ -72,7 +72,8 @@ import {
     getSingleOrderPerClient,
     getSingleOrderFromDB,
     addOrder,
-    addOrderDetail
+    addOrderDetail,
+    assignUser
 } from './order';
 
 import {
@@ -153,6 +154,7 @@ export {
     getSingleOrderFromDB,
     addOrder,
     addOrderDetail,
+    assignUser,
 
     // Location
     getSectionByWarehouse,

@@ -7,7 +7,8 @@ import {
     SELECT_SINGLE_ORDER_PER_CLIENT,
     SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
-    ADD_ORDER_DETAIL
+    ADD_ORDER_DETAIL,
+    ASSIGN_USER_ORDER
 } from './types';
 
 const requestConfig = {
@@ -115,6 +116,25 @@ export function addOrderDetail(fields, success) {
                 }
                 success(response);
             })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
+export function assignUser(fields, success) {
+    return function (dispatch) {
+        axios.post(`${API_URL}/orderuser`, qs.stringify(fields), requestConfig) 
+            .then(response => {
+                if(response.data) {
+                    dispatch({
+                        type: ASSIGN_USER_ORDER,
+                        payload: response.data
+                    });
+                }
+                success(response);
+            }) 
             .catch(err => {
                 if(err)
                     console.log(err);
