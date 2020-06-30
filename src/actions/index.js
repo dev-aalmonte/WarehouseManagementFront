@@ -73,7 +73,9 @@ import {
     getSingleOrderFromDB,
     addOrder,
     addOrderDetail,
-    assignUser
+    assignUser,
+    nextProductList,
+    previousProductList
 } from './order';
 
 import {
@@ -155,6 +157,8 @@ export {
     addOrder,
     addOrderDetail,
     assignUser,
+    nextProductList,
+    previousProductList,
 
     // Location
     getSectionByWarehouse,

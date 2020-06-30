@@ -8,7 +8,9 @@ import {
     SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
     ADD_ORDER_DETAIL,
-    ASSIGN_USER_ORDER
+    ASSIGN_USER_ORDER,
+    NEXT_ORDER_PRODUCT,
+    PREVIOUS_ORDER_PRODUCT
 } from './types';
 
 const requestConfig = {
@@ -139,5 +141,21 @@ export function assignUser(fields, success) {
                 if(err)
                     console.log(err);
             });
+    }
+}
+
+export function nextProductList() {
+    return function (dispatch) {
+        dispatch({
+            type: NEXT_ORDER_PRODUCT,
+        })
+    }
+}
+
+export function previousProductList() {
+    return function (dispatch) {
+        dispatch({
+            type: PREVIOUS_ORDER_PRODUCT,
+        })
     }
 }

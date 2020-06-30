@@ -30,12 +30,12 @@ class OrderHold extends Component {
         this.openModal('assign_user');
     }
 
-    startOrder() {
-
+    startOrder(orderID) {
+        this.props.history.push(`/order/search/${orderID}`);
     }
 
     cancelOrder() {
-
+        
     }
 
     render() {
@@ -57,7 +57,7 @@ class OrderHold extends Component {
                                         <div className='orders-hold__body__list__list-item__agent'>{order.client.first_name} {order.client.last_name} {order.order_users.length > 0 ? `- Assigned to ${order.order_users[order.order_users.length - 1].first_name} ${order.order_users[order.order_users.length - 1].last_name}` : ""} </div>
                                         <div className='orders-hold__body__list__list-item__buttons'>
                                             <FormSmallButton onClick={() => this.openAssignUser(order.id)} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='user-plus'/>
-                                            <FormSmallButton onClick={() => this.startOrder()} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
+                                            <FormSmallButton onClick={() => this.startOrder(order.id)} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
                                             <FormSmallButton onClick={() => this.cancelOrder()} className='orders-hold__body__list__list-item__buttons__button danger' type='button' icon='minus'/>
                                         </div>
                                     </div>

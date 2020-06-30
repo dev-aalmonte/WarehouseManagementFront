@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import history from '../../history';
 
 import Icon from './icon';
+import { ROOT_URL } from '../../config';
 
 class Header extends Component {
 
@@ -27,7 +28,7 @@ class Header extends Component {
         return (
             <div className='header'>
                 {
-                    (this.props.actual_page.includes('/home') || this.props.actual_page.includes('/')) ? "" :
+                    (this.props.actual_page.includes('/home') || this.props.actual_page == ROOT_URL) ? "" :
                     <div className='header__back'>
                         <Icon className='header__back__icon' icon='angle-left' onClick={this.backToMenu}/>
                     </div>

@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 import { Heading, Text } from '../common/headings';
 import { PlaceholderImage } from '../common/image';
 import { FormButton } from '../formFields';
 
 class OrderSearch extends Component {
-    previousProduct() {
-        console.log("Looking for the previous product");
+
+    componentWillMount() {
+        this.props.getSingleOrderFromDB(this.props.match.params.id);
     }
 
-    acceptProduct() {
-        console.log("Looking for the next product");
+    previousProduct = () => {
+        this.props.previousProductList();
+    }
+
+    acceptProduct = () => {
+        this.props.nextProductList();
     }
 
     skipProduct() {
@@ -18,10 +25,15 @@ class OrderSearch extends Component {
     }
 
     render() {
-        return(
+        const products = this.props.selected_order.order_details;
+        let index = this.props.product_index;
+
+        let productName = products ? products[index].name : "";
+        let productDescription = products ? products[index].description : "";
+        return (
             <div className='order-search'>
-                <Heading className='order-search__heading'>Product Name</Heading>
-                <Text className='order-search__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros.</Text>
+                <Heading className='order-search__heading'>{productName}</Heading>
+                <Text className='order-search__description'>{productDescription}</Text>
                 <PlaceholderImage className='order-search__image' width='800' height='600'/>
                 <div className='order-search__button-container'>
                     <FormButton className='order-search__button-container__button' title='Back' type='button' onClick={this.previousProduct} />
@@ -33,4 +45,9 @@ class OrderSearch extends Component {
     }
 }
 
-export default OrderSearch;
+function mapStateToProps(state) {
+    const { selected_order, product_index } = state.order;
+    return { selected_order, product_index };
+}
+
+export default connect(mapStateToProps, actions)(OrderSearch);
