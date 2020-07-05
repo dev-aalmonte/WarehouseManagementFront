@@ -11,6 +11,11 @@
     &__heading {
         grid-row: title-s/title-e;
         grid-column: s/e;
+
+        &__icon {
+            margin-left: 2rem;
+            color: $f-succ;
+        }
     }
 
     &__description {

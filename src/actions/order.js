@@ -84,6 +84,23 @@ export function getSingleOrderFromDB(orderID){
     }
 }
 
+export function pickProduct(fields, success) {
+    console.log("fields", fields);
+    return function (dispatch) {
+        axios.post(`${API_URL}/orderdetails/update`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                dispatch({
+                    type: ORDER_DETAILS_UPDATE_PRODUCT_STATUS
+                });
+                success(response);
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
 export function addOrder(fields, success) {
     if(!fields.id) {
         return function (dispatch) {

@@ -6,7 +6,8 @@ import {
     ADD_ORDER_DETAIL,
     ASSIGN_USER_ORDER,
     NEXT_ORDER_PRODUCT,
-    PREVIOUS_ORDER_PRODUCT
+    PREVIOUS_ORDER_PRODUCT,
+    ORDER_DETAILS_UPDATE_PRODUCT_STATUS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -69,6 +70,7 @@ export default function(state = INITIAL_STATE, action){
             }
         }
 
+        case ORDER_DETAILS_UPDATE_PRODUCT_STATUS:
         case ADD_ORDER:
         case ADD_ORDER_DETAIL:
         case ASSIGN_USER_ORDER:

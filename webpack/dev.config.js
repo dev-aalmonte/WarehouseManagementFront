@@ -9,6 +9,7 @@ const proxyRules = require('../proxy/rules');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = webpackMerge(webpackCommon, {
 
@@ -89,6 +90,6 @@ module.exports = webpackMerge(webpackCommon, {
       errors: true
     },
     proxy: proxyRules
-  }
+  },
 
 });

@@ -75,7 +75,8 @@ import {
     addOrderDetail,
     assignUser,
     nextProductList,
-    previousProductList
+    previousProductList,
+    pickProduct
 } from './order';
 
 import {
@@ -159,6 +160,7 @@ export {
     assignUser,
     nextProductList,
     previousProductList,
+    pickProduct,
 
     // Location
     getSectionByWarehouse,
