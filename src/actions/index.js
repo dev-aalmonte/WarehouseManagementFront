@@ -76,7 +76,8 @@ import {
     assignUser,
     nextProductList,
     previousProductList,
-    pickProduct
+    pickProduct,
+    updateOrderStatus
 } from './order';
 
 import {
@@ -161,6 +162,7 @@ export {
     nextProductList,
     previousProductList,
     pickProduct,
+    updateOrderStatus,
 
     // Location
     getSectionByWarehouse,

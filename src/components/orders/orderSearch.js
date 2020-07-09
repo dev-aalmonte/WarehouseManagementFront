@@ -38,7 +38,11 @@ class OrderSearch extends Component {
             });
             if(listPicked) {
                 // Change the order status and go back to the hold screen
-                this.props.history.goBack();
+                const fields = {
+                    orderID: this.props.selected_order.id,
+                    statusID: 4
+                }
+                this.props.updateOrderStatus(fields, this.props.history.goBack);
             }
         }
         this.props.nextProductList();

@@ -10,7 +10,8 @@ import {
     ADD_ORDER_DETAIL,
     ASSIGN_USER_ORDER,
     NEXT_ORDER_PRODUCT,
-    PREVIOUS_ORDER_PRODUCT
+    PREVIOUS_ORDER_PRODUCT,
+    UPDATE_ORDER_STATUS
 } from './types';
 
 const requestConfig = {
@@ -120,6 +121,25 @@ export function addOrder(fields, success) {
                         console.log(err);
                 });
         }
+    }
+}
+
+export function updateOrderStatus(fields, success) {
+    return function (dispatch) {
+        axios.put(`${API_URL}/orders/${fields.orderID}`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data) {
+                    dispatch({
+                        type: UPDATE_ORDER_STATUS,
+                        payload: response.data
+                    });
+                }
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
     }
 }
 
