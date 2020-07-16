@@ -138,16 +138,16 @@ export class FormSelect extends Component {
         // console.log("Goes here!");
     }
 
-
     onChange(value) {
         const { input, onChangeEvent } = this.props;
-        input.onChange(value);
+        if(input)
+            input.onChange(value);
         if(onChangeEvent)
             onChangeEvent(value.target.value);
     }
 
     render() {
-        const { className, title, options, placeholder, input, meta} = this.props;
+        const { className, title, options, placeholder, input, meta } = this.props;
         if (meta) {
             const { touched, error, warning } = meta;
             return (
@@ -174,7 +174,7 @@ export class FormSelect extends Component {
             <div className={`${className} form-select`}>
                 <label className='form-select__label'>{title}</label>
                 <div className='form-select__input-container'>
-                    <select className='form-select__input-container__input' {...input}>
+                    <select className='form-select__input-container__input' {...input} onChange={value => this.onChange(value)}>
                         <option value='' disabled>{placeholder}</option>
                         {
                             options ?

@@ -7,18 +7,23 @@ import Icon from '../common/icon';
 import StatusCircle from '../common/statusCircle';
 import Modal from '../common/modal';
 import { Heading } from '../common/headings';
-import { FormSmallButton } from '../formFields';
+import { FormSmallButton, FormSelect } from '../formFields';
 import OrderAssignUser from './orderAssignUser';
 
 class OrderHold extends Component {
 
     componentWillMount() {
-        this.props.getOrdersPerStatus(3);
+        this.props.getOrdersPerStatus(-1);
+        this.props.getStatusByProperty(2);
     }
 
     displaySearchBarInput = (event) => {
         const search = event.target.value;
-        this.props.getOrdersPerStatus(3, null, search);
+        this.props.getOrdersPerStatus(-1, null, search);
+    }
+
+    sortTable = (value) => {
+        this.props.getOrdersPerStatus(value);
     }
 
     openModal = (name) => {
@@ -40,10 +45,23 @@ class OrderHold extends Component {
 
     render() {
         const data = this.props.orders;
+        const sortOptions = this.props.status.map(status => {
+            return {
+                key: status.id,
+                value: status.name
+            }
+        });
+        sortOptions.splice(0, 0, {
+            key: -1,
+            value: "All"
+        })
         return (
             <div className='orders-hold'>
                 <Heading className='orders-hold__heading'>Hold Orders</Heading>
-                <Searchbar className='orders-hold__searchbar' placeholder='Search by Order Number' onKeyUp={this.displaySearchBarInput} />
+                <div className='orders-hold__search-form'>
+                    <Searchbar className='orders-hold__search-form__searchbar' placeholder='Search by Order Number' onKeyUp={this.displaySearchBarInput} />
+                    <FormSelect className='orders-hold__search-form__sort' placeholder='Sort By' options={sortOptions} onChangeEvent={this.sortTable}/> 
+                </div>
                 <div className='orders-hold__body'>
                     <div className='orders-hold__body__list'>
                         {
@@ -77,7 +95,8 @@ class OrderHold extends Component {
 
 function mapStateToProps(state) {
     const { pagination, orders } = state.order;
-    return { pagination, orders };
+    const { status } = state.status;
+    return { pagination, orders, status };
 }
 
 export default connect(mapStateToProps, actions)(OrderHold);
