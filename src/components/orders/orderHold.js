@@ -43,6 +43,21 @@ class OrderHold extends Component {
         
     }
 
+    getIconOrder(statusID) {
+        switch(statusID) {
+            case 1:
+                return 'box';
+            case 3:
+                return 'clock';
+            case 4:
+                return 'shopping-cart';
+            case 6:
+                return 'home';
+            case 7:
+                return 'truck';
+        }
+    }
+
     render() {
         const data = this.props.orders;
         const sortOptions = this.props.status.map(status => {
@@ -67,10 +82,11 @@ class OrderHold extends Component {
                         {
                             data ?
                             data.map((order, index) => {
+                                const icon = this.getIconOrder(order.statusID)
                                 return (
                                     <div key={index} className='orders-hold__body__list__list-item'>
                                         <div className='orders-hold__body__list__list-item__status'><StatusCircle className='orders-hold__body__list__list-item__status__status-circle' status='available'/></div>
-                                        <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon='box-open' /></div>
+                                        <div className='orders-hold__body__list__list-item__icon'><Icon className='orders-hold__body__list__list-item__icon__icon' icon={icon} /></div>
                                         <div className='orders-hold__body__list__list-item__order'>Order #: {order.id}</div>
                                         <div className='orders-hold__body__list__list-item__agent'>{order.client.first_name} {order.client.last_name} {order.order_users.length > 0 ? `- Assigned to ${order.order_users[order.order_users.length - 1].first_name} ${order.order_users[order.order_users.length - 1].last_name}` : ""} </div>
                                         <div className='orders-hold__body__list__list-item__buttons'>
