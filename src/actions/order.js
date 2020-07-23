@@ -11,7 +11,8 @@ import {
     ASSIGN_USER_ORDER,
     NEXT_ORDER_PRODUCT,
     PREVIOUS_ORDER_PRODUCT,
-    UPDATE_ORDER_STATUS
+    UPDATE_ORDER_STATUS,
+    ORDER_DETAILS_UPDATE_PRODUCT_STATUS
 } from './types';
 
 const requestConfig = {
@@ -85,8 +86,7 @@ export function getSingleOrderFromDB(orderID){
     }
 }
 
-export function pickProduct(fields, success) {
-    console.log("fields", fields);
+export function updateOrderProduct(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/orderdetails/update`, qs.stringify(fields), requestConfig)
             .then(response => {

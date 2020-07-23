@@ -17,16 +17,18 @@ class OrderSearch extends Component {
         this.props.previousProductList();
     }
 
-    acceptProduct = () => {
+    acceptProduct = (skipped) => {
         const index = this.props.product_index;
         const order_detail = this.props.selected_order.order_detail;
         const picked = order_detail[index].picked;
         if(!picked){
             const fields = {
                 order_detail_id: order_detail[index].id,
-                user_id: this.props.user.id
+                user_id: this.props.user.id,
+                type: 'pick',
+                picked: skipped ? 2 : 1
             }
-            this.props.pickProduct(fields, this.props.nextProductList);
+            this.props.updateOrderProduct(fields, this.props.nextProductList);
             this.props.getSingleOrderFromDB(this.props.match.params.id);
         }
         else {
@@ -46,10 +48,6 @@ class OrderSearch extends Component {
             }
         }
         this.props.nextProductList();
-    }
-
-    skipProduct() {
-        console.log("Skipping product");
     }
 
     render() {
@@ -76,7 +74,7 @@ class OrderSearch extends Component {
                 <PlaceholderImage className='order-search__image' width='800' height='600'/>
                 <div className='order-search__button-container'>
                     <FormButton className='order-search__button-container__button' title='Back' type='button' onClick={this.previousProduct} />
-                    <FormButton className='order-search__button-container__button' title='Skip' type='button' onClick={this.skipProduct} />
+                    <FormButton className='order-search__button-container__button' title='Skip' type='button' onClick={() => this.acceptProduct(true)} />
                     <FormButton className='order-search__button-container__button' title={productPicked ? 'Next' : 'Accept'} type='button' onClick={this.acceptProduct} />
                 </div>
             </div>

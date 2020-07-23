@@ -222,6 +222,8 @@
             transform: scale(0.97);
         }
     }
+
+    @include ButtonBackground;
 }
 
 .form-small-button {
@@ -250,35 +252,7 @@
         }
     }
 
-    &.success {
-        button {
-            background: $f-succ;
-
-            &:hover {
-                background: $b-hightlight-color-succ;
-            }
-        }
-    }
-
-    &.warning {
-        button {
-            background: $f-warn;
-    
-            &:hover {
-                background: $b-hightlight-color-warn;
-            }
-        }
-    }
-
-    &.danger {
-        button {
-            background: $f-error;
-    
-            &:hover {
-                background: $b-hightlight-color-error;
-            }
-        }
-    }
+    @include ButtonBackground;
 }
 
 .form-list {

@@ -35,6 +35,56 @@
     }
 }
 
+@mixin TextAlignment {
+    &.center {
+        text-align: center;
+    }
+
+    &.start {
+        text-align: start;
+    }
+
+    &.end {
+        text-align: end;
+    }
+
+    &.justify {
+        text-align: justify;
+    }
+}
+
+@mixin ButtonBackground {
+    &.success {
+        button {
+            background: $f-succ;
+
+            &:hover {
+                background: $b-hightlight-color-succ;
+            }
+        }
+    }
+
+    &.warning {
+        button {
+            background: $f-warn;
+    
+            &:hover {
+                background: $b-hightlight-color-warn;
+            }
+        }
+    }
+
+    &.danger {
+        button {
+            background: $f-error;
+    
+            &:hover {
+                background: $b-hightlight-color-error;
+            }
+        }
+    }
+}
+
 // Background Colors
 $b-primary-color: #4a707a;
 $b-secondary-color: #7697a0;
@@ -44,9 +94,9 @@ $b-background-color: #ddddda;
 $b-background-light-color: #FFFFFE;
 
 // Background Highlight Color
-$b-hightlight-color-succ: rgba(#2F801E, .5);
-$b-hightlight-color-warn: rgba(#DBC92C, .5);
-$b-hightlight-color-error: rgba(#DB2C2C, .5);
+$b-hightlight-color-succ: rgba(#2F801E, .45);
+$b-hightlight-color-warn: rgba(#DBC92C, .45);
+$b-hightlight-color-error: rgba(#DB2C2C, .45);
 
 
 // Text color
@@ -56,4 +106,4 @@ $t-secondary-color: #111;
 // Form Color
 $f-error: #DB2C2C;
 $f-warn: #DBC92C;
-$f-succ: #2F801E;
+$f-succ: rgba(#2F801E, .75);

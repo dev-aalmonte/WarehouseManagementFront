@@ -1,5 +1,7 @@
 .heading {
     font-size: 4rem;
+
+    @include TextAlignment;
 }
 
 .small-heading {
@@ -12,6 +14,8 @@
     &.xsmall {
         font-size: 1.8rem;
     }
+    
+    @include TextAlignment;
 }
 
 .text {
@@ -25,4 +29,6 @@
     &.xsmall {
         font-size: 1rem;
     }
+
+    @include TextAlignment;
 }

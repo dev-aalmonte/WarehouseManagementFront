@@ -13,9 +13,9 @@ export class Heading extends Component {
 
 export class SmallHeading extends Component {
     render() {
-        const { className, children, size } = this.props;
+        const { className, children, size, align } = this.props;
         return (
-            <div className={`${className} small-heading ${size}`}>
+            <div className={`${className} small-heading ${size} ${align}`}>
                 {children}
             </div>
         )
@@ -24,9 +24,9 @@ export class SmallHeading extends Component {
 
 export class Text extends Component {
     render() {
-        const { className, children } = this.props;
+        const { className, align, children } = this.props;
         return (
-            <div className={`${className} text`}>
+            <div className={`${className} text ${align}`}>
                 {children}
             </div>
         )

@@ -35,8 +35,20 @@ class OrderHold extends Component {
         this.openModal('assign_user');
     }
 
-    startOrder(orderID) {
-        this.props.history.push(`/order/search/${orderID}`);
+    startOrder(orderID, statusID) {
+        switch(statusID) {
+            case 1: // Packed
+                break;
+            case 3: // Hold
+                this.props.history.push(`/order/search/${orderID}`);
+                break
+            case 4: // Picked
+                this.props.history.push(`/order/ship/${orderID}`);
+                break;
+            case 6: // Completed
+            case 7: // Shipped
+                break;
+        }
     }
 
     cancelOrder() {
@@ -45,15 +57,15 @@ class OrderHold extends Component {
 
     getIconOrder(statusID) {
         switch(statusID) {
-            case 1:
+            case 1: // Packed
                 return 'box';
-            case 3:
+            case 3: // Hold
                 return 'clock';
-            case 4:
+            case 4: // Picked
                 return 'shopping-cart';
-            case 6:
+            case 6: // Completed
                 return 'home';
-            case 7:
+            case 7: // Shipped
                 return 'truck';
         }
     }
@@ -91,7 +103,7 @@ class OrderHold extends Component {
                                         <div className='orders-hold__body__list__list-item__agent'>{order.client.first_name} {order.client.last_name} {order.order_users.length > 0 ? `- Assigned to ${order.order_users[order.order_users.length - 1].first_name} ${order.order_users[order.order_users.length - 1].last_name}` : ""} </div>
                                         <div className='orders-hold__body__list__list-item__buttons'>
                                             <FormSmallButton onClick={() => this.openAssignUser(order.id)} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='user-plus'/>
-                                            <FormSmallButton onClick={() => this.startOrder(order.id)} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
+                                            <FormSmallButton onClick={() => this.startOrder(order.id, order.statusID)} className='orders-hold__body__list__list-item__buttons__button' type='button' icon='check'/>
                                             <FormSmallButton onClick={() => this.cancelOrder()} className='orders-hold__body__list__list-item__buttons__button danger' type='button' icon='minus'/>
                                         </div>
                                     </div>
@@ -102,7 +114,6 @@ class OrderHold extends Component {
                         }
                     </div>
                 </div>
-                
                 <Modal className='modal-assign_user'> <OrderAssignUser /> </Modal>
             </div>
         )
