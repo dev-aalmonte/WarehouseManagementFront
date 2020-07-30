@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import CurrencyInput from 'react-currency-input';
+import DropzoneComponent from "react-dropzone-component";
+
+import "../../node_modules/dropzone/dist/min/dropzone.min.css";
+import "../../node_modules/react-dropzone-component/styles/filepicker.css";
 
 import Icon from './common/icon';
 
@@ -443,6 +447,42 @@ export class FormList extends Component {
                         </div>
                     }
                 </div>
+            </div>
+        )
+    }
+}
+
+export class FormImage extends Component {
+    
+    dropzoneConfig() {
+        return {
+            iconFiletypes: [".jpg", ".png"],
+            showFiletypeIcon: true,
+            postUrl: "https://httpbin.org/post"
+        }
+    }
+    
+    djsConfig() {
+        return {
+            addRemoveLinks: true,
+            maxFiles: 4
+        }
+    }
+    
+    onMaxFilesExceeded(file) {
+        this.removeFile(file);
+    }
+    
+    render() {
+        const { className, onAddImage, input } = this.props;
+        const eventHandlers = {
+            addedfile: onAddImage,
+            maxfilesexceeded: this.onMaxFilesExceeded,
+
+        }
+        return (
+            <div className={`${className} form-image`}>
+                <DropzoneComponent config={this.dropzoneConfig()} djsConfig={this.djsConfig()} eventHandlers={eventHandlers} />
             </div>
         )
     }

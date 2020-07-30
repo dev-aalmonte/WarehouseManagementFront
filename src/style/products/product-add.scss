@@ -7,14 +7,16 @@
     &__background {
         grid-column: background-s/background-e;
         background: $b-secondary-color;
+        border-radius: .5rem 0 0 .5rem;
     }
 
     &__content {
+        align-self: center;
         grid-column: content-s/content-e;
         padding: 2.6rem;
 
         display: grid;
-        grid-template-rows: [header-s] .2fr [header-e error-s] .2fr [error-e form-s] .8fr [form-e];
+        grid-template-rows: [header-s] .1fr [header-e error-s] .1fr [error-e form-s] .8fr [form-e];
 
         &__title {
             grid-row: header-s/header-e;
@@ -36,11 +38,11 @@
 
 .product-add-form {
     display: grid;
-    grid-template-rows: repeat(6, 4rem);
+    grid-template-rows: repeat(8, 6rem);
     grid-template-columns: repeat(6, 11rem);
 
-    grid-row-gap: 3rem;
-    grid-column-gap: 1.8rem;
+    row-gap: 1rem;
+    column-gap: 1.8rem;
 
     &__name {
         grid-row: 1/2;
@@ -111,8 +113,13 @@
         grid-column: 4/-1;
     }
 
+    &__image {
+        grid-row: 5/8;
+        grid-column: 1/-1;
+    }
+
     &__submit {
-        grid-row: 6/7;
+        grid-row: 8/9;
         grid-column: 6/7;
         justify-self: end;
 
