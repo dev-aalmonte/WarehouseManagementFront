@@ -1,36 +1,91 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 import { Heading, Text } from '../common/headings';
 import { PlaceholderImage } from '../common/image';
 import { FormButton } from '../formFields';
+import Icon from '../common/icon';
 
 class OrderSearch extends Component {
-    previousProduct() {
-        console.log("Looking for the previous product");
+
+    componentWillMount() {
+        this.props.getSingleOrderFromDB(this.props.match.params.id);
     }
 
-    acceptProduct() {
-        console.log("Looking for the next product");
+    previousProduct = () => {
+        this.props.previousProductList();
     }
 
-    skipProduct() {
-        console.log("Skipping product");
+    acceptProduct = (skipped) => {
+        const index = this.props.product_index;
+        const order_detail = this.props.selected_order.order_detail;
+        const picked = order_detail[index].picked;
+        if(!picked){
+            const fields = {
+                order_detail_id: order_detail[index].id,
+                user_id: this.props.user.id,
+                type: 'pick',
+                picked: skipped ? 2 : 1
+            }
+            this.props.updateOrderProduct(fields, this.props.nextProductList);
+            this.props.getSingleOrderFromDB(this.props.match.params.id);
+        }
+        else {
+            let listPicked = true;
+            order_detail.forEach(product => {
+                if(!product.picked){
+                    listPicked = false;
+                }
+            });
+            if(listPicked) {
+                // Change the order status and go back to the hold screen
+                const fields = {
+                    orderID: this.props.selected_order.id,
+                    statusID: 4
+                }
+                this.props.updateOrderStatus(fields, this.props.history.goBack);
+            }
+        }
+        this.props.nextProductList();
     }
 
     render() {
-        return(
+        const products = this.props.selected_order.order_details;
+        const index = this.props.product_index;
+
+        const productName = products ? products[index].name : "";
+        const productDescription = products ? products[index].description : "";
+        const productPicked = products ? this.props.selected_order.order_detail[index].picked : 0;
+        return (
             <div className='order-search'>
-                <Heading className='order-search__heading'>Product Name</Heading>
-                <Text className='order-search__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros.</Text>
+                <Heading className='order-search__heading'>
+                    {productName}
+                    {
+                        productPicked == 1 ?
+                        <Icon className='order-search__heading__icon' icon='check'/>
+                        :
+                        ""
+                    }
+                </Heading>
+                <Text className='order-search__description'>
+                    {productDescription}
+                </Text>
                 <PlaceholderImage className='order-search__image' width='800' height='600'/>
                 <div className='order-search__button-container'>
                     <FormButton className='order-search__button-container__button' title='Back' type='button' onClick={this.previousProduct} />
-                    <FormButton className='order-search__button-container__button' title='Skip' type='button' onClick={this.skipProduct} />
-                    <FormButton className='order-search__button-container__button' title='Accept' type='button' onClick={this.acceptProduct} />
+                    <FormButton className='order-search__button-container__button' title='Skip' type='button' onClick={() => this.acceptProduct(true)} />
+                    <FormButton className='order-search__button-container__button' title={productPicked ? 'Next' : 'Accept'} type='button' onClick={this.acceptProduct} />
                 </div>
             </div>
         )
     }
 }
 
-export default OrderSearch;
+function mapStateToProps(state) {
+    const { user } = state.auth;
+    const { selected_order, product_index } = state.order;
+    return { selected_order, product_index, user };
+}
+
+export default connect(mapStateToProps, actions)(OrderSearch);

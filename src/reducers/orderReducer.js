@@ -4,6 +4,11 @@ import {
     SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
     ADD_ORDER_DETAIL,
+    ASSIGN_USER_ORDER,
+    NEXT_ORDER_PRODUCT,
+    PREVIOUS_ORDER_PRODUCT,
+    ORDER_DETAILS_UPDATE_PRODUCT_STATUS,
+    UPDATE_ORDER_STATUS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,7 +19,8 @@ const INITIAL_STATE = {
         last_page: null
     },
     orders: [],
-    selected_order: {}
+    selected_order: {},
+    product_index: 0
 }
 
 export default function(state = INITIAL_STATE, action){
@@ -44,9 +50,32 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_order: action.payload
             }
+        
+        case NEXT_ORDER_PRODUCT: {
+            let newIndex = state.product_index + 1
+            if(newIndex >= state.selected_order.order_details.length)
+                newIndex = 0;
+            return {
+                ...state,
+                product_index: newIndex
+            }
+        }
+            
+        case PREVIOUS_ORDER_PRODUCT: {
+            let newIndex = state.product_index - 1
+            if(newIndex < 0)
+                newIndex = 0;
+            return {
+                ...state,
+                product_index: newIndex
+            }
+        }
 
+        case UPDATE_ORDER_STATUS:
+        case ORDER_DETAILS_UPDATE_PRODUCT_STATUS:
         case ADD_ORDER:
         case ADD_ORDER_DETAIL:
+        case ASSIGN_USER_ORDER:
         default: 
             return state;
     }

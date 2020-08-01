@@ -5,14 +5,15 @@ import { reduxForm, Field } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormSelect, FormDecimal } from '../formFields';
+import { FormInput, FormButton, FormSelect, FormDecimal, FormImage } from '../formFields';
 import { required } from '../formFieldsValidation';
 import { notify } from '../common/general';
 import FormError from '../common/formError';
 
 class ProductAddForm extends Component {
+
     render() {
-        const { className, handleSubmit } = this.props;
+        const { className, handleSubmit, onAddImage } = this.props;
         const weightOption = [
             {
                 key: 'lb',
@@ -23,6 +24,7 @@ class ProductAddForm extends Component {
                 value: 'Kilograms (KG)'
             }
         ]
+
         const longitudeOption = [
             {
                 key: 'ft',
@@ -33,6 +35,7 @@ class ProductAddForm extends Component {
                 value: 'Meters (M)'
             }
         ]
+
         return (
             <form onSubmit={handleSubmit} className={`${className} product-add-form`}>
                 <Field className='product-add-form__name' type='text' name='name' title='Name' placeholder='Name' component={FormInput}  validate={[required]} />
@@ -44,6 +47,7 @@ class ProductAddForm extends Component {
                 <Field className='product-add-form__width' type='text' name='width' title='Width' placeholder='Width' component={FormDecimal}/>
                 <Field className='product-add-form__height' type='text' name='height' title='Height' placeholder='Height' component={FormDecimal} />
                 <Field className='product-add-form__length' type='text' name='length' title='Length' placeholder='Length' component={FormDecimal} />
+                <Field className='product-add-form__image' name='image' title='Image' onAddImage={onAddImage} component={FormImage} />
                 <Field className='product-add-form__submit' type='submit' name='submit' title='Add Product' onClick={() => console.log('submiting Product')} component={FormButton}/>
             </form>
         )
@@ -85,25 +89,37 @@ class ProductAdd extends Component {
         return number;
     }
 
+    onAddImage = (file) => {
+        console.log("Adding Image");
+        this.setState({images: file});
+    }
+
     onSubmit = (fields) => {
         fields.price = this.unformatNumber(fields.price);
         fields.weight = fields.weight ? this.unformatNumber(fields.weight) : fields.weight;
         fields.width = fields.width ? this.unformatNumber(fields.width) : fields.width;
         fields.height = fields.height ? this.unformatNumber(fields.height) : fields.height;
         fields.length = fields.length ? this.unformatNumber(fields.length) : fields.length;
+
+        console.log("Images: ", this.state.images);
+
+        if(this.state.images)
+            fields.images = this.state.images;
         
-        this.props.addProduct(fields, () => {
-            document.querySelectorAll('.modal').forEach((element) => {
-                notify('success', 'The product has been added successfully');
-                element.classList.remove('active');
-                this.resetTable();
-                this.resetActive();
-            })
-        },
-        (res) => {
-            this.setState({formerr: res.name})
-            console.log("Error response: ", res.name);
-        });
+        console.log("Fields: ", fields);
+
+        // this.props.addProduct(fields, () => {
+        //     document.querySelectorAll('.modal').forEach((element) => {
+        //         notify('success', 'The product has been added successfully');
+        //         element.classList.remove('active');
+        //         this.resetTable();
+        //         this.resetActive();
+        //     })
+        // },
+        // (res) => {
+        //     this.setState({formerr: res.name})
+        //     console.log("Error response: ", res.name);
+        // });
     }
 
     render() {
@@ -117,7 +133,7 @@ class ProductAdd extends Component {
                             return <FormError className='product-add__content__form-err'>{message}</FormError>
                         })
                     }
-                    <ProductAddForm onSubmit={(e) => this.onSubmit(e)} className='product-add__content__form' />
+                    <ProductAddForm onSubmit={(e) => this.onSubmit(e)} onAddImage={this.onAddImage} className='product-add__content__form' />
                 </div>
             </div>
         )

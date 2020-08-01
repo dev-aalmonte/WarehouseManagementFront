@@ -163,7 +163,6 @@
 
     &__input-container {
         width: 100%;
-        height: 100%;
         position: relative;
         
         &__input {
@@ -199,7 +198,7 @@
 
 .form-button {
     cursor: pointer;
-    width: 100%;
+    // width: 100%;
     
     button {
         min-width: 15rem;
@@ -223,6 +222,8 @@
             transform: scale(0.97);
         }
     }
+
+    @include ButtonBackground;
 }
 
 .form-small-button {
@@ -251,35 +252,7 @@
         }
     }
 
-    &.success {
-        button {
-            background: $f-succ;
-
-            &:hover {
-                background: $b-hightlight-color-succ;
-            }
-        }
-    }
-
-    &.warning {
-        button {
-            background: $f-warn;
-    
-            &:hover {
-                background: $b-hightlight-color-warn;
-            }
-        }
-    }
-
-    &.danger {
-        button {
-            background: $f-error;
-    
-            &:hover {
-                background: $b-hightlight-color-error;
-            }
-        }
-    }
+    @include ButtonBackground;
 }
 
 .form-list {

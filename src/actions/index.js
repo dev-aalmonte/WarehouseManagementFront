@@ -72,7 +72,12 @@ import {
     getSingleOrderPerClient,
     getSingleOrderFromDB,
     addOrder,
-    addOrderDetail
+    addOrderDetail,
+    assignUser,
+    nextProductList,
+    previousProductList,
+    updateOrderProduct,
+    updateOrderStatus,
 } from './order';
 
 import {
@@ -153,6 +158,11 @@ export {
     getSingleOrderFromDB,
     addOrder,
     addOrderDetail,
+    assignUser,
+    nextProductList,
+    previousProductList,
+    updateOrderProduct,
+    updateOrderStatus,
 
     // Location
     getSectionByWarehouse,

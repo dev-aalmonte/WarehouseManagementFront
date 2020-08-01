@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import CurrencyInput from 'react-currency-input';
+import DropzoneComponent from "react-dropzone-component";
+
+import "../../node_modules/dropzone/dist/min/dropzone.min.css";
+import "../../node_modules/react-dropzone-component/styles/filepicker.css";
 
 import Icon from './common/icon';
 
@@ -138,16 +142,16 @@ export class FormSelect extends Component {
         // console.log("Goes here!");
     }
 
-
     onChange(value) {
         const { input, onChangeEvent } = this.props;
-        input.onChange(value);
+        if(input)
+            input.onChange(value);
         if(onChangeEvent)
             onChangeEvent(value.target.value);
     }
 
     render() {
-        const { className, title, options, placeholder, input, meta} = this.props;
+        const { className, title, options, placeholder, input, meta } = this.props;
         if (meta) {
             const { touched, error, warning } = meta;
             return (
@@ -174,7 +178,7 @@ export class FormSelect extends Component {
             <div className={`${className} form-select`}>
                 <label className='form-select__label'>{title}</label>
                 <div className='form-select__input-container'>
-                    <select className='form-select__input-container__input' {...input}>
+                    <select className='form-select__input-container__input' {...input} onChange={value => this.onChange(value)}>
                         <option value='' disabled>{placeholder}</option>
                         {
                             options ?
@@ -443,6 +447,42 @@ export class FormList extends Component {
                         </div>
                     }
                 </div>
+            </div>
+        )
+    }
+}
+
+export class FormImage extends Component {
+    
+    dropzoneConfig() {
+        return {
+            iconFiletypes: [".jpg", ".png"],
+            showFiletypeIcon: true,
+            postUrl: "https://httpbin.org/post"
+        }
+    }
+    
+    djsConfig() {
+        return {
+            addRemoveLinks: true,
+            maxFiles: 4
+        }
+    }
+    
+    onMaxFilesExceeded(file) {
+        this.removeFile(file);
+    }
+    
+    render() {
+        const { className, onAddImage, input } = this.props;
+        const eventHandlers = {
+            addedfile: onAddImage,
+            maxfilesexceeded: this.onMaxFilesExceeded,
+
+        }
+        return (
+            <div className={`${className} form-image`}>
+                <DropzoneComponent config={this.dropzoneConfig()} djsConfig={this.djsConfig()} eventHandlers={eventHandlers} />
             </div>
         )
     }

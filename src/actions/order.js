@@ -7,7 +7,12 @@ import {
     SELECT_SINGLE_ORDER_PER_CLIENT,
     SELECT_SINGLE_ORDER_FROM_DB,
     ADD_ORDER,
-    ADD_ORDER_DETAIL
+    ADD_ORDER_DETAIL,
+    ASSIGN_USER_ORDER,
+    NEXT_ORDER_PRODUCT,
+    PREVIOUS_ORDER_PRODUCT,
+    UPDATE_ORDER_STATUS,
+    ORDER_DETAILS_UPDATE_PRODUCT_STATUS
 } from './types';
 
 const requestConfig = {
@@ -81,6 +86,22 @@ export function getSingleOrderFromDB(orderID){
     }
 }
 
+export function updateOrderProduct(fields, success) {
+    return function (dispatch) {
+        axios.post(`${API_URL}/orderdetails/update`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                dispatch({
+                    type: ORDER_DETAILS_UPDATE_PRODUCT_STATUS
+                });
+                success(response);
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
 export function addOrder(fields, success) {
     if(!fields.id) {
         return function (dispatch) {
@@ -103,6 +124,25 @@ export function addOrder(fields, success) {
     }
 }
 
+export function updateOrderStatus(fields, success) {
+    return function (dispatch) {
+        axios.put(`${API_URL}/orders/${fields.orderID}`, qs.stringify(fields), requestConfig)
+            .then(response => {
+                if(response.data) {
+                    dispatch({
+                        type: UPDATE_ORDER_STATUS,
+                        payload: response.data
+                    });
+                }
+                success();
+            })
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            })
+    }
+}
+
 export function addOrderDetail(fields, success) {
     return function (dispatch) {
         axios.post(`${API_URL}/orderdetail`, qs.stringify(fields), requestConfig)
@@ -119,5 +159,40 @@ export function addOrderDetail(fields, success) {
                 if(err)
                     console.log(err);
             });
+    }
+}
+
+export function assignUser(fields, success) {
+    return function (dispatch) {
+        axios.post(`${API_URL}/orderuser`, qs.stringify(fields), requestConfig) 
+            .then(response => {
+                if(response.data) {
+                    dispatch({
+                        type: ASSIGN_USER_ORDER,
+                        payload: response.data
+                    });
+                }
+                success(response);
+            }) 
+            .catch(err => {
+                if(err)
+                    console.log(err);
+            });
+    }
+}
+
+export function nextProductList() {
+    return function (dispatch) {
+        dispatch({
+            type: NEXT_ORDER_PRODUCT,
+        })
+    }
+}
+
+export function previousProductList() {
+    return function (dispatch) {
+        dispatch({
+            type: PREVIOUS_ORDER_PRODUCT,
+        })
     }
 }

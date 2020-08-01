@@ -12,9 +12,30 @@
         grid-column: s/e;
     }
 
-    &__searchbar {
+    &__search-form {
         grid-row: search-s/search-e;
         grid-column: s/e;
+
+        display: grid;
+        grid-template-columns: [searchbar-s] .8fr [searchbar-e sort-s] .2fr [sort-e];
+
+        &__searchbar {
+            grid-column: searchbar-s/searchbar-e;
+        }
+
+        &__sort {
+            grid-column: sort-s/sort-e;
+
+            label {
+                display: none;
+            }
+
+            div {
+                grid-row: 1/-1;
+                align-self: center;
+                margin-top: 1rem;
+            }
+        }
     }
 
     &__body {
