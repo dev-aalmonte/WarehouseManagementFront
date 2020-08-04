@@ -3,7 +3,8 @@ import {
     SELECT_SINGLE_PRODUCT,
     ADD_PRODUCTS,
     EDIT_PRODUCTS,
-    DELETE_PRODUCTS
+    DELETE_PRODUCTS,
+    UPLOAD_PRODUCT_IMAGES
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -38,7 +39,8 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_product: id == -1 ? {} : state.products[id]
             }
-
+    
+        case UPLOAD_PRODUCT_IMAGES:
         case ADD_PRODUCTS:
         case EDIT_PRODUCTS:
         case DELETE_PRODUCTS:

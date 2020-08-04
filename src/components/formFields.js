@@ -458,13 +458,15 @@ export class FormImage extends Component {
         return {
             iconFiletypes: [".jpg", ".png"],
             showFiletypeIcon: true,
-            postUrl: "https://httpbin.org/post"
+            postUrl: 'no-url'
+            // postUrl: "https://httpbin.org/post"
         }
     }
     
     djsConfig() {
         return {
             addRemoveLinks: true,
+            autoProcessQueue: false,
             maxFiles: 4
         }
     }

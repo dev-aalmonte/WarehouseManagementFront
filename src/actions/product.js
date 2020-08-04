@@ -6,12 +6,19 @@ import {
     ADD_PRODUCTS,
     EDIT_PRODUCTS,
     DELETE_PRODUCTS,
-    SELECT_SINGLE_PRODUCT
+    SELECT_SINGLE_PRODUCT,
+    UPLOAD_PRODUCT_IMAGES
 } from './types';
 
 const requestConfig = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
+    }
+}
+
+const fileRequestConfig = {
+    headers: {
+        'Content-Type': 'multipart/form-data'
     }
 }
 
@@ -55,11 +62,13 @@ export function addProduct(fields, success, error) {
                             payload: response.data
                         });
                     }
-                    success();
+                    success(response);
                 })
                 .catch(err => {
-                    if(err)
-                        error(err.response.data.error)
+                    if(err){
+                        console.log(err);
+                        // error(err.response.data.error)
+                    }
                 });
         }
     }
@@ -79,6 +88,30 @@ export function addProduct(fields, success, error) {
                     if(err)
                         console.log(err);
                 });
+        }
+    }
+}
+
+export function uploadProductImage(fields, success, error) {
+    if(fields.id) {
+        let data = new FormData();
+        data.append('index', fields.index);
+        data.append('image', fields.image, fields.image.name);
+        return function (dispatch) {
+            axios.post(`${API_URL}/upload/product/${fields.id}`, data, fileRequestConfig)
+                .then(response => {
+                    if(response.data) {
+                        dispatch({
+                            type: UPLOAD_PRODUCT_IMAGES,
+                            payload: response.data
+                        });
+                        success(response.data);
+                    }
+                })
+                .catch(err => {
+                    if(err)
+                        console.log(err);
+                })
         }
     }
 }

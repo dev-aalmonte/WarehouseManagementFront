@@ -91,7 +91,34 @@ class ProductAdd extends Component {
 
     onAddImage = (file) => {
         console.log("Adding Image");
-        this.setState({images: file});
+        if(this.state.images)
+            this.setState({images: [...this.state.images, file]});
+        else
+            this.setState({images: [file]});
+    }
+
+    uploadImage = (response) => {
+        let images;
+        
+        if(this.state.images)
+        images = this.state.images;
+        
+        console.log("Product add Response: ", response.data);
+        console.log("Images: ", images);
+        
+        images.forEach((image, index) => {
+            let imageFields = {
+                id: response.data.id,
+                index: index,
+                image: image
+            }
+
+            this.props.uploadProductImage(imageFields, (response) => {
+                console.log("Response: ", response);
+            })
+
+        });
+        
     }
 
     onSubmit = (fields) => {
@@ -99,27 +126,25 @@ class ProductAdd extends Component {
         fields.weight = fields.weight ? this.unformatNumber(fields.weight) : fields.weight;
         fields.width = fields.width ? this.unformatNumber(fields.width) : fields.width;
         fields.height = fields.height ? this.unformatNumber(fields.height) : fields.height;
-        fields.length = fields.length ? this.unformatNumber(fields.length) : fields.length;
+        fields.length = fields.length ? this.unformatNumber(fields.length) : fields.length
 
-        console.log("Images: ", this.state.images);
 
-        if(this.state.images)
-            fields.images = this.state.images;
-        
-        console.log("Fields: ", fields);
+        this.props.addProduct(fields, (response) => {
+            this.uploadImage(response);
 
-        // this.props.addProduct(fields, () => {
-        //     document.querySelectorAll('.modal').forEach((element) => {
-        //         notify('success', 'The product has been added successfully');
-        //         element.classList.remove('active');
-        //         this.resetTable();
-        //         this.resetActive();
-        //     })
-        // },
-        // (res) => {
-        //     this.setState({formerr: res.name})
-        //     console.log("Error response: ", res.name);
-        // });
+            notify('success', 'The product has been added successfully');
+
+            document.querySelectorAll('.modal').forEach((element) => {
+                element.classList.remove('active');
+            });
+
+            this.resetTable();
+            this.resetActive();
+        },
+        (res) => {
+            this.setState({formerr: res.name})
+            console.log("Error response: ", res.name);
+        });
     }
 
     render() {
