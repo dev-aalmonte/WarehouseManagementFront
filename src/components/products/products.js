@@ -9,6 +9,8 @@ import Modal from '../common/modal';
 import ProductDetail from './productDetail';
 import ProductAdd from './productAdd';
 import { notify, notifyConfirm, notifyRemove, notifyUpdate } from '../common/general';
+import { PlaceholderImage } from '../common/image';
+import { SmallHeading } from '../common/headings';
 
 class Products extends Component {
     constructor(props) {
@@ -111,7 +113,36 @@ class Products extends Component {
                     <FormSmallButton onClick={() => this.openEditProduct()} className='products__buttoms__button' type='button' icon='edit'/>
                     <FormSmallButton onClick={() => this.openAddProduct()} className='products__buttoms__button' type='button' icon='plus'/>
                 </div>
-                <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} />
+                <div className='products__list'>
+                    {
+                        tableData ?
+                        tableData.map((product, index) => {
+                            return (
+                                <div key={index} className='products__list__item' onDoubleClick={tableEvents.onDoubleClick}>
+                                    <div className='products__list__item__image'>
+                                        <PlaceholderImage width='100' height='100'></PlaceholderImage>
+                                    </div>
+
+                                    <SmallHeading className='products__list__item__title'>{product.name}</SmallHeading>
+                                    <SmallHeading className='products__list__item__subtitle' size='xsmall'>Weight ({product.metric_weight}): {product.weight} - Longitude ({product.metric_longitude}): W:{product.width} H:{product.height} L:{product.length}</SmallHeading>
+                                    <SmallHeading className='products__list__item__extra' size='small'>$ {product.price}</SmallHeading>
+                                </div>
+                            )
+                        })
+                        :
+                        ""
+                    }
+                </div>
+                <div className='products__pagination'>
+                    <div className='products__pagination__pagination-info'>
+                        Page: {pagination.current_page} of {pagination.last_page}
+                    </div>
+                    <div className='products__pagination__pagination-buttons'>
+                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`products__pagination__pagination-buttons__button prev ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
+                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`products__pagination__pagination-buttons__button next ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
+                    </div>
+                </div>
+                {/* <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} /> */}
 
                 <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
                 <Modal className='modal-product_add'> <ProductAdd/> </Modal>
