@@ -11,6 +11,7 @@ import ProductAdd from './productAdd';
 import { notify, notifyConfirm, notifyRemove, notifyUpdate } from '../common/general';
 import { PlaceholderImage } from '../common/image';
 import { SmallHeading } from '../common/headings';
+import Pagination from '../common/pagination';
 
 class Products extends Component {
     constructor(props) {
@@ -133,15 +134,7 @@ class Products extends Component {
                         ""
                     }
                 </div>
-                <div className='products__pagination'>
-                    <div className='products__pagination__pagination-info'>
-                        Page: {pagination.current_page} of {pagination.last_page}
-                    </div>
-                    <div className='products__pagination__pagination-buttons'>
-                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`products__pagination__pagination-buttons__button prev ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
-                        <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`products__pagination__pagination-buttons__button next ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
-                    </div>
-                </div>
+                <Pagination className='products__pagination' pagination={pagination} fetch={this.props.getProducts} />
                 {/* <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} /> */}
 
                 <Modal className='modal-product_detail'> <ProductDetail/> </Modal>

@@ -34,6 +34,7 @@ class Table extends Component {
         return templateItem;
     }
 
+    // TODO: Delete after implementation of pagination
     paginationOnClick(url) {
         if (url != null){
             this.props.getProducts(url);
@@ -150,6 +151,7 @@ class Table extends Component {
                     }
                 </div>
                 {
+                    // TODO: Delete after implementation of pagination
                     pagination ?
                     (
                         <div className='table__footer'>
