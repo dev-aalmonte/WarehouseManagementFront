@@ -19,20 +19,21 @@ class Products extends Component {
 
         this.state = {
             lastSelectedIndex: null,
-            activeKey: ''
+            activeKey: '',
+            itemsPerPage: 6
         }
     }
     
     componentWillMount() {
-        this.props.getProducts();
+        this.props.getProducts(null, '', this.state.itemsPerPage);
     }
     
     resetTable() {
         const { current_page } = this.props.pagination;
         if(current_page != null)
-            this.props.getProducts(`http://127.0.0.1:8000/api/products?page=${current_page}`)
+            this.props.getProducts(`http://127.0.0.1:8000/api/products?page=${current_page}`, '', this.state.itemsPerPage);
         else
-            this.props.getProducts();
+            this.props.getProducts(null, '', this.state.itemsPerPage);
     }
 
     resetActive() {

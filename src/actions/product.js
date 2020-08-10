@@ -22,11 +22,16 @@ const fileRequestConfig = {
     }
 }
 
-export function getProducts(paginationURL = null, search = '') {
+export function getProducts(paginationURL = null, search = '', itemsPerPage = 15) {
     const requestURL = paginationURL ? paginationURL : `${API_URL}/products`;
-    const searchURL = paginationURL ? `&search=${search}` : `?search=${search}`;
+    let searchURL = '';
+    if(search != ''){
+        searchURL = (paginationURL) ? `&search=${search}` : `?search=${search}`;
+    }
+    const itemPerPageURL = (paginationURL && search != '') ? `&item_number=${itemsPerPage}` : `?item_number=${itemsPerPage}`;
+
     return function (dispatch) {
-        axios.get(requestURL + searchURL)
+        axios.get(requestURL + searchURL + itemPerPageURL)
             .then(response => {
                 if(response.data){
                     dispatch({
