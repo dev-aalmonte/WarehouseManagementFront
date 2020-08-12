@@ -1,5 +1,4 @@
 .pagination {
-    margin-top: 2.5rem;
     grid-row: footer-s/footer-e;
 
     display: grid;
@@ -7,7 +6,8 @@
     grid-template-rows: 1fr;
     
     &__pagination-info {
-        font-size: 1.2rem;
+        align-self: center;
+        font-size: 1.4rem;
     }
 
     &__pagination-buttons {
@@ -16,9 +16,11 @@
         display: grid;
         grid-template-columns: 5rem 5rem;
         justify-content: end;
+        align-items: center;
 
         &__button {
             justify-self: end;
+
             width: 3.6rem;
             height: 3.6rem;
         }

@@ -4,14 +4,16 @@ import * as actions from '../../actions';
 
 import Searchbar from '../common/searchbar';
 import { FormSmallButton } from '../formFields';
-import Table from '../common/table';
 import Modal from '../common/modal';
 import ProductDetail from './productDetail';
 import ProductAdd from './productAdd';
 import { notify, notifyConfirm, notifyRemove, notifyUpdate } from '../common/general';
 import { PlaceholderImage } from '../common/image';
-import { SmallHeading } from '../common/headings';
+import { SmallHeading, Heading } from '../common/headings';
 import Pagination from '../common/pagination';
+
+// TODO: Import to delete
+import Table from '../common/table';
 
 class Products extends Component {
     constructor(props) {
@@ -179,6 +181,7 @@ class Products extends Component {
         }
         return (
             <div className='products'>
+                <Heading className='products__heading'>Products</Heading>
                 <Searchbar className='products-searchbar' placeholder='Search a Product' onKeyUp={this.displaySearchBarInput}/>
                 <div className='products__buttoms'>
                     <FormSmallButton onClick={() => this.deleteProduct()} className='products__buttoms__button' type='button' icon='minus'/>

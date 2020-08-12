@@ -2,15 +2,21 @@
     grid-column: s/e;
 
     display: grid;
-    grid-template-rows: [s] 7rem [m] 1fr [pagination-s] 4rem [pagination-e e] ;
+    grid-template-rows: [heading-s] 6rem [heading-e s] 6rem [m] 1fr [pagination-s] 6rem [pagination-e e] ;
     grid-template-columns: [s] .9fr [m] .1fr [e];
 
+    
     padding: 5rem 20rem;
-
+    
+    &__heading {
+        grid-row: heading-s/heading-e;
+        grid-column: s/e;
+        margin-left: 1rem;
+    }
+    
     &__searchbar {
         grid-row: s/m;
         grid-column: s/m;
-        
     }
     
     &__buttoms {
@@ -30,18 +36,19 @@
     }
     
     &__list {
-        max-height: 70rem;
+        max-height: 72rem;
         overflow-y: hidden;
-
+        
         margin-top: 2rem;
         margin-left: 2rem;
         
         grid-row: m/e;
         grid-column: s/e;
-
+        
         display: grid;
         grid-template-rows: repeat(10, 12rem);
-
+        
+        
         &__item {
             display: grid;
             grid-template-rows: [item-s] 1fr [item-m] 1fr [item-e];
@@ -77,13 +84,17 @@
                 align-self: center;
             }
         }
-        
+
         &__item.active {
             background-color: $b-hightlight-color;
         }
-    
+        
         &__item.to_delete {
             background: rgba(#BF6666, .5);
+        }
+        
+        &__item:hover {
+            background-color: rgba($b-hightlight-color, .2);
         }
     }
 
