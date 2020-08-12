@@ -34,13 +34,6 @@ class Table extends Component {
         return templateItem;
     }
 
-    // TODO: Delete after implementation of pagination
-    paginationOnClick(url) {
-        if (url != null){
-            this.props.getProducts(url);
-        }
-    }
-
     onKeyDown(event) {
         if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
             this.setState({activeKey: event.key});

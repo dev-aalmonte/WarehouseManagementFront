@@ -20,12 +20,66 @@ class Products extends Component {
         this.state = {
             lastSelectedIndex: null,
             activeKey: '',
-            itemsPerPage: 6
+            itemsPerPage: 6,
         }
     }
     
     componentWillMount() {
         this.props.getProducts(null, '', this.state.itemsPerPage);
+    }
+
+    onKeyDown(event) {
+        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
+            this.setState({activeKey: event.key});
+        }
+    }
+
+    onKeyUp(event) {
+        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
+            this.setState({activeKey: ''});
+        }
+    }
+
+    rowOnClick = (event, index) => {
+        const parent = event.target.parentElement;
+        const parentIsActive = parent.classList.contains('active');
+
+        const allElements = parent.parentElement.childNodes;
+        
+        if(parent.parentElement.classList.contains("table"))
+            return;
+
+        if(this.state.activeKey == 'Shift') {
+            if(this.state.lastSelectedIndex == null)
+                parent.classList.add('active');
+            else if(this.state.lastSelectedIndex > index){
+                const firstIndex = index;
+                const lastIndex = this.state.lastSelectedIndex;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+            else if(this.state.lastSelectedIndex < index){
+                const firstIndex = this.state.lastSelectedIndex;
+                const lastIndex = index;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+        }
+        else {
+            allElements.forEach(element => {
+                element.classList.remove('active');
+            });
+
+            if(!parentIsActive)
+                parent.classList.add('active');
+        }
+        this.setState({lastSelectedIndex: index});
     }
     
     resetTable() {
@@ -94,6 +148,18 @@ class Products extends Component {
         this.props.getProducts(null, search);
     }
 
+    onKeyDown(event) {
+        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
+            this.setState({activeKey: event.key});
+        }
+    }
+
+    onKeyUp(event) {
+        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
+            this.setState({activeKey: ''});
+        }
+    }
+
     render() {
         const tableHeader = ["Product", "Price", "Weight", "Longitude"];
         const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
@@ -102,8 +168,12 @@ class Products extends Component {
         const pagination = this.props.pagination;
         const tableEvents = {
             onDoubleClick: (event) => {
-                const parent = event.target.parentElement;
-                this.props.selectSingleProduct(parent.id);
+                let parent = event.target.parentElement;
+                while(parent.id == ""){
+                    parent = parent.parentElement;
+                }
+
+                this.props.selectSingleProduct(parent.id - 1);
                 this.openModal('product_detail');
             }
         }
@@ -115,12 +185,12 @@ class Products extends Component {
                     <FormSmallButton onClick={() => this.openEditProduct()} className='products__buttoms__button' type='button' icon='edit'/>
                     <FormSmallButton onClick={() => this.openAddProduct()} className='products__buttoms__button' type='button' icon='plus'/>
                 </div>
-                <div className='products__list'>
+                <div className='products__list' onKeyDownCapture={event => this.onKeyDown(event)}  onKeyUpCapture={event => this.onKeyUp(event)} tabIndex="0">
                     {
                         tableData ?
                         tableData.map((product, index) => {
                             return (
-                                <div key={index} className='products__list__item' onDoubleClick={tableEvents.onDoubleClick}>
+                                <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event)}>
                                     <div className='products__list__item__image'>
                                         <PlaceholderImage width='100' height='100'></PlaceholderImage>
                                     </div>
@@ -146,8 +216,8 @@ class Products extends Component {
 }
 
 function mapStateToProps(state) {
-    const { products, pagination } = state.product;
-    return { products, pagination };
+    const { products, selected_product, pagination } = state.product;
+    return { products, selected_product, pagination };
 }
 
 export default connect(mapStateToProps, actions)(Products);

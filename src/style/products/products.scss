@@ -77,7 +77,16 @@
                 align-self: center;
             }
         }
+        
+        &__item.active {
+            background-color: $b-hightlight-color;
+        }
+    
+        &__item.to_delete {
+            background: rgba(#BF6666, .5);
+        }
     }
+
 
     &__pagination {
         grid-row: pagination-s/pagination-e;
