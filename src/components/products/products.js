@@ -165,17 +165,17 @@ class Products extends Component {
     render() {
         const tableHeader = ["Product", "Price", "Weight", "Longitude"];
         const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
-        const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"]
+        const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"];
         const tableData = this.props.products;
         const pagination = this.props.pagination;
         const tableEvents = {
-            onDoubleClick: (event) => {
+            onDoubleClick: (event, index) => {
                 let parent = event.target.parentElement;
                 while(parent.id == ""){
                     parent = parent.parentElement;
                 }
 
-                this.props.selectSingleProduct(parent.id - 1);
+                this.props.selectSingleProduct(index);
                 this.openModal('product_detail');
             }
         }
@@ -193,7 +193,7 @@ class Products extends Component {
                         tableData ?
                         tableData.map((product, index) => {
                             return (
-                                <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event)}>
+                                <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
                                     <div className='products__list__item__image'>
                                         <PlaceholderImage width='100' height='100'></PlaceholderImage>
                                     </div>
