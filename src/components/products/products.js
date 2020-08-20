@@ -8,12 +8,13 @@ import Modal from '../common/modal';
 import ProductDetail from './productDetail';
 import ProductAdd from './productAdd';
 import { notify, notifyConfirm, notifyRemove, notifyUpdate } from '../common/general';
-import { PlaceholderImage } from '../common/image';
+import { PlaceholderImage, BackgroundImage } from '../common/image';
 import { SmallHeading, Heading } from '../common/headings';
 import Pagination from '../common/pagination';
 
 // TODO: Import to delete
 import Table from '../common/table';
+import { STORAGE_URL } from '../../config';
 
 class Products extends Component {
     constructor(props) {
@@ -196,8 +197,14 @@ class Products extends Component {
                         tableData.map((product, index) => {
                             return (
                                 <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
-                                    <div className='products__list__item__image'>
-                                        <PlaceholderImage width='100' height='100'></PlaceholderImage>
+                                    <div className='products__list__item__image-container'>
+                                        {
+                                            product.image.length == 0 ?
+                                            <PlaceholderImage className='products__list__item__image-container__image' width='100' height='100'></PlaceholderImage>
+                                            :
+                                            <BackgroundImage className='products__list__item__image-container__image' src={STORAGE_URL + product.image[0].path}/>
+                                        }
+                                        
                                     </div>
 
                                     <SmallHeading className='products__list__item__title'>{product.name}</SmallHeading>
