@@ -199,10 +199,10 @@ class Products extends Component {
                                 <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
                                     <div className='products__list__item__image-container'>
                                         {
-                                            product.image.length == 0 ?
+                                            product.images.length == 0 ?
                                             <PlaceholderImage className='products__list__item__image-container__image' width='100' height='100'></PlaceholderImage>
                                             :
-                                            <BackgroundImage className='products__list__item__image-container__image' src={STORAGE_URL + product.image[0].path}/>
+                                            <BackgroundImage className='products__list__item__image-container__image' src={STORAGE_URL + product.images[0].path}/>
                                         }
                                         
                                     </div>

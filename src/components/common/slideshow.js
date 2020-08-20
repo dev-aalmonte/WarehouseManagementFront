@@ -13,6 +13,25 @@ class Slideshow extends Component {
         }
     }
 
+    componentDidUpdate() {
+        const { imgs } = this.props;
+
+        if(!this.arrayEquals(imgs, this.state.imageList)) {
+            this.setState({ imageList: imgs });
+        }
+    }
+
+    arrayEquals(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+
+        for(var i = 0; i < a.length; i++){
+            if(a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
     selectImage = (event, index) => {
         document.querySelectorAll('.slideshow__bulletpoint__bullet').forEach(element => {
             element.classList.remove('active');
@@ -35,7 +54,6 @@ class Slideshow extends Component {
         }
         document.querySelectorAll('.slideshow__bulletpoint__bullet')[index].classList.add('active');
         this.setState({currentImageIndex: index});
-
     }
     
     moveBackward = () => {
@@ -55,8 +73,9 @@ class Slideshow extends Component {
     }
     
     render() {
-        const { className } = this.props;
+        const { className, imgs } = this.props;
         const { imageList, currentImageIndex } = this.state;
+
         return (
             <div className={`${className} slideshow ${imageList.length == 0 ? 'hidden' : ''}`}>
                 <div className='slideshow__image-container'>
