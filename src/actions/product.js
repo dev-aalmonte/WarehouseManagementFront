@@ -23,15 +23,16 @@ const fileRequestConfig = {
 }
 
 export function getProducts(paginationURL = null, search = '', itemsPerPage = 15) {
-    const requestURL = paginationURL ? paginationURL : `${API_URL}/products`;
-    let searchURL = '';
-    if(search != ''){
-        searchURL = (paginationURL) ? `&search=${search}` : `?search=${search}`;
-    }
-    const itemPerPageURL = (paginationURL && search != '') ? `&item_number=${itemsPerPage}` : `?item_number=${itemsPerPage}`;
+    let requestURL = paginationURL ? paginationURL : `${API_URL}/products`;
+
+    const searchURL = (requestURL.indexOf("?") !== -1) ? `&search=${search}` : `?search=${search}`;
+    requestURL += searchURL;
+
+    const itemPerPageURL = (requestURL.indexOf("?") !== -1) ? `&item_number=${itemsPerPage}` : `?item_number=${itemsPerPage}`;
+    requestURL += itemPerPageURL;
 
     return function (dispatch) {
-        axios.get(requestURL + searchURL + itemPerPageURL)
+        axios.get(requestURL)
             .then(response => {
                 if(response.data){
                     dispatch({

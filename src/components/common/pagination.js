@@ -4,9 +4,10 @@ import { FormSmallButton } from '../formFields';
 
 class Pagination extends Component {
 
-    paginationOnClick(url, fetch) {
+    paginationOnClick(url) {
+        const { fetch, itemNumber, search } = this.props;
         if (url != null){
-            fetch(url);
+            fetch(url, search, itemNumber);
         }
     }
 
@@ -18,8 +19,8 @@ class Pagination extends Component {
                     Page: {pagination.current_page} of {pagination.last_page}
                 </div>
                 <div className='pagination__pagination-buttons'>
-                    <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url, fetch)} className={`pagination__pagination-buttons__button prev ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
-                    <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url, fetch)} className={`pagination__pagination-buttons__button next ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
+                    <FormSmallButton onClick={() => this.paginationOnClick(pagination.prev_page_url)} className={`pagination__pagination-buttons__button prev ${pagination.prev_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-left'/>
+                    <FormSmallButton onClick={() => this.paginationOnClick(pagination.next_page_url)} className={`pagination__pagination-buttons__button next ${pagination.next_page_url == null ? 'hidden' : '' }`} type='button' icon='angle-right'/>
                 </div>
             </div>
         )

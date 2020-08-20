@@ -23,6 +23,7 @@ class Products extends Component {
             lastSelectedIndex: null,
             activeKey: '',
             itemsPerPage: 6,
+            search: '',
         }
     }
     
@@ -147,7 +148,8 @@ class Products extends Component {
 
     displaySearchBarInput = (event) => {
         const search = event.target.value;
-        this.props.getProducts(null, search);
+        this.setState({ search: search });
+        this.props.getProducts(null, search, this.state.itemsPerPage);
     }
 
     onKeyDown(event) {
@@ -208,7 +210,7 @@ class Products extends Component {
                         ""
                     }
                 </div>
-                <Pagination className='products__pagination' pagination={pagination} fetch={this.props.getProducts} />
+                <Pagination className='products__pagination' pagination={pagination} fetch={this.props.getProducts} itemNumber={this.state.itemsPerPage} search={this.state.search} />
                 {/* <Table className='products__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} pagination={pagination} events={tableEvents} /> */}
 
                 <Modal className='modal-product_detail'> <ProductDetail/> </Modal>
