@@ -173,7 +173,7 @@ class Products extends Component {
         const pagination = this.props.pagination;
         const tableEvents = {
             onDoubleClick: (event, index) => {
-                let parent = event.target.parentElement;
+                let parent = event.target;
                 while(parent.id == ""){
                     parent = parent.parentElement;
                 }

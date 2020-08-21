@@ -17,7 +17,11 @@ class Slideshow extends Component {
         const { imgs } = this.props;
 
         if(!this.arrayEquals(imgs, this.state.imageList)) {
-            this.setState({ imageList: imgs });
+            this.setState({ 
+                imageList: imgs, 
+                currentImageIndex: 0,
+                lastIndex: imgs.length - 1,
+            });
         }
     }
 
@@ -71,6 +75,18 @@ class Slideshow extends Component {
         document.querySelectorAll('.slideshow__bulletpoint__bullet')[index].classList.add('active');
         this.setState({currentImageIndex: index});
     }
+
+    toggleOverlay = (event) => {
+        let target = event.target;
+        while(target.id != 'slideshow__image-container'){
+            target = target.parentElement;
+        }
+
+        if(target.classList.contains('overlay'))
+           target.classList.remove('overlay');
+        else
+            target.classList.add('overlay');
+    }
     
     render() {
         const { className, imgs } = this.props;
@@ -78,7 +94,7 @@ class Slideshow extends Component {
 
         return (
             <div className={`${className} slideshow ${imageList.length == 0 ? 'hidden' : ''}`}>
-                <div className='slideshow__image-container'>
+                <div id="slideshow__image-container" className='slideshow__image-container' onClick={this.toggleOverlay}>
                     <img className='slideshow__image-container__image' src={imageList[currentImageIndex]} />
                 </div>
                 <div onClick={this.moveBackward} className={`slideshow__back-control ${imageList.length == 1 ? 'hidden' : ''}`}>
