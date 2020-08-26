@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import CurrencyInput from 'react-currency-input';
 import DropzoneComponent from "react-dropzone-component";
 
@@ -467,7 +468,23 @@ export class FormImage extends Component {
         return {
             addRemoveLinks: true,
             autoProcessQueue: false,
-            maxFiles: 4
+            maxFiles: 4,
+            previewTemplate: ReactDOMServer.renderToStaticMarkup(
+                    <div className="dropzone-thumbnail dz-preview dz-file-preview">
+                        <div className="dropzone-thumbnail__image-container dz-image"> 
+                            <img className="dropzone-thumbnail__details__image" data-dz-thumbnail="true" />
+                        </div>
+                        <div className="dropzone-thumbnail__details dz-details">
+                            <div className="dropzone-thumbnail__details__size dz-size"><span data-dz-size="true"></span></div>
+                            <div className="dropzone-thumbnail__details__filename dz-filename"><span data-dz-name="true"></span></div>
+                            <div class="dropzone-thumbnail__details__remove dz-remove" data-dz-remove="true"><Icon className="dropzone-thumbnail__details__remove__icon" icon="minus"></Icon></div>
+                        </div>
+                        <div className="dropzone-thumbnail__progress dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
+                        <div className="dropzone-thumbnail__success dz-success-mark"><span>✔</span></div>
+                        <div className="dropzone-thumbnail__error dz-error-mark"><span>✘</span></div>
+                        <div className="dropzone-thumbnail__error-message dz-error-message"><span data-dz-errormessage="true"></span></div>
+                    </div>
+              )
         }
     }
     

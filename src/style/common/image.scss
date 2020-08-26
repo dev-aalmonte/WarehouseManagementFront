@@ -4,6 +4,59 @@
 
 }
 
+.dropzone {
+
+    .dz-preview {
+        background: rgba(0, 0, 0, 0) !important;
+    }
+
+    .dz-progress {
+        display: none;
+    }
+}
+
+.dropzone-thumbnail {
+    a.dz-remove {
+        display: none !important;
+    }
+
+    &__details {
+        height: 90%;
+        display: grid !important;
+        grid-template-rows: 1fr 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+
+        &__filename {
+            overflow: hidden;
+        }
+
+        &__remove {
+            margin-top: 1.4rem;
+            width: 3rem;
+            height: 3rem;
+            background: $b-hightlight-color-error;
+            border-radius: 50%;
+
+            cursor: pointer !important;
+
+            &:hover {
+                background: rgba($b-hightlight-color-error, .8);
+            }
+
+            &__icon {
+                padding-top: .2rem;
+                padding-right: .2rem;
+                font-size: 2.8rem;
+
+                color: white;
+
+                cursor: pointer !important;
+            }
+        }
+    }
+}
+
 // .overlay {
 //     position: fixed;
 //     z-index: $z-index-6;

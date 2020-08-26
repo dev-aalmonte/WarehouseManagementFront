@@ -90,7 +90,6 @@ class ProductAdd extends Component {
     }
 
     onAddImage = (file) => {
-        console.log("Adding Image");
         if(this.state.images)
             this.setState({images: [...this.state.images, file]});
         else
@@ -101,10 +100,7 @@ class ProductAdd extends Component {
         let images;
         
         if(this.state.images)
-        images = this.state.images;
-        
-        console.log("Product add Response: ", response.data);
-        console.log("Images: ", images);
+            images = this.state.images;
         
         images.forEach((image, index) => {
             let imageFields = {
@@ -114,7 +110,7 @@ class ProductAdd extends Component {
             }
 
             this.props.uploadProductImage(imageFields, (response) => {
-                console.log("Response: ", response);
+                // TODO: Real upload message goes here
             })
 
         });
