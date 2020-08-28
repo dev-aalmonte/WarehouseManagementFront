@@ -8,20 +8,25 @@ import { STORAGE_URL } from '../../config';
 class ProductDetail extends Component {
 
     getImagePath() {
-        const { images } =  this.props.selected_product;
-        let pathArray = [];
-
-        if(images) {
-            images.forEach(image => {
-                pathArray.push(STORAGE_URL + image.path);
-            });
+        if(this.props.selected_product){
+            const { images } =  this.props.selected_product;
+            let pathArray = [];
+    
+            if(images) {
+                images.forEach(image => {
+                    pathArray.push(STORAGE_URL + image.path);
+                });
+            }
+    
+            return pathArray;
         }
-
-        return pathArray;
     }
 
     render() {
         const pathArray = this.getImagePath();
+        const productName = this.props.selected_product ? this.props.selected_product.name : "";
+        const productDescription = this.props.selected_product ? this.props.selected_product.description : "";
+        const productPrice = this.props.selected_product ? this.props.selected_product.price : "";
 
         return (
             <div className='product-detail'>
@@ -29,11 +34,11 @@ class ProductDetail extends Component {
                     <Slideshow className='product-detail__slideshow__slideshow' imgs={pathArray}/>
                 </div>
                 <div className='product-detail__content'>
-                    <Heading className='product-detail__title'>{this.props.selected_product.name}</Heading>
+                    <Heading className='product-detail__title'>{productName}</Heading>
                     <div className='product-detail__content__description'>
-                        {this.props.selected_product.description}
+                        {productDescription || ""}
                     </div>
-                    <div className='product-detail__content__price'>${this.props.selected_product.price}</div>
+                    <div className='product-detail__content__price'>${productPrice || ""}</div>
                 </div>
             </div>
         )

@@ -111,10 +111,11 @@ class Products extends Component {
     }
 
     openEditProduct = () => {
-        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        const allElementsSelected = document.querySelectorAll(`.products__list__item.active`);
         if(allElementsSelected.length === 1){
             const selectedItem = allElementsSelected[0];
-            this.props.selectSingleProduct(selectedItem.id);
+            const index = selectedItem.attributes.listIndex.value;
+            this.props.selectSingleProduct(index);
             this.openModal('product_add');
         }
         else {
@@ -123,7 +124,7 @@ class Products extends Component {
     }
 
     deleteProduct = () => {
-        const allElementsSelected = document.querySelectorAll(`.table__body__row.active`);
+        const allElementsSelected = document.querySelectorAll(`.products__list__item.active`);
         if(allElementsSelected.length > 0){
             notifyConfirm('Are you sure you want to delete it?', (toastID) => {
                 notifyRemove(toastID);
@@ -196,7 +197,7 @@ class Products extends Component {
                         tableData ?
                         tableData.map((product, index) => {
                             return (
-                                <div key={index} id={product.id} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
+                                <div key={index} id={product.id} listIndex={index} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
                                     <div className='products__list__item__image-container'>
                                         {
                                             product.images.length == 0 ?

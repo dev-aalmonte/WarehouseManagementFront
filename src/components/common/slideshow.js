@@ -16,7 +16,7 @@ class Slideshow extends Component {
     componentDidUpdate() {
         const { imgs } = this.props;
 
-        if(!this.arrayEquals(imgs, this.state.imageList)) {
+        if(imgs && !this.arrayEquals(imgs, this.state.imageList)) {
             this.setState({ 
                 imageList: imgs, 
                 currentImageIndex: 0,
