@@ -27,7 +27,8 @@ import { faQuestionCircle,
         faTruck,
         faHome,
         faClock,
-        faExclamation} from '@fortawesome/free-solid-svg-icons';
+        faExclamation,
+        faTrash} from '@fortawesome/free-solid-svg-icons';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -56,7 +57,8 @@ library.add(faQuestionCircle,
             faTruck,
             faHome,
             faClock, 
-            faExclamation);
+            faExclamation,
+            faTrash);
 
 export default class App extends Component {
     render() {

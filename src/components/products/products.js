@@ -12,8 +12,6 @@ import { PlaceholderImage, BackgroundImage } from '../common/image';
 import { SmallHeading, Heading } from '../common/headings';
 import Pagination from '../common/pagination';
 
-// TODO: Import to delete
-import Table from '../common/table';
 import { STORAGE_URL } from '../../config';
 
 class Products extends Component {
@@ -116,6 +114,8 @@ class Products extends Component {
             const selectedItem = allElementsSelected[0];
             const index = selectedItem.attributes.listIndex.value;
             this.props.selectSingleProduct(index);
+
+            console.log("Selected Product: ", this.props.selected_product)
             this.openModal('product_add');
         }
         else {

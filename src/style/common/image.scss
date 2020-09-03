@@ -6,6 +6,15 @@
 
 .dropzone {
 
+    .filepicker-file-icon {
+        margin-top: 6rem;
+        margin-left: 1.4rem;
+    }
+
+    .dz-message {
+        font-size: 1.4rem;
+    }
+
     .dz-preview {
         background: rgba(0, 0, 0, 0) !important;
     }
