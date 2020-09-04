@@ -1,10 +1,12 @@
 import {
     GET_PRODUCTS,
     SELECT_SINGLE_PRODUCT,
+    SELECT_SINGLE_PRODUCT_FROM_DB,
     ADD_PRODUCTS,
     EDIT_PRODUCTS,
     DELETE_PRODUCTS,
-    UPLOAD_PRODUCT_IMAGES
+    UPLOAD_PRODUCT_IMAGES,
+    REMOVE_PRODUCT_IMAGES
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -39,7 +41,15 @@ export default function(state = INITIAL_STATE, action){
                 ...state,
                 selected_product: id == -1 ? {} : state.products[id]
             }
-    
+
+        case SELECT_SINGLE_PRODUCT_FROM_DB:
+            const selected_product = action.payload;
+            return {
+                ...state,
+                selected_product
+            }
+
+        case REMOVE_PRODUCT_IMAGES:
         case UPLOAD_PRODUCT_IMAGES:
         case ADD_PRODUCTS:
         case EDIT_PRODUCTS:

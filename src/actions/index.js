@@ -8,8 +8,10 @@ import {
     getProducts,
     addProduct,
     selectSingleProduct,
+    selectSingleProductFromDB,
     deleteProduct,
-    uploadProductImage
+    uploadProductImage,
+    removeProductImage,
 } from './product';
 
 import {
@@ -100,8 +102,10 @@ export {
     getProducts,
     addProduct,
     selectSingleProduct,
+    selectSingleProductFromDB,
     deleteProduct,
     uploadProductImage,
+    removeProductImage,
 
     // Warehouse
     getWarehouses,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { arrayEquals } from './functions';
 
 import Icon from './icon';
 
@@ -16,7 +17,7 @@ class Slideshow extends Component {
     componentDidUpdate() {
         const { imgs } = this.props;
 
-        if(imgs && !this.arrayEquals(imgs, this.state.imageList)) {
+        if(imgs && !arrayEquals(imgs, this.state.imageList)) {
             this.setState({ 
                 imageList: imgs, 
                 currentImageIndex: 0,
@@ -25,16 +26,16 @@ class Slideshow extends Component {
         }
     }
 
-    arrayEquals(a, b) {
-        if (a === b) return true;
-        if (a == null || b == null) return false;
-        if (a.length !== b.length) return false;
+    // arrayEquals(a, b) {
+    //     if (a === b) return true;
+    //     if (a == null || b == null) return false;
+    //     if (a.length !== b.length) return false;
 
-        for(var i = 0; i < a.length; i++){
-            if(a[i] !== b[i]) return false;
-        }
-        return true;
-    }
+    //     for(var i = 0; i < a.length; i++){
+    //         if(a[i] !== b[i]) return false;
+    //     }
+    //     return true;
+    // }
 
     selectImage = (event, index) => {
         document.querySelectorAll('.slideshow__bulletpoint__bullet').forEach(element => {

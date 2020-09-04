@@ -14,6 +14,12 @@ import Icon from '../common/icon';
 
 class ProductAddForm extends Component {
 
+    removeImage = (id) => {
+        this.props.removeProductImage(id, (productID) => {
+            this.props.selectSingleProductFromDB(productID);
+        });
+    }    
+
     render() {
         const { className, handleSubmit, onAddImage, onRemoveImage, imageLength } = this.props;
         const { images } = this.props.initialValues;
@@ -59,7 +65,7 @@ class ProductAddForm extends Component {
                             return (
                                 <div key={index} className='product-add-form__uploaded-images__image-container'>
                                     <BackgroundImage className='product-add-form__uploaded-images__image-container__image' src={STORAGE_URL + image.path}/>
-                                    <div className='product-add-form__uploaded-images__image-container__remove'><Icon icon='trash'/></div>
+                                    <div className='product-add-form__uploaded-images__image-container__remove' onClick={() => this.removeImage(image.id)}><Icon icon='trash'/></div>
                                 </div>
                             )
                         })
@@ -195,7 +201,7 @@ ProductAddForm = reduxForm({
 ProductAddForm = connect((state) => {
     const { selected_product, pagination } = state.product;
     return { initialValues: selected_product, pagination };
-})(ProductAddForm);
+}, actions)(ProductAddForm);
 
 function mapStateToProps(state) {
     const { selected_product, pagination } = state.product;

@@ -114,8 +114,6 @@ class Products extends Component {
             const selectedItem = allElementsSelected[0];
             const index = selectedItem.attributes.listIndex.value;
             this.props.selectSingleProduct(index);
-
-            console.log("Selected Product: ", this.props.selected_product)
             this.openModal('product_add');
         }
         else {
@@ -167,9 +165,9 @@ class Products extends Component {
     }
 
     render() {
-        const tableHeader = ["Product", "Price", "Weight", "Longitude"];
-        const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
-        const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"];
+        // const tableHeader = ["Product", "Price", "Weight", "Longitude"];
+        // const columnTable = ["name", "price", "weight", ["width", "height", "length"]];
+        // const templateColumn = ["[data]", "$[data]", "[data]", "w:[data] h:[data] l:[data]"];
         const tableData = this.props.products;
         const pagination = this.props.pagination;
         const tableEvents = {

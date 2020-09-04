@@ -7,7 +7,9 @@ import {
     EDIT_PRODUCTS,
     DELETE_PRODUCTS,
     SELECT_SINGLE_PRODUCT,
-    UPLOAD_PRODUCT_IMAGES
+    SELECT_SINGLE_PRODUCT_FROM_DB,
+    UPLOAD_PRODUCT_IMAGES,
+    REMOVE_PRODUCT_IMAGES,
 } from './types';
 
 const requestConfig = {
@@ -48,12 +50,24 @@ export function getProducts(paginationURL = null, search = '', itemsPerPage = 15
     }
 }
 
-export function selectSingleProduct(id) {
+export function selectSingleProduct(index) {
     return function (dispatch){
         dispatch({
             type: SELECT_SINGLE_PRODUCT,
-            payload: id
+            payload: index
         });
+    }
+}
+
+export function selectSingleProductFromDB(id) {
+    return function (dispatch){
+        axios.get(`${API_URL}/products/${id}`)
+            .then(response => {
+                dispatch({
+                    type: SELECT_SINGLE_PRODUCT_FROM_DB,
+                    payload: response.data
+                });
+            })
     }
 }
 
@@ -119,6 +133,19 @@ export function uploadProductImage(fields, success, error) {
                         console.log(err);
                 })
         }
+    }
+}
+
+export function removeProductImage(id, success) {
+    return function (dispatch) {
+        axios.delete(`${API_URL}/images/product/${id}`, requestConfig)
+            .then(response => {
+                dispatch({
+                    type: REMOVE_PRODUCT_IMAGES,
+                    payload: response.data
+                });
+                success(response.data.productID);
+            })
     }
 }
 
