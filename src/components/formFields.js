@@ -465,10 +465,11 @@ export class FormImage extends Component {
     }
     
     djsConfig() {
+        const { maxFiles } = this.props;
         return {
             addRemoveLinks: true,
             autoProcessQueue: false,
-            maxFiles: 4,
+            maxFiles,
             previewTemplate: ReactDOMServer.renderToStaticMarkup(
                 <div className="dropzone-thumbnail dz-preview dz-file-preview">
                     <div className="dropzone-thumbnail__image-container dz-image"> 

@@ -102,7 +102,7 @@ export function addProduct(fields, success, error) {
                             payload: response.data
                         });
                     }
-                    success();
+                    success(response);
                 })
                 .catch(err => {
                     if(err)

@@ -112,7 +112,7 @@ class Products extends Component {
         const allElementsSelected = document.querySelectorAll(`.products__list__item.active`);
         if(allElementsSelected.length === 1){
             const selectedItem = allElementsSelected[0];
-            const index = selectedItem.attributes.listIndex.value;
+            const index = selectedItem.attributes.listindex.value;
             this.props.selectSingleProduct(index);
             this.openModal('product_add');
         }
@@ -128,7 +128,8 @@ class Products extends Component {
                 notifyRemove(toastID);
                 allElementsSelected.forEach((element) => {
                     element.classList.add('to_delete');
-                    const rowID = this.props.products[element.id].id;
+                    const index = element.attributes.listindex.value;
+                    const rowID = this.props.products[index].id;
                     this.props.deleteProduct(rowID, () => {
                         this.resetTable();
                         this.resetActive();
@@ -195,7 +196,7 @@ class Products extends Component {
                         tableData ?
                         tableData.map((product, index) => {
                             return (
-                                <div key={index} id={product.id} listIndex={index} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
+                                <div key={index} id={product.id} listindex={index} className='products__list__item' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
                                     <div className='products__list__item__image-container'>
                                         {
                                             product.images.length == 0 ?

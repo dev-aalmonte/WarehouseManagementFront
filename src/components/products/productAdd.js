@@ -23,6 +23,11 @@ class ProductAddForm extends Component {
     render() {
         const { className, handleSubmit, onAddImage, onRemoveImage, imageLength } = this.props;
         const { images } = this.props.initialValues;
+        let maxFiles = 4;
+        if(images)
+            maxFiles -= images.length;
+
+        console.log("[MaxFiles]: ", maxFiles);
 
         const weightOption = [
             {
@@ -57,7 +62,7 @@ class ProductAddForm extends Component {
                 <Field className='product-add-form__width' type='text' name='width' title='Width' placeholder='Width' component={FormDecimal}/>
                 <Field className='product-add-form__height' type='text' name='height' title='Height' placeholder='Height' component={FormDecimal} />
                 <Field className='product-add-form__length' type='text' name='length' title='Length' placeholder='Length' component={FormDecimal} />
-                <Field className='product-add-form__image' name='image' title='Image' onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 4} component={FormImage} />
+                <Field className='product-add-form__image' name='image' title='Image' onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 4} maxFiles={maxFiles} component={FormImage} />
                 <div className='product-add-form__uploaded-images'>
                     {   
                         images ?
