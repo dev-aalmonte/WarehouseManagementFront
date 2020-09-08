@@ -2,13 +2,75 @@
     grid-column: s/e;
 
     display: grid;
-    grid-template-rows: [s client-heading-s] 7rem [client-heading-e client-sub-s] 3rem [client-sub-e client-description-s] 12rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
+    grid-template-rows: [s client-heading-s] 12rem [client-heading-e client-description-s] 12rem [client-description-e order-heading-s] 7rem [order-heading-e order-search-s] 7rem [order-search-e order-table-s] 1fr [order-table-e e];
     // grid-template-columns: [s] .9fr [m] .1fr [e];
-
+    
+    margin-top: 7rem;
     padding: 5rem 20rem;
+
+    &__background {
+
+        &__image {
+            min-width: 100%;
+            max-height: 30%;
+    
+            width: 100%;
+            height: auto;
+    
+            position: fixed;
+            top: 5rem;
+            left: 0;
+    
+            object-fit: cover;
+            object-position: 50% 50%;
+            z-index: -2;
+        }
+        
+        &__plain {
+            position: fixed;
+            top: 27.5rem;
+            left: 0;
+            
+            min-width: 100%;
+            height: 100%;
+            z-index: -1;
+            
+            background: $b-background-light-color;
+            background: linear-gradient(0deg, rgba($b-background-light-color,1) 90%, rgba($b-background-light-color,0) 100%);
+        }
+    }
 
     &__heading {
         grid-row: client-heading-s/client-heading-e;
+
+        overflow: hidden;
+
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: [logo-s] 13rem [logo-e text-s] 1fr [text-e];
+
+
+        &__logo {
+            width: 10rem;
+            height: 10rem;
+
+            border: 1rem solid black;
+
+            grid-row: 1/-1;
+            grid-column: logo-s/logo-e;
+            z-index: 10;
+        }
+
+        &__name {
+            align-self: end;
+            grid-row: 1/2;
+            grid-column: text-s/text-e;
+        }
+        
+        &__email {
+            grid-row: 2/3;
+            grid-column: text-s/text-e;
+        }
     }
 
     &__small-heading {

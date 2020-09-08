@@ -27,8 +27,6 @@ class ProductAddForm extends Component {
         if(images)
             maxFiles -= images.length;
 
-        console.log("[MaxFiles]: ", maxFiles);
-
         const weightOption = [
             {
                 key: 'lb',

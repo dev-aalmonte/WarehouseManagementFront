@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import { Heading, Text, SmallHeading } from '../common/headings';
 import Table from '../common/table';
 import Searchbar from '../common/searchbar';
+import { PlaceholderImage, BackgroundImage } from '../common/image';
 import { FormSmallButton } from '../formFields';
 import Modal from '../common/modal';
 import OrderAdd from '../orders/orderAdd';
@@ -44,8 +45,17 @@ class Client extends Component {
         }
         return (
             <div className='client'>
-                <Heading className='client__heading'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
-                <SmallHeading className='client__small-heading' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
+                <div className='client__background'>
+                    <BackgroundImage className='client__background__image' src="https://i.redd.it/9gbgilapxrl51.jpg"/>
+                    <div className='client__background__plain'></div>
+                </div>
+
+                <div className='client__heading'>
+                    <PlaceholderImage className='client__heading__logo' width={100} height={100}/>
+                    <Heading className='client__heading__name'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
+                    <SmallHeading className='client__heading__email' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
+                </div>
+
                 <Text className='client__description'>{this.props.selected_client.description ? this.props.selected_client.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros." }</Text>
                 <Heading className='client__order-heading'>Orders</Heading>
                 <div className='client__order-searchbar-container'>
