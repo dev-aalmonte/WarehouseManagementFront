@@ -46,7 +46,8 @@ class Client extends Component {
         return (
             <div className='client'>
                 <div className='client__background'>
-                    <BackgroundImage className='client__background__image' src="https://i.redd.it/9gbgilapxrl51.jpg"/>
+                    <div className='client__background__image-shadow'></div>
+                    <BackgroundImage className='client__background__image' src="https://i.redd.it/9ao2bu27jyl51.jpg"/>
                     <div className='client__background__plain'></div>
                 </div>
 
