@@ -92,6 +92,14 @@
             grid-row: 2/3;
             grid-column: text-s/text-e;
         }
+
+        &__edit {
+            grid-row: 1/2;
+            grid-column: text-s/text-e;
+
+            align-self: center;
+            justify-self: end;
+        }
     }
 
     &__small-heading {

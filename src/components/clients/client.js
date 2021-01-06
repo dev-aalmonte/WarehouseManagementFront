@@ -6,9 +6,10 @@ import { Heading, Text, SmallHeading } from '../common/headings';
 import Table from '../common/table';
 import Searchbar from '../common/searchbar';
 import { PlaceholderImage, BackgroundImage } from '../common/image';
-import { FormSmallButton } from '../formFields';
+import { FormButton, FormSmallButton } from '../formFields';
 import Modal from '../common/modal';
 import OrderAdd from '../orders/orderAdd';
+import ClientAdd from './clientAdd';
 
 class Client extends Component {
 
@@ -23,6 +24,11 @@ class Client extends Component {
     
     openAddOrder = () => {
         this.openModal('order_add');
+    }
+
+    openClientEdit = () => {
+        this.props.selectSingleClientFromDB(this.props.match.params.id);
+        this.openModal('client_edit');
     }
 
     displaySearchBarInput = (event) => {
@@ -55,6 +61,7 @@ class Client extends Component {
                     <PlaceholderImage className='client__heading__logo' width={100} height={100}/>
                     <Heading className='client__heading__name'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
                     <SmallHeading className='client__heading__email' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
+                    <FormButton className="client__heading__edit" title="Edit" onClick={() => this.openClientEdit()}/>
                 </div>
 
                 <Text className='client__description'>{this.props.selected_client.description ? this.props.selected_client.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros." }</Text>
@@ -65,6 +72,7 @@ class Client extends Component {
                 </div>
                 <Table className='client__order-table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}/>
                 <Modal className='modal-order_add'> <OrderAdd/> </Modal>
+                <Modal className='modal-client_edit'> <ClientAdd type="edit"/> </Modal>
             </div>
         )
     }

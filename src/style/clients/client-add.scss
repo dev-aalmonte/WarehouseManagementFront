@@ -2,7 +2,7 @@
     height: 100%;
 
     display: grid;
-    grid-template-columns: [background-s] .3fr [background-e content-s] .7fr [content-e];
+    grid-template-columns: [background-s] .35fr [background-e m-content-s] .65fr [m-content-e];
 
     &__background {
         grid-column: background-s/background-e;
@@ -10,11 +10,20 @@
     }
 
     &__content {
-        grid-column: content-s/content-e;
-        padding: 2.6rem;
+        grid-column: m-content-s/m-content-e;
+
+        &__heading {
+            align-self: center;
+            padding-left: 2.6rem;
+        }
+
+        &__form {
+            padding-left: 2.6rem;
+            padding-bottom: 1rem;
+        }
 
         display: grid;
-        grid-template-rows: .2fr .8fr;
+        grid-template-rows: .15fr .85fr;
     }
 }
 

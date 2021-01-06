@@ -12,7 +12,7 @@ import { notify } from '../common/general';
 
 class ClientAddForm extends Component {
     render() {
-        const { className, handleSubmit } = this.props;
+        const { className, handleSubmit, type } = this.props;
         return (
             <form onSubmit={handleSubmit} className={`${className} client-add-form`}>
                 <Field className='client-add-form__first-name' type='text' name='first_name' title='First Name' placeholder='First Name' component={FormInput} validate={[required]} />
@@ -27,7 +27,7 @@ class ClientAddForm extends Component {
                 <Field className='client-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} validate={[required]} />
                 <Field className='client-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput} validate={[required]}/>
 
-                <Field className='client-add-form__submit' type='submit' name='submit' title='Add Client' onClick={() => console.log('Submiting Client')} component={FormButton}/>
+                <Field className='client-add-form__submit' type='submit' name='submit' title={type == "edit" ? 'Edit Client' : 'Add Client'} onClick={() => console.log('Submiting Client')} component={FormButton}/>
             </form>
         )
     }
@@ -52,8 +52,8 @@ class ClientAdd extends Component {
 
     onSubmit = (fields) => {
         this.props.addClient(fields, () => {
+            notify('success', 'The client has been added successfully');
             document.querySelectorAll('.modal').forEach((element) => {
-                notify('success', 'The client has been added successfully');
                 element.classList.remove('active');
                 this.resetTable();
                 this.resetActive();
@@ -62,12 +62,13 @@ class ClientAdd extends Component {
     }
 
     render() {
+        const { type } = this.props;
         return (
             <div className='client-add'>
                 <div className='client-add__background'></div>
                 <div className='client-add__content'>
-                    <Heading className="client-add__heading">Add Client</Heading>
-                    <ClientAddForm onSubmit={(e) => this.onSubmit(e)} className='client-add__content__form' />
+                    <Heading className="client-add__content__heading">{type == "edit" ? "Edit Client" : 'Add Client'}</Heading>
+                    <ClientAddForm onSubmit={(e) => this.onSubmit(e)} className='client-add__content__form' type={type} />
                 </div>
             </div>
         )
@@ -87,6 +88,7 @@ ClientAddForm = connect(state => {
         first_name: selected_client.first_name,
         last_name: selected_client.last_name,
         email: selected_client.email,
+        description: selected_client.description,
         street_address: selected_client.billing_address.street_address,
         extra_address: selected_client.billing_address.extra_address,
         city: selected_client.billing_address.city,
