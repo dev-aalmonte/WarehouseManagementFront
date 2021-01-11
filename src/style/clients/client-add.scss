@@ -3,6 +3,7 @@
 
     display: grid;
     grid-template-columns: [background-s] .35fr [background-e m-content-s] .65fr [m-content-e];
+    padding-bottom: 4rem;
 
     &__background {
         grid-column: background-s/background-e;
@@ -12,18 +13,20 @@
     &__content {
         grid-column: m-content-s/m-content-e;
 
+        display: grid;
+        grid-template-rows: [header-s] 1fr [header-e form-s] 6fr [form-e];
+        grid-template-columns: 1fr;
+
         &__heading {
+            grid-row: header-s/header-e;
             align-self: center;
             padding-left: 2.6rem;
         }
 
         &__form {
+            grid-row: form-s/form-e;
             padding-left: 2.6rem;
-            padding-bottom: 1rem;
         }
-
-        display: grid;
-        grid-template-rows: .15fr .85fr;
     }
 }
 

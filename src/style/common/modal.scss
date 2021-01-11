@@ -11,7 +11,7 @@
     z-index: -10;
     
     display: grid;
-    grid-template-rows: .2fr [content-s] .6fr [content-e] .2fr;
+    grid-template-rows: 1fr [content-s] 1fr [content-e] 1fr;
     grid-template-columns: .2fr [content-s] .6fr [content-e] .2fr;
     
     &__content {
@@ -30,5 +30,21 @@
 }
 
 .modal.xsmall {
-    grid-template-rows: .6fr [content-s] .2fr [content-e] .6fr;
+    grid-template-rows: 1fr [content-s] .4fr [content-e] 1fr;
+}
+
+.modal.small {
+    grid-template-rows: 1fr [content-s] .5fr [content-e] 1fr;
+}
+
+.modal.medium {
+    grid-template-rows: 1fr [content-s] .8fr [content-e] 1fr;
+}
+
+.modal.large {
+    grid-template-rows: 1fr [content-s] 1fr [content-e] 1fr;
+}
+
+.modal.xlarge {
+    grid-template-rows: 1fr [content-s] 1.2fr [content-e] 1fr;
 }

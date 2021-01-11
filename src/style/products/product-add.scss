@@ -1,36 +1,36 @@
 .product-add {
-    height: 100%;
-
     display: grid;
-    grid-template-columns: [background-s] .3fr [background-e content-s] .7fr [content-e];
+    grid-template-columns: [background-s] .35fr [background-e content-s] .65fr [content-e];
 
     &__background {
         grid-column: background-s/background-e;
         background: $b-secondary-color;
-        border-radius: .5rem 0 0 .5rem;
     }
 
     &__content {
         align-self: center;
         grid-column: content-s/content-e;
-        padding: 2.6rem;
 
         display: grid;
+        grid-template-columns: 1fr;
         grid-template-rows: [header-s] .1fr [header-e error-s] .1fr [error-e form-s] .8fr [form-e];
 
         &__title {
             grid-row: header-s/header-e;
             align-self: end;
+            padding-left: 2.6rem;
         }
 
         &__form-err {
             grid-row: error-s/error-e;
             align-self: center;
-
+            padding-left: 2.6rem;
         }
 
         &__form {
             grid-row: form-s/form-e;
+            padding-left: 2.6rem;
+            padding-bottom: 2.6rem;
 
         }
     }
@@ -38,7 +38,7 @@
 
 .product-add-form {
     display: grid;
-    grid-template-rows: repeat(9, 6rem);
+    grid-template-rows: repeat(9, 5.5rem);
     grid-template-columns: repeat(6, 11rem);
 
     row-gap: 1rem;
@@ -114,6 +114,7 @@
     }
 
     &__image {
+        padding-top: 1rem;
         grid-row: 5/8;
         grid-column: 1/-1;
 
