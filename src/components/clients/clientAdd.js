@@ -5,14 +5,16 @@ import { reduxForm, Field } from 'redux-form';
 import { API_URL } from '../../config';
 
 import { Heading } from '../common/headings';
-import { FormInput, FormButton, FormTextArea } from '../formFields';
+import { FormInput, FormButton, FormTextArea, FormImage } from '../formFields';
 import { required } from '../formFieldsValidation';
 import { notify } from '../common/general';
 
 
 class ClientAddForm extends Component {
     render() {
-        const { className, handleSubmit, type } = this.props;
+        const { className, handleSubmit, type, onAddImage, onRemoveImage, imageLength } = this.props;
+        const { images } = this.props.initialValues;
+        let maxFiles = 1;
         return (
             <form onSubmit={handleSubmit} className={`${className} client-add-form`}>
                 <Field className='client-add-form__first-name' type='text' name='first_name' title='First Name' placeholder='First Name' component={FormInput} validate={[required]} />
@@ -27,6 +29,9 @@ class ClientAddForm extends Component {
                 <Field className='client-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} validate={[required]} />
                 <Field className='client-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput} validate={[required]}/>
 
+                <Field className="client-add-form__logo" name="logo" title="Logo" onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
+                <Field className="client-add-form__background" name="background" title="Background" onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
+
                 <Field className='client-add-form__submit' type='submit' name='submit' title={type == "edit" ? 'Edit Client' : 'Add Client'} onClick={() => console.log('Submiting Client')} component={FormButton}/>
             </form>
         )
@@ -34,6 +39,16 @@ class ClientAddForm extends Component {
 }
 
 class ClientAdd extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            formerr: [],
+            logo: "",
+            background: ""
+        }
+    }
 
     resetTable() {
         const { current_page } = this.props.pagination;
@@ -48,6 +63,40 @@ class ClientAdd extends Component {
             element.classList.remove('active');
             element.classList.remove('to_delete');
         })
+    }
+
+    onAddImage = (file) => {
+        if(this.state.images)
+            this.setState({images: [...this.state.images, file]});
+        else
+            this.setState({images: [file]});
+    }
+
+    onRemoveImage = (file) => {
+        let images = this.state.images.filter(image => file != image);
+        this.setState({images: images});
+    }
+
+    uploadImage = (response, success) => {
+        let images;
+        
+        if(this.state.images)
+            images = this.state.images;
+        
+        images.forEach((image, index) => {
+            let imageFields = {
+                id: response.data.id,
+                index: index,
+                image: image
+            }
+
+            this.props.uploadProductImage(imageFields, (response) => {
+                // TODO: Real upload message goes here
+            })
+
+        });
+        
+        success();
     }
 
     onSubmit = (fields) => {

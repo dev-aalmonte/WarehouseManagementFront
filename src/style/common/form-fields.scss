@@ -464,3 +464,26 @@
         }
     }
 }
+
+.form-image {
+    
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-column: 1fr;
+
+    &__label {
+        grid-row: 1/-1;
+        grid-column: 1/-1;
+
+        font-size: 1.6rem;
+        z-index: 11;
+
+        padding-top: .6rem;
+        padding-left: 1rem;
+    }
+    
+    &__form {
+        grid-row: 1/-1;
+        grid-column: 1/-1;
+    }
+}

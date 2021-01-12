@@ -494,7 +494,7 @@ export class FormImage extends Component {
     }
     
     render() {
-        const { className, onAddImage, onRemoveImage, input } = this.props;
+        const { className, onAddImage, onRemoveImage, title, input } = this.props;
         const eventHandlers = {
             addedfile: onAddImage,
             removedfile: onRemoveImage,
@@ -503,7 +503,8 @@ export class FormImage extends Component {
         }
         return (
             <div className={`${className} form-image`}>
-                <DropzoneComponent config={this.dropzoneConfig()} djsConfig={this.djsConfig()} eventHandlers={eventHandlers} />
+                <label className='form-image__label'>{title}</label>
+                <DropzoneComponent className='form-image__form' config={this.dropzoneConfig()} djsConfig={this.djsConfig()} eventHandlers={eventHandlers} />
             </div>
         )
     }
