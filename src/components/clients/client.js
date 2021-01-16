@@ -11,6 +11,8 @@ import Modal from '../common/modal';
 import OrderAdd from '../orders/orderAdd';
 import ClientAdd from './clientAdd';
 
+import { STORAGE_URL } from '../../config';
+
 class Client extends Component {
 
     componentWillMount() {
@@ -49,16 +51,22 @@ class Client extends Component {
                 this.props.history.push(`/order/detail/${orderID}`);
             }
         }
+
+        const logo = this.props.selected_client.logo;
+        const background = this.props.selected_client.background;
+
+        console.log("Logo: ", logo);
+        console.log("Background: ", background);
         return (
             <div className='client'>
                 <div className='client__background'>
                     <div className='client__background__image-shadow'></div>
-                    <BackgroundImage className='client__background__image' src="https://i.redd.it/9ao2bu27jyl51.jpg"/>
+                    <BackgroundImage className='client__background__image' src={STORAGE_URL + (background == undefined ? "" : background.path) }/>
                     <div className='client__background__plain'></div>
                 </div>
 
                 <div className='client__heading'>
-                    <PlaceholderImage className='client__heading__logo' width={100} height={100}/>
+                    <BackgroundImage className='client__heading__logo' src={STORAGE_URL + (logo == undefined ? "" : logo.path) }/>
                     <Heading className='client__heading__name'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
                     <SmallHeading className='client__heading__email' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
                     <FormButton className="client__heading__edit" title="Edit" onClick={() => this.openClientEdit()}/>
