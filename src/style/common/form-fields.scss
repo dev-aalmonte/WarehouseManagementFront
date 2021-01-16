@@ -466,7 +466,6 @@
 }
 
 .form-image {
-    
     display: grid;
     grid-template-rows: 1fr;
     grid-column: 1fr;
@@ -476,6 +475,7 @@
         grid-column: 1/-1;
 
         font-size: 1.6rem;
+        max-height: 2rem;
         z-index: 11;
 
         padding-top: .6rem;

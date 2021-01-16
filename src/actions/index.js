@@ -67,6 +67,8 @@ import {
     selectSingleClientFromDB,
     addClient,
     deleteClient,
+    uploadClientImage,
+    removeClientImage
 } from './client';
 
 import {
@@ -156,6 +158,8 @@ export {
     selectSingleClientFromDB,
     addClient,
     deleteClient,
+    uploadClientImage,
+    removeClientImage,
 
     // Order
     getOrdersPerClient,

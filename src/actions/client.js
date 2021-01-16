@@ -10,11 +10,19 @@ import {
     EDIT_CLIENTS,
     DELETE_CLIENTS,
     DISPLAY_CLIENT,
+    REMOVE_CLIENT_IMAGES,
+    UPLOAD_CLIENT_IMAGES,
 } from './types';
 
 const requestConfig = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
+    }
+}
+
+const fileRequestConfig = {
+    headers: {
+        'Content-Type': 'multipart/form-data'
     }
 }
 
@@ -74,7 +82,7 @@ export function addClient(fields, success) {
                             payload: response.data
                         });
                     }
-                    success();
+                    success(response);
                 })
                 .catch(err => {
                     if(err)
@@ -92,13 +100,51 @@ export function addClient(fields, success) {
                             payload: response.data
                         });
                     }
-                    success();
+                    success(response);
                 })
                 .catch(err => {
                     if(err)
                         console.log(err);
                 });
         }
+    }
+}
+
+export function uploadClientImage(fields, success, error) {
+    if(fields.id) {
+        let data = new FormData();
+        data.append('index', fields.index);
+        data.append('logo', fields.logo, fields.logo.name);
+        data.append('background', fields.background, fields.background.name);
+        return function (dispatch) {
+            axios.post(`${API_URL}/upload/client/${fields.id}`, data, fileRequestConfig)
+                .then(response => {
+                    if(response.data) {
+                        dispatch({
+                            type: UPLOAD_CLIENT_IMAGES,
+                            payload: response.data
+                        });
+                        success(response.data);
+                    }
+                })
+                .catch(err => {
+                    if(err)
+                        console.log(err);
+                })
+        }
+    }
+}
+
+export function removeClientImage(id, success) {
+    return function (dispatch) {
+        axios.delete(`${API_URL}/images/client/${id}`, requestConfig)
+            .then(response => {
+                dispatch({
+                    type: REMOVE_CLIENT_IMAGES,
+                    payload: response.data
+                });
+                success(response.data.productID);
+            })
     }
 }
 

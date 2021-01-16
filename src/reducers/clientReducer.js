@@ -5,6 +5,8 @@ import {
     EDIT_CLIENTS,
     DELETE_CLIENTS,
     DISPLAY_CLIENT,
+    UPLOAD_CLIENT_IMAGES,
+    REMOVE_CLIENT_IMAGES,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -47,6 +49,8 @@ export default function(state = INITIAL_STATE, action){
                 selected_client: action.payload
             }
 
+        case UPLOAD_CLIENT_IMAGES:
+        case REMOVE_CLIENT_IMAGES:
         case ADD_CLIENTS:
         case EDIT_CLIENTS:
         case DELETE_CLIENTS:

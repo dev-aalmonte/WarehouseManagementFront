@@ -12,7 +12,7 @@ import { notify } from '../common/general';
 
 class ClientAddForm extends Component {
     render() {
-        const { className, handleSubmit, type, onAddImage, onRemoveImage, imageLength } = this.props;
+        const { className, handleSubmit, type, onAddImageLogo, onRemoveImageLogo, onAddImageBackground, onRemoveImageBackground, imageLength } = this.props;
         const { images } = this.props.initialValues;
         let maxFiles = 1;
         return (
@@ -29,8 +29,8 @@ class ClientAddForm extends Component {
                 <Field className='client-add-form__country' name='country' title='Country' placeholder='Country' component={FormInput} validate={[required]} />
                 <Field className='client-add-form__zipcode' type='text' name='zipcode' title='Zip Code' placeholder='Zip Code' component={FormInput} validate={[required]}/>
 
-                <Field className="client-add-form__logo" name="logo" title="Logo" onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
-                <Field className="client-add-form__background" name="background" title="Background" onAddImage={onAddImage} onRemoveImage={onRemoveImage} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
+                <Field className="client-add-form__logo" name="logo" title="Logo" onAddImage={onAddImageLogo} onRemoveImage={onRemoveImageLogo} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
+                <Field className="client-add-form__background" name="background" title="Background" onAddImage={onAddImageBackground} onRemoveImage={onRemoveImageBackground} disabled={imageLength >= 1} maxFiles={maxFiles} component={FormImage} />
 
                 <Field className='client-add-form__submit' type='submit' name='submit' title={type == "edit" ? 'Edit Client' : 'Add Client'} onClick={() => console.log('Submiting Client')} component={FormButton}/>
             </form>
@@ -65,48 +65,56 @@ class ClientAdd extends Component {
         })
     }
 
-    onAddImage = (file) => {
-        if(this.state.images)
-            this.setState({images: [...this.state.images, file]});
-        else
-            this.setState({images: [file]});
+    onAddImageLogo = (file) => {
+        this.setState({logo: file});
     }
 
-    onRemoveImage = (file) => {
-        let images = this.state.images.filter(image => file != image);
-        this.setState({images: images});
+    onAddImageBackground = (file) => {
+        this.setState({background: file});
+    }
+
+    onRemoveImageLogo = (file) => {
+        this.setState({logo: null});
+    }
+
+    onRemoveImageBackground = (file) => {
+        this.setState({background: null});
     }
 
     uploadImage = (response, success) => {
-        let images;
+        let logo;
+        let background;
         
-        if(this.state.images)
-            images = this.state.images;
+        if(this.state.logo)
+            logo = this.state.logo;
+
+        if(this.state.background)
+            background = this.state.background;
+
+        let imageFields = {
+            id: response.data.id,
+            logo: logo,
+            background: background
+        }
+
+        this.props.uploadClientImage(imageFields, (response) => {
         
-        images.forEach((image, index) => {
-            let imageFields = {
-                id: response.data.id,
-                index: index,
-                image: image
-            }
-
-            this.props.uploadProductImage(imageFields, (response) => {
-                // TODO: Real upload message goes here
-            })
-
-        });
+        })
         
         success();
     }
 
     onSubmit = (fields) => {
-        this.props.addClient(fields, () => {
-            notify('success', 'The client has been added successfully');
-            document.querySelectorAll('.modal').forEach((element) => {
-                element.classList.remove('active');
-                this.resetTable();
-                this.resetActive();
-            })
+        this.props.addClient(fields, (response) => {
+            console.log("Client Response: ", response);
+            this.uploadImage(response, () => {
+                notify('success', 'The client has been added successfully');
+                document.querySelectorAll('.modal').forEach((element) => {
+                    element.classList.remove('active');
+                    this.resetTable();
+                    this.resetActive();
+                });
+            });
         });
     }
 
@@ -117,7 +125,7 @@ class ClientAdd extends Component {
                 <div className='client-add__background'></div>
                 <div className='client-add__content'>
                     <Heading className="client-add__content__heading">{type == "edit" ? "Edit Client" : 'Add Client'}</Heading>
-                    <ClientAddForm onSubmit={(e) => this.onSubmit(e)} className='client-add__content__form' type={type} />
+                    <ClientAddForm onSubmit={(e) => this.onSubmit(e)} onAddImageLogo={this.onAddImageLogo} onAddImageBackground={this.onAddImageBackground} onRemoveImageLogo={this.onRemoveImageLogo} onRemoveImageBackground={this.onRemoveImageBackground} className='client-add__content__form' type={type} />
                 </div>
             </div>
         )
