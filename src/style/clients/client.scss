@@ -71,15 +71,25 @@
         text-shadow: .1rem .1rem 1.5rem $b-background-light-color;
 
 
-        &__logo {
+        &__logo-container {
             width: 10rem;
             height: 10rem;
-
-            border: 1rem solid black;
+            border-radius: .5rem;
+            
+            box-shadow: 0 0 1rem $b-background-light-color;
 
             grid-row: 1/-1;
             grid-column: logo-s/logo-e;
+
+            align-self: center;
+            justify-self: center;
             z-index: 10;
+
+            &__logo {
+                width: inherit;
+                height: inherit;
+                border-radius: inherit;
+            }
         }
 
         &__name {

@@ -61,12 +61,14 @@ class Client extends Component {
             <div className='client'>
                 <div className='client__background'>
                     <div className='client__background__image-shadow'></div>
-                    <BackgroundImage className='client__background__image' src={STORAGE_URL + (background == undefined ? "" : background.path) }/>
+                    <BackgroundImage className='client__background__image' src={(background == null || background == undefined) ? "https://i.redd.it/qd67gtkn7cb61.jpg" : (STORAGE_URL + background.path) }/>
                     <div className='client__background__plain'></div>
                 </div>
 
                 <div className='client__heading'>
-                    <BackgroundImage className='client__heading__logo' src={STORAGE_URL + (logo == undefined ? "" : logo.path) }/>
+                    <div className="client__heading__logo-container">
+                        <BackgroundImage className='client__heading__logo-container__logo' src={ (logo == undefined || logo == null) ? "https://i.redd.it/dhbxv6ux1gb61.jpg" : (STORAGE_URL + logo.path) }/>
+                    </div>
                     <Heading className='client__heading__name'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
                     <SmallHeading className='client__heading__email' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
                     <FormButton className="client__heading__edit" title="Edit" onClick={() => this.openClientEdit()}/>
