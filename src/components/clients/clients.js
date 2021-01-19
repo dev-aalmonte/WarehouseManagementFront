@@ -91,6 +91,7 @@ class Clients extends Component {
         const tableEvents = {
             onDoubleClick: (event) => {
                 const clientID = this.props.clients[event.target.parentElement.id].id;
+                this.props.selectSingleClient(event.target.parentElement.id);
                 this.props.history.push(`/client/${clientID}`);
             }
         }

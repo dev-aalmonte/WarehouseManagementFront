@@ -52,29 +52,40 @@ class Client extends Component {
             }
         }
 
-        const logo = this.props.selected_client.logo;
-        const background = this.props.selected_client.background;
+        let logo;
+        let background;
+        let first_name;
+        let last_name;
+        let email;
+        let description;
 
-        console.log("Logo: ", logo);
-        console.log("Background: ", background);
+        if(this.props.selected_client) {
+            logo = this.props.selected_client.logo;
+            background = this.props.selected_client.background;
+            first_name = this.props.selected_client.first_name;
+            last_name = this.props.selected_client.last_name;
+            email = this.props.selected_client.email;
+            description = this.props.selected_client.description;
+        }
+
         return (
             <div className='client'>
                 <div className='client__background'>
                     <div className='client__background__image-shadow'></div>
-                    <BackgroundImage className='client__background__image' src={(background == null || background == undefined) ? "https://i.redd.it/qd67gtkn7cb61.jpg" : (STORAGE_URL + background.path) }/>
+                    <BackgroundImage className='client__background__image' src={(background == null || background == undefined) ? "" : (STORAGE_URL + background.path) }/>
                     <div className='client__background__plain'></div>
                 </div>
 
                 <div className='client__heading'>
                     <div className="client__heading__logo-container">
-                        <BackgroundImage className='client__heading__logo-container__logo' src={ (logo == undefined || logo == null) ? "https://i.redd.it/dhbxv6ux1gb61.jpg" : (STORAGE_URL + logo.path) }/>
+                        <BackgroundImage className='client__heading__logo-container__logo' src={ (logo == undefined || logo == null) ? "" : (STORAGE_URL + logo.path) }/>
                     </div>
-                    <Heading className='client__heading__name'>{this.props.selected_client.first_name} {this.props.selected_client.last_name}</Heading>
-                    <SmallHeading className='client__heading__email' size='xsmall'>{this.props.selected_client.email}</SmallHeading>
+                    <Heading className='client__heading__name'>{first_name} {last_name}</Heading>
+                    <SmallHeading className='client__heading__email' size='xsmall'>{email}</SmallHeading>
                     <FormButton className="client__heading__edit" title="Edit" onClick={() => this.openClientEdit()}/>
                 </div>
 
-                <Text className='client__description'>{this.props.selected_client.description ? this.props.selected_client.description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros." }</Text>
+                <Text className='client__description'>{description ? description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tellus ex, finibus id vehicula eu, tempus non mauris. Sed nec purus vitae augue volutpat viverra non quis ligula. Ut eget mauris id tellus sollicitudin sagittis. Fusce euismod dui vel nulla aliquam, id luctus mauris sodales. Phasellus pharetra cursus lacus in pulvinar. Quisque posuere diam non massa sodales aliquam. Suspendisse pellentesque fermentum nibh ut euismod. Cras ac pellentesque turpis. Morbi at orci ultrices, congue lorem in, sodales eros." }</Text>
                 <Heading className='client__order-heading'>Orders</Heading>
                 <div className='client__order-searchbar-container'>
                     <Searchbar className='client__order-searchbar-container__searchbar' placeholder='Search for Order ID'  onKeyUp={this.displaySearchBarInput} />

@@ -13,7 +13,6 @@ import { notify } from '../common/general';
 class ClientAddForm extends Component {
     render() {
         const { className, handleSubmit, type, onAddImageLogo, onRemoveImageLogo, onAddImageBackground, onRemoveImageBackground, imageLength } = this.props;
-        const { images } = this.props.initialValues;
         let maxFiles = 1;
         return (
             <form onSubmit={handleSubmit} className={`${className} client-add-form`}>
@@ -52,10 +51,16 @@ class ClientAdd extends Component {
 
     resetTable() {
         const { current_page } = this.props.pagination;
+        const { selected_client } = this.props;
         if(current_page != null)
             this.props.getClients(`${API_URL}/clients?page=${current_page}`)
         else
             this.props.getClients();
+
+        if(selected_client != null || selected_client != undefined) {
+            console.log("Goes here");
+            this.props.selectSingleClientFromDB(selected_client.id);
+        }
     }
 
     resetActive() {
@@ -98,15 +103,12 @@ class ClientAdd extends Component {
         }
 
         this.props.uploadClientImage(imageFields, (response) => {
-        
-        })
-        
-        success();
+            success();
+        });
     }
 
     onSubmit = (fields) => {
         this.props.addClient(fields, (response) => {
-            console.log("Client Response: ", response);
             this.uploadImage(response, () => {
                 notify('success', 'The client has been added successfully');
                 document.querySelectorAll('.modal').forEach((element) => {
@@ -140,7 +142,7 @@ ClientAddForm = reduxForm({
 
 ClientAddForm = connect(state => {
     const { selected_client } = state.client;
-    const initialValues = selected_client.id ? {
+    const initialValues = (selected_client && selected_client.id) ? {
         id: selected_client.id,
         first_name: selected_client.first_name,
         last_name: selected_client.last_name,
