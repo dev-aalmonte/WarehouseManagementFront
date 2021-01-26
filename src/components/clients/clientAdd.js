@@ -142,7 +142,7 @@ ClientAddForm = reduxForm({
 
 ClientAddForm = connect(state => {
     const { selected_client } = state.client;
-    const initialValues = (selected_client && selected_client.id) ? {
+    const initialValues = (selected_client.id) ? {
         id: selected_client.id,
         first_name: selected_client.first_name,
         last_name: selected_client.last_name,
