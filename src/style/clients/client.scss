@@ -110,6 +110,16 @@
             align-self: center;
             justify-self: end;
         }
+
+        @media only screen and (max-width: 76.8rem) {
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: [logo-s] 15rem [logo-e text-s] 1fr [text-e];
+            
+            &__edit {
+                grid-row: 3/4;
+                align-self: end;
+            } 
+        }
     }
 
     &__small-heading {

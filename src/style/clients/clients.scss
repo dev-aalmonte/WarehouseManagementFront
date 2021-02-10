@@ -37,4 +37,24 @@
         grid-row: m/e;
         grid-column: s/e;
     }
+
+    @media only screen and (max-width: 76.8rem) {
+        padding: 0;
+
+        padding-top: 5rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+
+        grid-template-rows: [s heading-s] 1fr [heading-e search-s] 1fr [search-e buttons-s] 1fr [buttons-e m] 14fr [e];
+        grid-template-columns: [s m] 1fr [e]; 
+
+        &__buttoms {
+            grid-row: buttons-s/buttons-e;
+
+            &__button {
+                width: 80%;
+            }
+        }
+
+    }
 }
