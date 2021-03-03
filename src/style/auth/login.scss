@@ -52,5 +52,9 @@
             display: grid;
             grid-row-gap: 2.5rem;
         }
+
+        @media only screen and (max-width: 76.8rem) {
+            margin: 0 5rem;
+        }
     }
 }
