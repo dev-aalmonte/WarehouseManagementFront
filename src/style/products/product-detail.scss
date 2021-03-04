@@ -8,6 +8,8 @@
         grid-column: slide-s/slide-e;
         background: $b-secondary-color;
 
+        min-height: 85rem;
+
         img {
             min-height: 85rem;
             max-height: 90rem;
@@ -19,7 +21,7 @@
         padding: 2.6rem;
 
         display: grid;
-        grid-template-rows: .2fr .8fr;
+        grid-template-rows: 2fr 8fr;
 
         &__description {
             font-size: 1.6rem;

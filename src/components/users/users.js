@@ -102,6 +102,7 @@ class Users extends Component {
         }
         return (
             <div className='users'>
+                <Heading className='users__heading'>Users</Heading>
                 <Searchbar className='users__searchbar' placeholder='Search a Warehouse' onKeyUp={this.displaySearchBarInput}/>
                 <div className='users__buttoms'>
                     <FormSmallButton onClick={() => this.deleteUser()} className='users__buttoms__button' type='button' icon='minus'/>

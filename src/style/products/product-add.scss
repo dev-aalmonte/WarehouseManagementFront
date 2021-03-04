@@ -1,6 +1,6 @@
 .product-add {
     display: grid;
-    grid-template-columns: [background-s] .35fr [background-e content-s] .65fr [content-e];
+    grid-template-columns: [background-s] 3fr [background-e content-s] 6fr [content-e];
 
     &__background {
         grid-column: background-s/background-e;
@@ -13,25 +13,22 @@
 
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: [header-s] .1fr [header-e error-s] .1fr [error-e form-s] .8fr [form-e];
+        grid-template-rows: [header-s] 1fr [header-e error-s] 1fr [error-e form-s] 8fr [form-e];
+
+        padding: 2rem;
 
         &__title {
             grid-row: header-s/header-e;
             align-self: end;
-            padding-left: 2.6rem;
         }
 
         &__form-err {
             grid-row: error-s/error-e;
             align-self: center;
-            padding-left: 2.6rem;
         }
 
         &__form {
             grid-row: form-s/form-e;
-            padding-left: 2.6rem;
-            padding-bottom: 2.6rem;
-
         }
     }
 }

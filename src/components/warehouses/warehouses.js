@@ -8,6 +8,7 @@ import { FormSmallButton } from '../formFields';
 import Modal from '../common/modal';
 import WarehouseAdd from './warehouseAdd';
 import { notify, notifyConfirm, notifyRemove } from '../common/general';
+import { Heading } from '../common/headings';
 
 class Warehouses extends Component {
     
@@ -93,6 +94,7 @@ class Warehouses extends Component {
         }
         return (
             <div className='warehouses'>
+                <Heading className='warehouses__heading'>Warehouses</Heading>
                 <Searchbar className='warehouses__searchbar' placeholder='Search a Warehouse' onKeyUp={this.displaySearchBarInput}/>
                 <div className='warehouses__buttoms'>
                     <FormSmallButton onClick={() => this.deleteWarehouse()} className='warehouses__buttoms__button' type='button' icon='minus'/>

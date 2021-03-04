@@ -12,7 +12,7 @@
     
     display: grid;
     grid-template-rows: 1fr [content-s] 1fr [content-e] 1fr;
-    grid-template-columns: .2fr [content-s] .6fr [content-e] .2fr;
+    grid-template-columns: 2fr [content-s] 6fr [content-e] 2fr;
     
     &__content {
         grid-row: content-s/content-e;
@@ -22,6 +22,10 @@
     }
 
     opacity: 0;
+
+    @media only screen and (max-width: 76.8rem) {
+        grid-template-columns: 1fr [content-s] 8fr [content-e] 1fr;
+    }
 }
 
 .modal.active {

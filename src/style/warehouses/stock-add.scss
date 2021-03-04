@@ -2,7 +2,7 @@
     height: 100%;
 
     display: grid;
-    grid-template-columns: [background-s] .3fr [background-e content-s] .7fr [content-e];
+    grid-template-columns: [background-s] 3fr [background-e content-s] 7fr [content-e];
 
     &__background {
         grid-column: background-s/background-e;
@@ -14,7 +14,7 @@
         padding: 2.6rem;
 
         display: grid;
-        grid-template-rows: .2fr .8fr;
+        grid-template-rows: 2fr 8fr;
     }
 }
 
@@ -45,8 +45,5 @@
         grid-row: 6/7;
         grid-column: 6/7;
         justify-self: end;
-
-        padding-right: 4rem;
-        padding-top: 2rem;
     }
 }

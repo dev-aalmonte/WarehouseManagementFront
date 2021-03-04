@@ -22,7 +22,7 @@
 
             display: grid;
             grid-template-rows: [s] 7rem [m] 1fr [e];
-            grid-template-columns: [s] .9fr [m] .1fr [e];
+            grid-template-columns: [s] 9fr [m] 1fr [e];
 
             &__searchbar {
                 grid-row: s/m;
@@ -49,6 +49,16 @@
             &__table {
                 grid-row: m/e;
                 grid-column: s/e;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 76.8rem) {
+        padding: 5rem;
+
+        &__products, &__location {
+            &__table-container {
+                grid-template-columns: [s] 8fr [m] 2fr [e];
             }
         }
     }

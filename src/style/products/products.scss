@@ -3,8 +3,7 @@
 
     display: grid;
     grid-template-rows: [heading-s] 6rem [heading-e s] 6rem [m] 1fr [pagination-s] 6rem [pagination-e e] ;
-    grid-template-columns: [s] .9fr [m] .1fr [e];
-
+    grid-template-columns: [s] 10fr [m] 1fr [e];
     
     padding: 5rem 20rem;
     
@@ -123,5 +122,10 @@
             grid-template-columns: 1fr 1fr;
             column-gap: 2rem;
         }
+    }
+
+    @media only screen and (max-width: 76.8rem) {
+        padding: 5rem;
+        grid-template-columns: [s] 8fr [m] 2fr [e];
     }
 }
