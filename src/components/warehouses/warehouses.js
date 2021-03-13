@@ -92,6 +92,7 @@ class Warehouses extends Component {
                 this.props.history.push(`/warehouse/${warehouseID}`);
             }
         }
+        
         return (
             <div className='warehouses'>
                 <Heading className='warehouses__heading'>Warehouses</Heading>
