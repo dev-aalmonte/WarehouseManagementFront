@@ -2,6 +2,7 @@
     height: 4.4rem;
     background: rgba($f-error, .7);
 
+    margin: 1rem 0;
     padding-left: 2rem;
     
     border-radius: .5rem;
@@ -10,4 +11,10 @@
 
     display: grid;
     align-items: center;
+
+    cursor: pointer;
+    
+    &.hidden {
+        display: none;
+    }
 }

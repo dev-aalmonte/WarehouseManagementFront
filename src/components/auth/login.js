@@ -62,6 +62,10 @@ class Login extends Component {
         });
     }
 
+    onClick = () => {
+        this.setState({formerr: ''});
+    }
+
     render() {
         return (
             <div className='login'>
@@ -70,13 +74,14 @@ class Login extends Component {
                     {/* <PlaceholderImage className='login__background__image' width='1920' height='1080' /> */}
                 </div>
                 <div className='login__content'>
-                    <Heading className='login__content__heading'> Login</Heading>
+                    <Heading className='login__content__heading'>Login
                     {
                         this.state.formerr != '' ?
-                            <FormError className='login__content__form-err'>{this.state.formerr}</FormError>
+                            <FormError className='login__content__form-err' onClick={this.onClick}>{this.state.formerr}</FormError>
                         :
                             ''
                     }
+                    </Heading>
                     <LoginForm onSubmit={this.onSubmit} className='login__content__form' />
                 </div>
             </div>

@@ -26,7 +26,7 @@
         grid-column: m/e;
 
         display: grid;
-        grid-template-rows: [header-s] .5fr [header-e err-s] .1fr [err-e form-s] 1fr [form-e];
+        grid-template-rows: [header-s] 1fr [header-e form-s] 2fr [form-e];
         grid-template-columns: [s] 1fr [e];
         grid-row-gap: 3rem;
 
@@ -36,11 +36,6 @@
             grid-row: header-s/header-e;
             grid-column: s/e;
             align-self: end;
-        }
-
-        &__form-err {
-            grid-row: err-s/err-e;
-            grid-column: s/e;
         }
         
         &__form {
