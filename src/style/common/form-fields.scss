@@ -266,7 +266,7 @@
     &__input-container-list {
         display: grid;
 
-        grid-template-columns: .7fr .25fr .05fr;
+        grid-template-columns: 7fr 2fr 6rem;
         grid-template-rows: 1fr;
 
         grid-column-gap: 1rem;
@@ -357,9 +357,12 @@
             align-self: end;
             justify-self: center;
             
+            height: 3.6rem;
+            min-width: 5rem;
+
             &__button {
-                height: 3.6rem;
-                width: 3.6rem;
+                width: 100%;
+                height: 100%; 
             }
         }
     }

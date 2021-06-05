@@ -275,10 +275,7 @@ export class FormList extends Component {
 
         const { objectName, objectValueInput } = options;
         var objectToAdd = {};
-
-        // console.log("Object Name: ", objectName);
-        // console.log("Object Value Input: ", objectValueInput);
-
+        
         objectName.map((name, index) => {
             if(objectValueInput[index] === null) {
                 objectToAdd[name] = this.state.selectedSuggestion ? this.state.selectedSuggestion : '';

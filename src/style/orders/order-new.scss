@@ -9,8 +9,7 @@
 
     &__form {
         display: grid;
-        grid-template-columns: .8fr .2fr;
-        grid-template-rows: .1fr .5fr .2fr .2fr;
+        grid-template-rows: 1fr 4fr 1fr 1fr;
 
         grid-column-gap: 1rem;
         align-items: start;
@@ -24,11 +23,6 @@
 .order-add-form {
     &__client {
         grid-column: 1/-1;
-        grid-row: 1/2;
-    }
-    
-    &__quantity {
-        grid-column: 2/3;
         grid-row: 1/2;
     }
 

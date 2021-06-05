@@ -54,7 +54,7 @@ class OrderNewForm extends Component {
         return (
             <form onSubmit={handleSubmit} onKeyPress={onKeyPress} className={`${className} order-add-form`}>
                 <Field className='order-add-form__client' name='clientID' title='Client' placeholder='Select a Client' options={clientSelect} component={FormSelect}  validate={[required]} />
-                <FieldArray className='order-add-form__products' suggestion={suggestionList} name='products' title='Product List' placeholder='Look for a product by the ID, SKU, or Name' component={FormList} options={listOption} componentList={[<Field className='order-add-form__quantity' name='quantity' title='Quantity' placeholder='Quantity' component={FormInput} />]}/>
+                <FieldArray className='order-add-form__products' suggestion={suggestionList} name='products' title='Product List' placeholder='Search by ID, SKU, or Name' component={FormList} options={listOption} componentList={[<Field className='order-add-form__quantity' name='quantity' title='Quantity' placeholder='Quantity' component={FormInput} />]}/>
                 {/* Footer of the Field Array */}
                 <div className='order-add-form__products-footer'>
                     <div className='order-add-form__products-footer__field subtotal'>
