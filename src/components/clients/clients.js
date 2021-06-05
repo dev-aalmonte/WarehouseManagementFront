@@ -6,13 +6,25 @@ import { FormSmallButton } from '../formFields';
 
 import Searchbar from '../common/searchbar';
 import Table from '../common/table';
-import { Heading } from '../common/headings';
+import { Heading, SmallHeading } from '../common/headings';
 import { API_URL } from '../../config';
 import Modal from '../common/modal';
 import ClientAdd from './clientAdd';
 import { notify, notifyConfirm, notifyRemove } from '../common/general';
+import { PlaceholderImage } from '../common/image';
 
 class Clients extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            lastSelectedIndex: null,
+            activeKey: '',
+            itemsPerPage: 6,
+            search: '',
+        }
+    }
 
     componentWillMount() {
         this.props.getClients();
@@ -78,21 +90,80 @@ class Clients extends Component {
         }
     }
 
+    onKeyDown(event) {
+        if(this.state.activeKey !== 'Shift' && event.key == 'Shift'){
+            this.setState({activeKey: event.key});
+        }
+    }
+
+    onKeyUp(event) {
+        if(this.state.activeKey === 'Shift' && event.key === 'Shift'){
+            this.setState({activeKey: ''});
+        }
+    }
+
+    rowOnClick = (event, index) => {
+        const parent = event.target.parentElement;
+        const parentIsActive = parent.classList.contains('active');
+
+        const allElements = parent.parentElement.childNodes;
+        
+        if(parent.parentElement.classList.contains("table"))
+            return;
+
+        if(this.state.activeKey == 'Shift') {
+            if(this.state.lastSelectedIndex == null)
+                parent.classList.add('active');
+            else if(this.state.lastSelectedIndex > index){
+                const firstIndex = index;
+                const lastIndex = this.state.lastSelectedIndex;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+            else if(this.state.lastSelectedIndex < index){
+                const firstIndex = this.state.lastSelectedIndex;
+                const lastIndex = index;
+
+                allElements.forEach((element, index) => {
+                    if(index >= firstIndex && index <= lastIndex)
+                        element.classList.add('active');
+                })
+            }
+        }
+        else {
+            allElements.forEach(element => {
+                element.classList.remove('active');
+            });
+
+            if(!parentIsActive)
+                parent.classList.add('active');
+        }
+        this.setState({lastSelectedIndex: index});
+    }
+
     displaySearchBarInput = (event) => {
         const search = event.target.value;
         this.props.getClients(null, search);
     }
 
     render() {
-        const tableHeader = ["Name", "Email", "Address"];
-        const columnTable = [["first_name", "last_name"], "email", {key:'billing_address', column: ['street_address', 'extra_address', 'city', 'state', 'country', 'zipcode']}];
-        const templateColumn = ["[data] [data]", "[data]", "[data] [data], [data], [data], [data], [data]"];
+        // const tableHeader = ["Name", "Email", "Address"];
+        // const columnTable = [["first_name", "last_name"], "email", {key:'billing_address', column: ['street_address', 'extra_address', 'city', 'state', 'country', 'zipcode']}];
+        // const templateColumn = ["[data] [data]", "[data]", "[data] [data], [data], [data], [data], [data]"];
         const tableData = this.props.clients;
         const tableEvents = {
-            onDoubleClick: (event) => {
-                const clientID = this.props.clients[event.target.parentElement.id].id;
-                this.props.selectSingleClient(event.target.parentElement.id);
-                this.props.history.push(`/client/${clientID}`);
+            onDoubleClick: (event, index) => {
+                let parent = event.target;
+                while(parent.id == "") {
+                    parent = parent.parentElement;
+                }
+
+                // const clientID = this.props.clients[event.target.parentElement.id].id;
+                this.props.selectSingleClient(index);
+                this.props.history.push(`/client/${parent.id}`);
             }
         }
         return (
@@ -104,7 +175,28 @@ class Clients extends Component {
                     <FormSmallButton onClick={() => this.openEditClient()} className='clients__buttoms__button' type='button' icon='edit'/>
                     <FormSmallButton onClick={() => this.openAddClient()} className='clients__buttoms__button' type='button' icon='plus'/>
                 </div>
-                <Table className='clients__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}  />
+                <div className='clients__list' onKeyDownCapture={event => this.onKeyDown(event)}  onKeyUpCapture={event => this.onKeyUp(event)} tabIndex="0">
+                    {
+                        tableData ?
+                        tableData.map((client, index) => {
+                            const billing_address = client.billing_address
+                            const address = `${billing_address.street_address} ${billing_address.extra_address}, ${billing_address.city}, ${billing_address.state}, ${billing_address.country}, ${billing_address.zipcode}`
+                            return (
+                                <div key={index} id={client.id} listindex={index} className='clients__list__client' onClick={(event) => this.rowOnClick(event, index)} onDoubleClick={(event) => tableEvents.onDoubleClick(event, index)}>
+                                    <div className='clients__list__client__image-container'>
+                                        <PlaceholderImage className='clients__list__client__image-container__image' width="100" height="100"/>
+                                    </div>
+                                    <SmallHeading className='clients__list__client__name'>{client.first_name} {client.last_name}</SmallHeading>
+                                    <SmallHeading className='clients__list__client__address' size='small'>{address}</SmallHeading>
+                                </div>
+                            )
+                        })
+                        :
+                        "" // TODO: Have to show something when is empty
+                    }
+                    
+                </div>
+                {/* <Table className='clients__table' heading={tableHeader} body={tableData} columnName={columnTable} template={templateColumn} events={tableEvents}  /> */}
 
                 <Modal className='modal-client_add'> <ClientAdd/> </Modal>
             </div>

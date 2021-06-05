@@ -214,7 +214,7 @@ class Products extends Component {
                             )
                         })
                         :
-                        ""
+                        "" // TODO: Have to show something when is empty
                     }
                 </div>
                 <Pagination className='products__pagination' pagination={pagination} fetch={this.props.getProducts} itemNumber={this.state.itemsPerPage} search={this.state.search} />
